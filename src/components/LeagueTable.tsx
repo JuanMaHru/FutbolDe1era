@@ -7,6 +7,7 @@ import { GAME_IDS } from "@/lib/game/games";
 import { leagueService } from "@/lib/leagues/local";
 import type { League, Standing } from "@/lib/leagues/types";
 import { shiftWeek, weekKeys } from "@/lib/leagues/week";
+import { shareUrl } from "@/lib/site";
 
 const DAYS = ["L", "M", "M", "J", "V", "S", "D"];
 const MEDALS = ["🥇", "🥈", "🥉"];
@@ -17,6 +18,7 @@ export function LeagueTable({ code }: { code: string }) {
   const [weekOf, setWeekOf] = useState("");
   const [rows, setRows] = useState<Standing[]>([]);
   const [toast, setToast] = useState("");
+  const [confirmLeave, setConfirmLeave] = useState(false);
   const today = weekOf ? dateKey() : "";
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export function LeagueTable({ code }: { code: string }) {
     if (league && weekOf) leagueService.standings(league.code, weekOf, GAME_IDS).then(setRows);
   }, [league, weekOf]);
 
-  if (league === undefined) return <div className="card muted">Cargando…</div>;
+  if (league === undefined || !weekOf) return <div className="card muted">Cargando…</div>;
   if (league === null)
     return (
       <div className="card stack">
@@ -41,7 +43,7 @@ export function LeagueTable({ code }: { code: string }) {
   const isCurrentWeek = days.includes(today);
 
   const invite = async () => {
-    const text = `Sumate a mi liga "${league.name}" en Fútbol de Primera ⚽\nCódigo: ${league.code}\n${window.location.origin}/ligas`;
+    const text = [`Sumate a mi liga "${league.name}" en Fútbol de Primera ⚽`, `Código: ${league.code}`, shareUrl("/ligas")].filter(Boolean).join("\n");
     try {
       await navigator.clipboard.writeText(text);
       setToast("Invitación copiada");
@@ -107,17 +109,26 @@ export function LeagueTable({ code }: { code: string }) {
         </div>
       )}
 
-      <button
-        className="btn btn-ghost small"
-        style={{ justifySelf: "start", color: "var(--muted)" }}
-        onClick={async () => {
-          if (!confirm(`¿Salir de "${league.name}"?`)) return;
-          await leagueService.leave(league.code);
-          router.push("/ligas");
-        }}
-      >
-        Salir de la liga
-      </button>
+      {confirmLeave ? (
+        <div className="card row">
+          <span>¿Salir de “{league.name}”?</span>
+          <button
+            className="btn"
+            style={{ borderColor: "var(--danger)", color: "var(--danger)" }}
+            onClick={async () => {
+              await leagueService.leave(league.code);
+              router.push("/ligas");
+            }}
+          >
+            Sí, salir
+          </button>
+          <button className="btn btn-ghost" onClick={() => setConfirmLeave(false)}>Cancelar</button>
+        </div>
+      ) : (
+        <button className="btn btn-ghost small" style={{ justifySelf: "start", color: "var(--muted)" }} onClick={() => setConfirmLeave(true)}>
+          Salir de la liga
+        </button>
+      )}
       {toast && <div className="toast" role="status">{toast}</div>}
     </div>
   );

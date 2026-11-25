@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "node --test --experimental-strip-types tests/*.test.ts"
+    "test": "node --test --experimental-strip-types tests/*.test.ts",
+    "build:standalone": "node standalone/build.mjs"
   },
   "dependencies": {
     "next": "15.5.28",
@@ -17,6 +18,7 @@
     "@types/node": "22.15.3",
     "@types/react": "19.1.12",
     "@types/react-dom": "19.1.9",
+    "esbuild": "^0.25.4",
     "typescript": "5.8.3"
   }
 }

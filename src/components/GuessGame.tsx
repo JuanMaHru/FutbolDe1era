@@ -7,6 +7,7 @@ import { points, shareText } from "@/lib/game/scoring";
 import type { Cell, Entity, GameId } from "@/lib/game/types";
 import { loadDaily, loadStats, recordFinish, saveDaily, type GameStats } from "@/lib/progress";
 import { notifyProfileChange } from "@/lib/storage";
+import { shareUrl } from "@/lib/site";
 import { Countdown } from "./Countdown";
 import { GuessInput } from "./GuessInput";
 
@@ -93,17 +94,21 @@ export function GuessGame({ gameId }: { gameId: GameId }) {
       rows: rows.map((r) => r.cells),
       won,
       maxGuesses: game.maxGuesses,
-      url: typeof window !== "undefined" ? `${window.location.origin}/${gameId}` : undefined,
+      url: shareUrl(`/${gameId}`),
     });
-    try {
-      if (navigator.share && /Mobi|Android/i.test(navigator.userAgent)) {
+    if (navigator.share && /Mobi|Android/i.test(navigator.userAgent)) {
+      try {
         await navigator.share({ text });
         return;
+      } catch (e) {
+        if ((e as Error).name === "AbortError") return; // el usuario cerró el menú
       }
+    }
+    try {
       await navigator.clipboard.writeText(text);
       flash("¡Copiado! Pegalo en el grupo 📋");
     } catch {
-      flash("No se pudo copiar");
+      flash("Mantené apretado el texto de arriba para copiarlo");
     }
   };
 
@@ -146,7 +151,7 @@ export function GuessGame({ gameId }: { gameId: GameId }) {
                 <div><b>+{repGain ?? pts}</b><small>reputación</small></div>
                 <div><b>{stats?.streak ?? 0}🔥</b><small>racha</small></div>
               </div>
-              <div className="share-preview" aria-label="Vista previa para compartir">{`⚽ ${BRAND} #${dayNumber(key)} · ${game.title} ${won ? guessIds.length : "X"}/${game.maxGuesses}\n${shareGrid}`}</div>
+              <div className="share-preview" style={{ userSelect: "all" }} aria-label="Vista previa para compartir">{`⚽ ${BRAND} #${dayNumber(key)} · ${game.title} ${won ? guessIds.length : "X"}/${game.maxGuesses}\n${shareGrid}`}</div>
               <div className="row">
                 <button className="btn btn-primary" onClick={share}>Compartir resultado</button>
                 <Link className="btn" href={`/${other.id}`}>Jugar {other.title} →</Link>
