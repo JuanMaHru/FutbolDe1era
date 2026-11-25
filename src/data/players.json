@@ -1,0 +1,672 @@
+[
+ {
+  "id": "lionel-messi",
+  "name": "Lionel Messi",
+  "club": "Inter Miami",
+  "league": "MLS",
+  "nationality": "ARG",
+  "position": "EXT",
+  "number": 10,
+  "birthDate": "1987-06-24"
+ },
+ {
+  "id": "julian-alvarez",
+  "name": "Julián Álvarez",
+  "club": "Atlético de Madrid",
+  "league": "LaLiga",
+  "nationality": "ARG",
+  "position": "DC",
+  "number": 19,
+  "birthDate": "2000-01-31"
+ },
+ {
+  "id": "lautaro-martinez",
+  "name": "Lautaro Martínez",
+  "club": "Inter",
+  "league": "Serie A",
+  "nationality": "ARG",
+  "position": "DC",
+  "number": 10,
+  "birthDate": "1997-08-22"
+ },
+ {
+  "id": "enzo-fernandez",
+  "name": "Enzo Fernández",
+  "club": "Chelsea",
+  "league": "Premier League",
+  "nationality": "ARG",
+  "position": "MC",
+  "number": 8,
+  "birthDate": "2001-01-17"
+ },
+ {
+  "id": "alexis-mac-allister",
+  "name": "Alexis Mac Allister",
+  "club": "Liverpool",
+  "league": "Premier League",
+  "nationality": "ARG",
+  "position": "MC",
+  "number": 10,
+  "birthDate": "1998-12-24"
+ },
+ {
+  "id": "emiliano-martinez",
+  "name": "Emiliano Martínez",
+  "club": "Aston Villa",
+  "league": "Premier League",
+  "nationality": "ARG",
+  "position": "ARQ",
+  "number": 23,
+  "birthDate": "1992-09-02"
+ },
+ {
+  "id": "cristian-romero",
+  "name": "Cristian Romero",
+  "club": "Tottenham",
+  "league": "Premier League",
+  "nationality": "ARG",
+  "position": "DFC",
+  "number": 17,
+  "birthDate": "1998-04-27"
+ },
+ {
+  "id": "lisandro-martinez",
+  "name": "Lisandro Martínez",
+  "club": "Manchester United",
+  "league": "Premier League",
+  "nationality": "ARG",
+  "position": "DFC",
+  "number": 6,
+  "birthDate": "1998-01-18"
+ },
+ {
+  "id": "rodrigo-de-paul",
+  "name": "Rodrigo De Paul",
+  "club": "Inter Miami",
+  "league": "MLS",
+  "nationality": "ARG",
+  "position": "MC",
+  "number": 7,
+  "birthDate": "1994-05-24"
+ },
+ {
+  "id": "nicolas-otamendi",
+  "name": "Nicolás Otamendi",
+  "club": "Benfica",
+  "league": "Primeira Liga",
+  "nationality": "ARG",
+  "position": "DFC",
+  "number": 30,
+  "birthDate": "1988-02-12"
+ },
+ {
+  "id": "franco-mastantuono",
+  "name": "Franco Mastantuono",
+  "club": "Real Madrid",
+  "league": "LaLiga",
+  "nationality": "ARG",
+  "position": "EXT",
+  "number": 30,
+  "birthDate": "2007-08-14"
+ },
+ {
+  "id": "nico-paz",
+  "name": "Nico Paz",
+  "club": "Como",
+  "league": "Serie A",
+  "nationality": "ARG",
+  "position": "MCO",
+  "number": 10,
+  "birthDate": "2004-09-08"
+ },
+ {
+  "id": "thiago-almada",
+  "name": "Thiago Almada",
+  "club": "Atlético de Madrid",
+  "league": "LaLiga",
+  "nationality": "ARG",
+  "position": "MCO",
+  "number": 11,
+  "birthDate": "2001-04-26"
+ },
+ {
+  "id": "alejandro-garnacho",
+  "name": "Alejandro Garnacho",
+  "club": "Chelsea",
+  "league": "Premier League",
+  "nationality": "ARG",
+  "position": "EXT",
+  "number": 49,
+  "birthDate": "2004-07-01"
+ },
+ {
+  "id": "giuliano-simeone",
+  "name": "Giuliano Simeone",
+  "club": "Atlético de Madrid",
+  "league": "LaLiga",
+  "nationality": "ARG",
+  "position": "EXT",
+  "number": 20,
+  "birthDate": "2002-12-18"
+ },
+ {
+  "id": "nahuel-molina",
+  "name": "Nahuel Molina",
+  "club": "Atlético de Madrid",
+  "league": "LaLiga",
+  "nationality": "ARG",
+  "position": "LAT",
+  "number": 16,
+  "birthDate": "1998-04-06"
+ },
+ {
+  "id": "paulo-dybala",
+  "name": "Paulo Dybala",
+  "club": "Roma",
+  "league": "Serie A",
+  "nationality": "ARG",
+  "position": "MCO",
+  "number": 21,
+  "birthDate": "1993-11-15"
+ },
+ {
+  "id": "giovani-lo-celso",
+  "name": "Giovani Lo Celso",
+  "club": "Real Betis",
+  "league": "LaLiga",
+  "nationality": "ARG",
+  "position": "MCO",
+  "number": 20,
+  "birthDate": "1996-04-09"
+ },
+ {
+  "id": "matias-soule",
+  "name": "Matías Soulé",
+  "club": "Roma",
+  "league": "Serie A",
+  "nationality": "ARG",
+  "position": "EXT",
+  "number": 18,
+  "birthDate": "2003-04-15"
+ },
+ {
+  "id": "exequiel-palacios",
+  "name": "Exequiel Palacios",
+  "club": "Bayer Leverkusen",
+  "league": "Bundesliga",
+  "nationality": "ARG",
+  "position": "MC",
+  "number": 25,
+  "birthDate": "1998-10-05"
+ },
+ {
+  "id": "facundo-medina",
+  "name": "Facundo Medina",
+  "club": "Olympique de Marsella",
+  "league": "Ligue 1",
+  "nationality": "ARG",
+  "position": "DFC",
+  "number": 32,
+  "birthDate": "1999-05-28"
+ },
+ {
+  "id": "angel-correa",
+  "name": "Ángel Correa",
+  "club": "Tigres",
+  "league": "Liga MX",
+  "nationality": "ARG",
+  "position": "DC",
+  "number": 11,
+  "birthDate": "1995-03-09"
+ },
+ {
+  "id": "edinson-cavani",
+  "name": "Edinson Cavani",
+  "club": "Boca Juniors",
+  "league": "Liga Profesional",
+  "nationality": "URU",
+  "position": "DC",
+  "number": 10,
+  "birthDate": "1987-02-14"
+ },
+ {
+  "id": "miguel-merentiel",
+  "name": "Miguel Merentiel",
+  "club": "Boca Juniors",
+  "league": "Liga Profesional",
+  "nationality": "URU",
+  "position": "DC",
+  "number": 16,
+  "birthDate": "1996-02-24"
+ },
+ {
+  "id": "leandro-paredes",
+  "name": "Leandro Paredes",
+  "club": "Boca Juniors",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "MC",
+  "number": 5,
+  "birthDate": "1994-06-29"
+ },
+ {
+  "id": "agustin-marchesin",
+  "name": "Agustín Marchesín",
+  "club": "Boca Juniors",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "ARQ",
+  "number": 1,
+  "birthDate": "1988-03-16"
+ },
+ {
+  "id": "exequiel-zeballos",
+  "name": "Exequiel Zeballos",
+  "club": "Boca Juniors",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "EXT",
+  "number": 7,
+  "birthDate": "2002-04-24"
+ },
+ {
+  "id": "milton-gimenez",
+  "name": "Milton Giménez",
+  "club": "Boca Juniors",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "DC",
+  "number": 9,
+  "birthDate": "1996-08-12"
+ },
+ {
+  "id": "franco-armani",
+  "name": "Franco Armani",
+  "club": "River Plate",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "ARQ",
+  "number": 1,
+  "birthDate": "1986-10-16"
+ },
+ {
+  "id": "miguel-borja",
+  "name": "Miguel Borja",
+  "club": "River Plate",
+  "league": "Liga Profesional",
+  "nationality": "COL",
+  "position": "DC",
+  "number": 9,
+  "birthDate": "1993-01-26"
+ },
+ {
+  "id": "facundo-colidio",
+  "name": "Facundo Colidio",
+  "club": "River Plate",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "DC",
+  "number": 11,
+  "birthDate": "2000-01-04"
+ },
+ {
+  "id": "maximiliano-salas",
+  "name": "Maximiliano Salas",
+  "club": "River Plate",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "DC",
+  "number": 7,
+  "birthDate": "1997-12-01"
+ },
+ {
+  "id": "juan-fernando-quintero",
+  "name": "Juan Fernando Quintero",
+  "club": "River Plate",
+  "league": "Liga Profesional",
+  "nationality": "COL",
+  "position": "MCO",
+  "number": 10,
+  "birthDate": "1993-01-18"
+ },
+ {
+  "id": "german-pezzella",
+  "name": "Germán Pezzella",
+  "club": "River Plate",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "DFC",
+  "number": 6,
+  "birthDate": "1991-06-27"
+ },
+ {
+  "id": "marcos-acuna",
+  "name": "Marcos Acuña",
+  "club": "River Plate",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "LAT",
+  "number": 21,
+  "birthDate": "1991-10-28"
+ },
+ {
+  "id": "gonzalo-montiel",
+  "name": "Gonzalo Montiel",
+  "club": "River Plate",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "LAT",
+  "number": 29,
+  "birthDate": "1997-01-01"
+ },
+ {
+  "id": "adrian-martinez",
+  "name": "Adrián Martínez",
+  "club": "Racing Club",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "DC",
+  "number": 9,
+  "birthDate": "1992-01-07"
+ },
+ {
+  "id": "gabriel-arias",
+  "name": "Gabriel Arias",
+  "club": "Racing Club",
+  "league": "Liga Profesional",
+  "nationality": "CHI",
+  "position": "ARQ",
+  "number": 21,
+  "birthDate": "1987-09-13"
+ },
+ {
+  "id": "gaston-martirena",
+  "name": "Gastón Martirena",
+  "club": "Racing Club",
+  "league": "Liga Profesional",
+  "nationality": "URU",
+  "position": "LAT",
+  "number": 2,
+  "birthDate": "2000-01-04"
+ },
+ {
+  "id": "angel-di-maria",
+  "name": "Ángel Di María",
+  "club": "Rosario Central",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "EXT",
+  "number": 11,
+  "birthDate": "1988-02-14"
+ },
+ {
+  "id": "ignacio-malcorra",
+  "name": "Ignacio Malcorra",
+  "club": "Rosario Central",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "MC",
+  "number": 10,
+  "birthDate": "1987-07-24"
+ },
+ {
+  "id": "gabriel-avalos",
+  "name": "Gabriel Ávalos",
+  "club": "Independiente",
+  "league": "Liga Profesional",
+  "nationality": "PAR",
+  "position": "DC",
+  "number": 9,
+  "birthDate": "1990-10-12"
+ },
+ {
+  "id": "rodrigo-rey",
+  "name": "Rodrigo Rey",
+  "club": "Independiente",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "ARQ",
+  "number": 33,
+  "birthDate": "1991-03-08"
+ },
+ {
+  "id": "guido-carrillo",
+  "name": "Guido Carrillo",
+  "club": "Estudiantes",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "DC",
+  "number": 9,
+  "birthDate": "1991-05-25"
+ },
+ {
+  "id": "fernando-muslera",
+  "name": "Fernando Muslera",
+  "club": "Estudiantes",
+  "league": "Liga Profesional",
+  "nationality": "URU",
+  "position": "ARQ",
+  "number": 1,
+  "birthDate": "1986-06-16"
+ },
+ {
+  "id": "santiago-ascacibar",
+  "name": "Santiago Ascacíbar",
+  "club": "Estudiantes",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "MC",
+  "number": 5,
+  "birthDate": "1997-02-25"
+ },
+ {
+  "id": "jose-sosa",
+  "name": "José Sosa",
+  "club": "Estudiantes",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "MCO",
+  "number": 10,
+  "birthDate": "1985-06-19"
+ },
+ {
+  "id": "edwuin-cetre",
+  "name": "Edwuin Cetré",
+  "club": "Estudiantes",
+  "league": "Liga Profesional",
+  "nationality": "COL",
+  "position": "EXT",
+  "number": 32,
+  "birthDate": "1998-01-02"
+ },
+ {
+  "id": "walter-bou",
+  "name": "Walter Bou",
+  "club": "Lanús",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "DC",
+  "number": 9,
+  "birthDate": "1993-08-25"
+ },
+ {
+  "id": "claudio-aquino",
+  "name": "Claudio Aquino",
+  "club": "Vélez Sarsfield",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "position": "MCO",
+  "number": 22,
+  "birthDate": "1991-07-24"
+ },
+ {
+  "id": "sebastian-villa",
+  "name": "Sebastián Villa",
+  "club": "Independiente Rivadavia",
+  "league": "Liga Profesional",
+  "nationality": "COL",
+  "position": "EXT",
+  "number": 22,
+  "birthDate": "1996-05-19"
+ },
+ {
+  "id": "federico-valverde",
+  "name": "Federico Valverde",
+  "club": "Real Madrid",
+  "league": "LaLiga",
+  "nationality": "URU",
+  "position": "MC",
+  "number": 8,
+  "birthDate": "1998-07-22"
+ },
+ {
+  "id": "darwin-nunez",
+  "name": "Darwin Núñez",
+  "club": "Al Hilal",
+  "league": "Saudi Pro League",
+  "nationality": "URU",
+  "position": "DC",
+  "number": 9,
+  "birthDate": "1999-06-24"
+ },
+ {
+  "id": "luis-suarez",
+  "name": "Luis Suárez",
+  "club": "Inter Miami",
+  "league": "MLS",
+  "nationality": "URU",
+  "position": "DC",
+  "number": 9,
+  "birthDate": "1987-01-24"
+ },
+ {
+  "id": "luis-diaz",
+  "name": "Luis Díaz",
+  "club": "Bayern Múnich",
+  "league": "Bundesliga",
+  "nationality": "COL",
+  "position": "EXT",
+  "number": 14,
+  "birthDate": "1997-01-13"
+ },
+ {
+  "id": "james-rodriguez",
+  "name": "James Rodríguez",
+  "club": "León",
+  "league": "Liga MX",
+  "nationality": "COL",
+  "position": "MCO",
+  "number": 10,
+  "birthDate": "1991-07-12"
+ },
+ {
+  "id": "vinicius-junior",
+  "name": "Vinícius Júnior",
+  "club": "Real Madrid",
+  "league": "LaLiga",
+  "nationality": "BRA",
+  "position": "EXT",
+  "number": 7,
+  "birthDate": "2000-07-12"
+ },
+ {
+  "id": "raphinha",
+  "name": "Raphinha",
+  "club": "Barcelona",
+  "league": "LaLiga",
+  "nationality": "BRA",
+  "position": "EXT",
+  "number": 11,
+  "birthDate": "1996-12-14"
+ },
+ {
+  "id": "neymar",
+  "name": "Neymar",
+  "club": "Santos",
+  "league": "Brasileirão",
+  "nationality": "BRA",
+  "position": "EXT",
+  "number": 10,
+  "birthDate": "1992-02-05"
+ },
+ {
+  "id": "moises-caicedo",
+  "name": "Moisés Caicedo",
+  "club": "Chelsea",
+  "league": "Premier League",
+  "nationality": "ECU",
+  "position": "MC",
+  "number": 25,
+  "birthDate": "2001-11-02"
+ },
+ {
+  "id": "arturo-vidal",
+  "name": "Arturo Vidal",
+  "club": "Colo-Colo",
+  "league": "Primera Chile",
+  "nationality": "CHI",
+  "position": "MC",
+  "number": 23,
+  "birthDate": "1987-05-22"
+ },
+ {
+  "id": "miguel-almiron",
+  "name": "Miguel Almirón",
+  "club": "Atlanta United",
+  "league": "MLS",
+  "nationality": "PAR",
+  "position": "EXT",
+  "number": 10,
+  "birthDate": "1994-02-10"
+ },
+ {
+  "id": "kylian-mbappe",
+  "name": "Kylian Mbappé",
+  "club": "Real Madrid",
+  "league": "LaLiga",
+  "nationality": "FRA",
+  "position": "DC",
+  "number": 10,
+  "birthDate": "1998-12-20"
+ },
+ {
+  "id": "erling-haaland",
+  "name": "Erling Haaland",
+  "club": "Manchester City",
+  "league": "Premier League",
+  "nationality": "NOR",
+  "position": "DC",
+  "number": 9,
+  "birthDate": "2000-07-21"
+ },
+ {
+  "id": "lamine-yamal",
+  "name": "Lamine Yamal",
+  "club": "Barcelona",
+  "league": "LaLiga",
+  "nationality": "ESP",
+  "position": "EXT",
+  "number": 10,
+  "birthDate": "2007-07-13"
+ },
+ {
+  "id": "mohamed-salah",
+  "name": "Mohamed Salah",
+  "club": "Liverpool",
+  "league": "Premier League",
+  "nationality": "EGY",
+  "position": "EXT",
+  "number": 11,
+  "birthDate": "1992-06-15"
+ },
+ {
+  "id": "cristiano-ronaldo",
+  "name": "Cristiano Ronaldo",
+  "club": "Al Nassr",
+  "league": "Saudi Pro League",
+  "nationality": "POR",
+  "position": "DC",
+  "number": 7,
+  "birthDate": "1985-02-05"
+ }
+]

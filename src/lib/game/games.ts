@@ -1,0 +1,33 @@
+import playersData from "@/data/players.json";
+import coachesData from "@/data/coaches.json";
+import type { Coach, GameDefinition, GameId, Player } from "./types";
+import { coachAttributes, playerAttributes } from "./compare";
+import { COUNTRIES, POSITIONS } from "./meta";
+
+export const BRAND = "Fútbol de Primera";
+
+export const playerGame: GameDefinition<Player> = {
+  id: "jugador",
+  title: "Jugador",
+  noun: "jugador",
+  maxGuesses: 8,
+  seed: 20261101,
+  items: playersData as Player[],
+  attributes: playerAttributes,
+  subtitle: (p) => `${POSITIONS[p.position]?.label ?? p.position} · ${p.club} · ${COUNTRIES[p.nationality]?.flag ?? ""}`,
+};
+
+export const coachGame: GameDefinition<Coach> = {
+  id: "dt",
+  title: "DT",
+  noun: "entrenador",
+  maxGuesses: 8,
+  seed: 19781986,
+  items: coachesData as Coach[],
+  attributes: coachAttributes,
+  subtitle: (c) => `${c.team} · ${c.formation} · ${COUNTRIES[c.nationality]?.flag ?? ""}`,
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const GAMES: Record<GameId, GameDefinition<any>> = { jugador: playerGame, dt: coachGame };
+export const GAME_IDS: GameId[] = ["jugador", "dt"];
