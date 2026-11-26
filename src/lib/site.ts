@@ -19,8 +19,8 @@ export const SOCIAL: { id: "instagram" | "x" | "tiktok"; label: string; url: str
 export const DONATE: { links: { amount: string; label: string; url: string }[]; alias: string; freeAmountUrl: string } = {
   links: [
     { amount: "$1.000", label: "Un sobre de figuritas 🃏", url: "https://mpago.la/267Yria" },
-    { amount: "$3.000", label: "El chori de la previa 🌭", url: "" },
-    { amount: "$5.000", label: "Una entrada a la cancha 🎟️", url: "" },
+    { amount: "$3.000", label: "El chori de la previa 🌭", url: "https://mpago.la/2KiqMbu" },
+    { amount: "$5.000", label: "Una entrada a la cancha 🎟️", url: "https://mpago.la/28JXdw2" },
   ],
   /** Alias de Mercado Pago para transferir cualquier monto (ej.: futbol.de.primera.mp). */
   alias: "juanmahru",
