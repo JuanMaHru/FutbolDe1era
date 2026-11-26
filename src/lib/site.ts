@@ -18,12 +18,12 @@ export const SOCIAL: { id: "instagram" | "x" | "tiktok"; label: string; url: str
  */
 export const DONATE: { links: { amount: string; label: string; url: string }[]; alias: string; freeAmountUrl: string } = {
   links: [
-    { amount: "$1.000", label: "Un café ☕", url: "" },
-    { amount: "$3.000", label: "Una birra 🍺", url: "" },
+    { amount: "$1.000", label: "Un sobre de figuritas 🃏", url: "" },
+    { amount: "$3.000", label: "El chori de la previa 🌭", url: "" },
     { amount: "$5.000", label: "Una entrada a la cancha 🎟️", url: "" },
   ],
   /** Alias de Mercado Pago para transferir cualquier monto (ej.: futbol.de.primera.mp). */
-  alias: "",
+  alias: "juanmahru",
   /** Opcional: link con monto libre (p. ej. un link.mercadopago.com.ar/tuusuario). */
   freeAmountUrl: "",
 };

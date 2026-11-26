@@ -27,7 +27,7 @@ export function DonateButton({ variant = "pill" }: { variant?: "pill" | "card" |
 
 function DonateDialog({ open, onClose }: { open: boolean; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null);
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState("");
   useEffect(() => {
     const d = ref.current;
     if (!d) return;
@@ -35,8 +35,11 @@ function DonateDialog({ open, onClose }: { open: boolean; onClose: () => void })
     if (!open && d.open) d.close();
   }, [open]);
   const ready = donationsReady();
-  const copy = async () => {
-    try { await navigator.clipboard.writeText(DONATE.alias); setCopied(true); setTimeout(() => setCopied(false), 1800); } catch { /* se puede seleccionar a mano */ }
+  const copy = async (amount?: string) => {
+    play("win");
+    const msg = amount ? `Alias copiado: transferí ${amount} desde Mercado Pago 💙` : "¡Alias copiado!";
+    try { await navigator.clipboard.writeText(DONATE.alias); setCopied(msg); } catch { setCopied(`Alias: ${DONATE.alias}${amount ? ` · ${amount}` : ""}`); }
+    setTimeout(() => setCopied(""), 3500);
   };
   return (
     <dialog ref={ref} className="howto" onClose={onClose} onClick={(e) => e.target === ref.current && onClose()}>
@@ -49,21 +52,28 @@ function DonateDialog({ open, onClose }: { open: boolean; onClose: () => void })
         ) : (
           <>
             <div className="donate-grid">
-              {DONATE.links.filter((l) => l.url).map((l) => (
-                <a key={l.amount} className="donate-opt" href={l.url} target="_blank" rel="noreferrer" onClick={() => play("win")}>
-                  <b>{l.amount}</b><span>{l.label}</span>
-                </a>
-              ))}
+              {DONATE.links.map((l) =>
+                l.url ? (
+                  <a key={l.amount} className="donate-opt" href={l.url} target="_blank" rel="noreferrer" onClick={() => play("win")}>
+                    <b>{l.amount}</b><span>{l.label}</span>
+                  </a>
+                ) : DONATE.alias ? (
+                  <button key={l.amount} className="donate-opt" onClick={() => copy(l.amount)}>
+                    <b>{l.amount}</b><span>{l.label}</span>
+                  </button>
+                ) : null,
+              )}
               {DONATE.freeAmountUrl && <a className="donate-opt" href={DONATE.freeAmountUrl} target="_blank" rel="noreferrer"><b>Otro monto</b><span>Elegís vos</span></a>}
             </div>
             {DONATE.alias && (
               <div className="donate-alias">
-                <span className="muted small">O transferí por Mercado Pago al alias:</span>
+                <span className="muted small">Elegí una opción (copia el alias) o transferí lo que quieras por Mercado Pago al alias:</span>
                 <code style={{ userSelect: "all" }}>{DONATE.alias}</code>
-                <button className="btn" onClick={copy}>{copied ? "¡Copiado!" : "Copiar alias"}</button>
+                <button className="btn" onClick={() => copy()}>Copiar alias</button>
+                {copied && <span className="donate-ok" role="status">{copied}</span>}
               </div>
             )}
-            <p className="muted small" style={{ margin: 0 }}>Se abre Mercado Pago en otra pestaña. El pago lo procesa Mercado Pago; nosotros no vemos tus datos.</p>
+            <p className="muted small" style={{ margin: 0 }}>La transferencia la hacés desde tu app de Mercado Pago; nosotros no vemos tus datos.</p>
           </>
         )}
       </div>
