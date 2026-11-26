@@ -1,10 +1,10 @@
 "use client";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import * as E from "@/lib/career/engine";
 import type { CareerState, Fixture, MatchResult, Moment, MomentKind, Offer } from "@/lib/career/engine";
 import { CAREER_COUNTRIES, LEAGUES, NATIONS, clubInfo, isDerby, startingOffers, strengthOf } from "@/lib/career/world";
 import { eventById, resolveChoice, type Effect } from "@/lib/career/events";
-import { achievements } from "@/lib/career/awards";
 import { matchComments, situation } from "@/lib/career/comments";
 import { POSITIONS, COUNTRIES } from "@/lib/game/meta";
 import { dateKey } from "@/lib/game/daily";
@@ -15,7 +15,7 @@ import { play } from "@/lib/sound";
 import { Crest } from "../art/Crest";
 import { Kit } from "../art/Kit";
 import { Confetti } from "../Confetti";
-import { CareerCard } from "./CareerCard";
+import { CareerJourney } from "./CareerJourney";
 import { MomentRunner, PenaltySave, PenaltyShoot } from "./Moments";
 import { Burst } from "./Burst";
 import { TrophyIcon } from "./Trophy";
@@ -74,6 +74,7 @@ function Create({ onCreate, migrated }: { onCreate: (s: CareerState) => void; mi
   const bonus = E.repToBonus(rep);
   const ready = name.trim().length >= 2 && club && talent;
   const t = talent ? E.TALENTS.find((x) => x.id === talent)! : null;
+  const [demo, setDemo] = useState<CareerState | null>(null);
 
   const roll = () => {
     if (talent || rolling) return;
@@ -87,6 +88,14 @@ function Create({ onCreate, migrated }: { onCreate: (s: CareerState) => void; mi
     <div className="career-create">
       <h1 className="hero-title" style={{ fontSize: "clamp(28px,7vw,44px)" }}>Modo <span className="hl">Carrera</span></h1>
       <p className="lead">Creá tu jugador y viví toda su carrera: liga completa, copas, torneos internacionales y la selección. Los partidos importantes los jugás vos; el resto se simula pero cuenta.</p>
+      <Link className="btn btn-ghost demo-btn" href="/vitrina">🏆 Ver todos los títulos, premios y logros</Link>
+      <button className="btn btn-ghost demo-btn" onClick={() => { play("click"); setDemo(demo ? null : demoCareer()); }}>{demo ? "✕ Cerrar ejemplo" : "👀 Ver un final de carrera de ejemplo"}</button>
+      {demo && (
+        <div className="demo-box">
+          <CareerJourney s={demo} demo />
+          <button className="btn big-cta" onClick={() => { setDemo(null); window.scrollTo({ top: 0, behavior: "smooth" }); }}>Cerrar el ejemplo y crear mi jugador</button>
+        </div>
+      )}
       {migrated && <p className="notice">Actualizamos el Modo Carrera (formatos reales, ida y vuelta, premios y logros). Tu carrera anterior no es compatible: empezá una nueva.</p>}
       <div className="rep-note">
         <span className="rep-big">⭐ {rep}</span>
@@ -283,6 +292,7 @@ function Hub({ s, save }: { s: CareerState; save: (s: CareerState | null) => voi
           </div>
         </details>
       )}
+      <Link className="link-btn" href="/vitrina" style={{ display: "inline-block", marginTop: 10 }}>🏆 Ver todos los logros posibles</Link>
       {(s.trophies.length > 0 || s.awards.length > 0) && (
         <details className="history">
           <summary>Vitrina ({s.trophies.length} títulos · {s.awards.length} premios)</summary>
@@ -647,21 +657,30 @@ function SeasonEnd({ s, save }: { s: CareerState; save: (s: CareerState) => void
 }
 
 function Retired({ s, save }: { s: CareerState; save: (s: CareerState | null) => void }) {
-  const ach = achievements(s);
   return (
-    <section className="event card">
-      <div className="event-icon">👟</div>
-      <h2>Fin de una carrera</h2>
-      <p>{s.totals.pj} partidos, {plural(s.totals.goals, "gol", "goles")}, {plural(s.trophies.length, "título", "títulos")}{s.caps ? ` y ${s.caps} partidos con ${NATIONS[s.nationality]?.name ?? "la selección"}` : ""}.</p>
-      {ach.length > 0 && (
-        <>
-          <h3 className="offers-title">Logros de tu carrera</h3>
-          <div className="achievements">{ach.map((a, i) => <div key={a.id} className="ach" style={{ animationDelay: `${i * 90}ms` }}><span className="ach-icon">{a.icon}</span><div><b>{a.title}</b><span className="muted small">{a.desc}</span></div></div>)}</div>
-        </>
-      )}
-      {(s.trophies.length > 0 || s.awards.length > 0) && <><h3 className="offers-title">Vitrina</h3><Showcase s={s} /></>}
-      <CareerCard s={s} achievements={ach.map((a) => `${a.icon} ${a.title}`)} />
+    <section className="retired">
+      <div className="event-icon" style={{ textAlign: "center" }}>👟</div>
+      <h2 className="j-big-title">Fin de una carrera</h2>
+      <CareerJourney s={s} />
       <button className="btn btn-primary big-cta" onClick={() => save(null)}>Empezar una nueva carrera</button>
     </section>
   );
+}
+
+/** Carrera simulada completa para mostrar cómo se ve el final. */
+export function demoCareer(): CareerState {
+  const nats = ["ARG", "URU", "BRA", "ESP", "COL"];
+  const pos = ["DC", "EXT", "MCO", "MC", "DFC", "ARQ"][Math.floor(R() * 6)];
+  const nat = nats[Math.floor(R() * nats.length)];
+  const talents: E.TalentId[] = ["talento", "crack", "crack", "fenomeno"];
+  let s = E.newCareer({ name: "Juan Ejemplo", nick: "El Ejemplo", nationality: nat, position: pos, archetype: E.ARCHETYPES[E.ROLE_OF[pos]][0].id, foot: "zurdo", number: 10, age: 18, club: startingOffers(150, nat, R)[0], repBonus: 3, talent: talents[Math.floor(R() * talents.length)] }, R);
+  for (let i = 0; i < 25 && s.phase !== "retired"; i++) {
+    s = E.simulateRest(s, R);
+    if (s.phase === "season-end") {
+      const best = [...(s.offers ?? [])].sort((a, b) => clubInfo(b.club).strength - clubInfo(a.club).strength)[0];
+      const pickOffer = best && clubInfo(best.club).strength > clubInfo(s.club).strength + 2 && R() < 0.75 ? best : null;
+      s = s.age >= 35 && R() < 0.5 ? { ...s, phase: "retired" } : E.startNextSeason(s, pickOffer, R);
+    }
+  }
+  return { ...s, phase: "retired" };
 }

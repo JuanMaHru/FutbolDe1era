@@ -17,6 +17,7 @@ import { GuessInput } from "./GuessInput";
 import { HowTo } from "./HowTo";
 import { IconHelp } from "./Icons";
 import { MysteryCard } from "./MysteryCard";
+import { DonateButton } from "./Donate";
 
 type Mode = "daily" | "archive" | "practice";
 type Item = Entity & Record<string, unknown>;
@@ -226,6 +227,7 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
                   <Link className="btn" href="/archivo">← {t("nav.archive")}</Link>
                 )}
               </div>
+              <DonateButton variant="link" />
               {mode === "daily" && stats && stats.won > 0 && <Distribution stats={stats} current={won ? guessIds.length : 0} />}
               <p className="muted small" style={{ marginBottom: 0 }}>
                 {mode === "daily" && <>{t("result.next")} <Countdown /> · </>}

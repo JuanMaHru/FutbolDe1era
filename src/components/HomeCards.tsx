@@ -9,6 +9,7 @@ import { play } from "@/lib/sound";
 import { Countdown } from "./Countdown";
 import { ModeArt, type ModeId } from "./art/ModeArt";
 import { useProfile } from "./useProfile";
+import { DonateButton } from "./Donate";
 
 interface Mode {
   id: ModeId;
@@ -97,6 +98,7 @@ export function HomeCards() {
           );
         })}
       </div>
+      <div style={{ marginTop: 22 }}><DonateButton variant="card" /></div>
     </>
   );
 }

@@ -79,7 +79,7 @@ export function TrophyIcon({ name, size = 28 }: { name: string; size?: number })
       break;
     case "mvp":
     case "young":
-      body = <><path d="M34 4 L50 30 L66 4" fill="none" stroke={k === "mvp" ? "#c33" : "#2b6cb0"} strokeWidth="8" /><circle cx="50" cy="58" r="30" fill={f} stroke={silver ? "#5e6b7a" : "#8a6a12"} strokeWidth="3" /><path d="M50 40 l6 13 14 1-11 9 4 14-13-8-13 8 4-14-11-9 14-1z" fill={silver ? "#5e6b7a" : "#8a6a12"} />{k === "young" && <text x="50" y="96" textAnchor="middle" fontSize="12" fontWeight="900" fill="#2b6cb0">U21</text>}</>;
+      body = <><path d="M34 4 L50 30 L66 4" fill="none" stroke={k === "mvp" ? "#c33" : "#2b6cb0"} strokeWidth="8" /><circle cx="50" cy="58" r="30" fill={f} stroke={silver ? "#5e6b7a" : "#8a6a12"} strokeWidth="3" /><path d="M50 40 l6 13 14 1-11 9 4 14-13-8-13 8 4-14-11-9 14-1z" fill={silver ? "#5e6b7a" : "#8a6a12"} />{k === "young" && <text x="50" y="99" textAnchor="middle" fontSize="10" fontWeight="900" fill="#5cc3ff">U21</text>}</>;
       break;
     case "continental":
       body = <><path d="M40 10 H60 L58 54 C57 62 54 66 50 66 C46 66 43 62 42 54 Z" fill={f} /><path d="M40 16 C26 18 28 40 42 42 M60 16 C74 18 72 40 58 42" fill="none" stroke={f} strokeWidth="4" /><rect x="45" y="64" width="10" height="18" fill={f} />{base}</>;

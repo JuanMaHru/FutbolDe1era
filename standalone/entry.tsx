@@ -13,6 +13,7 @@ import { OnceGame } from "@/components/OnceGame";
 import { PalabraGame } from "@/components/PalabraGame";
 import { BingoGame } from "@/components/BingoGame";
 import { CareerApp } from "@/components/career/CareerApp";
+import { Catalog } from "@/components/career/Catalog";
 
 function Page({ path }: { path: string }) {
   const game = path.match(/^\/(jugador|dt)(?:\/(\d+))?$/);
@@ -31,6 +32,14 @@ function Page({ path }: { path: string }) {
     return <BingoGame key={path} day={day} />;
   }
   if (path === "/carrera") return <CareerApp />;
+  if (path === "/vitrina")
+    return (
+      <>
+        <h1 className="hero-title" style={{ fontSize: "clamp(28px,7vw,44px)" }}>La <span className="hl">vitrina</span></h1>
+        <p className="lead">Todo lo que podés ganar en el Modo Carrera: títulos, premios individuales y logros.</p>
+        <Catalog />
+      </>
+    );
   if (path === "/archivo")
     return (
       <>

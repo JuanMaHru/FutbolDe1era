@@ -7,6 +7,7 @@ import { shareUrl } from "@/lib/site";
 import { play } from "@/lib/sound";
 import { Countdown } from "./Countdown";
 import { IconClose, IconHelp } from "./Icons";
+import { DonateButton } from "./Donate";
 import type { DailyMode } from "./useDailyGame";
 
 export function GameTop({ title, mode, day, dateLabel, onHelp, extra }: { title: string; mode: DailyMode | "practice"; day: number; dateLabel?: string; onHelp: () => void; extra?: React.ReactNode }) {
@@ -134,6 +135,7 @@ export function ResultCard({
           {t("result.next")} <Countdown />
         </p>
       )}
+      <DonateButton variant="link" />
       {toast.node}
     </section>
   );

@@ -7,6 +7,7 @@ import { SOCIAL } from "@/lib/site";
 import { isMuted, play, setMuted } from "@/lib/sound";
 import { IconInstagram, IconSound, IconTikTok, IconX } from "./Icons";
 import { ThemePicker } from "./ThemePicker";
+import { DonateButton } from "./Donate";
 import { Crest } from "./art/Crest";
 import { DEFAULT_THEME, currentTheme, setTheme } from "@/lib/theme";
 import { useProfile } from "./useProfile";
@@ -53,6 +54,7 @@ export function Header() {
             })}
           </div>
           <div className="topbar-right">
+            <DonateButton />
             <div className="langs" role="group" aria-label="Idioma">
               {LANGS.map((l) => (
                 <button

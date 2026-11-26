@@ -114,6 +114,7 @@ export interface SeasonLine {
   season: number; year: number; club: string; league: string;
   pj: number; goals: number; assists: number; cleanSheets: number; avg: number;
   place: number; cup: string; intl?: string; titles: string[]; awards: string[];
+  age?: number; ovr?: number; highlights?: string[];
 }
 
 export interface Offer { club: string; tag?: "arabia" | "vuelta" | "salto"; salary: number }
@@ -162,6 +163,19 @@ export interface CareerState {
   offers?: Offer[];
   bonusDay?: string;
   log: string[];
+  /** Momentos clave de la temporada en curso (para el recorrido final). */
+  seasonHighlights?: string[];
+  peakOvr?: number;
+}
+
+/** Agrega un momento clave a la temporada en curso. */
+function hl(s: CareerState, text: string) {
+  s.seasonHighlights = [...(s.seasonHighlights ?? []), text].slice(-14);
+}
+/** Agrega un momento clave a la última temporada cerrada (torneos de selección, Balón de Oro). */
+function hlLast(s: CareerState, text: string) {
+  const h = s.history[s.history.length - 1];
+  if (h) s.history = [...s.history.slice(0, -1), { ...h, highlights: [...(h.highlights ?? []), text] }];
 }
 
 // ---------------------------------------------------------------- utilidades
@@ -248,7 +262,9 @@ export function newCareer(input: {
     recentEvents: [], eventCounts: {}, phase: "event", pendingEvent: "debut", log: [`Firmaste tu primer contrato con ${input.club}.`],
   };
   s.salary = Math.max(1, Math.round(leagueOfState(s).salary * 0.12));
-  return buildSeason(s, firstSeasonIntl(s), rand);
+  const n = buildSeason(s, firstSeasonIntl(s), rand);
+  hl(n, `🌱 Debut profesional en ${input.club} a los ${input.age} años`);
+  return n;
 }
 
 function firstSeasonIntl(s: CareerState): string | undefined {
@@ -266,7 +282,7 @@ const nextId = (s: CareerState) => Math.max(FX_ID, ...s.fixtures.map((f) => f.id
 
 /** Arma la temporada: tablas, fechas de liga y huecos para copas. */
 function buildSeason(s0: CareerState, intl: string | undefined, rand: () => number): CareerState {
-  const s: CareerState = { ...s0, tables: [], fixtures: [], idx: 0, stats: emptyStats(), lstats: emptyStats(), autoLog: [] };
+  const s: CareerState = { ...s0, tables: [], fixtures: [], idx: 0, stats: emptyStats(), lstats: emptyStats(), autoLog: [], seasonHighlights: [] };
   s.comp = { cupAlive: true, cupRound: 0, cupFaced: [], intl, intlAlive: !!intl, intlStage: 0, intlFaced: [], intlPts: 0, poAlive: false, poFaced: [], tourn: 0, champions: [] };
   const lg = leagueOfState(s);
   const clubs = clubsInLeague(lg.id, s.leagueOverride).map((c) => c.name);
@@ -646,7 +662,12 @@ function applyOne(s0: CareerState, idx: number, res: MatchResult, rand: () => nu
     if (!national) s.stats = addStats(s.stats, res, cs);
     if (fx.kind === "league" || fx.kind === "playoff") s.lstats = addStats(s.lstats, res, cs);
     s.totals = addStats(s.totals, res, cs);
-    if (res.goals >= 3) s.hattricks++;
+    if (res.goals >= 3) { s.hattricks++; hl(s, `🎩 Hat-trick contra ${fx.rival} (${fx.comp})`); }
+    if (res.goals && s0.totals.goals === 0) hl(s, `⚽ Primer gol como profesional, contra ${fx.rival}`);
+    for (const m of [50, 100, 200, 300, 400, 500]) if (s0.totals.goals < m && s.totals.goals >= m) hl(s, `💯 Gol número ${m} de tu carrera`);
+    for (const m of [100, 250, 500, 750]) if (s0.totals.pj < m && s.totals.pj >= m) hl(s, `🏟️ Partido número ${m}`);
+    if (res.gf - res.ga >= 4 && fx.key) hl(s, `💥 Goleada ${res.gf}-${res.ga} a ${fx.rival}`);
+    if (res.goals && isDerby(myTeam(s), fx.rival) && fx.key) hl(s, `😈 Gol en el clásico contra ${fx.rival}`);
     if (isDerby(myTeam(s), fx.rival)) s.derbyGoals += res.goals;
     if (auto) {
       // Partido simulado: la forma y la confianza vuelven de a poco a valores normales.
@@ -678,7 +699,9 @@ function applyOne(s0: CareerState, idx: number, res: MatchResult, rand: () => nu
     if (isGroupEnd && placeIn(nat.table, myTeam(s)) > 2) nat.alive = false;
     if (fx.knockout && !fullWin) nat.alive = false;
     s.caps += res.played ? 1 : 0;
+    if (fx.final && !fullWin) hlLast(s, `💔 Final perdida de la ${nat.name} contra ${fx.rival}`);
     if (fx.final && fullWin) {
+      hlLast(s, `🏆 ¡Campeón de la ${nat.name} con ${NATIONS[s.nationality].name}!`);
       s.trophies = [...s.trophies, `${nat.name} con ${NATIONS[s.nationality].name}`];
       s.finalsWon++;
       s.fame = clamp(s.fame + 15);
@@ -686,7 +709,7 @@ function applyOne(s0: CareerState, idx: number, res: MatchResult, rand: () => nu
     }
     if (nat.alive && fx.knockout && !fx.final) nat.fixtures = [...nat.fixtures]; // siguiente ronda ya existe
     if (!nat.alive || nat.idx >= nat.fixtures.length) {
-      if (!nat.alive) s.log.unshift(`${NATIONS[s.nationality].name} quedó afuera de la ${nat.name} (${fx.stage}).`);
+      if (!nat.alive) { s.log.unshift(`${NATIONS[s.nationality].name} quedó afuera de la ${nat.name} (${fx.stage}).`); if (!fx.final) hlLast(s, `🎽 ${nat.name}: eliminados en ${fx.stage}`); }
       return finishYear(s, rand);
     }
     // Rival de la siguiente ronda.
@@ -700,8 +723,9 @@ function applyOne(s0: CareerState, idx: number, res: MatchResult, rand: () => nu
   s.idx = idx + 1;
   const lg = leagueOfState(s);
   if (fx.kind === "cup" && tieDone) {
-    if (!fullWin) s.comp = { ...s.comp, cupAlive: false };
+    if (!fullWin) { s.comp = { ...s.comp, cupAlive: false }; if (fx.final) hl(s, `💔 Final perdida de la ${fx.comp} contra ${fx.rival}`); }
     else if (fx.final) {
+      hl(s, `🏆 Campeón de la ${fx.comp}${res.pens ? " por penales" : ""}`);
       s.trophies = [...s.trophies, `${fx.comp} ${year} (${s.club})`];
       s.finalsWon++;
       s.fame = clamp(s.fame + 6);
@@ -728,8 +752,9 @@ function applyOne(s0: CareerState, idx: number, res: MatchResult, rand: () => nu
         else { s.comp = { ...s.comp, intlAlive: false }; s.log.unshift(`${pts} puntos: eliminados en la fase liga de la ${fx.comp}.`); }
       }
     } else if (tieDone) {
-      if (!fullWin) s.comp = { ...s.comp, intlAlive: false };
+      if (!fullWin) { s.comp = { ...s.comp, intlAlive: false }; if (fx.final) hl(s, `💔 Final perdida de la ${fx.comp} contra ${fx.rival}`); else if (fx.stage.startsWith("Semifinal")) hl(s, `🌎 Semifinal de la ${fx.comp}`); }
       else if (fx.final) {
+        hl(s, `🏆 ¡Campeón de la ${fx.comp}!`);
         s.trophies = [...s.trophies, `${fx.comp} ${year} (${s.club})`];
         s.finalsWon++;
         s.fame = clamp(s.fame + 14);
@@ -766,8 +791,10 @@ function applyOne(s0: CareerState, idx: number, res: MatchResult, rand: () => nu
     const roundIdx = po.rounds.findIndex((r) => fx.stage.startsWith(r.name));
     const tname = lg.format.tournaments[s.comp.tourn];
     if (!fullWin) {
+      if (fx.final) hl(s, `💔 Final perdida del ${tname || lg.name} contra ${fx.rival}`);
       s.comp = { ...s.comp, poAlive: false, tourn: s.comp.tourn + 1, champions: [...s.comp.champions, fx.rival] };
     } else if (fx.final) {
+      hl(s, `🏆 Campeón del ${tname || lg.name}`);
       const title = `${tname || lg.name} ${year} (${s.club})`;
       s.trophies = [...s.trophies, title];
       s.finalsWon++;
@@ -829,17 +856,19 @@ function endSeason(s0: CareerState, rand: () => number, auto: string[] = []): Ca
     s.log.unshift(`⬇️ ${s.club} descendió a la ${LEAGUES[lg.relegateTo].name}.`);
   }
   s.trophies = [...s.trophies, ...titles];
+  titles.forEach((t) => hl(s, t.startsWith("Ascenso") ? `⬆️ ${t.replace(/ \d{4} \(.*\)$/, "")}` : `🏆 Campeón: ${t.replace(/ \(.*\)$/, "")}`));
+  if (lg.relegateTo && place >= size) hl(s, `⬇️ Descenso a la ${LEAGUES[lg.relegateTo].name}`);
   const wonTourn = s.trophies.some((t) => t.includes(` ${year} (${s.club})`) && lg.format.tournaments.some((n) => n && t.startsWith(n)));
   s.nextIntl = (lg.top[0] && place <= lg.top[0]) || wonTourn ? CONTINENTAL[lg.continent][0] : lg.top[1] && place <= lg.top[1] && CONTINENTAL[lg.continent][1] ? CONTINENTAL[lg.continent][1] : undefined;
 
   // Premios individuales de la liga.
   const aw = seasonAwards(s, place, rand);
   s.awards = [...s.awards, ...aw];
-  aw.forEach((a) => s.log.unshift(`🏅 ${a}`));
+  aw.forEach((a) => { s.log.unshift(`🏅 ${a}`); hl(s, `🏅 ${a}`); });
 
   const avg = s.stats.pj ? Math.round((s.stats.ratingSum / s.stats.pj) * 10) / 10 : 0;
   const seasonTitles = [...new Set([...s0.trophies.filter((t) => t.includes(` ${year} (${s.club})`)), ...titles])];
-  s.history = [...s.history, { season: s.season, year, club: s.club, league: lg.name, pj: s.stats.pj, goals: s.stats.goals, assists: s.stats.assists, cleanSheets: s.stats.cleanSheets, avg, place, cup: cupResult(s), intl: intlResult(s), titles: seasonTitles, awards: aw }];
+  s.history = [...s.history, { season: s.season, year, club: s.club, league: lg.name, pj: s.stats.pj, goals: s.stats.goals, assists: s.stats.assists, cleanSheets: s.stats.cleanSheets, avg, place, cup: cupResult(s), intl: intlResult(s), titles: seasonTitles, awards: aw, age: s.age, ovr: s.ovr, highlights: s.seasonHighlights ?? [] }];
 
   // Evolución: potencial, edad y rendimiento.
   const t = talentOf(s);
@@ -849,6 +878,7 @@ function endSeason(s0: CareerState, rand: () => number, auto: string[] = []): Ca
   if (ovr > t.cap && g > 0) ovr = Math.max(s.ovr, t.cap + (rand() < 0.1 ? 1 : 0));
   s.age = age;
   s.ovr = clamp(ovr, 40, 99);
+  s.peakOvr = Math.max(s.peakOvr ?? 0, s.ovr);
 
   // Selección.
   const nat = NATIONS[s.nationality];
@@ -859,6 +889,7 @@ function endSeason(s0: CareerState, rand: () => number, auto: string[] = []): Ca
     s.caps += caps;
     s.natGoals += gg;
     s.log.unshift(`🎽 Convocado a ${nat.name} en Eliminatorias y amistosos: ${caps} partidos, ${gg} goles.`);
+    if (s0.caps === 0) hlLast(s, `🎽 Primera convocatoria a ${nat.name}`);
     const tour = nationalTournament(s.nationality, year);
     if (tour) {
       const rivals: string[] = [];
@@ -891,7 +922,7 @@ function finishYear(s0: CareerState, rand: () => number): CareerState {
     s.fame = clamp(s.fame + 10);
     s.log.unshift(`🏆 ${bo.award}`);
     const h = s.history[s.history.length - 1];
-    if (h) s.history = [...s.history.slice(0, -1), { ...h, awards: [...h.awards, bo.award] }];
+    if (h) s.history = [...s.history.slice(0, -1), { ...h, awards: [...h.awards, bo.award], highlights: [...(h.highlights ?? []), `🌟 ¡Ganaste el ${bo.award}!`] }];
   } else if (bo.rank) s.log.unshift(`🗳️ Quedaste ${bo.rank}º en la votación del Balón de Oro.`);
   s.offers = makeOffers(s, rand);
   s.phase = s.age >= 38 ? "retired" : "season-end";
@@ -900,7 +931,9 @@ function finishYear(s0: CareerState, rand: () => number): CareerState {
 
 function makeOffers(s: CareerState, rand: () => number): Offer[] {
   const cur = clubInfo(s.club).strength;
-  const reach = Math.min(90, s.ovr + 3, cur + (s.ovr >= cur + 2 && s.fame >= 30 ? 7 : 2) + (s.fame >= 70 ? 3 : 0));
+  // Si tu nivel supera mucho al de tu club, te buscan clubes a tu altura.
+  const jump = s.ovr >= cur + 2 ? Math.max(s.fame >= 30 ? 7 : 4, s.ovr - cur - 2) : 2;
+  const reach = Math.min(90, s.ovr + 3, cur + jump + (s.fame >= 70 ? 3 : 0));
   const floor = Math.max(45, Math.min(reach - 14, s.ovr - 18));
   const pool = CLUBS_W.filter((c) => c.name !== s.club && c.strength <= reach && c.strength >= floor && c.league !== "ARG2");
   const lg = leagueOfState(s);
@@ -944,6 +977,7 @@ export function startNextSeason(s: CareerState, offer: Offer | null, rand: () =>
   n.injury = 0; n.suspension = 0; n.form = 60;
   n.offers = undefined; n.nextIntl = undefined;
   n = buildSeason(n, intl, rand);
+  if (offer && offer.club !== s.club) hl(n, offer.tag === "vuelta" ? `🏠 Vuelta a casa: ${offer.club}` : offer.tag === "arabia" ? `💰 Contrato millonario con ${offer.club}` : `✍️ Fichaje por ${offer.club}`);
   n.phase = "event";
   // Si la primera fecha no es clave, simular hasta la primera que sí.
   if (!n.fixtures[0]?.key) n.fixtures[0] = { ...n.fixtures[0], key: true };
