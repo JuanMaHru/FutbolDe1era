@@ -31,6 +31,7 @@ const flag = (code: string) => `${COUNTRIES[code]?.flag ?? ""} ${code}`.trim();
 export const playerAttributes: Attribute<Player>[] = [
   {
     key: "club",
+    nearHint: "juega en la misma liga", nearShort: "Misma liga",
     label: "Club",
     // Amarillo: mismo club no, pero misma liga.
     compare: (g, t) =>
@@ -40,27 +41,32 @@ export const playerAttributes: Attribute<Player>[] = [
   },
   {
     key: "league",
+    nearHint: "liga del mismo continente", nearShort: "Mismo contin.",
     label: "Liga",
     compare: (g, t) => grouped(g.league, t.league, region, LEAGUES[g.league]?.short ?? g.league),
   },
   {
     key: "nationality",
+    nearHint: "misma confederación", nearShort: "Misma conf.",
     label: "País",
     compare: (g, t) => grouped(g.nationality, t.nationality, confed, flag(g.nationality)),
   },
   {
     key: "position",
-    label: "Posición",
+    nearHint: "misma línea (def., medio, ataque)", nearShort: "Misma línea",
+    label: "Puesto",
     compare: (g, t) =>
-      grouped(g.position, t.position, (p) => POSITIONS[p]?.line, POSITIONS[g.position]?.label ?? g.position),
+      grouped(g.position, t.position, (p) => POSITIONS[p]?.line, g.position),
   },
   {
     key: "age",
+    nearHint: "±2 años", nearShort: "±2 años", numeric: true,
     label: "Edad",
     compare: (g, t, today) => numeric(ageOn(g.birthDate, today), ageOn(t.birthDate, today), 2),
   },
   {
     key: "number",
+    nearHint: "±3 números", nearShort: "±3", numeric: true,
     label: "Dorsal",
     compare: (g, t) => numeric(g.number, t.number, 3),
   },
@@ -72,6 +78,7 @@ const back = (formation: string) => formation.split("-")[0];
 export const coachAttributes: Attribute<Coach>[] = [
   {
     key: "team",
+    nearHint: "dirige en la misma liga", nearShort: "Misma liga",
     label: "Equipo",
     compare: (g, t) =>
       g.team === t.team
@@ -80,28 +87,33 @@ export const coachAttributes: Attribute<Coach>[] = [
   },
   {
     key: "league",
+    nearHint: "liga del mismo continente", nearShort: "Mismo contin.",
     label: "Liga",
     compare: (g, t) => grouped(g.league, t.league, region, LEAGUES[g.league]?.short ?? g.league),
   },
   {
     key: "nationality",
+    nearHint: "misma confederación", nearShort: "Misma conf.",
     label: "País",
     compare: (g, t) => grouped(g.nationality, t.nationality, confed, flag(g.nationality)),
   },
   {
     key: "age",
+    nearHint: "±3 años", nearShort: "±3 años", numeric: true,
     label: "Edad",
     compare: (g, t, today) => numeric(ageOn(g.birthDate, today), ageOn(t.birthDate, today), 3),
   },
   {
     key: "formation",
+    nearHint: "misma cantidad de defensores", nearShort: "Misma defensa",
     label: "Esquema",
     // Amarillo: misma cantidad de defensores.
     compare: (g, t) => grouped(g.formation, t.formation, back, g.formation),
   },
   {
     key: "debut",
-    label: "Debut DT",
+    nearHint: "±3 años", nearShort: "±3 años", numeric: true,
+    label: "Debut",
     compare: (g, t) => numeric(g.debutYear, t.debutYear, 3),
   },
 ];

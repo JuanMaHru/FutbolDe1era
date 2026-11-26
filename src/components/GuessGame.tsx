@@ -1,92 +1,148 @@
 "use client";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BRAND, GAMES } from "@/lib/game/games";
-import { dateKey, dayNumber, keyToDate, pickDaily, randomPick } from "@/lib/game/daily";
-import { points, shareText } from "@/lib/game/scoring";
-import type { Cell, Entity, GameId } from "@/lib/game/types";
-import { loadDaily, loadStats, recordFinish, saveDaily, type GameStats } from "@/lib/progress";
-import { notifyProfileChange } from "@/lib/storage";
+import { dateKey, dayNumber, dayToKey, keyToDate, pickDaily, randomPick } from "@/lib/game/daily";
+import { EMOJI, points, shareText } from "@/lib/game/scoring";
+import type { Attribute, Cell, Entity, GameId } from "@/lib/game/types";
+import { loadDaily, loadStats, recordArchive, recordFinish, saveDaily, type GameStats } from "@/lib/progress";
+import { notifyProfileChange, read, write } from "@/lib/storage";
 import { shareUrl } from "@/lib/site";
+import { t } from "@/lib/i18n";
+import { play } from "@/lib/sound";
+import { CellContent } from "./CellContent";
+import { Confetti } from "./Confetti";
 import { Countdown } from "./Countdown";
 import { GuessInput } from "./GuessInput";
+import { HowTo } from "./HowTo";
+import { IconHelp } from "./Icons";
+import { MysteryCard } from "./MysteryCard";
 
-type Mode = "daily" | "practice";
+type Mode = "daily" | "archive" | "practice";
+type Item = Entity & Record<string, unknown>;
 
-export function GuessGame({ gameId }: { gameId: GameId }) {
+export function GuessGame({ gameId, day }: { gameId: GameId; day?: number }) {
   const game = GAMES[gameId];
+  const attrs = game.attributes as Attribute<Entity>[];
   const other = gameId === "jugador" ? GAMES.dt : GAMES.jugador;
 
   const [ready, setReady] = useState(false);
   const [mode, setMode] = useState<Mode>("daily");
   const [key, setKey] = useState("");
-  const [target, setTarget] = useState<Entity | null>(null);
+  const [target, setTarget] = useState<Item | null>(null);
   const [guessIds, setGuessIds] = useState<string[]>([]);
   const [stats, setStats] = useState<GameStats | null>(null);
   const [repGain, setRepGain] = useState<number | null>(null);
   const [toast, setToast] = useState("");
+  const [help, setHelp] = useState(false);
+  const [confetti, setConfetti] = useState(0);
+  const [shake, setShake] = useState(false);
+  const [fresh, setFresh] = useState<string | null>(null); // id del último intento (para animarlo)
+  const timers = useRef<number[]>([]);
 
-  const byId = useMemo(() => new Map<string, Entity>(game.items.map((i: Entity) => [i.id, i])), [game]);
+  const byId = useMemo(() => new Map<string, Item>(game.items.map((i: Item) => [i.id, i])), [game]);
 
-  const startDaily = useCallback(() => {
-    const k = dateKey();
-    const saved = loadDaily(gameId, k);
+  const load = useCallback(() => {
+    const today = dateKey();
+    const todayN = dayNumber(today);
+    const isArchive = day !== undefined && day >= 1 && day < todayN;
+    const k = isArchive ? dayToKey(day!) : today;
     setKey(k);
-    setMode("daily");
+    setMode(isArchive ? "archive" : "daily");
     setTarget(pickDaily(game.items, game.seed, k));
-    setGuessIds(saved.guesses);
+    setGuessIds(loadDaily(gameId, k).guesses);
     setStats(loadStats(gameId, game.maxGuesses));
     setRepGain(null);
-  }, [game, gameId]);
+    setFresh(null);
+  }, [game, gameId, day]);
 
   useEffect(() => {
-    startDaily();
+    load();
     setReady(true);
-  }, [startDaily]);
+    if (!read<boolean>(`seenHelp:${gameId}`, false)) {
+      setHelp(true);
+      write(`seenHelp:${gameId}`, true);
+    }
+    return () => timers.current.forEach(clearTimeout);
+  }, [load, gameId]);
 
   const startPractice = () => {
     setMode("practice");
     setTarget(randomPick(game.items, target ?? undefined));
     setGuessIds([]);
     setRepGain(null);
+    setFresh(null);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const today = key ? keyToDate(key) : new Date();
-  const rows: { item: Entity; cells: Cell[] }[] = useMemo(
+  const rows = useMemo(
     () =>
       target
         ? guessIds.flatMap((id) => {
             const item = byId.get(id);
-            if (!item) return [];
-            return [{ item, cells: game.attributes.map((a: { compare: (g: Entity, t: Entity, d: Date) => Cell }) => a.compare(item, target, today)) }];
+            return item ? [{ item, cells: attrs.map((a) => a.compare(item, target, today)) }] : [];
           })
         : [],
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [guessIds, target, byId, game, key],
+    [guessIds, target, byId, key],
   );
 
   const won = !!target && guessIds.includes(target.id);
   const done = won || guessIds.length >= game.maxGuesses;
   const used = useMemo(() => new Set(rows.map((r) => r.item.name)), [rows]);
 
-  const onPick = (item: Entity) => {
+  /** Sonidos escalonados al dar vuelta las casillas, y el desenlace. */
+  const animateReveal = (cells: Cell[], isWin: boolean, finished: boolean) => {
+    play("kick");
+    cells.forEach((c, i) => {
+      timers.current.push(window.setTimeout(() => play(c.status === "hit" ? "hit" : c.status === "near" ? "near" : "flip"), 180 + i * 90));
+    });
+    const end = 180 + cells.length * 90 + 120;
+    timers.current.push(
+      window.setTimeout(() => {
+        if (isWin) {
+          play("win");
+          setConfetti((n) => n + 1);
+        } else if (finished) {
+          play("lose");
+        } else {
+          setShake(true);
+          timers.current.push(window.setTimeout(() => setShake(false), 450));
+        }
+      }, end),
+    );
+  };
+
+  const onPick = (item: Item) => {
     if (done || !target) return;
     const next = [...guessIds, item.id];
-    setGuessIds(next);
-    if (mode !== "daily") return;
     const isWin = item.id === target.id;
     const finished = isWin || next.length >= game.maxGuesses;
+    setGuessIds(next);
+    setFresh(item.id);
+    animateReveal(attrs.map((a) => a.compare(item, target, today)), isWin, finished);
+    if (mode === "practice") return;
     saveDaily(gameId, key, { guesses: next, done: finished, won: isWin });
-    if (finished) {
-      const res = recordFinish(gameId, key, isWin, next.length, game.maxGuesses, points(isWin, next.length));
+    if (!finished) return;
+    const pts = points(isWin, next.length);
+    if (mode === "daily") {
+      const res = recordFinish(gameId, key, isWin, next.length, game.maxGuesses, pts);
       setStats(res.stats);
       setRepGain(res.repGain);
-      notifyProfileChange();
+    } else {
+      setRepGain(recordArchive(gameId, key, pts).repGain);
     }
+    notifyProfileChange();
+  };
+
+  const flash = (msg: string) => {
+    setToast(msg);
+    timers.current.push(window.setTimeout(() => setToast(""), 2200));
   };
 
   const share = async () => {
+    play("click");
     const text = shareText({
       brand: BRAND,
       title: game.title,
@@ -101,95 +157,112 @@ export function GuessGame({ gameId }: { gameId: GameId }) {
         await navigator.share({ text });
         return;
       } catch (e) {
-        if ((e as Error).name === "AbortError") return; // el usuario cerró el menú
+        if ((e as Error).name === "AbortError") return;
       }
     }
     try {
       await navigator.clipboard.writeText(text);
-      flash("¡Copiado! Pegalo en el grupo 📋");
+      flash(t("result.copied"));
     } catch {
-      flash("Mantené apretado el texto de arriba para copiarlo");
+      flash(t("result.copyFail"));
     }
   };
 
-  const flash = (msg: string) => {
-    setToast(msg);
-    setTimeout(() => setToast(""), 2200);
-  };
-
-  if (!ready || !target) {
-    return <div className="card muted" style={{ marginTop: 24 }}>Cargando el reto…</div>;
-  }
+  if (!ready || !target) return <div className="card muted" style={{ marginTop: 24 }}>Cargando el reto…</div>;
 
   const pts = points(won, guessIds.length);
-  const shareGrid = rows.map((r) => r.cells.map((c) => (c.status === "hit" ? "🟩" : c.status === "near" ? "🟨" : "⬛")).join("")).join("\n");
+  const n = dayNumber(key);
+  const shareGrid = rows.map((r) => r.cells.map((c) => EMOJI[c.status]).join("")).join("\n");
 
   return (
     <>
+      <Confetti fire={confetti} />
       <div className="game-head">
-        <div>
+        <div style={{ minWidth: 0 }}>
           <div className="row" style={{ gap: 8, marginBottom: 6 }}>
-            {mode === "daily" ? <span className="tag tag-accent">Reto #{dayNumber(key)}</span> : <span className="tag">Práctica · no suma</span>}
+            {mode === "daily" && <span className="tag tag-accent">Reto #{n} · Hoy</span>}
+            {mode === "archive" && <span className="tag">{t("game.archiveTag")} · #{n} · {fmt(key)}</span>}
+            {mode === "practice" && <span className="tag">{t("game.practiceTag")}</span>}
           </div>
-          <h1>Adiviná el {game.noun}</h1>
+          <h1>{t("game.guessThe")} {game.title}</h1>
         </div>
-        <div className="tries">
-          <b>{guessIds.length}</b>/{game.maxGuesses}
+        <div className="head-actions">
+          <button className="icon-btn big" onClick={() => { play("click"); setHelp(true); }} aria-label={t("game.howto")} title={t("game.howto")}>
+            <IconHelp />
+          </button>
         </div>
       </div>
 
+      <div className="tries-bar" aria-label={`${guessIds.length} de ${game.maxGuesses} intentos`}>
+        {Array.from({ length: game.maxGuesses }, (_, i) => {
+          const r = rows[i];
+          const cls = !r ? "" : r.item.id === target.id ? "t-win" : "t-used";
+          return <span key={i} className={`try ${cls}`} />;
+        })}
+        <span className="tries-text"><b>{guessIds.length}</b>/{game.maxGuesses}</span>
+      </div>
+
+      <MysteryCard gameId={gameId} rows={rows} attributes={attrs} revealed={done ? target : undefined} />
+
       {done && (
         <section className={`card result ${won ? "" : "lost"}`} aria-live="polite">
-          <p className="result-title">{won ? (guessIds.length === 1 ? "¡De primera! 🎯" : "¡Golazo! ⚽") : "Esta vez no 😮‍💨"}</p>
-          <p className="result-answer">{target.name}</p>
-          <p className="muted small" style={{ margin: 0 }}>{game.subtitle(target)}</p>
+          <p className="result-title">{won ? (guessIds.length === 1 ? `${t("result.first")} 🎯` : `${t("result.win")} ⚽`) : `${t("result.lose")} 😮‍💨`}</p>
+          <p className="muted small" style={{ margin: "2px 0 0" }}>{game.subtitle(target)}</p>
 
-          {mode === "daily" ? (
+          {mode !== "practice" ? (
             <>
               <div className="reward">
-                <div><b>{pts}</b><small>puntos de liga</small></div>
-                <div><b>+{repGain ?? pts}</b><small>reputación</small></div>
-                <div><b>{stats?.streak ?? 0}🔥</b><small>racha</small></div>
+                {mode === "daily" && <div><b>{pts}</b><small>{t("result.points")}</small></div>}
+                <div><b>+{repGain ?? (mode === "daily" ? pts : Math.floor(pts / 2))}</b><small>{t("result.rep")}</small></div>
+                {mode === "daily" && <div><b>{stats?.streak ?? 0}🔥</b><small>{t("result.streak")}</small></div>}
               </div>
-              <div className="share-preview" style={{ userSelect: "all" }} aria-label="Vista previa para compartir">{`⚽ ${BRAND} #${dayNumber(key)} · ${game.title} ${won ? guessIds.length : "X"}/${game.maxGuesses}\n${shareGrid}`}</div>
+              {mode === "archive" && <p className="notice">{t("result.archiveNote")}</p>}
+              <div className="share-preview" style={{ userSelect: "all" }}>{`⚽ ${BRAND} #${n} · ${game.title} ${won ? guessIds.length : "X"}/${game.maxGuesses}\n${shareGrid}`}</div>
               <div className="row">
-                <button className="btn btn-primary" onClick={share}>Compartir resultado</button>
-                <Link className="btn" href={`/${other.id}`}>Jugar {other.title} →</Link>
+                <button className="btn btn-primary" onClick={share}>{t("result.share")}</button>
+                {mode === "daily" ? (
+                  <Link className="btn" href={`/${other.id}`}>Jugar {other.title} →</Link>
+                ) : (
+                  <Link className="btn" href="/archivo">← {t("nav.archive")}</Link>
+                )}
               </div>
-              {stats && stats.won > 0 && <Distribution stats={stats} current={won ? guessIds.length : 0} />}
+              {mode === "daily" && stats && stats.won > 0 && <Distribution stats={stats} current={won ? guessIds.length : 0} />}
               <p className="muted small" style={{ marginBottom: 0 }}>
-                Próximo reto en <Countdown /> · <button className="btn-link" onClick={startPractice} style={linkBtn}>Jugar en modo práctica</button>
+                {mode === "daily" && <>{t("result.next")} <Countdown /> · </>}
+                <button onClick={startPractice} className="link-btn">{t("result.practice")}</button>
               </p>
             </>
           ) : (
             <div className="row" style={{ marginTop: 12 }}>
-              <button className="btn btn-primary" onClick={startPractice}>Otro más</button>
-              <button className="btn" onClick={startDaily}>Volver al reto del día</button>
+              <button className="btn btn-primary" onClick={startPractice}>{t("result.another")}</button>
+              <button className="btn" onClick={load}>{t("result.back")}</button>
             </div>
           )}
         </section>
       )}
 
-      {!done && (
-        <GuessInput items={game.items} used={used} placeholder={`Escribí un ${game.noun}…`} onPick={onPick} />
-      )}
+      {!done && <GuessInput items={game.items} used={used} placeholder={`${t("game.placeholder")} ${game.noun}…`} onPick={onPick} />}
 
-      <div className="grid-wrap">
+      <div className={`grid-wrap ${shake ? "shake" : ""}`}>
         {rows.length > 0 && (
           <div className="grid-labels" aria-hidden>
-            {game.attributes.map((a: { key: string; label: string }) => <div key={a.key}>{a.label}</div>)}
+            {attrs.map((a) => <div key={a.key}>{a.label}</div>)}
           </div>
         )}
         {[...rows].reverse().map((r) => (
-          <div className="guess" key={r.item.id}>
+          <div className={`guess ${fresh === r.item.id ? "fresh" : ""}`} key={r.item.id}>
             <p className="guess-name">
               {r.item.name} {target.id === r.item.id && <span className="tag tag-hit">¡Es!</span>}
             </p>
             <div className="guess-cells">
               {r.cells.map((c, i) => (
-                <div key={i} className={`cell ${c.status}`} style={{ animationDelay: `${i * 70}ms` }} aria-label={`${game.attributes[i].label}: ${c.display}, ${statusLabel(c)}`}>
-                  <span>{c.display}</span>
-                  {c.arrow && <span className="arrow">{c.arrow === "up" ? "▲" : "▼"}</span>}
+                <div
+                  key={i}
+                  className={`cell ${c.status}`}
+                  style={{ animationDelay: fresh === r.item.id ? `${180 + i * 90}ms` : "0ms" }}
+                  aria-label={`${attrs[i].label}: ${c.display}, ${statusLabel(c)}`}
+                >
+                  <CellContent attr={attrs[i].key} cell={c} item={r.item} />
                 </div>
               ))}
             </div>
@@ -197,42 +270,23 @@ export function GuessGame({ gameId }: { gameId: GameId }) {
         ))}
       </div>
 
-      {rows.length === 0 && (
-        <div className="legend">
-          <span style={{ "--c": "var(--hit)" } as React.CSSProperties}>Coincide</span>
-          <span style={{ "--c": "var(--near)" } as React.CSSProperties}>Cerca</span>
-          <span style={{ "--c": "var(--miss)" } as React.CSSProperties}>Nada que ver</span>
-          <span>▲▼ más / menos</span>
-        </div>
+      {rows.length === 0 && !done && (
+        <button className="howto-teaser" onClick={() => setHelp(true)}>
+          <span className="sw hit" /><span className="sw near" /><span className="sw miss" />
+          <span>Verde igual · Amarillo cerca · <u>Ver ejemplo</u></span>
+        </button>
       )}
 
-      <details className="help" open={rows.length === 0 && mode === "daily"}>
-        <summary>¿Cómo se juega?</summary>
-        <ul>
-          <li>Tenés {game.maxGuesses} intentos para adivinar el {game.noun} del día. Es el mismo para todos y cambia a medianoche (hora argentina).</li>
-          {gameId === "jugador" ? (
-            <>
-              <li><b>Club</b> amarillo: juega en la misma liga. <b>Liga</b> amarilla: mismo continente.</li>
-              <li><b>País</b> amarillo: misma confederación. <b>Posición</b> amarilla: misma línea (defensa, medio, ataque).</li>
-              <li><b>Edad</b> amarilla: ±2 años. <b>Dorsal</b> amarillo: ±3. Las flechas indican si el objetivo es mayor o menor.</li>
-            </>
-          ) : (
-            <>
-              <li><b>Equipo</b> amarillo: dirige en la misma liga (o también es DT de una selección).</li>
-              <li><b>País</b> amarillo: misma confederación. <b>Esquema</b> amarillo: misma cantidad de defensores.</li>
-              <li><b>Edad</b> amarilla: ±3 años. <b>Debut DT</b> amarillo: ±3 años.</li>
-            </>
-          )}
-          <li>Acertar suma puntos para tu liga y <b>reputación</b> para el Modo Carrera.</li>
-        </ul>
-      </details>
-
+      <HowTo game={game} open={help} onClose={() => setHelp(false)} today={key} />
       {toast && <div className="toast" role="status">{toast}</div>}
     </>
   );
 }
 
-const linkBtn: React.CSSProperties = { background: "none", border: 0, padding: 0, color: "var(--accent)", cursor: "pointer", textDecoration: "underline", font: "inherit" };
+function fmt(key: string) {
+  const [, m, d] = key.split("-");
+  return `${Number(d)}/${Number(m)}`;
+}
 
 function statusLabel(c: Cell) {
   const base = c.status === "hit" ? "coincide" : c.status === "near" ? "cerca" : "no coincide";
@@ -249,10 +303,10 @@ function Distribution({ stats, current }: { stats: GameStats; current: number })
         <span><b style={{ color: "var(--chalk)" }}>{stats.maxStreak}</b> mejor racha</span>
       </div>
       <div className="dist">
-        {stats.dist.map((n, i) => (
+        {stats.dist.map((v, i) => (
           <div className="dist-row" key={i}>
             <span>{i + 1}</span>
-            <div className={`dist-bar ${current === i + 1 ? "current" : ""}`} style={{ width: `${Math.max((n / max) * 100, 8)}%` }}>{n}</div>
+            <div className={`dist-bar ${current === i + 1 ? "current" : ""}`} style={{ width: `${Math.max((v / max) * 100, 8)}%` }}>{v}</div>
           </div>
         ))}
       </div>

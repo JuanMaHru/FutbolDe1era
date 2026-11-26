@@ -72,3 +72,18 @@ export function recordFinish(game: GameId, key: string, won: boolean, guesses: n
   saveProfile(profile);
   return { stats, profile, repGain };
 }
+
+/**
+ * Final de un reto de archivo (día anterior): suma media reputación, no toca racha
+ * ni puntos de liga. Idempotente por (juego, día).
+ */
+export function recordArchive(game: GameId, key: string, pts: number) {
+  const done = read<string[]>(`archive:${game}`, []);
+  if (done.includes(key)) return { profile: loadProfile(), repGain: 0 };
+  write(`archive:${game}`, [...done, key]);
+  const repGain = Math.floor(pts / 2);
+  const profile = loadProfile();
+  profile.reputation += repGain;
+  saveProfile(profile);
+  return { profile, repGain };
+}

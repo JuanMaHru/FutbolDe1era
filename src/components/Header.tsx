@@ -1,19 +1,87 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { LANGS, getLang, initLang, setLang, t, type Lang } from "@/lib/i18n";
+import { SOCIAL } from "@/lib/site";
+import { isMuted, play, setMuted } from "@/lib/sound";
+import { IconInstagram, IconSound, IconTikTok, IconX } from "./Icons";
 import { useProfile } from "./useProfile";
 
-const LINKS = [
-  { href: "/jugador", label: "Jugador" },
-  { href: "/dt", label: "DT" },
-  { href: "/ligas", label: "Ligas" },
-];
+const ICONS = { instagram: IconInstagram, x: IconX, tiktok: IconTikTok };
 
 export function Header() {
   const path = usePathname();
   const profile = useProfile();
+  const [muted, setM] = useState(false);
+  const [lang, setL] = useState<Lang>("es");
+  const [langMsg, setLangMsg] = useState("");
+
+  useEffect(() => {
+    initLang();
+    setL(getLang());
+    setM(isMuted());
+  }, []);
+
+  const links = [
+    { href: "/", label: t("nav.games"), active: path === "/" },
+    { href: "/archivo", label: t("nav.archive"), active: path.startsWith("/archivo") },
+    { href: "/ligas", label: t("nav.leagues"), active: path.startsWith("/ligas") },
+  ];
+
   return (
-    <header className="header">
+    <>
+      <div className="topbar">
+        <div className="topbar-inner">
+          <div className="socials">
+            <span className="topbar-label">{t("top.follow")}</span>
+            {SOCIAL.map((s) => {
+              const I = ICONS[s.id];
+              return s.url ? (
+                <a key={s.id} href={s.url} target="_blank" rel="noreferrer" aria-label={s.label} className="icon-btn"><I /></a>
+              ) : (
+                <span key={s.id} className="icon-btn disabled" title={`${s.label} · ${t("top.soon")}`} aria-label={`${s.label} (${t("top.soon")})`}><I /></span>
+              );
+            })}
+          </div>
+          <div className="topbar-right">
+            <div className="langs" role="group" aria-label="Idioma">
+              {LANGS.map((l) => (
+                <button
+                  key={l.code}
+                  className={`lang ${lang === l.code ? "active" : ""} ${l.ready ? "" : "soon"}`}
+                  aria-pressed={lang === l.code}
+                  title={l.ready ? l.name : `${l.name} · ${t("top.soon")}`}
+                  onClick={() => {
+                    if (!l.ready) {
+                      setLangMsg(`${l.name}: ${t("top.soon").toLowerCase()} 🚧`);
+                      setTimeout(() => setLangMsg(""), 1800);
+                      return;
+                    }
+                    setLang(l.code);
+                    setL(l.code);
+                  }}
+                >
+                  <span aria-hidden>{l.flag}</span> {l.label}
+                </button>
+              ))}
+            </div>
+            <button
+              className="icon-btn"
+              aria-label={muted ? t("top.sound.off") : t("top.sound.on")}
+              title={muted ? t("top.sound.off") : t("top.sound.on")}
+              onClick={() => {
+                setMuted(!muted);
+                setM(!muted);
+                if (muted) play("click");
+              }}
+            >
+              <IconSound on={!muted} />
+            </button>
+          </div>
+        </div>
+      </div>
+      <header className="header">
       <div className="header-inner">
         <Link href="/" className="brand" aria-label="Fútbol de Primera, inicio">
           <span className="brand-mark">1ª</span>
@@ -22,8 +90,8 @@ export function Header() {
           </span>
         </Link>
         <nav className="nav">
-          {LINKS.map((l) => (
-            <Link key={l.href} href={l.href} className={path.startsWith(l.href) ? "active" : ""}>
+          {links.map((l) => (
+            <Link key={l.href} href={l.href} className={l.active ? "active" : ""}>
               {l.label}
             </Link>
           ))}
@@ -32,6 +100,8 @@ export function Header() {
           </span>
         </nav>
       </div>
-    </header>
+      </header>
+      {langMsg && <div className="toast" role="status">{langMsg}</div>}
+    </>
   );
 }

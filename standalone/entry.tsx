@@ -6,10 +6,23 @@ import { GuessGame } from "@/components/GuessGame";
 import { HomeCards } from "@/components/HomeCards";
 import { LeaguesHome } from "@/components/LeaguesHome";
 import { LeagueTable } from "@/components/LeagueTable";
+import { Archive } from "@/components/Archive";
 
 function Page({ path }: { path: string }) {
-  if (path === "/jugador") return <GuessGame key="jugador" gameId="jugador" />;
-  if (path === "/dt") return <GuessGame key="dt" gameId="dt" />;
+  const game = path.match(/^\/(jugador|dt)(?:\/(\d+))?$/);
+  if (game) {
+    const id = game[1] as "jugador" | "dt";
+    const day = game[2] ? Number(game[2]) : undefined;
+    return <GuessGame key={path} gameId={id} day={day} />;
+  }
+  if (path === "/archivo")
+    return (
+      <>
+        <h1>Archivo de retos</h1>
+        <p className="lead">Jugá los días que te perdiste. Suman media reputación y no cuentan para la liga.</p>
+        <Archive />
+      </>
+    );
   if (path === "/ligas")
     return (
       <>
@@ -28,9 +41,9 @@ function Page({ path }: { path: string }) {
     );
   return (
     <>
-      <h1>El que sabe, juega.</h1>
+      <h1 className="hero-title">El que sabe, <span className="hl">juega.</span></h1>
       <p className="lead">
-        Dos retos por día, iguales para todos. Tu conocimiento de fútbol es tu stat: cada acierto suma para tu liga y para tu carrera.
+        Retos diarios iguales para todos. Tu conocimiento de fútbol es tu stat: cada acierto suma para tu liga y para tu carrera.
       </p>
       <HomeCards />
     </>

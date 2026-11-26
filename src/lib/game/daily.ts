@@ -54,3 +54,10 @@ export function randomPick<T>(items: readonly T[], exclude?: T): T {
   const pool = items.filter((i) => i !== exclude);
   return pool[Math.floor(Math.random() * pool.length)];
 }
+
+/** Clave de fecha del reto número `n` (inversa de dayNumber). */
+export function dayToKey(n: number): string {
+  const d = keyToDate(EPOCH);
+  d.setUTCDate(d.getUTCDate() + n - 1);
+  return d.toISOString().slice(0, 10);
+}

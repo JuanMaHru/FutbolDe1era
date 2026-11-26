@@ -22,7 +22,7 @@ export const COUNTRIES: Record<string, { name: string; flag: string; confed: Con
 export type Region = "Sudamérica" | "Europa" | "Norteamérica" | "Asia" | "Selecciones";
 
 export const LEAGUES: Record<string, { region: Region; short: string }> = {
-  "Liga Profesional": { region: "Sudamérica", short: "LPF 🇦🇷" },
+  "Liga Profesional": { region: "Sudamérica", short: "LPF" },
   "Brasileirão": { region: "Sudamérica", short: "Brasileirão" },
   "Primera Chile": { region: "Sudamérica", short: "Chile" },
   "Premier League": { region: "Europa", short: "Premier" },
@@ -34,10 +34,12 @@ export const LEAGUES: Record<string, { region: Region; short: string }> = {
   "MLS": { region: "Norteamérica", short: "MLS" },
   "Liga MX": { region: "Norteamérica", short: "Liga MX" },
   "Saudi Pro League": { region: "Asia", short: "Arabia" },
-  "Selecciones": { region: "Selecciones", short: "Selección" },
+  "Selecciones": { region: "Selecciones", short: "Nacional" },
 };
 
 export type Line = "ARQ" | "DEF" | "MED" | "DEL";
+
+export const LINE_LABEL: Record<Line, string> = { ARQ: "Arquero", DEF: "Defensa", MED: "Medio", DEL: "Ataque" };
 
 export const POSITIONS: Record<string, { label: string; line: Line }> = {
   ARQ: { label: "Arquero", line: "ARQ" },

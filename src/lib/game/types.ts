@@ -13,6 +13,12 @@ export interface Attribute<T> {
   key: string;
   label: string;
   compare: (guess: T, target: T, today: Date) => Cell;
+  /** Qué significa el amarillo en este atributo (para las instrucciones). */
+  nearHint: string;
+  /** Versión de 1-2 palabras para el ejemplo visual. */
+  nearShort: string;
+  /** Si el valor es numérico, con flechas ▲▼. */
+  numeric?: boolean;
 }
 
 export interface Entity {

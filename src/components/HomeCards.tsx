@@ -5,13 +5,33 @@ import { GAMES, GAME_IDS } from "@/lib/game/games";
 import { dateKey, dayNumber } from "@/lib/game/daily";
 import { loadDaily, loadStats, type DailyState } from "@/lib/progress";
 import type { GameId } from "@/lib/game/types";
+import { t, type TKey } from "@/lib/i18n";
+import { play } from "@/lib/sound";
+import { Countdown } from "./Countdown";
+import { Kit } from "./art/Kit";
+import { ModeArt, type ModeId } from "./art/ModeArt";
 import { useProfile } from "./useProfile";
 
-const ICON: Record<GameId, string> = { jugador: "👟", dt: "📋" };
-const BLURB: Record<GameId, string> = {
-  jugador: "Club, liga, país, posición, edad y dorsal. 8 intentos.",
-  dt: "Equipo, liga, país, edad, esquema y año de debut. 8 intentos.",
-};
+interface Mode {
+  id: ModeId;
+  href?: string;
+  badge?: "daily" | "new" | "soon";
+  desc: string;
+}
+
+const MODES: Mode[] = [
+  { id: "jugador", href: "/jugador", badge: "daily", desc: "Club, liga, país, posición, edad y dorsal" },
+  { id: "dt", href: "/dt", badge: "daily", desc: "Equipo, liga, país, edad, esquema y debut" },
+  { id: "ligas", href: "/ligas", desc: "Tabla semanal con tu grupo" },
+  { id: "archivo", href: "/archivo", badge: "new", desc: "Jugá los días que te perdiste" },
+  { id: "carrera", badge: "soon", desc: "Creá tu jugador y llegá a la Selección" },
+  { id: "once", badge: "soon", desc: "Completá el 11 con consignas" },
+  { id: "wordle", badge: "soon", desc: "Adiviná el apellido letra por letra" },
+  { id: "bingo", badge: "soon", desc: "Cantá bingo con jugadores" },
+];
+
+type Status = "new" | "playing" | "won" | "lost";
+const statusOf = (d: DailyState): Status => (d.done ? (d.won ? "won" : "lost") : d.guesses.length ? "playing" : "new");
 
 export function HomeCards() {
   const [state, setState] = useState<Record<string, { daily: DailyState; streak: number }> | null>(null);
@@ -21,61 +41,58 @@ export function HomeCards() {
   useEffect(() => {
     const k = dateKey();
     setKey(k);
-    setState(
-      Object.fromEntries(GAME_IDS.map((g) => [g, { daily: loadDaily(g, k), streak: loadStats(g, GAMES[g].maxGuesses).streak }])),
-    );
+    setState(Object.fromEntries(GAME_IDS.map((g) => [g, { daily: loadDaily(g, k), streak: loadStats(g, GAMES[g].maxGuesses).streak }])));
   }, []);
 
   return (
     <>
-      <div className="row" style={{ justifyContent: "space-between" }}>
-        <h2 style={{ margin: "8px 0" }}>Retos de hoy {key && <span className="muted small">#{dayNumber(key)}</span>}</h2>
-      </div>
-      <div className="game-cards">
-        {GAME_IDS.map((g) => {
+      <section className="board" aria-label={t("home.today")}>
+        <div className="board-head">
+          <span className="board-title">{t("home.today")} {key && <span className="board-num">#{dayNumber(key)}</span>}</span>
+          <span className="board-clock">{t("home.changesIn")} <Countdown /></span>
+        </div>
+        {GAME_IDS.map((g: GameId) => {
           const s = state?.[g];
-          const status = !s ? null : s.daily.done ? (s.daily.won ? "won" : "lost") : s.daily.guesses.length ? "playing" : "new";
+          const st = s ? statusOf(s.daily) : null;
           return (
-            <Link key={g} href={`/${g}`} className="card game-card">
-              <div className="row" style={{ justifyContent: "space-between" }}>
-                <span className="icon" aria-hidden>{ICON[g]}</span>
-                {status === "won" && <span className="tag tag-hit">Acertado · {s!.daily.guesses.length}/{GAMES[g].maxGuesses}</span>}
-                {status === "lost" && <span className="tag tag-miss">Fallado</span>}
-                {status === "playing" && <span className="tag tag-accent">En juego</span>}
-                {status === "new" && <span className="tag">Nuevo</span>}
-              </div>
-              <span className="big">Adiviná el {GAMES[g].title}</span>
-              <span className="muted small">{BLURB[g]}</span>
-              <span className="go">
-                {status === "won" || status === "lost" ? "Ver resultado →" : "Jugar →"}
-                {s && s.streak > 0 && <span className="muted small"> · racha {s.streak}🔥</span>}
+            <Link key={g} href={`/${g}`} className="board-row" onClick={() => play("click")}>
+              <Kit club="" label={g === "dt" ? "DT" : "?"} size={40} hidden />
+              <span className="board-name">{GAMES[g].title}</span>
+              <span className={`chip chip-${st ?? "new"}`}>
+                {st ? t(`status.${st}` as TKey) : "…"}
+                {st === "won" && ` · ${s!.daily.guesses.length}/${GAMES[g].maxGuesses}`}
               </span>
+              {s && s.streak > 0 && <span className="board-streak" title="Racha">🔥{s.streak}</span>}
+              <span className="board-go" aria-hidden>▶</span>
             </Link>
           );
         })}
-      </div>
+      </section>
 
-      <h2>Tu temporada</h2>
-      <div className="game-cards">
-        <Link href="/ligas" className="card game-card">
-          <span className="icon" aria-hidden>🏆</span>
-          <span className="big">Ligas entre amigos</span>
-          <span className="muted small">Armá una liga, pasá el código al grupo y peleen la tabla semanal con los retos diarios.</span>
-          <span className="go">Ir a ligas →</span>
-        </Link>
-        <div className="card game-card locked" aria-disabled>
-          <div className="row" style={{ justifyContent: "space-between" }}>
-            <span className="icon" aria-hidden>📖</span>
-            <span className="tag">Fase 2</span>
-          </div>
-          <span className="big">Modo Carrera</span>
-          <span className="muted small">
-            Tu historia como jugador o DT. Lo que acertás en los retos diarios te abre puertas: reputación, scouting y fichajes.
-          </span>
-          <span className="go" style={{ color: "var(--chalk)" }}>
-            Ya juntaste ⭐ {profile?.reputation ?? 0} de reputación
-          </span>
-        </div>
+      <h2 className="section-title">{t("home.pick")}</h2>
+      <div className="modes">
+        {MODES.map((m, i) => {
+          const inner = (
+            <>
+              {m.badge && <span className={`mode-badge b-${m.badge}`}>{t(`badge.${m.badge}` as TKey)}</span>}
+              <div className="mode-art"><ModeArt mode={m.id} /></div>
+              <div className="mode-foot">
+                <span className="mode-cta">{m.href ? "Jugar" : t("badge.soon")}</span>
+                <span className="mode-name">{t(`mode.${m.id}` as TKey)}</span>
+                <span className="mode-desc">{m.id === "carrera" && profile ? `Ya tenés ⭐ ${profile.reputation} de reputación` : m.desc}</span>
+              </div>
+            </>
+          );
+          return m.href ? (
+            <Link key={m.id} href={m.href} className="mode" style={{ animationDelay: `${i * 50}ms` }} onClick={() => play("click")}>
+              {inner}
+            </Link>
+          ) : (
+            <div key={m.id} className="mode mode-soon" style={{ animationDelay: `${i * 50}ms` }} aria-disabled>
+              {inner}
+            </div>
+          );
+        })}
       </div>
     </>
   );
