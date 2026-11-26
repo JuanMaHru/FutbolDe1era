@@ -13,6 +13,7 @@ export const playerGame: GameDefinition<Player> = {
   maxGuesses: 8,
   seed: 20261101,
   items: playersData as Player[],
+  targets: (playersData as Player[]).filter((p) => !p.check),
   attributes: playerAttributes,
   subtitle: (p) => `${POSITIONS[p.position]?.label ?? p.position} · ${p.club} · ${COUNTRIES[p.nationality]?.flag ?? ""}`,
 };
@@ -24,6 +25,7 @@ export const coachGame: GameDefinition<Coach> = {
   maxGuesses: 8,
   seed: 19781986,
   items: coachesData as Coach[],
+  targets: (coachesData as Coach[]).filter((c) => !c.check),
   attributes: coachAttributes,
   subtitle: (c) => `${c.team} · ${c.playedAs === "NJ" ? "No jugó profesionalmente" : `Jugó de ${POSITIONS[c.playedAs]?.label.toLowerCase()}`} · ${COUNTRIES[c.nationality]?.flag ?? ""}`,
 };

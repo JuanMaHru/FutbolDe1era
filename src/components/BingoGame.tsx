@@ -28,7 +28,7 @@ export function BingoGame({ day }: { day?: number }) {
   const [confetti, setConfetti] = useState(0);
   const toast = useToast();
   const date = g.key ? keyToDate(g.key) : new Date();
-  const board = useMemo(() => (g.key ? buildBingo(players, 777 + dayNumber(g.key) * 13, date) : null), [g.key]); // eslint-disable-line react-hooks/exhaustive-deps
+  const board = useMemo(() => (g.key ? buildBingo(players.filter((p) => !p.check), 777 + dayNumber(g.key) * 13, date) : null), [g.key]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!g.state || !board) return <div className="card muted" style={{ marginTop: 24 }}>Mezclando el bolillero…</div>;
   const s = g.state;

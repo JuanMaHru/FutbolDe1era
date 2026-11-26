@@ -49,7 +49,7 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
     const k = isArchive ? dayToKey(day!) : today;
     setKey(k);
     setMode(isArchive ? "archive" : "daily");
-    setTarget(pickDaily(game.items, game.seed, k));
+    setTarget(pickDaily(game.targets, game.seed, k));
     setGuessIds(loadDaily(gameId, k).guesses);
     setStats(loadStats(gameId, game.maxGuesses));
     setRepGain(null);
@@ -68,7 +68,7 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
 
   const startPractice = () => {
     setMode("practice");
-    setTarget(randomPick(game.items, target ?? undefined));
+    setTarget(randomPick(game.targets, target ?? undefined));
     setGuessIds([]);
     setRepGain(null);
     setFresh(null);

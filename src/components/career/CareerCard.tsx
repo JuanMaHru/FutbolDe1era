@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import type { CareerState } from "@/lib/career/engine";
 import { clubStyle } from "@/lib/clubs";
 import { COUNTRIES, POSITIONS } from "@/lib/game/meta";
+import { NATIONS } from "@/lib/career/world";
 
 const SHIRT = "M30 6 L42 2 Q50 9 58 2 L70 6 L96 22 L86 42 L76 37 L76 96 L24 96 L24 37 L14 42 L4 22 Z";
 
@@ -61,14 +62,15 @@ export function CareerCard({ s }: { s: CareerState }) {
     g.font = "900 30px system-ui, sans-serif";
     g.fillText("FÚTBOL DE PRIMERA · MODO CARRERA", 60, 90);
     g.font = "900 92px system-ui, sans-serif";
-    const words = s.name.toUpperCase().split(" ");
+    const words = (s.nick ? s.nick : s.name).toUpperCase().split(" ");
     g.fillText(words.slice(0, -1).join(" ") || words[0], 60, 210);
     if (words.length > 1) g.fillText(words.slice(-1)[0], 60, 305);
     g.font = "700 36px system-ui, sans-serif";
-    g.fillText(`${COUNTRIES[s.nationality]?.name ?? s.nationality} · ${POSITIONS[s.position]?.label ?? s.position} · ${s.age} años`, 60, 370);
+    g.fillText(`${s.nick ? `${s.name} · ` : ""}${COUNTRIES[s.nationality]?.name ?? NATIONS[s.nationality]?.name ?? s.nationality} · ${POSITIONS[s.position]?.label ?? s.position} · ${s.age} años`, 60, 370);
 
     // números grandes
-    const stats = [["PJ", s.totals.pj], ["GOLES", s.totals.goals], ["ASIST.", s.totals.assists], ["TÍTULOS", s.trophies.length]] as const;
+    const gk = s.position === "ARQ";
+    const stats: [string, number][] = [["PJ", s.totals.pj], gk ? ["VALLAS INV.", s.totals.cleanSheets] : ["GOLES", s.totals.goals], gk ? ["PENALES AT.", s.totals.penSaves] : ["ASIST.", s.totals.assists], ["TÍTULOS", s.trophies.length]];
     stats.forEach(([label, v], i) => {
       const x = 60 + i * 250;
       g.fillStyle = "rgba(255,255,255,0.06)";

@@ -11,9 +11,12 @@ Minijuegos diarios de fútbol conectados a un modo carrera. *Tu conocimiento rea
 - **Palabra Crack**: el apellido letra por letra.
 - **Bingo Futbolero**: ubicá a cada jugador que sale en la casilla que cumple.
 
-**Modo Carrera**: creás un jugador, debutás, tomás decisiones entre partidos y en cada partido jugás
-momentos (precisión + trivia real). La reputación de los retos diarios da nivel inicial y mejores pruebas,
-y ganar un reto hoy desbloquea un entrenamiento especial. Ficha final como imagen.
+**Modo Carrera**: creás un jugador (puesto, estilo de juego, pie hábil, apodo, dorsal) y jugás temporadas con
+calendario real: liga, copa nacional, copa continental si clasificás (Libertadores, Sudamericana, Champions,
+Europa League…), ascensos y descensos, y Mundial / Copa América / Eurocopa con tu selección si te convocan.
+Entre partidos hay ~60 eventos con resultados variables. En cada partido jugás minijuegos según tu puesto:
+definir, mano a mano, penales (patear y atajar), tiros libres (patear y atajar), pase filtrado, anticipo,
+cabezazo, tres en raya y trivia con preguntas generadas de la base. Ficha final como imagen.
 
 **Ligas entre amigos** (simuladas en local), **resultado compartible**, **sonidos**, **temas por club**
 (la página toma los colores de tu club o selección).
@@ -41,7 +44,8 @@ src/
       daily-games.ts   catálogo de retos diarios (rutas, ids, íconos)
       conditions.ts    consignas + emparejamiento (garantiza 11 y bingo resolubles)
       once.ts, bingo.ts, words.ts, careers.ts
-    career/            motor del Modo Carrera (eventos, partidos, temporadas, trivia)
+    career/            Modo Carrera: world.ts (ligas, clubes, selecciones), engine.ts (calendario,
+                       partidos, temporadas), events.ts (eventos), trivia.ts (preguntas)
     clubs.ts           colores y diseño PROPIOS de cada club (para escudos/camisetas ilustrados)
     theme.ts           temas por club
     sound.ts           efectos sintetizados con Web Audio
@@ -60,7 +64,9 @@ tests/
 Definí un `GameDefinition` (items + atributos con su `compare`) en `lib/game/games.ts` y creá la ruta `app/<id>/page.tsx` con `<GuessGame gameId="<id>" />`.
 
 ## Próximos pasos
-1. **Datos**: revisar clubes, dorsales, trayectorias (`careers.json`) y el puesto de los DTs (`playedAs`). Están escritos de memoria.
+1. **Datos**: todo está escrito de memoria. Lo marcado con `"check": true` en `players.json` / `coaches.json`
+   es lo más dudoso: se puede adivinar pero nunca es la respuesta del día ni entra en la trivia. Al verificarlo,
+   borrá la marca. Revisar también `careers.json`. Los scripts de `tools/` muestran cómo se cargaron.
 2. **Supabase**: implementar `SupabaseLeagueService` con la interfaz de `lib/leagues/types.ts` y migrar `progress.ts` a las tablas `profiles` y `daily_results`. Para evitar trampas, el objetivo del día y la validación tienen que pasar al servidor.
 3. **Fase 2**: el Modo Carrera consume `profile.reputation` y `profile.results`.
 

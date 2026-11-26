@@ -57,7 +57,8 @@
   "nationality": "ARG",
   "birthDate": "1978-09-01",
   "debutYear": 2012,
-  "playedAs": "DFC"
+  "playedAs": "DFC",
+  "check": true
  },
  {
   "id": "diego-simeone",
@@ -117,7 +118,8 @@
   "nationality": "ARG",
   "birthDate": "1962-08-14",
   "debutYear": 1992,
-  "playedAs": "MC"
+  "playedAs": "MC",
+  "check": true
  },
  {
   "id": "jorge-sampaoli",
@@ -268,5 +270,486 @@
   "birthDate": "1985-08-09",
   "debutYear": 2024,
   "playedAs": "LAT"
+ },
+ {
+  "id": "mauricio-pellegrino",
+  "name": "Mauricio Pellegrino",
+  "team": "Lanús",
+  "league": "Liga Profesional",
+  "nationality": "ARG",
+  "birthDate": "1971-10-05",
+  "playedAs": "DFC",
+  "debutYear": 2010,
+  "check": true
+ },
+ {
+  "id": "juan-pablo-vojvoda",
+  "name": "Juan Pablo Vojvoda",
+  "team": "Santos",
+  "league": "Brasileirão",
+  "nationality": "ARG",
+  "birthDate": "1975-01-13",
+  "playedAs": "DFC",
+  "debutYear": 2014,
+  "check": true
+ },
+ {
+  "id": "hernan-crespo",
+  "name": "Hernán Crespo",
+  "team": "São Paulo",
+  "league": "Brasileirão",
+  "nationality": "ARG",
+  "birthDate": "1975-07-05",
+  "playedAs": "DC",
+  "debutYear": 2015,
+  "check": true
+ },
+ {
+  "id": "fernando-diniz",
+  "name": "Fernando Diniz",
+  "team": "Vasco da Gama",
+  "league": "Brasileirão",
+  "nationality": "BRA",
+  "birthDate": "1974-03-27",
+  "playedAs": "MC",
+  "debutYear": 2009,
+  "check": true
+ },
+ {
+  "id": "leonardo-jardim",
+  "name": "Leonardo Jardim",
+  "team": "Cruzeiro",
+  "league": "Brasileirão",
+  "nationality": "POR",
+  "birthDate": "1974-08-01",
+  "playedAs": "NJ",
+  "debutYear": 2003,
+  "check": true
+ },
+ {
+  "id": "guido-pizarro",
+  "name": "Guido Pizarro",
+  "team": "Tigres",
+  "league": "Liga MX",
+  "nationality": "ARG",
+  "birthDate": "1990-02-26",
+  "playedAs": "MC",
+  "debutYear": 2024,
+  "check": true
+ },
+ {
+  "id": "domenec-torrent",
+  "name": "Domènec Torrent",
+  "team": "Monterrey",
+  "league": "Liga MX",
+  "nationality": "ESP",
+  "birthDate": "1962-07-14",
+  "playedAs": "NJ",
+  "debutYear": 2010,
+  "check": true
+ },
+ {
+  "id": "javier-mascherano",
+  "name": "Javier Mascherano",
+  "team": "Inter Miami",
+  "league": "MLS",
+  "nationality": "ARG",
+  "birthDate": "1984-06-08",
+  "playedAs": "MC",
+  "debutYear": 2023
+ },
+ {
+  "id": "jorge-jesus",
+  "name": "Jorge Jesus",
+  "team": "Al Nassr",
+  "league": "Saudi Pro League",
+  "nationality": "POR",
+  "birthDate": "1954-07-24",
+  "playedAs": "MC",
+  "debutYear": 1990,
+  "check": true
+ },
+ {
+  "id": "matthias-jaissle",
+  "name": "Matthias Jaissle",
+  "team": "Al-Ahli",
+  "league": "Saudi Pro League",
+  "nationality": "GER",
+  "birthDate": "1988-04-05",
+  "playedAs": "DFC",
+  "debutYear": 2019,
+  "check": true
+ },
+ {
+  "id": "enzo-maresca",
+  "name": "Enzo Maresca",
+  "team": "Chelsea",
+  "league": "Premier League",
+  "nationality": "ITA",
+  "birthDate": "1980-02-10",
+  "playedAs": "MC",
+  "debutYear": 2017,
+  "check": true
+ },
+ {
+  "id": "ruben-amorim",
+  "name": "Rúben Amorim",
+  "team": "Manchester United",
+  "league": "Premier League",
+  "nationality": "POR",
+  "birthDate": "1985-01-27",
+  "playedAs": "MC",
+  "debutYear": 2018
+ },
+ {
+  "id": "thomas-frank",
+  "name": "Thomas Frank",
+  "team": "Tottenham",
+  "league": "Premier League",
+  "nationality": "DEN",
+  "birthDate": "1973-10-09",
+  "playedAs": "NJ",
+  "debutYear": 2008,
+  "check": true
+ },
+ {
+  "id": "unai-emery",
+  "name": "Unai Emery",
+  "team": "Aston Villa",
+  "league": "Premier League",
+  "nationality": "ESP",
+  "birthDate": "1971-11-03",
+  "playedAs": "MC",
+  "debutYear": 2004
+ },
+ {
+  "id": "eddie-howe",
+  "name": "Eddie Howe",
+  "team": "Newcastle",
+  "league": "Premier League",
+  "nationality": "ENG",
+  "birthDate": "1977-11-29",
+  "playedAs": "DFC",
+  "debutYear": 2008
+ },
+ {
+  "id": "oliver-glasner",
+  "name": "Oliver Glasner",
+  "team": "Crystal Palace",
+  "league": "Premier League",
+  "nationality": "AUT",
+  "birthDate": "1974-08-28",
+  "playedAs": "DFC",
+  "debutYear": 2012
+ },
+ {
+  "id": "marco-silva",
+  "name": "Marco Silva",
+  "team": "Fulham",
+  "league": "Premier League",
+  "nationality": "POR",
+  "birthDate": "1977-07-12",
+  "playedAs": "LAT",
+  "debutYear": 2011
+ },
+ {
+  "id": "andoni-iraola",
+  "name": "Andoni Iraola",
+  "team": "Bournemouth",
+  "league": "Premier League",
+  "nationality": "ESP",
+  "birthDate": "1982-06-22",
+  "playedAs": "LAT",
+  "debutYear": 2018
+ },
+ {
+  "id": "fabian-hurzeler",
+  "name": "Fabian Hürzeler",
+  "team": "Brighton",
+  "league": "Premier League",
+  "nationality": "GER",
+  "birthDate": "1993-02-26",
+  "playedAs": "MC",
+  "debutYear": 2020,
+  "check": true
+ },
+ {
+  "id": "david-moyes",
+  "name": "David Moyes",
+  "team": "Everton",
+  "league": "Premier League",
+  "nationality": "SCO",
+  "birthDate": "1963-04-25",
+  "playedAs": "DFC",
+  "debutYear": 1998
+ },
+ {
+  "id": "ernesto-valverde",
+  "name": "Ernesto Valverde",
+  "team": "Athletic Club",
+  "league": "LaLiga",
+  "nationality": "ESP",
+  "birthDate": "1964-02-09",
+  "playedAs": "DC",
+  "debutYear": 1997
+ },
+ {
+  "id": "manuel-pellegrini",
+  "name": "Manuel Pellegrini",
+  "team": "Real Betis",
+  "league": "LaLiga",
+  "nationality": "CHI",
+  "birthDate": "1953-09-16",
+  "playedAs": "DFC",
+  "debutYear": 1988
+ },
+ {
+  "id": "matias-almeyda",
+  "name": "Matías Almeyda",
+  "team": "Sevilla",
+  "league": "LaLiga",
+  "nationality": "ARG",
+  "birthDate": "1973-12-21",
+  "playedAs": "MC",
+  "debutYear": 2011,
+  "check": true
+ },
+ {
+  "id": "jose-bordalas",
+  "name": "José Bordalás",
+  "team": "Getafe",
+  "league": "LaLiga",
+  "nationality": "ESP",
+  "birthDate": "1964-03-05",
+  "playedAs": "DC",
+  "debutYear": 1993,
+  "check": true
+ },
+ {
+  "id": "cristian-chivu",
+  "name": "Cristian Chivu",
+  "team": "Inter",
+  "league": "Serie A",
+  "nationality": "ROU",
+  "birthDate": "1980-10-26",
+  "playedAs": "DFC",
+  "debutYear": 2021,
+  "check": true
+ },
+ {
+  "id": "massimiliano-allegri",
+  "name": "Massimiliano Allegri",
+  "team": "Milan",
+  "league": "Serie A",
+  "nationality": "ITA",
+  "birthDate": "1967-08-11",
+  "playedAs": "MC",
+  "debutYear": 2004
+ },
+ {
+  "id": "antonio-conte",
+  "name": "Antonio Conte",
+  "team": "Napoli",
+  "league": "Serie A",
+  "nationality": "ITA",
+  "birthDate": "1969-07-31",
+  "playedAs": "MC",
+  "debutYear": 2006
+ },
+ {
+  "id": "gian-piero-gasperini",
+  "name": "Gian Piero Gasperini",
+  "team": "Roma",
+  "league": "Serie A",
+  "nationality": "ITA",
+  "birthDate": "1958-01-26",
+  "playedAs": "MC",
+  "debutYear": 1994,
+  "check": true
+ },
+ {
+  "id": "maurizio-sarri",
+  "name": "Maurizio Sarri",
+  "team": "Lazio",
+  "league": "Serie A",
+  "nationality": "ITA",
+  "birthDate": "1959-01-10",
+  "playedAs": "NJ",
+  "debutYear": 1990
+ },
+ {
+  "id": "cesc-fabregas",
+  "name": "Cesc Fàbregas",
+  "team": "Como",
+  "league": "Serie A",
+  "nationality": "ESP",
+  "birthDate": "1987-05-04",
+  "playedAs": "MC",
+  "debutYear": 2023
+ },
+ {
+  "id": "vincenzo-italiano",
+  "name": "Vincenzo Italiano",
+  "team": "Bologna",
+  "league": "Serie A",
+  "nationality": "ITA",
+  "birthDate": "1977-12-10",
+  "playedAs": "MC",
+  "debutYear": 2014,
+  "check": true
+ },
+ {
+  "id": "niko-kovac",
+  "name": "Niko Kovač",
+  "team": "Borussia Dortmund",
+  "league": "Bundesliga",
+  "nationality": "CRO",
+  "birthDate": "1971-10-15",
+  "playedAs": "MC",
+  "debutYear": 2009
+ },
+ {
+  "id": "roberto-de-zerbi",
+  "name": "Roberto De Zerbi",
+  "team": "Olympique de Marsella",
+  "league": "Ligue 1",
+  "nationality": "ITA",
+  "birthDate": "1979-06-06",
+  "playedAs": "MCO",
+  "debutYear": 2010
+ },
+ {
+  "id": "paulo-fonseca",
+  "name": "Paulo Fonseca",
+  "team": "Lyon",
+  "league": "Ligue 1",
+  "nationality": "POR",
+  "birthDate": "1973-03-05",
+  "playedAs": "DFC",
+  "debutYear": 2005,
+  "check": true
+ },
+ {
+  "id": "francesco-farioli",
+  "name": "Francesco Farioli",
+  "team": "Porto",
+  "league": "Primeira Liga",
+  "nationality": "ITA",
+  "birthDate": "1989-04-10",
+  "playedAs": "NJ",
+  "debutYear": 2020,
+  "check": true
+ },
+ {
+  "id": "jose-mourinho",
+  "name": "José Mourinho",
+  "team": "Benfica",
+  "league": "Primeira Liga",
+  "nationality": "POR",
+  "birthDate": "1963-01-26",
+  "playedAs": "MC",
+  "debutYear": 2000,
+  "check": true
+ },
+ {
+  "id": "luis-de-la-fuente",
+  "name": "Luis de la Fuente",
+  "team": "Selección de España",
+  "league": "Selecciones",
+  "nationality": "ESP",
+  "birthDate": "1961-06-21",
+  "playedAs": "LAT",
+  "debutYear": 2013
+ },
+ {
+  "id": "roberto-martinez",
+  "name": "Roberto Martínez",
+  "team": "Selección de Portugal",
+  "league": "Selecciones",
+  "nationality": "ESP",
+  "birthDate": "1973-07-13",
+  "playedAs": "MC",
+  "debutYear": 2007
+ },
+ {
+  "id": "ronald-koeman",
+  "name": "Ronald Koeman",
+  "team": "Selección de Países Bajos",
+  "league": "Selecciones",
+  "nationality": "NED",
+  "birthDate": "1963-03-21",
+  "playedAs": "DFC",
+  "debutYear": 1997
+ },
+ {
+  "id": "gennaro-gattuso",
+  "name": "Gennaro Gattuso",
+  "team": "Selección de Italia",
+  "league": "Selecciones",
+  "nationality": "ITA",
+  "birthDate": "1978-01-09",
+  "playedAs": "MC",
+  "debutYear": 2011
+ },
+ {
+  "id": "javier-aguirre",
+  "name": "Javier Aguirre",
+  "team": "Selección de México",
+  "league": "Selecciones",
+  "nationality": "MEX",
+  "birthDate": "1958-12-01",
+  "playedAs": "MC",
+  "debutYear": 1995
+ },
+ {
+  "id": "hajime-moriyasu",
+  "name": "Hajime Moriyasu",
+  "team": "Selección de Japón",
+  "league": "Selecciones",
+  "nationality": "JPN",
+  "birthDate": "1968-08-23",
+  "playedAs": "MC",
+  "debutYear": 2012
+ },
+ {
+  "id": "walid-regragui",
+  "name": "Walid Regragui",
+  "team": "Selección de Marruecos",
+  "league": "Selecciones",
+  "nationality": "MAR",
+  "birthDate": "1975-09-23",
+  "playedAs": "LAT",
+  "debutYear": 2013
+ },
+ {
+  "id": "jesse-marsch",
+  "name": "Jesse Marsch",
+  "team": "Selección de Canadá",
+  "league": "Selecciones",
+  "nationality": "USA",
+  "birthDate": "1973-11-08",
+  "playedAs": "MC",
+  "debutYear": 2015
+ },
+ {
+  "id": "hong-myung-bo",
+  "name": "Hong Myung-bo",
+  "team": "Selección de Corea del Sur",
+  "league": "Selecciones",
+  "nationality": "KOR",
+  "birthDate": "1969-02-12",
+  "playedAs": "DFC",
+  "debutYear": 2009
+ },
+ {
+  "id": "fernando-batista",
+  "name": "Fernando Batista",
+  "team": "Selección de Venezuela",
+  "league": "Selecciones",
+  "nationality": "ARG",
+  "birthDate": "1970-05-30",
+  "playedAs": "DFC",
+  "debutYear": 2010,
+  "check": true
  }
 ]

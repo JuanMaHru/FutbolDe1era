@@ -17,6 +17,7 @@ import { useDailyGame } from "./useDailyGame";
 const MAX_STRIKES = 3;
 interface OState { done: boolean; won: boolean; slots: (string | null)[]; strikes: number; summary?: string }
 const players = playerGame.items as Player[];
+const reliable = players.filter((p) => !p.check);
 const byId = new Map(players.map((p) => [p.id, p]));
 const last = (n: string) => n.split(" ").slice(-1)[0];
 const lastCount = new Map<string, number>();
@@ -33,7 +34,7 @@ export function OnceGame({ day }: { day?: number }) {
   const toast = useToast();
 
   const date = g.key ? keyToDate(g.key) : new Date();
-  const conds = useMemo(() => (g.key ? buildOnce(players, 31337 + dayNumber(g.key), date) : []), [g.key]); // eslint-disable-line react-hooks/exhaustive-deps
+  const conds = useMemo(() => (g.key ? buildOnce(reliable, 31337 + dayNumber(g.key), date) : []), [g.key]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!g.state || !g.key || !conds.length) return <div className="card muted" style={{ marginTop: 24 }}>Armando la cancha…</div>;
   const s = g.state;
@@ -69,7 +70,7 @@ export function OnceGame({ day }: { day?: number }) {
   const examples = s.done
     ? (() => {
         const taken = new Set(s.slots.filter(Boolean) as string[]);
-        const free = players.filter((p) => !taken.has(p.id));
+        const free = reliable.filter((p) => !taken.has(p.id));
         const empty = FORMATION.map((_, i) => i).filter((i) => !s.slots[i]);
         const m = perfectMatching(empty.map((i) => free.flatMap((p, j) => (fitsSlot(p, FORMATION[i].line, conds[i], date) ? [j] : []))));
         return new Map(empty.map((i, k) => [i, m ? free[m[k]]?.name : undefined]));

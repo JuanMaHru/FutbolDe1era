@@ -24,6 +24,8 @@ export interface Attribute<T> {
 export interface Entity {
   id: string;
   name: string;
+  /** Dato a verificar: se puede adivinar pero nunca es la respuesta del día. */
+  check?: boolean;
 }
 
 export interface Player extends Entity {
@@ -56,6 +58,8 @@ export interface GameDefinition<T extends Entity> {
   /** Semilla para el orden diario; cambiarla reordena todo el calendario. */
   seed: number;
   items: T[];
+  /** Posibles respuestas del día (sin datos marcados para revisar). */
+  targets: T[];
   attributes: Attribute<T>[];
   subtitle: (item: T) => string;
 }
