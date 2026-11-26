@@ -3,10 +3,17 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { THEME_BOOT } from "@/lib/theme";
 import { Footer } from "@/components/LegalNotice";
+import { SITE_URL } from "@/lib/site";
+
+const DESCRIPTION = "Adiviná el jugador y el DT del día, competí con tus amigos y compartí tu resultado. Tu conocimiento de fútbol es tu stat.";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Fútbol de Primera · El que sabe, juega",
-  description: "Adiviná el jugador y el DT del día, competí con tus amigos y compartí tu resultado. Tu conocimiento de fútbol es tu stat.",
+  description: DESCRIPTION,
+  alternates: { canonical: "/" },
+  openGraph: { type: "website", locale: "es_AR", url: SITE_URL, siteName: "Fútbol de Primera", title: "Fútbol de Primera · El que sabe, juega", description: DESCRIPTION },
+  twitter: { card: "summary_large_image", title: "Fútbol de Primera · El que sabe, juega", description: DESCRIPTION },
 };
 
 export const viewport: Viewport = { themeColor: "#0b0f1e", width: "device-width", initialScale: 1 };

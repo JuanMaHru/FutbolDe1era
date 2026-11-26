@@ -1,5 +1,7 @@
 # Fútbol de Primera
 
+**Jugar:** https://futbol-de1era.vercel.app
+
 Minijuegos diarios de fútbol conectados a un modo carrera. *Tu conocimiento real de fútbol es tu stat.*
 
 ## Qué hay hoy

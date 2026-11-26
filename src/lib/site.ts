@@ -1,7 +1,11 @@
-/** URL pública para textos compartibles. En la versión standalone (sin dominio propio) no se incluye link. */
+/** Dirección pública del sitio (Vercel). Si se cambia el dominio, cambiarlo acá. */
+export const SITE_URL = "https://futbol-de1era.vercel.app";
+
+/** URL pública para textos compartibles. Desde la versión de prueba (standalone) apunta al sitio público. */
 export function shareUrl(path: string): string | undefined {
-  if (process.env.NEXT_PUBLIC_STANDALONE === "1" || typeof window === "undefined") return undefined;
-  return `${window.location.origin}${path}`;
+  if (process.env.NEXT_PUBLIC_STANDALONE === "1" || typeof window === "undefined") return `${SITE_URL}${path}`;
+  const origin = window.location.origin;
+  return `${/^https?:\/\/(localhost|127\.)/.test(origin) ? SITE_URL : origin}${path}`;
 }
 
 /** Redes del proyecto: completar con la URL y el ícono pasa a estar activo. */
