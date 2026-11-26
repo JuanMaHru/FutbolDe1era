@@ -14,6 +14,7 @@ import { PalabraGame } from "@/components/PalabraGame";
 import { BingoGame } from "@/components/BingoGame";
 import { CareerApp } from "@/components/career/CareerApp";
 import { Catalog } from "@/components/career/Catalog";
+import { Footer, LegalNotice } from "@/components/LegalNotice";
 
 function Page({ path }: { path: string }) {
   const game = path.match(/^\/(jugador|dt)(?:\/(\d+))?$/);
@@ -32,6 +33,7 @@ function Page({ path }: { path: string }) {
     return <BingoGame key={path} day={day} />;
   }
   if (path === "/carrera") return <CareerApp />;
+  if (path === "/aviso-legal") return <LegalNotice />;
   if (path === "/vitrina")
     return (
       <>
@@ -87,7 +89,7 @@ function App() {
       <main className="container">
         <Page path={path} />
       </main>
-      <footer className="footer">Fútbol de Primera · Prototipo Fase 1 · Datos públicos, sin escudos ni fotos oficiales.</footer>
+      <Footer />
     </>
   );
 }

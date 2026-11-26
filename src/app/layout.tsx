@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { THEME_BOOT } from "@/lib/theme";
+import { Footer } from "@/components/LegalNotice";
 
 export const metadata: Metadata = {
   title: "Fútbol de Primera · El que sabe, juega",
@@ -19,9 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Header />
         <main className="container">{children}</main>
-        <footer className="footer">
-          Fútbol de Primera · Prototipo Fase 1 · Datos públicos, sin escudos ni fotos oficiales.
-        </footer>
+        <Footer />
       </body>
     </html>
   );

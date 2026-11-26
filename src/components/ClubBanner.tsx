@@ -27,7 +27,7 @@ export function ClubBanner() {
   const canto = CANTOS[[...theme].reduce((a, c) => a + c.charCodeAt(0), 0) % CANTOS.length];
   return (
     <div className="trapo" role="img" aria-label={`Trapo de ${theme}`}>
-      <Crest club={theme} size={58} />
+      <Crest club={theme} size={58} real={false} />
       <div className="trapo-text">
         <span className="trapo-small">{canto}</span>
         <span className="trapo-big">{s.short}</span>

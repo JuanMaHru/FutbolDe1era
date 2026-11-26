@@ -28,3 +28,11 @@ export const DONATE: { links: { amount: string; label: string; url: string }[]; 
   freeAmountUrl: "",
 };
 export const donationsReady = () => DONATE.links.some((l) => l.url) || !!DONATE.alias || !!DONATE.freeAmountUrl;
+
+/**
+ * Escudos reales (de TheSportsDB, ver tools/fetch_crests.ts), solo para identificar clubes.
+ * Si llega un reclamo, poner en false: toda la página vuelve a los escudos propios.
+ */
+export const REAL_CRESTS = true;
+/** Contacto para pedidos de baja de marcas o imágenes. */
+export const CONTACT_EMAIL = "juanmanuelhruby@gmail.com";

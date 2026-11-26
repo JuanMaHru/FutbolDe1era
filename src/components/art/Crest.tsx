@@ -1,4 +1,7 @@
-import { useId } from "react";
+"use client";
+import { useEffect, useId, useRef, useState } from "react";
+import CRESTS from "@/data/crests.json";
+import { REAL_CRESTS } from "@/lib/site";
 import { clubStyle } from "@/lib/clubs";
 import { PatternFill } from "./PatternFill";
 
@@ -22,7 +25,23 @@ const hash = (s: string) => [...s].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >
  * Escudo ilustrado PROPIO (no oficial): forma, ribete dorado, franjas con los colores del club,
  * monograma con serifa y, en los redondos, el nombre alrededor. Determinístico por nombre.
  */
-export function Crest({ club, size = 28, title }: { club: string; size?: number; title?: string }) {
+export function Crest({ club, size = 28, title, real = true }: { club: string; size?: number; title?: string; real?: boolean }) {
+  const url = real && REAL_CRESTS ? (CRESTS as Record<string, string>)[club] : undefined;
+  const [broken, setBroken] = useState(false);
+  const img = useRef<HTMLImageElement>(null);
+  // Si la imagen falló antes de hidratar, onError no llega: lo revisamos al montar.
+  useEffect(() => { const el = img.current; if (el && el.complete && el.naturalWidth === 0) setBroken(true); }, [url]);
+  if (url && !broken)
+    return (
+      // Escudo real, solo para identificar al club (ver /aviso-legal). Si no carga, vuelve al escudo propio.
+      // eslint-disable-next-line @next/next/no-img-element
+      <img ref={img} src={`${url}/${size > 60 ? "small" : "tiny"}`} width={size} height={size} alt={title ?? club} title={title ?? club} className="crest crest-real" loading="lazy" decoding="async" referrerPolicy="no-referrer" onError={() => setBroken(true)} />
+    );
+  return <OwnCrest club={club} size={size} title={title} />;
+}
+
+/** Escudo ilustrado propio (respaldo, y para usos decorativos). */
+export function OwnCrest({ club, size = 28, title }: { club: string; size?: number; title?: string }) {
   const s = clubStyle(club);
   const id = useId().replace(/:/g, "");
   const h = hash(club);
