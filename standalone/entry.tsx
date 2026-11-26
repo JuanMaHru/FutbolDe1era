@@ -7,6 +7,11 @@ import { HomeCards } from "@/components/HomeCards";
 import { LeaguesHome } from "@/components/LeaguesHome";
 import { LeagueTable } from "@/components/LeagueTable";
 import { Archive } from "@/components/Archive";
+import { TrayectoriaGame } from "@/components/TrayectoriaGame";
+import { OnceGame } from "@/components/OnceGame";
+import { PalabraGame } from "@/components/PalabraGame";
+import { BingoGame } from "@/components/BingoGame";
+import { CareerApp } from "@/components/career/CareerApp";
 
 function Page({ path }: { path: string }) {
   const game = path.match(/^\/(jugador|dt)(?:\/(\d+))?$/);
@@ -15,6 +20,16 @@ function Page({ path }: { path: string }) {
     const day = game[2] ? Number(game[2]) : undefined;
     return <GuessGame key={path} gameId={id} day={day} />;
   }
+  const tray = path.match(/^\/trayectoria(\/dt)?(?:\/(\d+))?$/);
+  if (tray) return <TrayectoriaGame key={path} kind={tray[1] ? "dt" : "jugador"} day={tray[2] ? Number(tray[2]) : undefined} />;
+  const other = path.match(/^\/(once|palabra|bingo)(?:\/(\d+))?$/);
+  if (other) {
+    const day = other[2] ? Number(other[2]) : undefined;
+    if (other[1] === "once") return <OnceGame key={path} day={day} />;
+    if (other[1] === "palabra") return <PalabraGame key={path} day={day} />;
+    return <BingoGame key={path} day={day} />;
+  }
+  if (path === "/carrera") return <CareerApp />;
   if (path === "/archivo")
     return (
       <>

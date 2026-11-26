@@ -50,11 +50,13 @@ test("jugador: club amarillo si es misma liga", () => {
   assert.equal(c.status, "near");
 });
 
-test("DT: esquema amarillo por misma línea de fondo", () => {
-  const scaloni = coaches.find((c: { name: string }) => c.name === "Lionel Scaloni");
-  const pep = coaches.find((c: { name: string }) => c.name === "Pep Guardiola");
-  const f = coachAttributes.find((a) => a.key === "formation")!;
-  assert.equal(f.compare(pep, scaloni, today).status, "near"); // 4-3-3 vs 4-4-2
+test("DT: 'jugó de' amarillo por misma línea; 'No jugó' solo coincide consigo mismo", () => {
+  const by = (n: string) => coaches.find((c: { name: string }) => c.name === n);
+  const f = coachAttributes.find((a) => a.key === "played")!;
+  assert.equal(f.compare(by("Pep Guardiola"), by("Diego Simeone"), today).status, "hit"); // MC vs MC
+  assert.equal(f.compare(by("Arne Slot"), by("Diego Simeone"), today).status, "near"); // MCO vs MC
+  assert.equal(f.compare(by("Jorge Sampaoli"), by("Ariel Holan"), today).status, "hit"); // NJ vs NJ
+  assert.equal(f.compare(by("Jorge Sampaoli"), by("Diego Simeone"), today).status, "miss");
 });
 
 test("reto diario: determinístico y sin repetir dentro de un ciclo", () => {
@@ -93,4 +95,33 @@ test("semana arranca el lunes", () => {
   const w = weekKeys("2026-11-25"); // miércoles
   assert.equal(w[0], "2026-11-23");
   assert.equal(w[6], "2026-11-29");
+});
+
+import { buildOnce, FORMATION, fitsSlot } from "../src/lib/game/once.ts";
+import { buildBingo, BINGO_SIZE } from "../src/lib/game/bingo.ts";
+import { scoreWord, WORDS } from "../src/lib/game/words.ts";
+import { perfectMatching } from "../src/lib/game/conditions.ts";
+
+test("Armá el 11: 60 días seguidos generan consignas resolubles", () => {
+  for (let d = 0; d < 60; d++) {
+    const conds = buildOnce(players, 1000 + d, today);
+    assert.equal(conds.length, FORMATION.length);
+    const cand = FORMATION.map((s, i) => players.flatMap((p: never, j: number) => (fitsSlot(p, s.line, conds[i], today) ? [j] : [])));
+    assert.ok(perfectMatching(cand));
+  }
+});
+
+test("Bingo: 60 días seguidos generan cartones resolubles con el mazo", () => {
+  for (let d = 0; d < 60; d++) {
+    const { cells, deck } = buildBingo(players, 5000 + d, today);
+    assert.equal(cells.length, BINGO_SIZE);
+    assert.equal(new Set(deck).size, deck.length);
+  }
+});
+
+test("Palabra: colores con letras repetidas", () => {
+  assert.deepEqual(scoreWord("ARMANI", "ARMANI"), ["hit", "hit", "hit", "hit", "hit", "hit"]);
+  assert.deepEqual(scoreWord("TOTTI", "TEVEZ"), ["hit", "miss", "miss", "miss", "miss"]);
+  assert.deepEqual(scoreWord("AAAAA", "AIMAR"), ["hit", "miss", "miss", "hit", "miss"]);
+  for (const w of WORDS) assert.match(w.word, /^[A-Z]{4,8}$/, w.word);
 });

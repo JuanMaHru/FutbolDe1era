@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { BRAND, GAMES } from "@/lib/game/games";
+import { BRAND, GAMES, type GuessGameId } from "@/lib/game/games";
 import { dateKey, dayNumber, dayToKey, keyToDate, pickDaily, randomPick } from "@/lib/game/daily";
 import { EMOJI, points, shareText } from "@/lib/game/scoring";
-import type { Attribute, Cell, Entity, GameId } from "@/lib/game/types";
+import type { Attribute, Cell, Entity } from "@/lib/game/types";
 import { loadDaily, loadStats, recordArchive, recordFinish, saveDaily, type GameStats } from "@/lib/progress";
 import { notifyProfileChange, read, write } from "@/lib/storage";
 import { shareUrl } from "@/lib/site";
@@ -21,7 +21,7 @@ import { MysteryCard } from "./MysteryCard";
 type Mode = "daily" | "archive" | "practice";
 type Item = Entity & Record<string, unknown>;
 
-export function GuessGame({ gameId, day }: { gameId: GameId; day?: number }) {
+export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }) {
   const game = GAMES[gameId];
   const attrs = game.attributes as Attribute<Entity>[];
   const other = gameId === "jugador" ? GAMES.dt : GAMES.jugador;

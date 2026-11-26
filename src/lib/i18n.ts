@@ -32,6 +32,8 @@ const es = {
   "status.won": "Acertado",
   "status.lost": "Fallado",
   "mode.jugador": "Adiviná el Jugador",
+  "mode.tray": "Trayectoria",
+  "mode.traydt": "Trayectoria DT",
   "mode.dt": "Adiviná el DT",
   "mode.ligas": "Ligas con amigos",
   "mode.archivo": "Archivo",

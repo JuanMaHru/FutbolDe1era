@@ -6,6 +6,9 @@ import { LANGS, getLang, initLang, setLang, t, type Lang } from "@/lib/i18n";
 import { SOCIAL } from "@/lib/site";
 import { isMuted, play, setMuted } from "@/lib/sound";
 import { IconInstagram, IconSound, IconTikTok, IconX } from "./Icons";
+import { ThemePicker } from "./ThemePicker";
+import { Crest } from "./art/Crest";
+import { DEFAULT_THEME, currentTheme, setTheme } from "@/lib/theme";
 import { useProfile } from "./useProfile";
 
 const ICONS = { instagram: IconInstagram, x: IconX, tiktok: IconTikTok };
@@ -16,11 +19,16 @@ export function Header() {
   const [muted, setM] = useState(false);
   const [lang, setL] = useState<Lang>("es");
   const [langMsg, setLangMsg] = useState("");
+  const [themeOpen, setThemeOpen] = useState(false);
+  const [theme, setThemeName] = useState(DEFAULT_THEME);
 
   useEffect(() => {
     initLang();
     setL(getLang());
     setM(isMuted());
+    const th = currentTheme();
+    setThemeName(th);
+    setTheme(th); // re-aplica por si cambió la fórmula de colores
   }, []);
 
   const links = [
@@ -66,6 +74,10 @@ export function Header() {
                 </button>
               ))}
             </div>
+            <button className="theme-btn" onClick={() => { play("click"); setThemeOpen(true); }} aria-label="Elegir colores de tu club" title="Tus colores">
+              {theme === DEFAULT_THEME ? <span className="swatch" style={{ width: 20, height: 20, "--a": "var(--accent)", "--b": "var(--bg)" } as React.CSSProperties} /> : <Crest club={theme} size={22} />}
+              <span>Colores</span>
+            </button>
             <button
               className="icon-btn"
               aria-label={muted ? t("top.sound.off") : t("top.sound.on")}
@@ -102,6 +114,7 @@ export function Header() {
       </div>
       </header>
       {langMsg && <div className="toast" role="status">{langMsg}</div>}
+      <ThemePicker open={themeOpen} onClose={() => { setThemeOpen(false); setThemeName(currentTheme()); }} />
     </>
   );
 }

@@ -3,6 +3,7 @@
 import { build } from "esbuild";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
+const THEME_BOOT = `try{var t=JSON.parse(localStorage.getItem("primera:v1:themeTokens")||"null");if(t){var r=document.documentElement;for(var k in t)r.style.setProperty(k,t[k]);}}catch(e){}`;
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -48,6 +49,7 @@ const html = `<title>Fútbol de Primera</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Adiviná el jugador y el DT del día y competí con tus amigos.">
 <style>${css}</style>
+<script>${THEME_BOOT}</script>
 <div id="root"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/${REACT}/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/${REACT}/umd/react-dom.production.min.js"></script>

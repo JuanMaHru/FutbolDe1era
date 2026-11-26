@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { dateKey } from "@/lib/game/daily";
-import { GAME_IDS } from "@/lib/game/games";
+import { DAILY_IDS as GAME_IDS } from "@/lib/game/daily-games";
 import { leagueService } from "@/lib/leagues/local";
 import type { League, Standing } from "@/lib/leagues/types";
 import { shiftWeek, weekKeys } from "@/lib/leagues/week";
@@ -100,7 +100,7 @@ export function LeagueTable({ code }: { code: string }) {
           </tbody>
         </table>
       </div>
-      <p className="muted small" style={{ margin: 0 }}>Puntos por día = Jugador + DT (máximo 20). “·” = no jugó.</p>
+      <p className="muted small" style={{ margin: 0 }}>Puntos por día = suma de todos los retos diarios (hasta 10 cada uno). “·” = no jugó.</p>
 
       {isCurrentWeek && (
         <div className="row">

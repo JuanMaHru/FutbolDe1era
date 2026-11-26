@@ -40,11 +40,13 @@ export interface Coach extends Entity {
   league: string;
   nationality: string;
   birthDate: string;
-  formation: string;
+  /** Puesto que jugaba como futbolista ("NJ" = no llegó a profesional). */
+  playedAs: string;
   debutYear: number;
 }
 
-export type GameId = "jugador" | "dt";
+/** Juegos diarios. Los ids se usan en rutas, almacenamiento y ligas. */
+export type GameId = "jugador" | "dt" | "tray" | "traydt" | "once" | "palabra" | "bingo";
 
 export interface GameDefinition<T extends Entity> {
   id: GameId;

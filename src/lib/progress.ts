@@ -35,6 +35,17 @@ export const loadDaily = (game: GameId, key: string) =>
   read<DailyState>(`daily:${game}:${key}`, { guesses: [], done: false, won: false });
 export const saveDaily = (game: GameId, key: string, s: DailyState) => write(`daily:${game}:${key}`, s);
 
+/** Estado diario genérico para juegos con forma propia (bingo, 11, palabra…). Siempre incluye done/won. */
+export interface BaseState {
+  done: boolean;
+  won: boolean;
+  /** Texto corto para el archivo/inicio, p. ej. "9/11" o "3/6". */
+  summary?: string;
+  guesses?: string[];
+}
+export const loadState = <S extends BaseState>(game: GameId, key: string, fallback: S) => read<S>(`daily:${game}:${key}`, fallback);
+export const saveState = <S extends BaseState>(game: GameId, key: string, s: S) => write(`daily:${game}:${key}`, s);
+
 export const loadStats = (game: GameId, max: number) => read<GameStats>(`stats:${game}`, emptyStats(max));
 
 export const loadProfile = () => read<Profile>("profile", { name: "", reputation: 0, results: {} });

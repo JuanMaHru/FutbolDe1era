@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { GAMES, GAME_IDS } from "@/lib/game/games";
+import { DAILY, dailyMeta } from "@/lib/game/daily-games";
 import { dateKey, dayNumber, dayToKey } from "@/lib/game/daily";
 import type { GameId } from "@/lib/game/types";
-import { loadDaily, type DailyState } from "@/lib/progress";
+import { loadState, type BaseState } from "@/lib/progress";
 import { read, write } from "@/lib/storage";
 import { t } from "@/lib/i18n";
 import { play } from "@/lib/sound";
@@ -13,10 +13,11 @@ const DOW = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];
 
 export function Archive() {
   const [tab, setTab] = useState<GameId>("jugador");
-  const [days, setDays] = useState<{ n: number; key: string; s: DailyState }[] | null>(null);
+  const [days, setDays] = useState<{ n: number; key: string; s: BaseState }[] | null>(null);
 
   useEffect(() => {
-    setTab(read<GameId>("archiveTab", "jugador"));
+    const saved = read<GameId>("archiveTab", "jugador");
+    setTab(DAILY.some((d) => d.id === saved) ? saved : "jugador");
   }, []);
 
   useEffect(() => {
@@ -25,54 +26,56 @@ export function Archive() {
       Array.from({ length: todayN }, (_, i) => {
         const n = todayN - i;
         const key = dayToKey(n);
-        return { n, key, s: loadDaily(tab, key) };
+        return { n, key, s: loadState<BaseState>(tab, key, { done: false, won: false }) };
       }),
     );
   }, [tab]);
 
+  const meta = dailyMeta(tab);
   const played = days?.filter((d) => d.s.done).length ?? 0;
   const wins = days?.filter((d) => d.s.won).length ?? 0;
 
   return (
     <>
-      <div className="tabs" role="tablist">
-        {GAME_IDS.map((g) => (
+      <div className="tabs tabs-scroll" role="tablist">
+        {DAILY.map((g) => (
           <button
-            key={g}
+            key={g.id}
             role="tab"
-            aria-selected={tab === g}
-            className={`tab ${tab === g ? "active" : ""}`}
+            aria-selected={tab === g.id}
+            className={`tab ${tab === g.id ? "active" : ""}`}
             onClick={() => {
               play("click");
-              setTab(g);
-              write("archiveTab", g);
+              setTab(g.id);
+              write("archiveTab", g.id);
             }}
           >
-            {GAMES[g].title}
+            <span aria-hidden>{g.icon}</span> {g.short}
           </button>
         ))}
       </div>
       {days && (
         <p className="muted small">
-          Jugaste {played} de {days.length} · acertaste {wins}
+          {meta.title}: jugaste {played} de {days.length} · ganaste {wins}
         </p>
       )}
       <div className="archive-grid">
         {days?.map(({ n, key, s }, i) => {
-          const status = s.done ? (s.won ? "won" : "lost") : s.guesses.length ? "playing" : "new";
+          const started = s.done || (s.guesses?.length ?? 0) > 0 || !!s.summary;
+          const status = s.done ? (s.won ? "won" : "lost") : started ? "playing" : "new";
           const d = new Date(`${key}T12:00:00Z`);
           return (
             <Link
               key={n}
-              href={i === 0 ? `/${tab}` : `/${tab}/${n}`}
+              href={i === 0 ? meta.path : `${meta.path}/${n}`}
               className={`day-tile d-${status}`}
               style={{ animationDelay: `${Math.min(i, 20) * 25}ms` }}
               onClick={() => play("click")}
             >
               <span className="day-n">#{n}</span>
               <span className="day-date">{i === 0 ? t("archive.today") : `${DOW[d.getUTCDay()]} ${d.getUTCDate()}/${d.getUTCMonth() + 1}`}</span>
-              <span className="day-status" aria-label={status}>
-                {status === "won" ? `✓ ${s.guesses.length}/${GAMES[tab].maxGuesses}` : status === "lost" ? "✗" : status === "playing" ? "…" : "▶"}
+              <span className="day-status">
+                {status === "won" ? `✓ ${s.summary ?? `${s.guesses?.length}/${meta.max}`}` : status === "lost" ? `✗ ${s.summary ?? ""}` : status === "playing" ? "…" : "▶"}
               </span>
             </Link>
           );

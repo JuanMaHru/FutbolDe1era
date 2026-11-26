@@ -25,9 +25,10 @@ export const coachGame: GameDefinition<Coach> = {
   seed: 19781986,
   items: coachesData as Coach[],
   attributes: coachAttributes,
-  subtitle: (c) => `${c.team} · ${c.formation} · ${COUNTRIES[c.nationality]?.flag ?? ""}`,
+  subtitle: (c) => `${c.team} · ${c.playedAs === "NJ" ? "No jugó profesionalmente" : `Jugó de ${POSITIONS[c.playedAs]?.label.toLowerCase()}`} · ${COUNTRIES[c.nationality]?.flag ?? ""}`,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const GAMES: Record<GameId, GameDefinition<any>> = { jugador: playerGame, dt: coachGame };
-export const GAME_IDS: GameId[] = ["jugador", "dt"];
+export type GuessGameId = "jugador" | "dt";
+export const GAMES: Record<GuessGameId, GameDefinition<any>> = { jugador: playerGame, dt: coachGame };
+export const GAME_IDS: GuessGameId[] = ["jugador", "dt"];

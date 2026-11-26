@@ -2,7 +2,7 @@ import type { Pattern } from "@/lib/clubs";
 
 /** Dibuja el patrón de camiseta dentro de un área 0..100 x 0..100 (se recorta afuera con clipPath). */
 export function PatternFill({ pattern, base, accent }: { pattern: Pattern; base: string; accent: string }) {
-  const bg = <rect x="0" y="0" width="100" height="100" fill={base} />;
+  const bg = <rect x="0" y="0" width="100" height="100" style={{ fill: base }} />;
   switch (pattern) {
     case "stripes":
       return (

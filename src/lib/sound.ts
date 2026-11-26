@@ -4,7 +4,7 @@
  */
 import { read, write } from "./storage";
 
-export type Sfx = "kick" | "flip" | "near" | "hit" | "win" | "lose" | "click";
+export type Sfx = "kick" | "flip" | "near" | "hit" | "win" | "lose" | "click" | "whistle";
 
 let ctx: AudioContext | null = null;
 let muted: boolean | null = null;
@@ -108,6 +108,9 @@ export function play(s: Sfx) {
       whistle(c, t, 0.35);
       noise(c, t + 0.2, 2.2, 0.35, 900, 0.4);
       [523, 659, 784, 1046].forEach((f, i) => tone(c, f, t + 0.25 + i * 0.09, 0.5, "triangle", 0.09));
+      break;
+    case "whistle": // pitazo inicial
+      whistle(c, t, 0.5);
       break;
     case "lose": // tres pitazos finales
       whistle(c, t, 0.22);

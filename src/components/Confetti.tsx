@@ -1,9 +1,12 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 /** Explosión breve de papelitos (colores de la app). Respeta prefers-reduced-motion. */
 export function Confetti({ fire }: { fire: number }) {
   const ref = useRef<HTMLCanvasElement>(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   useEffect(() => {
     if (!fire) return;
     if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
@@ -50,6 +53,7 @@ export function Confetti({ fire }: { fire: number }) {
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [fire]);
-  return <canvas ref={ref} className="confetti" aria-hidden />;
+  }, [fire, mounted]);
+  // Portal al body: un ancestro animado (transform) haría que position:fixed se ensanche la página.
+  return mounted ? createPortal(<canvas ref={ref} className="confetti" aria-hidden />, document.body) : null;
 }

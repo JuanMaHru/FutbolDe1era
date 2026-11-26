@@ -85,7 +85,11 @@ export function MysteryCard({
         ]
       : [
           { label: "Edad", value: range("age"), state: (range("age").match(/^\d+$/) ? "hit" : range("age") === "?" ? "none" : "near") as "hit" | "near" | "none" },
-          { label: "Esquema", value: know("formation")?.hit ? String(know("formation")!.item.formation) : know("formation") ? `${String(know("formation")!.item.formation).split("-")[0]} atrás` : "?", state: (know("formation") ? (know("formation")!.hit ? "hit" : "near") : "none") as "hit" | "near" | "none" },
+          (() => {
+            const k = know("played");
+            const code = k ? String(k.item.playedAs) : "";
+            return { label: "Jugó de", value: k?.hit ? (code === "NJ" ? "No jugó" : code) : k ? LINE_LABEL[POSITIONS[code]?.line] : "?", state: (k ? (k.hit ? "hit" : "near") : "none") as "hit" | "near" | "none" };
+          })(),
           { label: "Debut", value: range("debut"), state: (range("debut").match(/^\d+$/) ? "hit" : range("debut") === "?" ? "none" : "near") as "hit" | "near" | "none" },
         ]),
   ];

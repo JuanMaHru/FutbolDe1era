@@ -2,13 +2,21 @@
 
 Minijuegos diarios de fútbol conectados a un modo carrera. *Tu conocimiento real de fútbol es tu stat.*
 
-## Fase 1 (este prototipo)
-- **Adiviná el jugador**: club, liga, país, posición, edad y dorsal. 8 intentos.
-- **Adiviná el DT**: equipo, liga, país, edad, esquema y año de debut. 8 intentos.
-- El reto diario es el mismo para todos y cambia a medianoche de Buenos Aires.
-- Resultado compartible con emojis, rachas, distribución de intentos y modo práctica.
-- **Ligas entre amigos** con código de 6 caracteres y tabla semanal (de lunes a domingo).
-- **Reputación**: la moneda que conecta con el Modo Carrera de la Fase 2.
+## Qué hay hoy
+**Retos diarios** (iguales para todos, cambian a las 00:00 de Buenos Aires, con archivo de días anteriores):
+- **Adiviná el Jugador**: club, liga, país, puesto, edad y dorsal.
+- **Adiviná el DT**: equipo, liga, país, edad, cómo jugaba y año de debut.
+- **Trayectoria** / **Trayectoria DT**: cada error revela el siguiente club de la carrera.
+- **Armá el 11**: cada posición tiene una consigna (país, liga, club, edad, dorsal); 3 errores y roja.
+- **Palabra Crack**: el apellido letra por letra.
+- **Bingo Futbolero**: ubicá a cada jugador que sale en la casilla que cumple.
+
+**Modo Carrera**: creás un jugador, debutás, tomás decisiones entre partidos y en cada partido jugás
+momentos (precisión + trivia real). La reputación de los retos diarios da nivel inicial y mejores pruebas,
+y ganar un reto hoy desbloquea un entrenamiento especial. Ficha final como imagen.
+
+**Ligas entre amigos** (simuladas en local), **resultado compartible**, **sonidos**, **temas por club**
+(la página toma los colores de tu club o selección).
 
 ## Correr
 ```bash
@@ -21,7 +29,7 @@ npm run build
 ## Estructura
 ```
 src/
-  data/                players.json, coaches.json   ← base editable (JSON)
+  data/                players.json, coaches.json, careers.json (trayectorias) ← base editable
   lib/
     game/              lógica pura y testeable, sin React
       types.ts         Entity, Attribute, Cell, GameDefinition
@@ -30,6 +38,13 @@ src/
       daily.ts         reto del día determinístico (sin repetir hasta completar la lista)
       scoring.ts       puntos y texto para compartir
       games.ts         registro de juegos (agregar un juego = un GameDefinition)
+      daily-games.ts   catálogo de retos diarios (rutas, ids, íconos)
+      conditions.ts    consignas + emparejamiento (garantiza 11 y bingo resolubles)
+      once.ts, bingo.ts, words.ts, careers.ts
+    career/            motor del Modo Carrera (eventos, partidos, temporadas, trivia)
+    clubs.ts           colores y diseño PROPIOS de cada club (para escudos/camisetas ilustrados)
+    theme.ts           temas por club
+    sound.ts           efectos sintetizados con Web Audio
     progress.ts        estado diario, estadísticas, perfil/reputación
     storage.ts         localStorage seguro
     leagues/
@@ -45,7 +60,7 @@ tests/
 Definí un `GameDefinition` (items + atributos con su `compare`) en `lib/game/games.ts` y creá la ruta `app/<id>/page.tsx` con `<GuessGame gameId="<id>" />`.
 
 ## Próximos pasos
-1. **Datos**: revisar clubes y dorsales (cambian en cada mercado de pases) y ampliar la base. Las fechas de nacimiento son estables.
+1. **Datos**: revisar clubes, dorsales, trayectorias (`careers.json`) y el puesto de los DTs (`playedAs`). Están escritos de memoria.
 2. **Supabase**: implementar `SupabaseLeagueService` con la interfaz de `lib/leagues/types.ts` y migrar `progress.ts` a las tablas `profiles` y `daily_results`. Para evitar trampas, el objetivo del día y la validación tienen que pasar al servidor.
 3. **Fase 2**: el Modo Carrera consume `profile.reputation` y `profile.results`.
 

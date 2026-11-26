@@ -30,11 +30,14 @@ export function CellContent({ attr, cell, item }: { attr: string; cell: Cell; it
         </>
       );
     }
+    case "played":
     case "position": {
-      const p = POSITIONS[String(item.position)];
+      const code = String(attr === "played" ? item.playedAs : item.position);
+      const p = POSITIONS[code];
+      if (code === "NJ") return <span className="c-main tight">No jugó</span>;
       return (
         <>
-          <span className="c-main c-big">{String(item.position)}</span>
+          <span className="c-main c-big">{code}</span>
           <span className="c-sub">{p ? LINE_LABEL[p.line] : ""}</span>
         </>
       );

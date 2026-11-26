@@ -17,6 +17,7 @@ export const COUNTRIES: Record<string, { name: string; flag: string; confed: Con
   BEL: { name: "Bélgica", flag: "🇧🇪", confed: "UEFA" },
   NOR: { name: "Noruega", flag: "🇳🇴", confed: "UEFA" },
   EGY: { name: "Egipto", flag: "🇪🇬", confed: "CAF" },
+  CRO: { name: "Croacia", flag: "🇭🇷", confed: "UEFA" },
 };
 
 export type Region = "Sudamérica" | "Europa" | "Norteamérica" | "Asia" | "Selecciones";
@@ -37,9 +38,9 @@ export const LEAGUES: Record<string, { region: Region; short: string }> = {
   "Selecciones": { region: "Selecciones", short: "Nacional" },
 };
 
-export type Line = "ARQ" | "DEF" | "MED" | "DEL";
+export type Line = "ARQ" | "DEF" | "MED" | "DEL" | "NJ";
 
-export const LINE_LABEL: Record<Line, string> = { ARQ: "Arquero", DEF: "Defensa", MED: "Medio", DEL: "Ataque" };
+export const LINE_LABEL: Record<Line, string> = { ARQ: "Arquero", DEF: "Defensa", MED: "Medio", DEL: "Ataque", NJ: "No jugó" };
 
 export const POSITIONS: Record<string, { label: string; line: Line }> = {
   ARQ: { label: "Arquero", line: "ARQ" },
@@ -49,4 +50,5 @@ export const POSITIONS: Record<string, { label: string; line: Line }> = {
   MCO: { label: "Enganche", line: "MED" },
   EXT: { label: "Extremo", line: "DEL" },
   DC: { label: "Centrodelantero", line: "DEL" },
+  NJ: { label: "No jugó", line: "NJ" },
 };

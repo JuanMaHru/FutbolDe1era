@@ -59,6 +59,117 @@ export const CLUBS: Record<string, ClubStyle> = {
   "Colo-Colo": { short: "Colo-Colo", abbr: "CC", colors: ["#FFFFFF", "#111111", "#111111"], pattern: "plain" },
   "Al Hilal": { short: "Al Hilal", abbr: "HIL", colors: ["#005BAC", "#FFFFFF", "#FFFFFF"], pattern: "plain", shape: "round" },
   "Al Nassr": { short: "Al Nassr", abbr: "NSR", colors: ["#FCD116", "#1B3F8F", "#1B3F8F"], pattern: "plain", shape: "round" },
+  // Más clubes argentinos (para temas y trayectorias)
+  "San Lorenzo": { short: "San Lorenzo", abbr: "CASLA", colors: ["#1B3A8C", "#D2232A", "#FFFFFF"], pattern: "stripes" },
+  "Huracán": { short: "Huracán", abbr: "CAH", colors: ["#FFFFFF", "#E30613", "#E30613"], pattern: "plain" },
+  "Newell's Old Boys": { short: "Newell's", abbr: "NOB", colors: ["#D8232A", "#111111", "#FFFFFF"], pattern: "halves" },
+  "Talleres": { short: "Talleres", abbr: "CAT", colors: ["#FFFFFF", "#0A2D6E", "#0A2D6E"], pattern: "stripes" },
+  "Belgrano": { short: "Belgrano", abbr: "CAB", colors: ["#4FA9E0", "#4FA9E0", "#0A1F44"], pattern: "plain" },
+  "Gimnasia y Esgrima LP": { short: "Gimnasia", abbr: "GELP", colors: ["#FFFFFF", "#1C2A5A", "#1C2A5A"], pattern: "band" },
+  "Banfield": { short: "Banfield", abbr: "CAB", colors: ["#FFFFFF", "#00804A", "#00804A"], pattern: "stripes" },
+  "Argentinos Juniors": { short: "Argentinos", abbr: "AAAJ", colors: ["#E31B23", "#FFFFFF", "#FFFFFF"], pattern: "band" },
+  "Platense": { short: "Platense", abbr: "CAP", colors: ["#FFFFFF", "#5B3A29", "#5B3A29"], pattern: "band" },
+  "Tigre": { short: "Tigre", abbr: "CAT", colors: ["#0D2B7A", "#D7192B", "#FFFFFF"], pattern: "band" },
+  "Colón": { short: "Colón", abbr: "CAC", colors: ["#D7192B", "#111111", "#FFFFFF"], pattern: "halves" },
+  "Unión": { short: "Unión", abbr: "CAU", colors: ["#FFFFFF", "#D7192B", "#D7192B"], pattern: "stripes" },
+  "Godoy Cruz": { short: "Godoy Cruz", abbr: "CDGC", colors: ["#FFFFFF", "#1B4AA3", "#1B4AA3"], pattern: "stripes" },
+  "Instituto": { short: "Instituto", abbr: "IACC", colors: ["#FFFFFF", "#D7192B", "#D7192B"], pattern: "stripes" },
+  "Defensa y Justicia": { short: "Defensa", abbr: "DYJ", colors: ["#00843D", "#FFD100", "#FFFFFF"], pattern: "halves" },
+  "Atlético Tucumán": { short: "Decano", abbr: "CAT", colors: ["#FFFFFF", "#6CACE4", "#0A1F44"], pattern: "stripes" },
+  "Sarmiento": { short: "Sarmiento", abbr: "CAS", colors: ["#00A651", "#00A651", "#FFFFFF"], pattern: "plain" },
+  "Aldosivi": { short: "Aldosivi", abbr: "CAA", colors: ["#FFD100", "#00843D", "#00843D"], pattern: "stripes" },
+  "Chacarita Juniors": { short: "Chacarita", abbr: "CACJ", colors: ["#FFFFFF", "#D7192B", "#111111"], pattern: "stripes" },
+  "Quilmes": { short: "Quilmes", abbr: "QAC", colors: ["#FFFFFF", "#0D2B7A", "#0D2B7A"], pattern: "plain" },
+  "Ferro Carril Oeste": { short: "Ferro", abbr: "FCO", colors: ["#00843D", "#00843D", "#FFFFFF"], pattern: "plain" },
+  "Nueva Chicago": { short: "Chicago", abbr: "CANCH", colors: ["#00843D", "#111111", "#FFFFFF"], pattern: "stripes" },
+  "Barracas Central": { short: "Barracas", abbr: "CABC", colors: ["#D7192B", "#FFFFFF", "#FFFFFF"], pattern: "plain" },
+  "Central Córdoba": { short: "C. Córdoba", abbr: "CACC", colors: ["#111111", "#FFFFFF", "#FFFFFF"], pattern: "stripes" },
+  "San Martín de Tucumán": { short: "San Martín", abbr: "CASM", colors: ["#FFFFFF", "#D7192B", "#D7192B"], pattern: "stripes" },
+  "Deportivo Riestra": { short: "Riestra", abbr: "CDR", colors: ["#111111", "#FFFFFF", "#FFFFFF"], pattern: "plain" },
+  // Sudamérica
+  "Nacional": { short: "Nacional", abbr: "CNF", colors: ["#FFFFFF", "#0D2B7A", "#D7192B"], pattern: "plain", shape: "round" },
+  "Peñarol": { short: "Peñarol", abbr: "CAP", colors: ["#FFD100", "#111111", "#111111"], pattern: "stripes" },
+  "Danubio": { short: "Danubio", abbr: "DFC", colors: ["#FFFFFF", "#111111", "#111111"], pattern: "sash" },
+  "Atlético Nacional": { short: "A. Nacional", abbr: "AN", colors: ["#FFFFFF", "#00843D", "#00843D"], pattern: "stripes" },
+  "Junior": { short: "Junior", abbr: "JFC", colors: ["#FFFFFF", "#D7192B", "#0D2B7A"], pattern: "stripes" },
+  "Millonarios": { short: "Millos", abbr: "MFC", colors: ["#0D2B7A", "#FFFFFF", "#FFFFFF"], pattern: "plain" },
+  "Envigado": { short: "Envigado", abbr: "EFC", colors: ["#FF7A00", "#00843D", "#FFFFFF"], pattern: "plain" },
+  "Universidad de Chile": { short: "La U", abbr: "U", colors: ["#0D2B7A", "#D7192B", "#FFFFFF"], pattern: "plain", shape: "round" },
+  "Corinthians": { short: "Corinthians", abbr: "SCCP", colors: ["#FFFFFF", "#111111", "#111111"], pattern: "plain", shape: "round" },
+  "Grêmio": { short: "Grêmio", abbr: "GFBPA", colors: ["#0D7BC4", "#111111", "#FFFFFF"], pattern: "stripes" },
+  "São Paulo": { short: "São Paulo", abbr: "SPFC", colors: ["#FFFFFF", "#D7192B", "#111111"], pattern: "band" },
+  "Internacional": { short: "Inter POA", abbr: "SCI", colors: ["#D7192B", "#D7192B", "#FFFFFF"], pattern: "plain", shape: "round" },
+  "Club América": { short: "América", abbr: "CA", colors: ["#FFD100", "#0D2B7A", "#0D2B7A"], pattern: "plain", shape: "round" },
+  "Atlas": { short: "Atlas", abbr: "AFC", colors: ["#D7192B", "#111111", "#FFFFFF"], pattern: "halves" },
+  // Europa
+  "Juventus": { short: "Juventus", abbr: "JUV", colors: ["#FFFFFF", "#111111", "#111111"], pattern: "stripes" },
+  "Milan": { short: "Milan", abbr: "ACM", colors: ["#FB090B", "#111111", "#FFFFFF"], pattern: "stripes", shape: "round" },
+  "Napoli": { short: "Napoli", abbr: "SSCN", colors: ["#12A0D7", "#12A0D7", "#FFFFFF"], pattern: "plain", shape: "round" },
+  "Fiorentina": { short: "Fiorentina", abbr: "ACF", colors: ["#592C82", "#592C82", "#FFFFFF"], pattern: "plain" },
+  "Palermo": { short: "Palermo", abbr: "PAL", colors: ["#F5A7C8", "#111111", "#111111"], pattern: "plain" },
+  "Atalanta": { short: "Atalanta", abbr: "ATA", colors: ["#1E71B8", "#111111", "#FFFFFF"], pattern: "stripes", shape: "round" },
+  "Genoa": { short: "Genoa", abbr: "GEN", colors: ["#A41D34", "#002D62", "#FFFFFF"], pattern: "halves" },
+  "Udinese": { short: "Udinese", abbr: "UDI", colors: ["#FFFFFF", "#111111", "#111111"], pattern: "stripes" },
+  "Parma": { short: "Parma", abbr: "PAR", colors: ["#FFFFFF", "#1B3A8C", "#FFD100"], pattern: "plain" },
+  "Catania": { short: "Catania", abbr: "CAT", colors: ["#D7192B", "#0D7BC4", "#FFFFFF"], pattern: "stripes" },
+  "Chievo": { short: "Chievo", abbr: "CHV", colors: ["#FFD100", "#0D2B7A", "#0D2B7A"], pattern: "plain" },
+  "Empoli": { short: "Empoli", abbr: "EMP", colors: ["#0D5CB6", "#0D5CB6", "#FFFFFF"], pattern: "plain" },
+  "Reggiana": { short: "Reggiana", abbr: "REG", colors: ["#8A1538", "#8A1538", "#FFFFFF"], pattern: "plain" },
+  "Valencia": { short: "Valencia", abbr: "VCF", colors: ["#FFFFFF", "#111111", "#F18A00"], pattern: "plain" },
+  "Villarreal": { short: "Villarreal", abbr: "VIL", colors: ["#FFE667", "#005187", "#005187"], pattern: "plain" },
+  "Sevilla": { short: "Sevilla", abbr: "SFC", colors: ["#FFFFFF", "#D7192B", "#D7192B"], pattern: "plain" },
+  "Getafe": { short: "Getafe", abbr: "GET", colors: ["#004FA3", "#004FA3", "#FFFFFF"], pattern: "plain" },
+  "Espanyol": { short: "Espanyol", abbr: "RCDE", colors: ["#FFFFFF", "#0A5CB8", "#0A5CB8"], pattern: "stripes" },
+  "Celta": { short: "Celta", abbr: "RCCV", colors: ["#8AC3EE", "#8AC3EE", "#D7192B"], pattern: "plain" },
+  "Athletic Club": { short: "Athletic", abbr: "AC", colors: ["#FFFFFF", "#D7192B", "#111111"], pattern: "stripes" },
+  "Rayo Vallecano": { short: "Rayo", abbr: "RV", colors: ["#FFFFFF", "#D7192B", "#D7192B"], pattern: "sash" },
+  "Almería": { short: "Almería", abbr: "UDA", colors: ["#FFFFFF", "#D7192B", "#D7192B"], pattern: "stripes" },
+  "Deportivo La Coruña": { short: "Depor", abbr: "RCD", colors: ["#FFFFFF", "#0A5CB8", "#0A5CB8"], pattern: "stripes" },
+  "Real Sociedad B": { short: "R. Sociedad", abbr: "RSB", colors: ["#FFFFFF", "#0A5CB8", "#0A5CB8"], pattern: "stripes" },
+  "Barcelona B": { short: "Barça B", abbr: "FCB", colors: ["#A50044", "#004D98", "#EDBB00"], pattern: "stripes" },
+  "Porto": { short: "Porto", abbr: "FCP", colors: ["#FFFFFF", "#0A4A9E", "#0A4A9E"], pattern: "stripes" },
+  "Sporting CP": { short: "Sporting", abbr: "SCP", colors: ["#FFFFFF", "#00814A", "#00814A"], pattern: "hoops" },
+  "União de Leiria": { short: "Leiria", abbr: "UDL", colors: ["#111111", "#111111", "#FFFFFF"], pattern: "plain" },
+  "Monaco": { short: "Monaco", abbr: "ASM", colors: ["#E2001A", "#FFFFFF", "#FFFFFF"], pattern: "halves" },
+  "Lille": { short: "Lille", abbr: "LOSC", colors: ["#E01E13", "#E01E13", "#FFFFFF"], pattern: "plain" },
+  "Rennes": { short: "Rennes", abbr: "SRFC", colors: ["#E13327", "#111111", "#FFFFFF"], pattern: "plain" },
+  "Ajax": { short: "Ajax", abbr: "AFC", colors: ["#FFFFFF", "#D2122E", "#D2122E"], pattern: "centerStripe" },
+  "Groningen": { short: "Groningen", abbr: "FCG", colors: ["#FFFFFF", "#00843D", "#00843D"], pattern: "stripes" },
+  "Borussia Dortmund": { short: "Dortmund", abbr: "BVB", colors: ["#FDE100", "#111111", "#111111"], pattern: "plain", shape: "round" },
+  "Mainz": { short: "Mainz", abbr: "M05", colors: ["#C3141E", "#C3141E", "#FFFFFF"], pattern: "plain" },
+  "Salzburg": { short: "Salzburg", abbr: "RBS", colors: ["#FFFFFF", "#D7192B", "#D7192B"], pattern: "plain" },
+  "Basel": { short: "Basel", abbr: "FCB", colors: ["#D7192B", "#0D2B7A", "#FFFFFF"], pattern: "halves" },
+  "Molde": { short: "Molde", abbr: "MFK", colors: ["#0D2B7A", "#0D2B7A", "#FFFFFF"], pattern: "plain" },
+  "Bryne": { short: "Bryne", abbr: "BFK", colors: ["#D7192B", "#D7192B", "#FFFFFF"], pattern: "plain" },
+  "Dinamo Zagreb": { short: "Dinamo", abbr: "GNK", colors: ["#0A4A9E", "#0A4A9E", "#FFFFFF"], pattern: "plain", shape: "round" },
+  "Galatasaray": { short: "Galatasaray", abbr: "GS", colors: ["#A90432", "#FDB912", "#FDB912"], pattern: "halves" },
+  "Zenit": { short: "Zenit", abbr: "ZEN", colors: ["#0A7BC1", "#0A7BC1", "#FFFFFF"], pattern: "plain" },
+  "Olympiacos": { short: "Olympiacos", abbr: "OSFP", colors: ["#FFFFFF", "#D7192B", "#D7192B"], pattern: "stripes" },
+  "West Ham": { short: "West Ham", abbr: "WHU", colors: ["#7A263A", "#1BB1E7", "#F3D459"], pattern: "sleeves" },
+  "Everton": { short: "Everton", abbr: "EFC", colors: ["#003399", "#003399", "#FFFFFF"], pattern: "plain" },
+  "Southampton": { short: "Saints", abbr: "SFC", colors: ["#FFFFFF", "#D71920", "#111111"], pattern: "stripes" },
+  "Brighton": { short: "Brighton", abbr: "BHA", colors: ["#FFFFFF", "#0057B8", "#0057B8"], pattern: "stripes" },
+  "Leeds United": { short: "Leeds", abbr: "LUFC", colors: ["#FFFFFF", "#1D428A", "#FFCD00"], pattern: "plain" },
+  "Reading": { short: "Reading", abbr: "RFC", colors: ["#FFFFFF", "#004494", "#004494"], pattern: "hoops" },
+  // Asia y otros
+  "Al-Ittihad": { short: "Al-Ittihad", abbr: "ITT", colors: ["#FFD100", "#111111", "#111111"], pattern: "stripes" },
+  "Al-Rayyan": { short: "Al-Rayyan", abbr: "RAY", colors: ["#D7192B", "#111111", "#FFFFFF"], pattern: "plain" },
+  "Al-Arabi": { short: "Al-Arabi", abbr: "ARB", colors: ["#D7192B", "#FFFFFF", "#FFFFFF"], pattern: "plain" },
+  "Shanghai Shenhua": { short: "Shenhua", abbr: "SSH", colors: ["#0A4A9E", "#0A4A9E", "#FFFFFF"], pattern: "plain" },
+  "Hebei": { short: "Hebei", abbr: "HEB", colors: ["#D7192B", "#D7192B", "#FFFFFF"], pattern: "plain" },
+  "Cerezo Osaka": { short: "Cerezo", abbr: "CRZ", colors: ["#E6007E", "#E6007E", "#FFFFFF"], pattern: "plain" },
+  "El Mokawloon": { short: "Mokawloon", abbr: "MOK", colors: ["#FFD100", "#111111", "#111111"], pattern: "plain" },
+  "Fenerbahçe": { short: "Fenerbahçe", abbr: "FB", colors: ["#FFED00", "#0E2C6E", "#0E2C6E"], pattern: "stripes", shape: "round" },
+  // Más selecciones (para temas)
+  "Selección de Chile": { short: "Chile", abbr: "CHI", colors: ["#D52B1E", "#0039A6", "#FFFFFF"], pattern: "plain", shape: "badge" },
+  "Selección de Perú": { short: "Perú", abbr: "PER", colors: ["#FFFFFF", "#D91023", "#D91023"], pattern: "sash", shape: "badge" },
+  "Selección de Bolivia": { short: "Bolivia", abbr: "BOL", colors: ["#007A3D", "#FFFFFF", "#FFFFFF"], pattern: "plain", shape: "badge" },
+  "Selección de Venezuela": { short: "Venezuela", abbr: "VEN", colors: ["#7B1E3A", "#FFD100", "#FFFFFF"], pattern: "plain", shape: "badge" },
+  "Selección de España": { short: "España", abbr: "ESP", colors: ["#C60B1E", "#FFC400", "#FFC400"], pattern: "plain", shape: "badge" },
+  "Selección de Italia": { short: "Italia", abbr: "ITA", colors: ["#0064AA", "#0064AA", "#FFFFFF"], pattern: "plain", shape: "badge" },
+  "Selección de Portugal": { short: "Portugal", abbr: "POR", colors: ["#C8102E", "#046A38", "#FFFFFF"], pattern: "plain", shape: "badge" },
+  "Selección de Países Bajos": { short: "P. Bajos", abbr: "NED", colors: ["#F36C21", "#F36C21", "#111111"], pattern: "plain", shape: "badge" },
+  "Selección de México": { short: "México", abbr: "MEX", colors: ["#006847", "#CE1126", "#FFFFFF"], pattern: "plain", shape: "badge" },
   // Selecciones
   "Selección Argentina": { short: "Argentina", abbr: "ARG", colors: ["#FFFFFF", "#75AADB", "#1F2A44"], pattern: "stripes", shape: "badge" },
   "Selección de Uruguay": { short: "Uruguay", abbr: "URU", colors: ["#5CBFEB", "#5CBFEB", "#111111"], pattern: "plain", shape: "badge" },
@@ -72,11 +183,17 @@ export const CLUBS: Record<string, ClubStyle> = {
   "Selección de Francia": { short: "Francia", abbr: "FRA", colors: ["#21304D", "#ED2939", "#FFFFFF"], pattern: "plain", shape: "badge" },
 };
 
-const FALLBACK: ClubStyle = { short: "", abbr: "?", colors: ["#2a4a3a", "#9fb8a9"], pattern: "plain" };
+const FALLBACK_COLORS = ["#3B5BA9", "#A93B3B", "#2E8B57", "#7A4AA8", "#C77D1A", "#2B7A8C"];
+function hashStr(s: string) {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  return h;
+}
 
 export function clubStyle(name: string): ClubStyle {
   const s = CLUBS[name];
   if (s) return s;
-  const abbr = name.split(/\s+/).map((w) => w[0]).join("").slice(0, 3).toUpperCase();
-  return { ...FALLBACK, short: name, abbr };
+  const abbr = name.split(/\s+/).filter((w) => w.length > 2 || /^[A-Z]/.test(w)).map((w) => w[0]).join("").slice(0, 3).toUpperCase() || "?";
+  const c = FALLBACK_COLORS[hashStr(name) % FALLBACK_COLORS.length];
+  return { short: name.length > 10 ? name.split(" ")[0] : name, abbr, colors: [c, "#FFFFFF", "#FFFFFF"], pattern: "plain" };
 }

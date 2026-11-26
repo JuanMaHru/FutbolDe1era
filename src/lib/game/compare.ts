@@ -72,9 +72,6 @@ export const playerAttributes: Attribute<Player>[] = [
   },
 ];
 
-/** Línea defensiva del esquema: "4-3-3" -> "4". */
-const back = (formation: string) => formation.split("-")[0];
-
 export const coachAttributes: Attribute<Coach>[] = [
   {
     key: "team",
@@ -104,11 +101,11 @@ export const coachAttributes: Attribute<Coach>[] = [
     compare: (g, t, today) => numeric(ageOn(g.birthDate, today), ageOn(t.birthDate, today), 3),
   },
   {
-    key: "formation",
-    nearHint: "misma cantidad de defensores", nearShort: "Misma defensa",
-    label: "Esquema",
-    // Amarillo: misma cantidad de defensores.
-    compare: (g, t) => grouped(g.formation, t.formation, back, g.formation),
+    key: "played",
+    nearHint: "jugaba en la misma línea", nearShort: "Misma línea",
+    label: "Jugó de",
+    // Amarillo: misma línea (defensa, medio, ataque). "No jugó" solo coincide consigo mismo.
+    compare: (g, t) => grouped(g.playedAs, t.playedAs, (p) => (p === "NJ" ? undefined : POSITIONS[p]?.line), g.playedAs),
   },
   {
     key: "debut",

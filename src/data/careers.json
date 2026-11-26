@@ -1,0 +1,1784 @@
+[
+ {
+  "id": "lionel-messi",
+  "kind": "jugador",
+  "name": "Lionel Messi",
+  "nationality": "ARG",
+  "position": "EXT",
+  "career": [
+   {
+    "club": "Barcelona",
+    "from": 2004,
+    "to": 2021
+   },
+   {
+    "club": "Paris Saint-Germain",
+    "from": 2021,
+    "to": 2023
+   },
+   {
+    "club": "Inter Miami",
+    "from": 2023,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "angel-di-maria",
+  "kind": "jugador",
+  "name": "Ángel Di María",
+  "nationality": "ARG",
+  "position": "EXT",
+  "career": [
+   {
+    "club": "Rosario Central",
+    "from": 2005,
+    "to": 2007
+   },
+   {
+    "club": "Benfica",
+    "from": 2007,
+    "to": 2010
+   },
+   {
+    "club": "Real Madrid",
+    "from": 2010,
+    "to": 2014
+   },
+   {
+    "club": "Manchester United",
+    "from": 2014,
+    "to": 2015
+   },
+   {
+    "club": "Paris Saint-Germain",
+    "from": 2015,
+    "to": 2022
+   },
+   {
+    "club": "Juventus",
+    "from": 2022,
+    "to": 2023
+   },
+   {
+    "club": "Benfica",
+    "from": 2023,
+    "to": 2025
+   },
+   {
+    "club": "Rosario Central",
+    "from": 2025,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "julian-alvarez",
+  "kind": "jugador",
+  "name": "Julián Álvarez",
+  "nationality": "ARG",
+  "position": "DC",
+  "career": [
+   {
+    "club": "River Plate",
+    "from": 2018,
+    "to": 2022
+   },
+   {
+    "club": "Manchester City",
+    "from": 2022,
+    "to": 2024
+   },
+   {
+    "club": "Atlético de Madrid",
+    "from": 2024,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "lautaro-martinez",
+  "kind": "jugador",
+  "name": "Lautaro Martínez",
+  "nationality": "ARG",
+  "position": "DC",
+  "career": [
+   {
+    "club": "Racing Club",
+    "from": 2015,
+    "to": 2018
+   },
+   {
+    "club": "Inter",
+    "from": 2018,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "enzo-fernandez",
+  "kind": "jugador",
+  "name": "Enzo Fernández",
+  "nationality": "ARG",
+  "position": "MC",
+  "career": [
+   {
+    "club": "River Plate",
+    "from": 2019,
+    "to": 2020
+   },
+   {
+    "club": "Defensa y Justicia",
+    "from": 2020,
+    "to": 2021,
+    "loan": true
+   },
+   {
+    "club": "River Plate",
+    "from": 2021,
+    "to": 2022
+   },
+   {
+    "club": "Benfica",
+    "from": 2022,
+    "to": 2023
+   },
+   {
+    "club": "Chelsea",
+    "from": 2023,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "alexis-mac-allister",
+  "kind": "jugador",
+  "name": "Alexis Mac Allister",
+  "nationality": "ARG",
+  "position": "MC",
+  "career": [
+   {
+    "club": "Argentinos Juniors",
+    "from": 2016,
+    "to": 2019
+   },
+   {
+    "club": "Brighton",
+    "from": 2019,
+    "to": 2023
+   },
+   {
+    "club": "Boca Juniors",
+    "from": 2019,
+    "to": 2020,
+    "loan": true
+   },
+   {
+    "club": "Liverpool",
+    "from": 2023,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "cristian-romero",
+  "kind": "jugador",
+  "name": "Cristian Romero",
+  "nationality": "ARG",
+  "position": "DFC",
+  "career": [
+   {
+    "club": "Belgrano",
+    "from": 2016,
+    "to": 2018
+   },
+   {
+    "club": "Genoa",
+    "from": 2018,
+    "to": 2020
+   },
+   {
+    "club": "Atalanta",
+    "from": 2020,
+    "to": 2021
+   },
+   {
+    "club": "Tottenham",
+    "from": 2021,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "rodrigo-de-paul",
+  "kind": "jugador",
+  "name": "Rodrigo De Paul",
+  "nationality": "ARG",
+  "position": "MC",
+  "career": [
+   {
+    "club": "Racing Club",
+    "from": 2013,
+    "to": 2014
+   },
+   {
+    "club": "Valencia",
+    "from": 2014,
+    "to": 2016
+   },
+   {
+    "club": "Racing Club",
+    "from": 2016,
+    "to": 2016,
+    "loan": true
+   },
+   {
+    "club": "Udinese",
+    "from": 2016,
+    "to": 2021
+   },
+   {
+    "club": "Atlético de Madrid",
+    "from": 2021,
+    "to": 2025
+   },
+   {
+    "club": "Inter Miami",
+    "from": 2025,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "paulo-dybala",
+  "kind": "jugador",
+  "name": "Paulo Dybala",
+  "nationality": "ARG",
+  "position": "MCO",
+  "career": [
+   {
+    "club": "Instituto",
+    "from": 2011,
+    "to": 2012
+   },
+   {
+    "club": "Palermo",
+    "from": 2012,
+    "to": 2015
+   },
+   {
+    "club": "Juventus",
+    "from": 2015,
+    "to": 2022
+   },
+   {
+    "club": "Roma",
+    "from": 2022,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "leandro-paredes",
+  "kind": "jugador",
+  "name": "Leandro Paredes",
+  "nationality": "ARG",
+  "position": "MC",
+  "career": [
+   {
+    "club": "Boca Juniors",
+    "from": 2010,
+    "to": 2014
+   },
+   {
+    "club": "Chievo",
+    "from": 2014,
+    "to": 2014,
+    "loan": true
+   },
+   {
+    "club": "Roma",
+    "from": 2014,
+    "to": 2017
+   },
+   {
+    "club": "Empoli",
+    "from": 2015,
+    "to": 2016,
+    "loan": true
+   },
+   {
+    "club": "Zenit",
+    "from": 2017,
+    "to": 2019
+   },
+   {
+    "club": "Paris Saint-Germain",
+    "from": 2019,
+    "to": 2023
+   },
+   {
+    "club": "Juventus",
+    "from": 2022,
+    "to": 2023,
+    "loan": true
+   },
+   {
+    "club": "Roma",
+    "from": 2023,
+    "to": 2025
+   },
+   {
+    "club": "Boca Juniors",
+    "from": 2025,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "nicolas-otamendi",
+  "kind": "jugador",
+  "name": "Nicolás Otamendi",
+  "nationality": "ARG",
+  "position": "DFC",
+  "career": [
+   {
+    "club": "Vélez Sarsfield",
+    "from": 2008,
+    "to": 2010
+   },
+   {
+    "club": "Porto",
+    "from": 2010,
+    "to": 2014
+   },
+   {
+    "club": "Atlético Mineiro",
+    "from": 2014,
+    "to": 2014,
+    "loan": true
+   },
+   {
+    "club": "Valencia",
+    "from": 2014,
+    "to": 2015
+   },
+   {
+    "club": "Manchester City",
+    "from": 2015,
+    "to": 2020
+   },
+   {
+    "club": "Benfica",
+    "from": 2020,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "angel-correa",
+  "kind": "jugador",
+  "name": "Ángel Correa",
+  "nationality": "ARG",
+  "position": "DC",
+  "career": [
+   {
+    "club": "San Lorenzo",
+    "from": 2013,
+    "to": 2014
+   },
+   {
+    "club": "Atlético de Madrid",
+    "from": 2014,
+    "to": 2025
+   },
+   {
+    "club": "Tigres",
+    "from": 2025,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "sergio-aguero",
+  "kind": "jugador",
+  "name": "Sergio Agüero",
+  "nationality": "ARG",
+  "position": "DC",
+  "career": [
+   {
+    "club": "Independiente",
+    "from": 2003,
+    "to": 2006
+   },
+   {
+    "club": "Atlético de Madrid",
+    "from": 2006,
+    "to": 2011
+   },
+   {
+    "club": "Manchester City",
+    "from": 2011,
+    "to": 2021
+   },
+   {
+    "club": "Barcelona",
+    "from": 2021,
+    "to": 2021
+   }
+  ]
+ },
+ {
+  "id": "juan-roman-riquelme",
+  "kind": "jugador",
+  "name": "Juan Román Riquelme",
+  "nationality": "ARG",
+  "position": "MCO",
+  "career": [
+   {
+    "club": "Boca Juniors",
+    "from": 1996,
+    "to": 2002
+   },
+   {
+    "club": "Barcelona",
+    "from": 2002,
+    "to": 2003
+   },
+   {
+    "club": "Villarreal",
+    "from": 2003,
+    "to": 2007
+   },
+   {
+    "club": "Boca Juniors",
+    "from": 2007,
+    "to": 2014
+   },
+   {
+    "club": "Argentinos Juniors",
+    "from": 2014,
+    "to": 2014
+   }
+  ]
+ },
+ {
+  "id": "carlos-tevez",
+  "kind": "jugador",
+  "name": "Carlos Tevez",
+  "nationality": "ARG",
+  "position": "DC",
+  "career": [
+   {
+    "club": "Boca Juniors",
+    "from": 2001,
+    "to": 2004
+   },
+   {
+    "club": "Corinthians",
+    "from": 2005,
+    "to": 2006
+   },
+   {
+    "club": "West Ham",
+    "from": 2006,
+    "to": 2007
+   },
+   {
+    "club": "Manchester United",
+    "from": 2007,
+    "to": 2009
+   },
+   {
+    "club": "Manchester City",
+    "from": 2009,
+    "to": 2013
+   },
+   {
+    "club": "Juventus",
+    "from": 2013,
+    "to": 2015
+   },
+   {
+    "club": "Boca Juniors",
+    "from": 2015,
+    "to": 2016
+   },
+   {
+    "club": "Shanghai Shenhua",
+    "from": 2017,
+    "to": 2017
+   },
+   {
+    "club": "Boca Juniors",
+    "from": 2018,
+    "to": 2021
+   }
+  ]
+ },
+ {
+  "id": "gabriel-batistuta",
+  "kind": "jugador",
+  "name": "Gabriel Batistuta",
+  "nationality": "ARG",
+  "position": "DC",
+  "career": [
+   {
+    "club": "Newell's Old Boys",
+    "from": 1988,
+    "to": 1989
+   },
+   {
+    "club": "River Plate",
+    "from": 1989,
+    "to": 1990
+   },
+   {
+    "club": "Boca Juniors",
+    "from": 1990,
+    "to": 1991
+   },
+   {
+    "club": "Fiorentina",
+    "from": 1991,
+    "to": 2000
+   },
+   {
+    "club": "Roma",
+    "from": 2000,
+    "to": 2003
+   },
+   {
+    "club": "Inter",
+    "from": 2003,
+    "to": 2003,
+    "loan": true
+   },
+   {
+    "club": "Al-Arabi",
+    "from": 2003,
+    "to": 2005
+   }
+  ]
+ },
+ {
+  "id": "javier-mascherano",
+  "kind": "jugador",
+  "name": "Javier Mascherano",
+  "nationality": "ARG",
+  "position": "MC",
+  "career": [
+   {
+    "club": "River Plate",
+    "from": 2003,
+    "to": 2006
+   },
+   {
+    "club": "Corinthians",
+    "from": 2006,
+    "to": 2006
+   },
+   {
+    "club": "West Ham",
+    "from": 2006,
+    "to": 2007
+   },
+   {
+    "club": "Liverpool",
+    "from": 2007,
+    "to": 2010
+   },
+   {
+    "club": "Barcelona",
+    "from": 2010,
+    "to": 2018
+   },
+   {
+    "club": "Hebei",
+    "from": 2018,
+    "to": 2019
+   },
+   {
+    "club": "Estudiantes",
+    "from": 2019,
+    "to": 2020
+   }
+  ]
+ },
+ {
+  "id": "gonzalo-higuain",
+  "kind": "jugador",
+  "name": "Gonzalo Higuaín",
+  "nationality": "ARG",
+  "position": "DC",
+  "career": [
+   {
+    "club": "River Plate",
+    "from": 2005,
+    "to": 2006
+   },
+   {
+    "club": "Real Madrid",
+    "from": 2007,
+    "to": 2013
+   },
+   {
+    "club": "Napoli",
+    "from": 2013,
+    "to": 2016
+   },
+   {
+    "club": "Juventus",
+    "from": 2016,
+    "to": 2020
+   },
+   {
+    "club": "Milan",
+    "from": 2018,
+    "to": 2019,
+    "loan": true
+   },
+   {
+    "club": "Chelsea",
+    "from": 2019,
+    "to": 2019,
+    "loan": true
+   },
+   {
+    "club": "Inter Miami",
+    "from": 2020,
+    "to": 2022
+   }
+  ]
+ },
+ {
+  "id": "edinson-cavani",
+  "kind": "jugador",
+  "name": "Edinson Cavani",
+  "nationality": "URU",
+  "position": "DC",
+  "career": [
+   {
+    "club": "Danubio",
+    "from": 2005,
+    "to": 2007
+   },
+   {
+    "club": "Palermo",
+    "from": 2007,
+    "to": 2010
+   },
+   {
+    "club": "Napoli",
+    "from": 2010,
+    "to": 2013
+   },
+   {
+    "club": "Paris Saint-Germain",
+    "from": 2013,
+    "to": 2020
+   },
+   {
+    "club": "Manchester United",
+    "from": 2020,
+    "to": 2022
+   },
+   {
+    "club": "Valencia",
+    "from": 2022,
+    "to": 2023
+   },
+   {
+    "club": "Boca Juniors",
+    "from": 2023,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "luis-suarez",
+  "kind": "jugador",
+  "name": "Luis Suárez",
+  "nationality": "URU",
+  "position": "DC",
+  "career": [
+   {
+    "club": "Nacional",
+    "from": 2005,
+    "to": 2006
+   },
+   {
+    "club": "Groningen",
+    "from": 2006,
+    "to": 2007
+   },
+   {
+    "club": "Ajax",
+    "from": 2007,
+    "to": 2011
+   },
+   {
+    "club": "Liverpool",
+    "from": 2011,
+    "to": 2014
+   },
+   {
+    "club": "Barcelona",
+    "from": 2014,
+    "to": 2020
+   },
+   {
+    "club": "Atlético de Madrid",
+    "from": 2020,
+    "to": 2022
+   },
+   {
+    "club": "Nacional",
+    "from": 2022,
+    "to": 2022
+   },
+   {
+    "club": "Grêmio",
+    "from": 2023,
+    "to": 2023
+   },
+   {
+    "club": "Inter Miami",
+    "from": 2024,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "diego-forlan",
+  "kind": "jugador",
+  "name": "Diego Forlán",
+  "nationality": "URU",
+  "position": "DC",
+  "career": [
+   {
+    "club": "Independiente",
+    "from": 1998,
+    "to": 2002
+   },
+   {
+    "club": "Manchester United",
+    "from": 2002,
+    "to": 2004
+   },
+   {
+    "club": "Villarreal",
+    "from": 2004,
+    "to": 2007
+   },
+   {
+    "club": "Atlético de Madrid",
+    "from": 2007,
+    "to": 2011
+   },
+   {
+    "club": "Inter",
+    "from": 2011,
+    "to": 2012
+   },
+   {
+    "club": "Internacional",
+    "from": 2012,
+    "to": 2014
+   },
+   {
+    "club": "Cerezo Osaka",
+    "from": 2014,
+    "to": 2015
+   },
+   {
+    "club": "Peñarol",
+    "from": 2015,
+    "to": 2016
+   }
+  ]
+ },
+ {
+  "id": "federico-valverde",
+  "kind": "jugador",
+  "name": "Federico Valverde",
+  "nationality": "URU",
+  "position": "MC",
+  "career": [
+   {
+    "club": "Peñarol",
+    "from": 2015,
+    "to": 2016
+   },
+   {
+    "club": "Real Madrid",
+    "from": 2016,
+    "to": null
+   },
+   {
+    "club": "Deportivo La Coruña",
+    "from": 2017,
+    "to": 2018,
+    "loan": true
+   }
+  ]
+ },
+ {
+  "id": "darwin-nunez",
+  "kind": "jugador",
+  "name": "Darwin Núñez",
+  "nationality": "URU",
+  "position": "DC",
+  "career": [
+   {
+    "club": "Peñarol",
+    "from": 2017,
+    "to": 2019
+   },
+   {
+    "club": "Almería",
+    "from": 2019,
+    "to": 2020
+   },
+   {
+    "club": "Benfica",
+    "from": 2020,
+    "to": 2022
+   },
+   {
+    "club": "Liverpool",
+    "from": 2022,
+    "to": 2025
+   },
+   {
+    "club": "Al Hilal",
+    "from": 2025,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "cristiano-ronaldo",
+  "kind": "jugador",
+  "name": "Cristiano Ronaldo",
+  "nationality": "POR",
+  "position": "DC",
+  "career": [
+   {
+    "club": "Sporting CP",
+    "from": 2002,
+    "to": 2003
+   },
+   {
+    "club": "Manchester United",
+    "from": 2003,
+    "to": 2009
+   },
+   {
+    "club": "Real Madrid",
+    "from": 2009,
+    "to": 2018
+   },
+   {
+    "club": "Juventus",
+    "from": 2018,
+    "to": 2021
+   },
+   {
+    "club": "Manchester United",
+    "from": 2021,
+    "to": 2022
+   },
+   {
+    "club": "Al Nassr",
+    "from": 2023,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "neymar",
+  "kind": "jugador",
+  "name": "Neymar",
+  "nationality": "BRA",
+  "position": "EXT",
+  "career": [
+   {
+    "club": "Santos",
+    "from": 2009,
+    "to": 2013
+   },
+   {
+    "club": "Barcelona",
+    "from": 2013,
+    "to": 2017
+   },
+   {
+    "club": "Paris Saint-Germain",
+    "from": 2017,
+    "to": 2023
+   },
+   {
+    "club": "Al Hilal",
+    "from": 2023,
+    "to": 2025
+   },
+   {
+    "club": "Santos",
+    "from": 2025,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "kylian-mbappe",
+  "kind": "jugador",
+  "name": "Kylian Mbappé",
+  "nationality": "FRA",
+  "position": "DC",
+  "career": [
+   {
+    "club": "Monaco",
+    "from": 2015,
+    "to": 2017
+   },
+   {
+    "club": "Paris Saint-Germain",
+    "from": 2017,
+    "to": 2024
+   },
+   {
+    "club": "Real Madrid",
+    "from": 2024,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "erling-haaland",
+  "kind": "jugador",
+  "name": "Erling Haaland",
+  "nationality": "NOR",
+  "position": "DC",
+  "career": [
+   {
+    "club": "Bryne",
+    "from": 2016,
+    "to": 2017
+   },
+   {
+    "club": "Molde",
+    "from": 2017,
+    "to": 2019
+   },
+   {
+    "club": "Salzburg",
+    "from": 2019,
+    "to": 2020
+   },
+   {
+    "club": "Borussia Dortmund",
+    "from": 2020,
+    "to": 2022
+   },
+   {
+    "club": "Manchester City",
+    "from": 2022,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "mohamed-salah",
+  "kind": "jugador",
+  "name": "Mohamed Salah",
+  "nationality": "EGY",
+  "position": "EXT",
+  "career": [
+   {
+    "club": "El Mokawloon",
+    "from": 2010,
+    "to": 2012
+   },
+   {
+    "club": "Basel",
+    "from": 2012,
+    "to": 2014
+   },
+   {
+    "club": "Chelsea",
+    "from": 2014,
+    "to": 2016
+   },
+   {
+    "club": "Fiorentina",
+    "from": 2015,
+    "to": 2015,
+    "loan": true
+   },
+   {
+    "club": "Roma",
+    "from": 2015,
+    "to": 2017
+   },
+   {
+    "club": "Liverpool",
+    "from": 2017,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "luis-diaz",
+  "kind": "jugador",
+  "name": "Luis Díaz",
+  "nationality": "COL",
+  "position": "EXT",
+  "career": [
+   {
+    "club": "Junior",
+    "from": 2017,
+    "to": 2019
+   },
+   {
+    "club": "Porto",
+    "from": 2019,
+    "to": 2022
+   },
+   {
+    "club": "Liverpool",
+    "from": 2022,
+    "to": 2025
+   },
+   {
+    "club": "Bayern Múnich",
+    "from": 2025,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "james-rodriguez",
+  "kind": "jugador",
+  "name": "James Rodríguez",
+  "nationality": "COL",
+  "position": "MCO",
+  "career": [
+   {
+    "club": "Envigado",
+    "from": 2006,
+    "to": 2008
+   },
+   {
+    "club": "Banfield",
+    "from": 2008,
+    "to": 2010
+   },
+   {
+    "club": "Porto",
+    "from": 2010,
+    "to": 2013
+   },
+   {
+    "club": "Monaco",
+    "from": 2013,
+    "to": 2014
+   },
+   {
+    "club": "Real Madrid",
+    "from": 2014,
+    "to": 2020
+   },
+   {
+    "club": "Bayern Múnich",
+    "from": 2017,
+    "to": 2019,
+    "loan": true
+   },
+   {
+    "club": "Everton",
+    "from": 2020,
+    "to": 2021
+   },
+   {
+    "club": "Al-Rayyan",
+    "from": 2021,
+    "to": 2022
+   },
+   {
+    "club": "Olympiacos",
+    "from": 2022,
+    "to": 2023
+   },
+   {
+    "club": "São Paulo",
+    "from": 2023,
+    "to": 2024
+   },
+   {
+    "club": "Rayo Vallecano",
+    "from": 2024,
+    "to": 2025
+   },
+   {
+    "club": "León",
+    "from": 2025,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "radamel-falcao",
+  "kind": "jugador",
+  "name": "Radamel Falcao",
+  "nationality": "COL",
+  "position": "DC",
+  "career": [
+   {
+    "club": "River Plate",
+    "from": 2005,
+    "to": 2009
+   },
+   {
+    "club": "Porto",
+    "from": 2009,
+    "to": 2011
+   },
+   {
+    "club": "Atlético de Madrid",
+    "from": 2011,
+    "to": 2013
+   },
+   {
+    "club": "Monaco",
+    "from": 2013,
+    "to": 2019
+   },
+   {
+    "club": "Manchester United",
+    "from": 2014,
+    "to": 2015,
+    "loan": true
+   },
+   {
+    "club": "Chelsea",
+    "from": 2015,
+    "to": 2016,
+    "loan": true
+   },
+   {
+    "club": "Galatasaray",
+    "from": 2019,
+    "to": 2021
+   },
+   {
+    "club": "Rayo Vallecano",
+    "from": 2021,
+    "to": 2023
+   },
+   {
+    "club": "Millonarios",
+    "from": 2024,
+    "to": 2025
+   }
+  ]
+ },
+ {
+  "id": "luka-modric",
+  "kind": "jugador",
+  "name": "Luka Modrić",
+  "nationality": "CRO",
+  "position": "MC",
+  "career": [
+   {
+    "club": "Dinamo Zagreb",
+    "from": 2003,
+    "to": 2008
+   },
+   {
+    "club": "Tottenham",
+    "from": 2008,
+    "to": 2012
+   },
+   {
+    "club": "Real Madrid",
+    "from": 2012,
+    "to": 2025
+   },
+   {
+    "club": "Milan",
+    "from": 2025,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "marcelo-gallardo",
+  "kind": "dt",
+  "name": "Marcelo Gallardo",
+  "nationality": "ARG",
+  "career": [
+   {
+    "club": "Nacional",
+    "from": 2011,
+    "to": 2012
+   },
+   {
+    "club": "River Plate",
+    "from": 2014,
+    "to": 2022
+   },
+   {
+    "club": "Al-Ittihad",
+    "from": 2023,
+    "to": 2024
+   },
+   {
+    "club": "River Plate",
+    "from": 2024,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "diego-simeone",
+  "kind": "dt",
+  "name": "Diego Simeone",
+  "nationality": "ARG",
+  "career": [
+   {
+    "club": "Racing Club",
+    "from": 2006,
+    "to": 2006
+   },
+   {
+    "club": "Estudiantes",
+    "from": 2006,
+    "to": 2007
+   },
+   {
+    "club": "River Plate",
+    "from": 2007,
+    "to": 2008
+   },
+   {
+    "club": "San Lorenzo",
+    "from": 2009,
+    "to": 2010
+   },
+   {
+    "club": "Catania",
+    "from": 2011,
+    "to": 2011
+   },
+   {
+    "club": "Racing Club",
+    "from": 2011,
+    "to": 2011
+   },
+   {
+    "club": "Atlético de Madrid",
+    "from": 2011,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "marcelo-bielsa",
+  "kind": "dt",
+  "name": "Marcelo Bielsa",
+  "nationality": "ARG",
+  "career": [
+   {
+    "club": "Newell's Old Boys",
+    "from": 1990,
+    "to": 1992
+   },
+   {
+    "club": "Atlas",
+    "from": 1992,
+    "to": 1993
+   },
+   {
+    "club": "Club América",
+    "from": 1995,
+    "to": 1996
+   },
+   {
+    "club": "Vélez Sarsfield",
+    "from": 1997,
+    "to": 1998
+   },
+   {
+    "club": "Espanyol",
+    "from": 1998,
+    "to": 1998
+   },
+   {
+    "club": "Selección Argentina",
+    "from": 1998,
+    "to": 2004
+   },
+   {
+    "club": "Selección de Chile",
+    "from": 2007,
+    "to": 2011
+   },
+   {
+    "club": "Athletic Club",
+    "from": 2011,
+    "to": 2013
+   },
+   {
+    "club": "Olympique de Marsella",
+    "from": 2014,
+    "to": 2015
+   },
+   {
+    "club": "Lille",
+    "from": 2017,
+    "to": 2017
+   },
+   {
+    "club": "Leeds United",
+    "from": 2018,
+    "to": 2022
+   },
+   {
+    "club": "Selección de Uruguay",
+    "from": 2023,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "jorge-sampaoli",
+  "kind": "dt",
+  "name": "Jorge Sampaoli",
+  "nationality": "ARG",
+  "career": [
+   {
+    "club": "Universidad de Chile",
+    "from": 2010,
+    "to": 2012
+   },
+   {
+    "club": "Selección de Chile",
+    "from": 2012,
+    "to": 2016
+   },
+   {
+    "club": "Sevilla",
+    "from": 2016,
+    "to": 2017
+   },
+   {
+    "club": "Selección Argentina",
+    "from": 2017,
+    "to": 2018
+   },
+   {
+    "club": "Santos",
+    "from": 2019,
+    "to": 2019
+   },
+   {
+    "club": "Atlético Mineiro",
+    "from": 2020,
+    "to": 2021
+   },
+   {
+    "club": "Olympique de Marsella",
+    "from": 2021,
+    "to": 2022
+   },
+   {
+    "club": "Sevilla",
+    "from": 2022,
+    "to": 2023
+   },
+   {
+    "club": "Flamengo",
+    "from": 2023,
+    "to": 2023
+   },
+   {
+    "club": "Rennes",
+    "from": 2024,
+    "to": 2025
+   },
+   {
+    "club": "Atlético Mineiro",
+    "from": 2025,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "pep-guardiola",
+  "kind": "dt",
+  "name": "Pep Guardiola",
+  "nationality": "ESP",
+  "career": [
+   {
+    "club": "Barcelona B",
+    "from": 2007,
+    "to": 2008
+   },
+   {
+    "club": "Barcelona",
+    "from": 2008,
+    "to": 2012
+   },
+   {
+    "club": "Bayern Múnich",
+    "from": 2013,
+    "to": 2016
+   },
+   {
+    "club": "Manchester City",
+    "from": 2016,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "carlo-ancelotti",
+  "kind": "dt",
+  "name": "Carlo Ancelotti",
+  "nationality": "ITA",
+  "career": [
+   {
+    "club": "Reggiana",
+    "from": 1995,
+    "to": 1996
+   },
+   {
+    "club": "Parma",
+    "from": 1996,
+    "to": 1998
+   },
+   {
+    "club": "Juventus",
+    "from": 1999,
+    "to": 2001
+   },
+   {
+    "club": "Milan",
+    "from": 2001,
+    "to": 2009
+   },
+   {
+    "club": "Chelsea",
+    "from": 2009,
+    "to": 2011
+   },
+   {
+    "club": "Paris Saint-Germain",
+    "from": 2011,
+    "to": 2013
+   },
+   {
+    "club": "Real Madrid",
+    "from": 2013,
+    "to": 2015
+   },
+   {
+    "club": "Bayern Múnich",
+    "from": 2016,
+    "to": 2017
+   },
+   {
+    "club": "Napoli",
+    "from": 2018,
+    "to": 2019
+   },
+   {
+    "club": "Everton",
+    "from": 2019,
+    "to": 2021
+   },
+   {
+    "club": "Real Madrid",
+    "from": 2021,
+    "to": 2025
+   },
+   {
+    "club": "Selección de Brasil",
+    "from": 2025,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "mauricio-pochettino",
+  "kind": "dt",
+  "name": "Mauricio Pochettino",
+  "nationality": "ARG",
+  "career": [
+   {
+    "club": "Espanyol",
+    "from": 2009,
+    "to": 2012
+   },
+   {
+    "club": "Southampton",
+    "from": 2013,
+    "to": 2014
+   },
+   {
+    "club": "Tottenham",
+    "from": 2014,
+    "to": 2019
+   },
+   {
+    "club": "Paris Saint-Germain",
+    "from": 2021,
+    "to": 2022
+   },
+   {
+    "club": "Chelsea",
+    "from": 2023,
+    "to": 2024
+   },
+   {
+    "club": "Selección de EE.UU.",
+    "from": 2024,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "jose-mourinho",
+  "kind": "dt",
+  "name": "José Mourinho",
+  "nationality": "POR",
+  "career": [
+   {
+    "club": "Benfica",
+    "from": 2000,
+    "to": 2000
+   },
+   {
+    "club": "União de Leiria",
+    "from": 2001,
+    "to": 2002
+   },
+   {
+    "club": "Porto",
+    "from": 2002,
+    "to": 2004
+   },
+   {
+    "club": "Chelsea",
+    "from": 2004,
+    "to": 2007
+   },
+   {
+    "club": "Inter",
+    "from": 2008,
+    "to": 2010
+   },
+   {
+    "club": "Real Madrid",
+    "from": 2010,
+    "to": 2013
+   },
+   {
+    "club": "Chelsea",
+    "from": 2013,
+    "to": 2015
+   },
+   {
+    "club": "Manchester United",
+    "from": 2016,
+    "to": 2018
+   },
+   {
+    "club": "Tottenham",
+    "from": 2019,
+    "to": 2021
+   },
+   {
+    "club": "Roma",
+    "from": 2021,
+    "to": 2024
+   },
+   {
+    "club": "Fenerbahçe",
+    "from": 2024,
+    "to": 2025
+   },
+   {
+    "club": "Benfica",
+    "from": 2025,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "jurgen-klopp",
+  "kind": "dt",
+  "name": "Jürgen Klopp",
+  "nationality": "GER",
+  "career": [
+   {
+    "club": "Mainz",
+    "from": 2001,
+    "to": 2008
+   },
+   {
+    "club": "Borussia Dortmund",
+    "from": 2008,
+    "to": 2015
+   },
+   {
+    "club": "Liverpool",
+    "from": 2015,
+    "to": 2024
+   }
+  ]
+ },
+ {
+  "id": "carlos-bianchi",
+  "kind": "dt",
+  "name": "Carlos Bianchi",
+  "nationality": "ARG",
+  "career": [
+   {
+    "club": "Vélez Sarsfield",
+    "from": 1993,
+    "to": 1996
+   },
+   {
+    "club": "Roma",
+    "from": 1996,
+    "to": 1997
+   },
+   {
+    "club": "Boca Juniors",
+    "from": 1998,
+    "to": 2001
+   },
+   {
+    "club": "Boca Juniors",
+    "from": 2003,
+    "to": 2004
+   },
+   {
+    "club": "Atlético de Madrid",
+    "from": 2005,
+    "to": 2006
+   },
+   {
+    "club": "Boca Juniors",
+    "from": 2013,
+    "to": 2014
+   }
+  ]
+ },
+ {
+  "id": "gerardo-martino",
+  "kind": "dt",
+  "name": "Gerardo Martino",
+  "nationality": "ARG",
+  "career": [
+   {
+    "club": "Selección de Paraguay",
+    "from": 2007,
+    "to": 2011
+   },
+   {
+    "club": "Newell's Old Boys",
+    "from": 2012,
+    "to": 2013
+   },
+   {
+    "club": "Barcelona",
+    "from": 2013,
+    "to": 2014
+   },
+   {
+    "club": "Selección Argentina",
+    "from": 2014,
+    "to": 2016
+   },
+   {
+    "club": "Atlanta United",
+    "from": 2017,
+    "to": 2018
+   },
+   {
+    "club": "Selección de México",
+    "from": 2019,
+    "to": 2022
+   },
+   {
+    "club": "Inter Miami",
+    "from": 2023,
+    "to": 2024
+   }
+  ]
+ },
+ {
+  "id": "luis-enrique",
+  "kind": "dt",
+  "name": "Luis Enrique",
+  "nationality": "ESP",
+  "career": [
+   {
+    "club": "Barcelona B",
+    "from": 2008,
+    "to": 2011
+   },
+   {
+    "club": "Roma",
+    "from": 2011,
+    "to": 2012
+   },
+   {
+    "club": "Celta",
+    "from": 2013,
+    "to": 2014
+   },
+   {
+    "club": "Barcelona",
+    "from": 2014,
+    "to": 2017
+   },
+   {
+    "club": "Selección de España",
+    "from": 2018,
+    "to": 2022
+   },
+   {
+    "club": "Paris Saint-Germain",
+    "from": 2023,
+    "to": null
+   }
+  ]
+ },
+ {
+  "id": "xabi-alonso",
+  "kind": "dt",
+  "name": "Xabi Alonso",
+  "nationality": "ESP",
+  "career": [
+   {
+    "club": "Real Sociedad B",
+    "from": 2019,
+    "to": 2022
+   },
+   {
+    "club": "Bayer Leverkusen",
+    "from": 2022,
+    "to": 2025
+   },
+   {
+    "club": "Real Madrid",
+    "from": 2025,
+    "to": null
+   }
+  ]
+ }
+]
