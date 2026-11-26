@@ -200,6 +200,20 @@ export const continentalPool = (cont: Continent, country: string) => [
   ...INTL_CLUBS.filter((c) => c.continent === cont),
 ];
 
+/** Supercopas nacionales (campeón de liga vs campeón de copa, al comienzo de la temporada). */
+export const SUPERCUPS: Record<string, string> = {
+  ARG: "Supercopa Argentina", BRA: "Supercopa do Brasil", ESP: "Supercopa de España", ENG: "Community Shield", ITA: "Supercoppa Italiana",
+  GER: "Supercopa de Alemania", FRA: "Trophée des Champions", POR: "Supertaça", NED: "Johan Cruijff Schaal", KSA: "Supercopa de Arabia",
+};
+/** Recopa del continente (campeón de la copa principal vs. campeón de la secundaria). */
+export const RECOPA: Partial<Record<Continent, { name: string; legs: boolean }>> = {
+  CONMEBOL: { name: "Recopa Sudamericana", legs: true },
+  UEFA: { name: "Supercopa de Europa", legs: false },
+};
+/** Los mejores clubes del mundo (para la Intercontinental y el Mundial de Clubes). */
+export const worldElite = (exclude: string[]) =>
+  [...CLUBS_W, ...INTL_CLUBS].filter((c) => !exclude.includes(c.name) && c.strength >= 66).sort((a, b) => b.strength - a.strength);
+
 /** Selecciones: nombre del equipo (con estilo en clubs.ts) y fuerza. */
 export const NATIONS: Record<string, { team: string; strength: number; name: string; flag: string; confed: Continent | "CAF" }> = {
   ARG: { team: "Selección Argentina", strength: 88, name: "Argentina", flag: "🇦🇷", confed: "CONMEBOL" },

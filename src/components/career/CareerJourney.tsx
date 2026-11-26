@@ -180,16 +180,23 @@ export function CareerJourney({ s, demo = false }: { s: CareerState; demo?: bool
       <section className="j-section">
         <h3 className="j-title">Logros · {ach.length} de {ACHIEVEMENTS.length}</h3>
         {ach.length ? (
-          <div className="j-achs">
-            {ach.map((a, i) => (
-              <div key={a.id} className={`j-ach tier-${a.tier}`} style={{ animationDelay: `${i * 90}ms` }}>
-                <Badge icon={a.icon} tier={a.tier} size={78} />
-                <span className="j-ach-tier">{TIER_LABEL[a.tier]}</span>
-                <b>{a.title}</b>
-                <span className="muted small">{a.desc}</span>
+          [{ title: "En la cancha", list: ach.filter((a) => !a.personal) }, { title: "Por cómo fuiste", list: ach.filter((a) => a.personal) }].map((g) =>
+            g.list.length ? (
+              <div key={g.title} className="j-ach-group">
+                <p className="j-ach-group-title">{g.title}</p>
+                <div className="j-achs">
+                  {g.list.map((a, i) => (
+                    <div key={a.id} className={`j-ach tier-${a.tier}`} style={{ animationDelay: `${i * 90}ms` }}>
+                      <Badge icon={a.icon} tier={a.tier} size={78} />
+                      <span className="j-ach-tier">{TIER_LABEL[a.tier]}</span>
+                      <b>{a.title}</b>
+                      <span className="muted small">{a.desc}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
+            ) : null,
+          )
         ) : <p className="muted">Esta vez no hubo logros. La próxima carrera puede ser distinta.</p>}
       </section>
 

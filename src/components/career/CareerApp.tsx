@@ -24,7 +24,7 @@ const KEY = "career";
 const POS_OPTS = ["ARQ", "DFC", "LAT", "MC", "MCO", "EXT", "DC"];
 const R = Math.random;
 const plural = (n: number, a: string, b: string) => `${n} ${n === 1 ? a : b}`;
-const COMP_ICON: Record<string, string> = { league: "🏟️", playoff: "⚔️", cup: "🏆", intl: "🌎", national: "🎽" };
+const COMP_ICON: Record<string, string> = { league: "🏟️", playoff: "⚔️", cup: "🏆", intl: "🌎", national: "🎽", super: "⭐" };
 /** Colores de un club para festejos (el blanco se reemplaza por el segundo color). */
 export const clubColors = (club: string): [string, string] => {
   const c = clubStyle(club).colors;
@@ -420,6 +420,9 @@ function EventStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
   if (s.pendingEvent === "national-call" && s.national) {
     return (<>{log}<section className="event card national"><div className="event-icon">{NATIONS[s.nationality]?.flag}</div><h2>¡Convocado para la {s.national.name}!</h2><p>El DT de {NATIONS[s.nationality]?.name} te incluyó en la lista. Vas a defender la camiseta de tu país.</p><button className="btn btn-primary big-cta" onClick={() => go(s)}>Viajar con la selección ✈️</button></section></>);
   }
+  if (s.pendingEvent === "clubwc-call" && s.national) {
+    return (<>{log}<section className="event card national"><div className="event-icon">🌐</div><h2>¡{s.club} juega el {s.national.name}!</h2><p>Los mejores clubes del planeta, un solo trofeo. Fase de grupos y eliminación directa hasta la final.</p><button className="btn btn-primary big-cta" onClick={() => go(s)}>Viajar al Mundial de Clubes ✈️</button></section></>);
+  }
   const ev = eventById(s.pendingEvent ?? "") ?? eventById("asado")!;
   if (effect && next) {
     return (<>{log}<section className="event card"><div className="event-icon">{ev.icon}</div><h2>{ev.title}</h2><p className="effect-text">{effect.text}</p><EffectChips e={effect} /><button className="btn btn-primary big-cta" onClick={() => go(next)}>Ir al partido →</button></section></>);
@@ -431,7 +434,7 @@ function EventStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
         <div className="event-icon">{ev.icon}</div>
         <h2>{ev.title}</h2>
         <p>{ev.body(s)}</p>
-        <div className="choices">{ev.choices.map((c, i) => <button key={i} className="btn choice" onClick={() => { play("click"); const e = resolveChoice(c, s, R); setEffect(e); setNext(E.applyEffect(s, e)); }}>{c.label}</button>)}</div>
+        <div className="choices">{ev.choices.map((c, i) => <button key={i} className="btn choice" onClick={() => { play("click"); const e = resolveChoice(c, s, R); setEffect(e); setNext(E.addChoice(E.applyEffect(s, e), c.tag)); }}>{c.label}</button>)}</div>
       </section>
     </>
   );

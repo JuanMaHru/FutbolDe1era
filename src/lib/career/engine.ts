@@ -5,6 +5,7 @@
  * Solo los partidos "clave" se juegan con minijuegos; el resto se simula pero cuenta.
  */
 import {
+  RECOPA, SUPERCUPS, worldElite,
   CONTINENTAL, CONT_FORMAT, LEAGUES, NATIONS, clubInfo, clubsInLeague, continentalPool, isDerby, leagueOf,
   nationalRival, nationalTournament, strengthOf, CLUBS_W, type Round,
 } from "./world";
@@ -72,7 +73,7 @@ const POOLS: Record<Role, [MomentKind, number][]> = {
 export interface Row { pj: number; w: number; d: number; l: number; gf: number; ga: number; pts: number }
 export interface Table { id: string; name: string; clubs: string[]; rounds: [string, string][][]; played: number; rows: Record<string, Row> }
 
-export type CompKind = "league" | "playoff" | "cup" | "intl" | "national";
+export type CompKind = "league" | "playoff" | "cup" | "intl" | "national" | "super";
 export interface FxResult { gf: number; ga: number; pens?: [number, number]; agg?: [number, number]; rating: number; goals: number; assists: number; played: boolean; key: boolean }
 export interface Fixture {
   id: number;
@@ -153,7 +154,12 @@ export interface CareerState {
   trophies: string[];
   awards: string[];
   caps: number; natGoals: number;
-  national?: { name: string; fixtures: Fixture[]; idx: number; table: Table; alive: boolean };
+  /** Torneo especial al final de la temporada: con la selección o el Mundial de Clubes. */
+  national?: { name: string; fixtures: Fixture[]; idx: number; table: Table; alive: boolean; kind?: "national" | "clubwc" };
+  /** Competencias especiales ganadas para la próxima temporada (supercopa, recopa, intercontinental). */
+  nextQual?: string[];
+  /** Conteo de decisiones personales (para logros de personalidad). */
+  choices?: Record<string, number>;
   lastKinds: MomentKind[];
   autoLog: string[]; // partidos simulados desde el último partido jugado
   pendingEvent?: string;
@@ -191,7 +197,18 @@ export const currentYear = (s: CareerState) => s.startYear + s.season - 1;
 export const role = (s: CareerState): Role => ROLE_OF[s.position] ?? "MED";
 export const leagueOfState = (s: CareerState) => leagueOf(s.club, s.leagueOverride);
 export const archetypeOf = (s: CareerState) => ARCHETYPES[role(s)].find((a) => a.id === s.archetype) ?? ARCHETYPES[role(s)][0];
-export const myTeam = (s: CareerState) => (s.phase === "national" && s.national ? NATIONS[s.nationality]?.team ?? s.club : s.club);
+export const isClubWC = (s: CareerState) => s.national?.kind === "clubwc";
+export const myTeam = (s: CareerState) => (s.phase === "national" && s.national && !isClubWC(s) ? NATIONS[s.nationality]?.team ?? s.club : s.club);
+/** Suma una decisión personal (o del mercado) al perfil del jugador. */
+export function addChoice(s: CareerState, tag?: string): CareerState {
+  if (!tag) return s;
+  return { ...s, choices: { ...(s.choices ?? {}), [tag]: (s.choices?.[tag] ?? 0) + 1 } };
+}
+/** Rival para el Mundial de Clubes: los mejores del mundo, sin repetir. */
+function clubWorldRival(s: CareerState, used: string[], rand: () => number, top = 24): string {
+  const pool = worldElite([s.club, ...used]).slice(0, top);
+  return pick(pool.length ? pool : worldElite([s.club]), rand).name;
+}
 const won = (r: { gf: number; ga: number; pens?: [number, number] }) => r.gf > r.ga || (!!r.pens && r.pens[0] > r.pens[1]);
 
 function poisson(l: number, rand: () => number) {
@@ -281,7 +298,7 @@ let FX_ID = 1;
 const nextId = (s: CareerState) => Math.max(FX_ID, ...s.fixtures.map((f) => f.id + 1), ...(s.national?.fixtures.map((f) => f.id + 1) ?? [1]));
 
 /** Arma la temporada: tablas, fechas de liga y huecos para copas. */
-function buildSeason(s0: CareerState, intl: string | undefined, rand: () => number): CareerState {
+function buildSeason(s0: CareerState, intl: string | undefined, rand: () => number, qual: string[] = []): CareerState {
   const s: CareerState = { ...s0, tables: [], fixtures: [], idx: 0, stats: emptyStats(), lstats: emptyStats(), autoLog: [], seasonHighlights: [] };
   s.comp = { cupAlive: true, cupRound: 0, cupFaced: [], intl, intlAlive: !!intl, intlStage: 0, intlFaced: [], intlPts: 0, poAlive: false, poFaced: [], tourn: 0, champions: [] };
   const lg = leagueOfState(s);
@@ -315,6 +332,7 @@ function buildSeason(s0: CareerState, intl: string | undefined, rand: () => numb
   const total = week;
   let n: CareerState = addCupRound(s, rand, total);
   if (intl) n = startIntl(n, rand, total);
+  n = addSpecials(n, qual, total, rand);
   n.fixtures.sort((a, b) => a.week - b.week || a.id - b.id);
   return n;
 }
@@ -419,6 +437,37 @@ function addIntlKnockout(s: CareerState, rand: () => number): CareerState {
   return { ...s, fixtures: [...s.fixtures, ...fx].sort((a, b) => a.week - b.week || a.id - b.id), comp: { ...s.comp, intlStage: k + 1, intlFaced: [...s.comp.intlFaced, rival] } };
 }
 
+/** Supercopa nacional, recopa continental e Intercontinental (según lo ganado la temporada anterior). */
+function addSpecials(s: CareerState, qual: string[], total: number, rand: () => number): CareerState {
+  const lg = leagueOfState(s);
+  const fx: Fixture[] = [];
+  let id = nextId(s);
+  const mk = (f: Omit<Fixture, "id">) => fx.push({ ...f, id: id++ });
+  const domestic = CLUBS_W.filter((c) => LEAGUES[c.league].country === lg.country && c.name !== s.club).sort((a, b) => b.strength - a.strength);
+  if (qual.includes("supercup") && SUPERCUPS[lg.country] && domestic.length) {
+    mk({ week: 1, kind: "super", comp: SUPERCUPS[lg.country], stage: "Final", rival: pick(domestic.slice(0, 4), rand).name, home: false, knockout: true, key: true, final: true, tie: "sup" });
+  }
+  const rec = RECOPA[lg.continent];
+  if (qual.includes("recopa") && rec) {
+    const rival = pick(continentalPool(lg.continent, lg.country).filter((c) => c.name !== s.club).sort((a, b) => b.strength - a.strength).slice(0, 6), rand).name;
+    if (rec.legs) {
+      mk({ week: 4, kind: "super", comp: rec.name, stage: "Final · Ida", rival, home: false, knockout: true, key: true, leg: 1, tie: "rec" });
+      mk({ week: 5, kind: "super", comp: rec.name, stage: "Final · Vuelta", rival, home: true, knockout: true, key: true, leg: 2, final: true, tie: "rec" });
+    } else mk({ week: 4, kind: "super", comp: rec.name, stage: "Final", rival, home: false, knockout: true, key: true, final: true, tie: "rec" });
+  }
+  if (qual.includes("intercont")) {
+    const w = Math.round(total * 0.45);
+    if (lg.continent === "UEFA") {
+      const rival = pick(worldElite([s.club]).filter((c) => LEAGUES[c.league]?.continent === "CONMEBOL" || (c as { continent?: string }).continent === "CONMEBOL").slice(0, 4), rand)?.name ?? "Flamengo";
+      mk({ week: w, kind: "super", comp: "Copa Intercontinental", stage: "Final", rival, home: false, knockout: true, key: true, final: true, tie: "ic-f" });
+    } else {
+      const rival = pick(worldElite([s.club]).filter((c) => (LEAGUES[c.league]?.continent ?? (c as { continent?: string }).continent) !== lg.continent && LEAGUES[c.league]?.continent !== "UEFA").slice(0, 6), rand)?.name ?? "Al Hilal";
+      mk({ week: w, kind: "super", comp: "Copa Intercontinental", stage: "Semifinal", rival, home: false, knockout: true, key: true, tie: "ic-s" });
+    }
+  }
+  return fx.length ? { ...s, fixtures: [...s.fixtures, ...fx].sort((a, b) => a.week - b.week || a.id - b.id) } : s;
+}
+
 /** Playoffs de liga (Apertura/Clausura, liguilla, MLS Cup). */
 function addPlayoffRound(s: CareerState, roundIdx: number, rand: () => number, seedRival?: string): CareerState {
   const lg = leagueOfState(s);
@@ -456,7 +505,7 @@ export function nextFixture(s: CareerState): { fx: Fixture; idx: number } | null
 
 export function startChance(s: CareerState): number {
   const need = strengthOf(myTeam(s)) - 4;
-  const base = s.phase === "national" ? 45 : 50;
+  const base = s.phase === "national" && !isClubWC(s) ? 45 : 50;
   return clamp(base + (s.ovr - need) * 4 + (s.confidence - 50) * 0.5 + (s.form - 50) * 0.3, 8, 97) / 100;
 }
 
@@ -677,9 +726,9 @@ function applyOne(s0: CareerState, idx: number, res: MatchResult, rand: () => nu
       s.form = clamp(s.form + (res.rating - 6.5) * 6);
       s.confidence = clamp(s.confidence + (res.rating - 6.3) * 5 + (won(res) ? 1 : -0.5));
     }
-    const weight = fx.kind === "national" ? 3 : fx.kind === "intl" ? 2 : fx.knockout ? 1.5 : 1;
+    const weight = fx.kind === "national" ? 3 : fx.kind === "intl" || fx.kind === "super" ? 2 : fx.knockout ? 1.5 : 1;
     s.fame = clamp(s.fame + (Math.max(0, res.rating - 7) * weight + res.goals * 0.25 * weight * (strengthOf(fx.rival) / 75)) * (fx.key ? 0.6 : 0.25));
-    if (national) s.natGoals += res.goals;
+    if (national && !isClubWC(s)) s.natGoals += res.goals;
   } else s.confidence = clamp(s.confidence - 1);
   if (!national) s.money += s.salary;
   if (fx.key) s.boost = 0;
@@ -698,23 +747,25 @@ function applyOne(s0: CareerState, idx: number, res: MatchResult, rand: () => nu
     const isGroupEnd = !fx.knockout && fx.round === 2;
     if (isGroupEnd && placeIn(nat.table, myTeam(s)) > 2) nat.alive = false;
     if (fx.knockout && !fullWin) nat.alive = false;
-    s.caps += res.played ? 1 : 0;
-    if (fx.final && !fullWin) hlLast(s, `💔 Final perdida de la ${nat.name} contra ${fx.rival}`);
+    const cwc = nat.kind === "clubwc";
+    if (!cwc) s.caps += res.played ? 1 : 0;
+    if (fx.final && !fullWin) hlLast(s, `💔 Final perdida ${cwc ? "del" : "de la"} ${nat.name} contra ${fx.rival}`);
     if (fx.final && fullWin) {
-      hlLast(s, `🏆 ¡Campeón de la ${nat.name} con ${NATIONS[s.nationality].name}!`);
-      s.trophies = [...s.trophies, `${nat.name} con ${NATIONS[s.nationality].name}`];
+      hlLast(s, cwc ? `🌐 ¡Campeón del ${nat.name} con ${s.club}!` : `🏆 ¡Campeón de la ${nat.name} con ${NATIONS[s.nationality].name}!`);
+      s.trophies = [...s.trophies, cwc ? `${nat.name} (${s.club})` : `${nat.name} con ${NATIONS[s.nationality].name}`];
       s.finalsWon++;
       s.fame = clamp(s.fame + 15);
       s.log.unshift(`🏆 ¡CAMPEÓN de la ${nat.name}!`);
     }
     if (nat.alive && fx.knockout && !fx.final) nat.fixtures = [...nat.fixtures]; // siguiente ronda ya existe
     if (!nat.alive || nat.idx >= nat.fixtures.length) {
-      if (!nat.alive) { s.log.unshift(`${NATIONS[s.nationality].name} quedó afuera de la ${nat.name} (${fx.stage}).`); if (!fx.final) hlLast(s, `🎽 ${nat.name}: eliminados en ${fx.stage}`); }
+      if (!nat.alive) { s.log.unshift(`${cwc ? s.club : NATIONS[s.nationality].name} quedó afuera ${cwc ? "del" : "de la"} ${nat.name} (${fx.stage}).`); if (!fx.final) hlLast(s, `${cwc ? "🌐" : "🎽"} ${nat.name}: eliminados en ${fx.stage}`); }
       return finishYear(s, rand);
     }
     // Rival de la siguiente ronda.
     const nx = nat.fixtures[nat.idx];
-    if (!nx.rival) nat.fixtures[nat.idx] = { ...nx, rival: nationalRival(s.nationality, nat.name, nat.fixtures.map((f) => f.rival).filter(Boolean), rand) };
+    const used = nat.fixtures.map((f) => f.rival).filter(Boolean);
+    if (!nx.rival) nat.fixtures[nat.idx] = { ...nx, rival: cwc ? clubWorldRival(s, used, rand, nx.final ? 5 : nx.stage.startsWith("Semi") ? 8 : 16) : nationalRival(s.nationality, nat.name, used, rand) };
     s.phase = "event";
     s.pendingEvent = pickEvent(s, rand);
     return s;
@@ -722,6 +773,19 @@ function applyOne(s0: CareerState, idx: number, res: MatchResult, rand: () => nu
 
   s.idx = idx + 1;
   const lg = leagueOfState(s);
+  if (fx.kind === "super" && tieDone) {
+    if (fullWin && fx.final) {
+      s.trophies = [...s.trophies, `${fx.comp} ${year} (${s.club})`];
+      s.finalsWon++;
+      s.fame = clamp(s.fame + (fx.comp === "Copa Intercontinental" ? 12 : 4));
+      hl(s, `🏆 Campeón de la ${fx.comp}${res.pens ? " por penales" : ""}`);
+      s.log.unshift(`🏆 ¡Campeón de la ${fx.comp}!`);
+    } else if (fullWin && fx.comp === "Copa Intercontinental") {
+      // Ganaste la semifinal: en la final espera el campeón de Europa.
+      const rival = pick(worldElite([s.club]).filter((c) => LEAGUES[c.league]?.continent === "UEFA").slice(0, 4), rand).name;
+      s.fixtures = [...s.fixtures, { id: nextId(s), week: Math.max(fx.week + 1, afterNow(s)), kind: "super" as const, comp: fx.comp, stage: "Final", rival, home: false, knockout: true, key: true, final: true, tie: "ic-f" }].sort((a, b) => a.week - b.week || a.id - b.id);
+    } else if (!fullWin && fx.final) hl(s, `💔 Final perdida de la ${fx.comp} contra ${fx.rival}`);
+  }
   if (fx.kind === "cup" && tieDone) {
     if (!fullWin) { s.comp = { ...s.comp, cupAlive: false }; if (fx.final) hl(s, `💔 Final perdida de la ${fx.comp} contra ${fx.rival}`); }
     else if (fx.final) {
@@ -861,6 +925,14 @@ function endSeason(s0: CareerState, rand: () => number, auto: string[] = []): Ca
   const wonTourn = s.trophies.some((t) => t.includes(` ${year} (${s.club})`) && lg.format.tournaments.some((n) => n && t.startsWith(n)));
   s.nextIntl = (lg.top[0] && place <= lg.top[0]) || wonTourn ? CONTINENTAL[lg.continent][0] : lg.top[1] && place <= lg.top[1] && CONTINENTAL[lg.continent][1] ? CONTINENTAL[lg.continent][1] : undefined;
 
+  // Competencias especiales para la próxima temporada (las gana el club, no el jugador).
+  const wonT = (re: RegExp) => s.trophies.some((t) => re.test(t) && t.includes(` ${year} (${s.club})`));
+  const q: string[] = [];
+  if (wonT(new RegExp(`^(${lg.name}|${lg.cup}|${lg.format.tournaments.filter(Boolean).join("|") || "-"})`))) q.push("supercup");
+  if (wonT(/^(Copa Libertadores|Copa Sudamericana|Champions League|Europa League)/)) q.push("recopa");
+  if (wonT(/^(Copa Libertadores|Champions League|Concacaf Champions Cup|AFC Champions League)/)) q.push("intercont");
+  s.nextQual = q;
+
   // Premios individuales de la liga.
   const aw = seasonAwards(s, place, rand);
   s.awards = [...s.awards, ...aw];
@@ -909,6 +981,26 @@ function endSeason(s0: CareerState, rand: () => number, auto: string[] = []): Ca
   } else {
     const tour = nationalTournament(s.nationality, year);
     if (tour && nat) s.log.unshift(`📺 Viste la ${tour.name} por TV. ¡El próximo puede ser tuyo!`);
+  }
+  // Mundial de Clubes cada 4 años (2029, 2033…): campeones continentales recientes y los mejores del ranking.
+  if (year % 4 === 1 && !nationalTournament(s.nationality, year)) {
+    const champ = [0, 1, 2, 3].some((k) => s.trophies.some((t) => /^(Copa Libertadores|Champions League|Concacaf Champions Cup|AFC Champions League)/.test(t) && t.includes(` ${year - k} (${s.club})`)));
+    if (champ || clubInfo(s.club).strength >= 82) {
+      const name = `Mundial de Clubes ${year}`;
+      const rivals: string[] = [];
+      for (let i = 0; i < 3; i++) rivals.push(clubWorldRival(s, rivals, rand, 30));
+      const table = newTable("nat-group", `${name} · Grupo`, [s.club, ...rivals], false, rand);
+      const fixtures: Fixture[] = [];
+      table.rounds.forEach((pairs, r) => {
+        const p = pairs.find(([a, b]) => a === s.club || b === s.club)!;
+        fixtures.push({ id: 900 + r, week: r, kind: "national", comp: name, stage: `Fase de grupos · Fecha ${r + 1}`, rival: p[0] === s.club ? p[1] : p[0], home: true, knockout: false, key: true, table: "nat-group", round: r });
+      });
+      ["Octavos de final", "Cuartos de final", "Semifinal", "Final"].forEach((r, i) => fixtures.push({ id: 910 + i, week: 3 + i, kind: "national", comp: name, stage: r, rival: "", home: true, knockout: true, key: true, final: r === "Final", tie: `cwc-${i}` }));
+      s.national = { name, fixtures, idx: 0, table, alive: true, kind: "clubwc" };
+      s.phase = "event";
+      s.pendingEvent = "clubwc-call";
+      return s;
+    }
   }
   return finishYear(s, rand);
 }
@@ -962,7 +1054,13 @@ function makeOffers(s: CareerState, rand: () => number): Offer[] {
 export function startNextSeason(s: CareerState, offer: Offer | null, rand: () => number): CareerState {
   let n: CareerState = { ...s, log: [...s.log] };
   let intl = s.nextIntl;
+  let qual = s.nextQual ?? [];
+  // Decisiones de mercado: quedarse rechazando ofertas mejores suma lealtad.
+  const better = (s.offers ?? []).some((o) => clubInfo(o.club).strength > clubInfo(s.club).strength);
+  if (!offer && better) n = addChoice(n, "fiel");
+  if (offer && offer.club !== s.club) n = addChoice(n, "aventurero");
   if (offer && offer.club !== s.club) {
+    qual = [];
     n.club = offer.club;
     n.confidence = 40;
     n.salary = offer.salary;
@@ -975,8 +1073,8 @@ export function startNextSeason(s: CareerState, offer: Offer | null, rand: () =>
   }
   n.season = s.season + 1;
   n.injury = 0; n.suspension = 0; n.form = 60;
-  n.offers = undefined; n.nextIntl = undefined;
-  n = buildSeason(n, intl, rand);
+  n.offers = undefined; n.nextIntl = undefined; n.nextQual = undefined;
+  n = buildSeason(n, intl, rand, qual);
   if (offer && offer.club !== s.club) hl(n, offer.tag === "vuelta" ? `🏠 Vuelta a casa: ${offer.club}` : offer.tag === "arabia" ? `💰 Contrato millonario con ${offer.club}` : `✍️ Fichaje por ${offer.club}`);
   n.phase = "event";
   // Si la primera fecha no es clave, simular hasta la primera que sí.
@@ -997,13 +1095,13 @@ export function simulateRest(s0: CareerState, rand: () => number): CareerState {
     const nx = nextFixture(s);
     if (!nx) break;
     let rival = nx.fx.rival;
-    if (!rival && s.national) rival = nationalRival(s.nationality, s.national.name, s.national.fixtures.map((f) => f.rival).filter(Boolean), rand);
+    if (!rival && s.national) rival = isClubWC(s) ? clubWorldRival(s, s.national.fixtures.map((f) => f.rival).filter(Boolean), rand) : nationalRival(s.nationality, s.national.name, s.national.fixtures.map((f) => f.rival).filter(Boolean), rand);
     const absent = s.injury > 0 || s.suspension > 0;
     let r = simQuick(s, rival, rand, absent ? "absent" : "simulate");
     if (needsPens(s, nx.fx, r)) r = { ...r, pens: shootout(s, rand() < 0.5, rand) };
     if (s.phase === "national" && !nx.fx.rival) s = { ...s, national: { ...s.national!, fixtures: s.national!.fixtures.map((f, i) => (i === nx.idx ? { ...f, rival } : f)) } };
     s = applyResult(s, nx.idx, r, rand, true);
-    if (s.phase === "event" && s.pendingEvent === "national-call") s = { ...s, pendingEvent: undefined, phase: "event" };
+    if (s.phase === "event" && (s.pendingEvent === "national-call" || s.pendingEvent === "clubwc-call")) s = { ...s, pendingEvent: undefined, phase: "event" };
   }
   return s;
 }

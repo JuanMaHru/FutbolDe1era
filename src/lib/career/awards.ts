@@ -34,7 +34,9 @@ export function ballonDor(s: CareerState, rand: () => number): { award?: string;
   const r = roleOf(s.position);
   score += r === "DEL" || r === "MED" ? (h?.goals ?? 0) * 0.3 + (h?.assists ?? 0) * 0.2 : (h?.cleanSheets ?? 0) * 0.35;
   for (const t of titles) {
-    if (t.startsWith("Mundial")) score += 22;
+    if (t.startsWith("Mundial de Clubes")) score += 12;
+    else if (t.startsWith("Copa Intercontinental")) score += 6;
+    else if (t.startsWith("Mundial")) score += 22;
     else if (t.startsWith("Champions League")) score += 16;
     else if (t.startsWith("Copa América") || t.startsWith("Eurocopa")) score += 12;
     else if (t.startsWith("Copa Libertadores")) score += 8;
@@ -53,9 +55,12 @@ export function ballonDor(s: CareerState, rand: () => number): { award?: string;
 
 /** Logros de toda la carrera: lo que hace única a cada historia. */
 export type Tier = "bronce" | "plata" | "oro" | "leyenda";
-export interface Achievement { id: string; icon: string; title: string; desc: string; tier: Tier }
-interface AchDef { id: string; icon: string; title: string; tier: Tier; how: string; test: (s: CareerState) => boolean; detail: (s: CareerState) => string }
+export interface Achievement { id: string; icon: string; title: string; desc: string; tier: Tier; personal: boolean }
+interface AchDef { id: string; icon: string; title: string; tier: Tier; how: string; test: (s: CareerState) => boolean; detail: (s: CareerState) => string; personal?: boolean }
+/** Logros que dependen de tus decisiones fuera de la cancha. */
+export const PERSONAL_IDS = new Set(["amigo", "profe", "fiesta", "solid", "picante", "humilde", "cabala", "fiel", "familia", "inversor", "rebelde", "lider", "limpio", "farandula", "fan", "estudioso", "guerrero", "ambicion", "patria", "valija", "barrio"]);
 
+const ch = (s: CareerState, tag: string) => s.choices?.[tag] ?? 0;
 const count = (s: CareerState, re: RegExp) => [...s.trophies, ...s.awards].filter((x) => re.test(x)).length;
 const clubsOf = (s: CareerState) => [...new Set(s.history.map((h) => h.club))];
 const countriesOf = (s: CareerState) => new Set(s.history.map((h) => LEAGUES[clubInfo(h.club).league]?.country));
@@ -81,7 +86,7 @@ export const ACHIEVEMENTS: AchDef[] = [
   { id: "world", icon: "✈️", title: "Trotamundos", tier: "plata", how: "Jugá en 4 países", test: (s) => countriesOf(s).size >= 4, detail: (s) => `Jugaste en ${countriesOf(s).size} países.` },
   { id: "idol", icon: "🗿", title: "Ídolo eterno", tier: "oro", how: "7 temporadas y un título en el mismo club", test: (s) => [...seasonsAt(s).entries()].some(([c, n]) => n >= 7 && s.trophies.some((x) => x.includes(`(${c})`))), detail: (s) => { const e = [...seasonsAt(s).entries()].find(([c, n]) => n >= 7 && s.trophies.some((x) => x.includes(`(${c})`)))!; return `${e[1]} temporadas y títulos con ${e[0]}.`; } },
   { id: "home", icon: "🏠", title: "Volver a casa", tier: "bronce", how: "Volvé al club donde debutaste", test: (s) => s.history.some((h, i) => i > 0 && h.club === s.firstClub) && clubsOf(s).length > 1, detail: (s) => `Cerraste el círculo en ${s.firstClub}.` },
-  { id: "wc", icon: "🌍", title: "Campeón del mundo", tier: "leyenda", how: "Ganá el Mundial", test: (s) => count(s, /^Mundial/) > 0, detail: () => "Levantaste la Copa del Mundo." },
+  { id: "wc", icon: "🌍", title: "Campeón del mundo", tier: "leyenda", how: "Ganá el Mundial", test: (s) => count(s, /^Mundial \d/) > 0, detail: () => "Levantaste la Copa del Mundo." },
   { id: "conti", icon: "🏆", title: "Campeón continental", tier: "oro", how: "Ganá la Copa América o la Eurocopa", test: (s) => count(s, /^(Copa América|Eurocopa)/) > 0, detail: (s) => `${count(s, /^(Copa América|Eurocopa)/)} títulos con tu selección.` },
   { id: "lib", icon: "🦅", title: "Gloria eterna", tier: "oro", how: "Ganá la Copa Libertadores", test: (s) => count(s, /^Copa Libertadores/) > 0, detail: (s) => `${count(s, /^Copa Libertadores/)} Libertadores.` },
   { id: "ucl", icon: "⭐", title: "Rey de Europa", tier: "oro", how: "Ganá la Champions League", test: (s) => count(s, /^Champions League/) > 0, detail: (s) => `${count(s, /^Champions League/)} Champions League.` },
@@ -96,11 +101,37 @@ export const ACHIEVEMENTS: AchDef[] = [
   { id: "caps", icon: "🎽", title: "Leyenda de la selección", tier: "oro", how: "Jugá 100 partidos con tu selección", test: (s) => s.caps >= 100, detail: (s) => `${s.caps} partidos con ${NATIONS[s.nationality]?.name ?? "tu país"}.` },
   { id: "natg", icon: "🗺️", title: "Goleador de la selección", tier: "oro", how: "Hacé 40 goles con tu selección", test: (s) => s.natGoals >= 40, detail: (s) => `${s.natGoals} goles con la camiseta de tu país.` },
   { id: "cap1", icon: "📞", title: "El llamado", tier: "bronce", how: "Debutá en tu selección", test: (s) => s.caps >= 1, detail: (s) => `${s.caps} partidos con ${NATIONS[s.nationality]?.name ?? "tu país"}.` },
-  { id: "rise", icon: "🚀", title: "Del ascenso a la gloria", tier: "leyenda", how: "Empezá en la Primera Nacional y ganá Champions, Libertadores o Mundial", test: (s) => leagueOf(s.firstClub).id === "ARG2" && count(s, /Champions League|Copa Libertadores|^Mundial/) > 0, detail: () => "Empezaste en la Primera Nacional y llegaste a la cima." },
+  { id: "rise", icon: "🚀", title: "Del ascenso a la gloria", tier: "leyenda", how: "Empezá en la Primera Nacional y ganá Champions, Libertadores o Mundial", test: (s) => leagueOf(s.firstClub).id === "ARG2" && count(s, /Champions League|Copa Libertadores|^Mundial \d/) > 0, detail: () => "Empezaste en la Primera Nacional y llegaste a la cima." },
   { id: "pj", icon: "🕰️", title: "Hombre récord", tier: "oro", how: "Jugá 650 partidos", test: (s) => s.totals.pj >= 650, detail: (s) => `${s.totals.pj} partidos jugados.` },
   { id: "money", icon: "💎", title: "Millonario", tier: "bronce", how: "Ganá 5 millones de USD", test: (s) => s.money >= 5000, detail: (s) => `${Math.round(s.money / 1000)} millones de USD ganados.` },
   { id: "pens", icon: "🧊", title: "Nervios de acero", tier: "bronce", how: "Ganá 3 definiciones por penales", test: (s) => s.shootoutsWon >= 3, detail: (s) => `Ganaste ${s.shootoutsWon} definiciones por penales.` },
   { id: "finals", icon: "🏟️", title: "Hombre de finales", tier: "oro", how: "Ganá 8 finales", test: (s) => s.finalsWon >= 8, detail: (s) => `Ganaste ${s.finalsWon} finales.` },
+  // ---- Por cómo fuiste: tus decisiones fuera de la cancha ----
+  { id: "amigo", icon: "🤝", title: "Amigo de oro", tier: "plata", how: "Prestale plata a tus compañeros siempre que te lo pidan", test: (s) => ch(s, "presta") >= 2 && ch(s, "no-presta") === 0, detail: () => "Siempre le prestaste plata a los amigos. Nunca dijiste que no." },
+  { id: "profe", icon: "📏", title: "Profesional ejemplar", tier: "oro", how: "Elegí casi siempre el camino profesional (110 veces) y casi nunca la fiesta", test: (s) => ch(s, "profesional") >= 110 && ch(s, "fiesta") <= 3, detail: (s) => `${ch(s, "profesional")} decisiones de profesional. Un ejemplo para los pibes.` },
+  { id: "fiesta", icon: "🪩", title: "Alma de la fiesta", tier: "bronce", how: "Andá a todas: 22 fiestas y festejos", test: (s) => ch(s, "fiesta") >= 22, detail: (s) => `${ch(s, "fiesta")} fiestas y ${ch(s, "grupo")} asados con el plantel.` },
+  { id: "solid", icon: "❤️‍🩹", title: "Corazón solidario", tier: "plata", how: "Ayudá a otros 20 veces (pibes, hinchas, ONG, animales)", test: (s) => ch(s, "solidario") >= 20, detail: (s) => `${ch(s, "solidario")} gestos solidarios.` },
+  { id: "picante", icon: "🌶️", title: "Lengua filosa", tier: "bronce", how: "Sé picante con la prensa y las redes 40 veces", test: (s) => ch(s, "picante") >= 40 && ch(s, "humilde") < ch(s, "picante"), detail: (s) => `${ch(s, "picante")} declaraciones picantes. Los periodistas te aman (o no).` },
+  { id: "humilde", icon: "🙇", title: "Perfil bajo", tier: "bronce", how: "Elegí la humildad 50 veces y casi nunca la polémica", test: (s) => ch(s, "humilde") >= 50 && ch(s, "picante") <= 10, detail: (s) => `${ch(s, "humilde")} veces elegiste el perfil bajo.` },
+  { id: "cabala", icon: "🧦", title: "Cabulero", tier: "bronce", how: "Respetá la cábala 14 veces", test: (s) => ch(s, "cabala") >= 14, detail: () => "La cábala no se toca." },
+  { id: "fiel", icon: "🫶", title: "Lealtad eterna", tier: "oro", how: "Rechazá 12 ofertas mejores y casi no cambies de club", test: (s) => ch(s, "fiel") >= 12 && ch(s, "aventurero") <= 2, detail: (s) => `Rechazaste ofertas mejores ${ch(s, "fiel")} veces por amor a la camiseta.` },
+  { id: "familia", icon: "👨‍👩‍👧", title: "Hombre de familia", tier: "plata", how: "Priorizá a tu familia 14 veces", test: (s) => ch(s, "familia") >= 14, detail: (s) => `${ch(s, "familia")} veces la familia fue primero.` },
+  { id: "inversor", icon: "📈", title: "Lobo de las finanzas", tier: "bronce", how: "Invertí en todos los negocios que te ofrezcan", test: (s) => ch(s, "inversor") >= 3, detail: () => "Pensaste en el después del fútbol." },
+  { id: "rebelde", icon: "🔥", title: "Rebelde sin causa", tier: "bronce", how: "Enfrentá a la autoridad 22 veces", test: (s) => ch(s, "rebelde") >= 22, detail: (s) => `${ch(s, "rebelde")} encontronazos con DTs, árbitros y dirigentes.` },
+  { id: "lider", icon: "📣", title: "Líder nato", tier: "plata", how: "Ponete el equipo al hombro 9 veces", test: (s) => ch(s, "lider") >= 9, detail: (s) => `${ch(s, "lider")} veces diste la cara por el grupo.` },
+  { id: "limpio", icon: "🕊️", title: "Juego limpio", tier: "plata", how: "Hacé siempre lo correcto ante el doping y las apuestas", test: (s) => ch(s, "limpio") >= 3, detail: () => "Nunca te ensuciaste. Un ejemplo de juego limpio." },
+  { id: "farandula", icon: "📸", title: "Estrella de la farándula", tier: "bronce", how: "Elegí la fama y los flashes 10 veces", test: (s) => ch(s, "farandula") >= 10, detail: (s) => `${ch(s, "farandula")} veces elegiste los flashes.` },
+  { id: "fan", icon: "🙌", title: "Ídolo de la gente", tier: "plata", how: "Dedicale tiempo a los hinchas 20 veces", test: (s) => ch(s, "fan") >= 20, detail: (s) => `${ch(s, "fan")} veces te quedaste con los hinchas.` },
+  { id: "estudioso", icon: "📚", title: "Estudioso del juego", tier: "bronce", how: "Estudiá, analizá y aprendé 24 veces", test: (s) => ch(s, "estudioso") >= 24, detail: (s) => `${ch(s, "estudioso")} veces elegiste aprender.` },
+  { id: "guerrero", icon: "🩹", title: "Guerrero", tier: "plata", how: "Jugá con dolor o sacrificate por el equipo 20 veces", test: (s) => ch(s, "sacrificio") >= 20, detail: (s) => `${ch(s, "sacrificio")} veces dejaste todo por el equipo.` },
+  { id: "ambicion", icon: "🚀", title: "Ambición sin techo", tier: "bronce", how: "Pedí más (sueldo, minutos, representante) 24 veces", test: (s) => ch(s, "ambicioso") >= 24, detail: (s) => `${ch(s, "ambicioso")} veces fuiste por más.` },
+  { id: "patria", icon: "🫡", title: "Patriota", tier: "bronce", how: "Elegí tu país por sobre todo 6 veces", test: (s) => ch(s, "patriota") >= 6, detail: () => "La camiseta de tu país, primero." },
+  { id: "valija", icon: "🧳", title: "Valija siempre lista", tier: "bronce", how: "Cambiá de club 10 veces", test: (s) => ch(s, "aventurero") >= 10, detail: (s) => `${ch(s, "aventurero")} mudanzas de club.` },
+  { id: "barrio", icon: "🏘️", title: "Nunca te olvidaste del barrio", tier: "bronce", how: "Volvé al barrio y al potrero 15 veces", test: (s) => ch(s, "barrio") >= 15, detail: () => "La fama no te cambió." },
+  // ---- Competencias nuevas ----
+  { id: "cwc", icon: "🌐", title: "Campeón del mundo de clubes", tier: "leyenda", how: "Ganá el Mundial de Clubes", test: (s) => count(s, /^Mundial de Clubes/) > 0, detail: (s) => `${count(s, /^Mundial de Clubes/)} Mundial de Clubes.` },
+  { id: "inter", icon: "🌎", title: "Rey intercontinental", tier: "oro", how: "Ganá la Copa Intercontinental", test: (s) => count(s, /^Copa Intercontinental/) > 0, detail: (s) => `${count(s, /^Copa Intercontinental/)} Copas Intercontinentales.` },
+  { id: "super", icon: "⭐", title: "Rey de las supercopas", tier: "plata", how: "Ganá 3 supercopas o recopas", test: (s) => count(s, /^(Supercopa|Supercoppa|Community Shield|Trophée|Supertaça|Johan Cruijff|Recopa)/) >= 3, detail: (s) => `${count(s, /^(Supercopa|Supercoppa|Community Shield|Trophée|Supertaça|Johan Cruijff|Recopa)/)} supercopas y recopas.` },
   { id: "fenomeno", icon: "💫", title: "Uno cada diez años", tier: "leyenda", how: "Que el ojeador te califique de fenómeno", test: (s) => s.talent === "fenomeno", detail: () => "El ojeador lo vio primero: un fenómeno generacional." },
 ];
 
@@ -113,6 +144,6 @@ export function achievements(s: CareerState): Achievement[] {
   const got = new Set(ACHIEVEMENTS.filter((a) => a.test(s)).map((a) => a.id));
   for (const l of ladders) { const top = l.find((id) => got.has(id)); l.forEach((id) => id !== top && got.delete(id)); }
   return ACHIEVEMENTS.filter((a) => got.has(a.id))
-    .map((a) => ({ id: a.id, icon: a.icon, title: a.title, tier: a.tier, desc: a.detail(s) }))
+    .map((a) => ({ id: a.id, icon: a.icon, title: a.title, tier: a.tier, desc: a.detail(s), personal: PERSONAL_IDS.has(a.id) }))
     .sort((a, b) => TIER_ORDER.indexOf(a.tier) - TIER_ORDER.indexOf(b.tier));
 }

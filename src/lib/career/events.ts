@@ -16,7 +16,7 @@ export interface Effect {
 }
 type W = number | ((s: CareerState) => number);
 export interface Outcome { w: W; e: Effect }
-export interface Choice { label: string; outcomes: Outcome[] }
+export interface Choice { label: string; outcomes: Outcome[]; /** Rasgo de personalidad que suma esta decisión. */ tag?: string }
 export interface CareerEvent {
   id: string;
   icon: string;
@@ -584,6 +584,33 @@ export const NATIONAL_EVENTS: CareerEvent[] = [
     ] },
 ];
 
+
+/** Rasgo de personalidad de cada decisión (en el orden de las opciones). Alimenta los logros personales. */
+const TAGS: Record<string, (string | null)[]> = {
+  asado: ["grupo", "profesional"], fiesta: ["fiesta", "profesional"], idolo: ["estudioso", "fan", "humilde"], pelea: ["rebelde", "humilde"],
+  capitan: ["lider", "humilde"], pibe: ["solidario", null], truco: ["grupo", "estudioso"], videojuego: ["picante", "profesional"],
+  cabala: ["cabala", "profesional"], psicologo: ["profesional", null], dieta: ["profesional", "fiesta"], "doble-turno": ["profesional", null],
+  lesion: ["sacrificio", "profesional"], pretemporada: ["profesional", null], "practica-especial": ["profesional", null],
+  "arquero-error": ["humilde", "profesional"], "delantero-sequia": ["humilde", "profesional"], "defensor-roja": ["rebelde", "humilde"],
+  posicion: ["sacrificio", "rebelde"], radio: ["humilde", "picante"], viral: ["picante", "humilde"], polemica: ["humilde", "picante"],
+  tele: ["farandula", "profesional"], comparacion: ["picante", "humilde"], representante: ["ambicioso", "fiel"], renovacion: ["ambicioso", "fiel"],
+  botines: ["farandula", "fiel"], negocio: ["inversor", null], "prestamo-companero": ["presta", "no-presta"], clasico: ["estudioso", "picante"],
+  "hinchas-aeropuerto": ["fan", null], barra: ["lider", null], sueldos: ["rebelde", "fiel"], micro: ["grupo", null], "cambio-dt": ["lider", null],
+  idioma: ["estudioso", null], extranar: ["familia", null], nacionalizar: [null, "patriota"], clima: ["profesional", null], hijo: ["familia", "familia"],
+  estudios: ["estudioso", null], "curso-dt": ["estudioso", null], "retiro-dudas": ["profesional", "fan"], solidario: ["solidario", null],
+  potrero: ["barrio", "profesional"], mascota: ["solidario", null], auto: ["farandula", "familia"], estrella: ["humilde", "rebelde"],
+  rotacion: ["ambicioso", "profesional"], "noche-copera": ["profesional", "humilde"], "robo-casa": ["familia", "sacrificio"], "robo-auto": ["farandula", null],
+  "pelea-dt": ["humilde", "rebelde"], "pelea-periodista": ["picante", "profesional"], "pelea-companero": ["lider", null], "aniversario-club": ["fiel", null],
+  "aniversario-debut": ["familia", "farandula"], casamiento: ["fiesta", "familia"], tatuaje: ["fan", "fan"], "amenaza-apuestas": ["limpio", null],
+  antidoping: ["limpio", null], "lesion-grave": ["profesional", null], reality: ["farandula", "humilde"], "primer-dt": ["familia", null],
+  huelga: ["lider", null], gira: ["profesional", "grupo"], "fiesta-fin": ["fiesta", null], hacker: ["humilde", null], restaurante: ["inversor", null],
+  embajador: ["solidario", null], rivalidad: ["humilde", "picante"], var: ["rebelde", "humilde"], "promesa-hincha": ["solidario", "solidario"],
+  record: ["humilde", "farandula"], "ex-pareja": ["humilde", "picante"], mudanza: [null, "barrio"], "socio-vitalicio": ["fiel"], nieve: ["profesional", null],
+  "nat-concentracion": ["estudioso", null], "nat-himno": ["patriota", "profesional"], "nat-prensa": ["humilde", "picante"], "nat-familia": ["familia", "profesional"],
+  "nat-camiseta": ["fan", "patriota"], "nat-mate": ["grupo", "profesional"], "nat-lesion": ["sacrificio", "profesional"], "nat-video": ["familia", "profesional"],
+};
+for (const e of [...EVENTS, ...NATIONAL_EVENTS]) e.choices.forEach((c, i) => { c.tag ??= TAGS[e.id]?.[i] ?? undefined; });
+
 const ALL = [...EVENTS, ...NATIONAL_EVENTS];
 export const eventById = (id: string) => ALL.find((e) => e.id === id);
 
@@ -598,7 +625,7 @@ export function resolveChoice(c: Choice, s: CareerState, rand: () => number): Ef
 
 /** Próximo evento: válido para la situación y que no se haya visto en los últimos ~18. */
 export function pickEvent(s: CareerState, rand: () => number): string {
-  const base = s.national ? NATIONAL_EVENTS : EVENTS;
+  const base = s.national && s.national.kind !== "clubwc" ? NATIONAL_EVENTS : EVENTS;
   const valid = base.filter((e) => (!e.when || e.when(s)) && (s.eventCounts?.[e.id] ?? 0) < (e.max ?? 99));
   const fresh = valid.filter((e) => !s.recentEvents.includes(e.id));
   const list = fresh.length ? fresh : valid;

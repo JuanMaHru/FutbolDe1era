@@ -709,3 +709,5 @@ a.mode .mode-cta { color: var(--accent); }
 .cat-tier { font-family: var(--display); text-transform: uppercase; font-size: 14px; letter-spacing: 0.1em; margin: 14px 0 8px; }
 .cat-tier.t-leyenda { color: #c084fc; } .cat-tier.t-oro { color: #f4c542; } .cat-tier.t-plata { color: #cfd8e3; } .cat-tier.t-bronce { color: #e3955a; }
 .donate-ok { font-weight: 800; color: #5cc3ff; animation: rise .25s both; }
+.j-ach-group { display: grid; gap: 8px; margin-bottom: 14px; }
+.j-ach-group-title { margin: 0; font-weight: 900; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
