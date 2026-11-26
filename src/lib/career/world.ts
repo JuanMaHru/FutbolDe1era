@@ -5,6 +5,16 @@
  */
 export type Continent = "CONMEBOL" | "UEFA" | "CONCACAF" | "AFC";
 
+export interface Round { name: string; legs: boolean }
+export interface LeagueFormat {
+  /** rr: todos contra todos. ac: Apertura y Clausura con playoffs. */
+  type: "rr" | "ac";
+  double: boolean;
+  zones: number;
+  tournaments: string[];
+  playoff?: { rounds: Round[]; qualify: number };
+}
+
 export interface League {
   id: string;
   name: string;
@@ -17,23 +27,58 @@ export interface League {
   promote?: string; // liga a la que asciende
   relegateTo?: string;
   salary: number; // miles de USD por partido para un club medio
+  format: LeagueFormat;
+  cupRounds: Round[];
+  /** Coeficiente para la Bota de Oro. */
+  coef: number;
 }
 
+const one = (name: string): Round => ({ name, legs: false });
+const two = (name: string): Round => ({ name, legs: true });
+const RR: LeagueFormat = { type: "rr", double: true, zones: 1, tournaments: [""] };
+const CUP_SINGLE = (names: string[]) => names.map(one);
+
 export const LEAGUES: Record<string, League> = {
-  ARG2: { id: "ARG2", name: "Primera Nacional", country: "ARG", cup: "Copa Argentina", continent: "CONMEBOL", size: 36, top: [0, 0], promote: "ARG1", salary: 2 },
-  ARG1: { id: "ARG1", name: "Liga Profesional", country: "ARG", cup: "Copa Argentina", continent: "CONMEBOL", size: 30, top: [4, 8], relegateTo: "ARG2", salary: 9 },
-  BRA: { id: "BRA", name: "Brasileirão", country: "BRA", cup: "Copa do Brasil", continent: "CONMEBOL", size: 20, top: [4, 8], salary: 22 },
-  URU: { id: "URU", name: "Liga Uruguaya", country: "URU", cup: "Copa AUF Uruguay", continent: "CONMEBOL", size: 16, top: [3, 6], salary: 5 },
-  ESP: { id: "ESP", name: "LaLiga", country: "ESP", cup: "Copa del Rey", continent: "UEFA", size: 20, top: [4, 6], salary: 90 },
-  ENG: { id: "ENG", name: "Premier League", country: "ENG", cup: "FA Cup", continent: "UEFA", size: 20, top: [4, 6], salary: 130 },
-  ITA: { id: "ITA", name: "Serie A", country: "ITA", cup: "Coppa Italia", continent: "UEFA", size: 20, top: [4, 6], salary: 70 },
-  GER: { id: "GER", name: "Bundesliga", country: "GER", cup: "DFB-Pokal", continent: "UEFA", size: 18, top: [4, 6], salary: 75 },
-  FRA: { id: "FRA", name: "Ligue 1", country: "FRA", cup: "Coupe de France", continent: "UEFA", size: 18, top: [3, 5], salary: 55 },
-  POR: { id: "POR", name: "Primeira Liga", country: "POR", cup: "Taça de Portugal", continent: "UEFA", size: 18, top: [2, 4], salary: 30 },
-  NED: { id: "NED", name: "Eredivisie", country: "NED", cup: "KNVB Beker", continent: "UEFA", size: 18, top: [2, 4], salary: 25 },
-  MEX: { id: "MEX", name: "Liga MX", country: "MEX", cup: "Copa MX", continent: "CONCACAF", size: 18, top: [4, 0], salary: 20 },
-  USA: { id: "USA", name: "MLS", country: "USA", cup: "US Open Cup", continent: "CONCACAF", size: 30, top: [3, 0], salary: 30 },
-  KSA: { id: "KSA", name: "Saudi Pro League", country: "KSA", cup: "King's Cup", continent: "AFC", size: 18, top: [3, 0], salary: 120 },
+  ARG2: { id: "ARG2", name: "Primera Nacional", country: "ARG", cup: "Copa Argentina", continent: "CONMEBOL", size: 18, top: [0, 0], promote: "ARG1", salary: 2, format: RR, coef: 1,
+    cupRounds: CUP_SINGLE(["32avos de final", "16avos de final", "Octavos de final", "Cuartos de final", "Semifinal", "Final"]) },
+  ARG1: { id: "ARG1", name: "Liga Profesional", country: "ARG", cup: "Copa Argentina", continent: "CONMEBOL", size: 30, top: [4, 10], relegateTo: "ARG2", salary: 9, coef: 1.5,
+    format: { type: "ac", double: false, zones: 2, tournaments: ["Torneo Apertura", "Torneo Clausura"], playoff: { qualify: 8, rounds: CUP_SINGLE(["Octavos de final", "Cuartos de final", "Semifinal", "Final"]) } },
+    cupRounds: CUP_SINGLE(["32avos de final", "16avos de final", "Octavos de final", "Cuartos de final", "Semifinal", "Final"]) },
+  BRA: { id: "BRA", name: "Brasileirão", country: "BRA", cup: "Copa do Brasil", continent: "CONMEBOL", size: 20, top: [6, 12], salary: 22, format: RR, coef: 1.5,
+    cupRounds: [two("Tercera fase"), two("Octavos de final"), two("Cuartos de final"), two("Semifinal"), two("Final")] },
+  URU: { id: "URU", name: "Liga Uruguaya", country: "URU", cup: "Copa AUF Uruguay", continent: "CONMEBOL", size: 16, top: [3, 6], salary: 5, format: RR, coef: 1,
+    cupRounds: CUP_SINGLE(["16avos de final", "Octavos de final", "Cuartos de final", "Semifinal", "Final"]) },
+  ESP: { id: "ESP", name: "LaLiga", country: "ESP", cup: "Copa del Rey", continent: "UEFA", size: 20, top: [4, 6], salary: 90, format: RR, coef: 2,
+    cupRounds: [one("Segunda ronda"), one("16avos de final"), one("Octavos de final"), one("Cuartos de final"), two("Semifinal"), one("Final")] },
+  ENG: { id: "ENG", name: "Premier League", country: "ENG", cup: "FA Cup", continent: "UEFA", size: 20, top: [4, 6], salary: 130, format: RR, coef: 2,
+    cupRounds: CUP_SINGLE(["Tercera ronda", "Cuarta ronda", "Quinta ronda", "Cuartos de final", "Semifinal", "Final"]) },
+  ITA: { id: "ITA", name: "Serie A", country: "ITA", cup: "Coppa Italia", continent: "UEFA", size: 20, top: [4, 6], salary: 70, format: RR, coef: 2,
+    cupRounds: [one("16avos de final"), one("Octavos de final"), one("Cuartos de final"), two("Semifinal"), one("Final")] },
+  GER: { id: "GER", name: "Bundesliga", country: "GER", cup: "DFB-Pokal", continent: "UEFA", size: 18, top: [4, 6], salary: 75, format: RR, coef: 2,
+    cupRounds: CUP_SINGLE(["Primera ronda", "Segunda ronda", "Octavos de final", "Cuartos de final", "Semifinal", "Final"]) },
+  FRA: { id: "FRA", name: "Ligue 1", country: "FRA", cup: "Coupe de France", continent: "UEFA", size: 18, top: [3, 5], salary: 55, format: RR, coef: 2,
+    cupRounds: CUP_SINGLE(["32avos de final", "16avos de final", "Octavos de final", "Cuartos de final", "Semifinal", "Final"]) },
+  POR: { id: "POR", name: "Primeira Liga", country: "POR", cup: "Taça de Portugal", continent: "UEFA", size: 18, top: [2, 4], salary: 30, format: RR, coef: 1.5,
+    cupRounds: [one("Cuarta ronda"), one("Octavos de final"), one("Cuartos de final"), two("Semifinal"), one("Final")] },
+  NED: { id: "NED", name: "Eredivisie", country: "NED", cup: "KNVB Beker", continent: "UEFA", size: 18, top: [2, 4], salary: 25, format: RR, coef: 1.5,
+    cupRounds: CUP_SINGLE(["Segunda ronda", "Octavos de final", "Cuartos de final", "Semifinal", "Final"]) },
+  MEX: { id: "MEX", name: "Liga MX", country: "MEX", cup: "Leagues Cup", continent: "CONCACAF", size: 18, top: [4, 0], salary: 20, coef: 1,
+    format: { type: "ac", double: false, zones: 1, tournaments: ["Apertura", "Clausura"], playoff: { qualify: 8, rounds: [two("Cuartos de final"), two("Semifinal"), two("Final")] } },
+    cupRounds: CUP_SINGLE(["Fase de grupos", "16avos de final", "Octavos de final", "Cuartos de final", "Semifinal", "Final"]) },
+  USA: { id: "USA", name: "MLS", country: "USA", cup: "US Open Cup", continent: "CONCACAF", size: 16, top: [3, 0], salary: 30, coef: 1,
+    format: { type: "rr", double: true, zones: 1, tournaments: [""], playoff: { qualify: 8, rounds: CUP_SINGLE(["Cuartos de final", "Semifinal", "Final de la MLS Cup"]) } },
+    cupRounds: CUP_SINGLE(["Tercera ronda", "Octavos de final", "Cuartos de final", "Semifinal", "Final"]) },
+  KSA: { id: "KSA", name: "Saudi Pro League", country: "KSA", cup: "King's Cup", continent: "AFC", size: 18, top: [3, 0], salary: 120, format: RR, coef: 1,
+    cupRounds: CUP_SINGLE(["Octavos de final", "Cuartos de final", "Semifinal", "Final"]) },
+};
+
+/** Formatos continentales. group: grupo de 4 ida y vuelta. league: fase liga de 8 partidos. */
+export interface ContinentalFormat { first: "group" | "league" | "none"; knockout: Round[] }
+export const CONT_FORMAT: Record<Continent, ContinentalFormat> = {
+  CONMEBOL: { first: "group", knockout: [two("Octavos de final"), two("Cuartos de final"), two("Semifinal"), one("Final")] },
+  UEFA: { first: "league", knockout: [two("Playoffs"), two("Octavos de final"), two("Cuartos de final"), two("Semifinal"), one("Final")] },
+  CONCACAF: { first: "none", knockout: [two("Primera ronda"), two("Octavos de final"), two("Cuartos de final"), two("Semifinal"), one("Final")] },
+  AFC: { first: "league", knockout: [two("Octavos de final"), one("Cuartos de final"), one("Semifinal"), one("Final")] },
 };
 
 export const CONTINENTAL: Record<Continent, [string, string]> = {
@@ -92,16 +137,68 @@ const C: [string, string, number][] = [
   ["Al Hilal", "KSA", 78], ["Al Nassr", "KSA", 77], ["Al-Ittihad", "KSA", 76], ["Al-Ahli", "KSA", 76], ["Al-Shabab", "KSA", 68], ["Al-Ettifaq", "KSA", 67],
 ];
 
+/** Clubes para completar cada liga a su tamaño real (sin estilo propio: escudo genérico). */
+const FILL: [string, string, number][] = [
+  ...(["All Boys", "Almirante Brown", "Atlanta", "Agropecuario", "Deportivo Morón", "Defensores de Belgrano", "Estudiantes de Buenos Aires", "Gimnasia de Jujuy", "Mitre", "Patronato", "Racing de Córdoba", "Temperley"].map((n, i) => [n, "ARG2", 47 + (i % 4)]) as [string, string, number][]),
+  ["San Martín de San Juan", "ARG1", 55],
+  ...(["Bahia", "Fortaleza", "Bragantino", "Athletico Paranaense", "Vitória", "Juventude", "Sport Recife", "Ceará"].map((n, i) => [n, "BRA", 70 - i]) as [string, string, number][]),
+  ...(["Cerro", "Boston River", "Plaza Colonia", "Progreso", "Cerro Largo", "Deportivo Maldonado", "Juventud de Las Piedras", "Racing de Montevideo", "Fénix", "Miramar Misiones"].map((n, i) => [n, "URU", 54 - Math.floor(i / 2)]) as [string, string, number][]),
+  ...(["Mallorca", "Osasuna", "Alavés", "Elche", "Levante", "Real Oviedo"].map((n, i) => [n, "ESP", 70 - i]) as [string, string, number][]),
+  ...(["Bournemouth", "Brentford", "Wolverhampton", "Leeds United", "Sunderland", "Burnley"].map((n, i) => [n, "ENG", 76 - i]) as [string, string, number][]),
+  ...(["Cagliari", "Sassuolo", "Parma", "Lecce", "Hellas Verona", "Cremonese", "Pisa"].map((n, i) => [n, "ITA", 69 - Math.floor(i / 2)]) as [string, string, number][]),
+  ...(["Freiburg", "Hoffenheim", "Union Berlin", "Borussia Mönchengladbach", "Augsburg", "Hamburgo", "Colonia", "Heidenheim", "St. Pauli"].map((n, i) => [n, "GER", 75 - Math.floor(i * 0.9)]) as [string, string, number][]),
+  ...(["Strasbourg", "Toulouse", "Brest", "Nantes", "Paris FC", "Auxerre", "Angers", "Le Havre", "Lorient", "Metz"].map((n, i) => [n, "FRA", 74 - Math.floor(i * 0.9)]) as [string, string, number][]),
+  ...(["Famalicão", "Santa Clara", "Gil Vicente", "Estoril", "Moreirense", "Casa Pia", "Arouca", "Estrela Amadora", "Tondela", "AVS", "Alverca", "Boavista"].map((n, i) => [n, "POR", 66 - Math.floor(i / 2)]) as [string, string, number][]),
+  ...(["Go Ahead Eagles", "Heerenveen", "NEC", "Sparta Rotterdam", "Groningen", "Fortuna Sittard", "PEC Zwolle", "Heracles", "NAC Breda", "Excelsior", "Telstar", "Volendam"].map((n, i) => [n, "NED", 68 - Math.floor(i / 2)]) as [string, string, number][]),
+  ...(["Pachuca", "Pumas", "Tijuana", "Atlas", "Santos Laguna", "Necaxa", "Juárez", "San Luis", "Puebla", "Querétaro", "Mazatlán"].map((n, i) => [n, "MEX", 66 - Math.floor(i / 2)]) as [string, string, number][]),
+  ...(["Seattle Sounders", "Philadelphia Union", "Cincinnati", "Orlando City", "New York City FC", "Nashville", "Charlotte", "New York Red Bulls", "Chicago Fire", "Toronto", "CF Montréal"].map((n, i) => [n, "USA", 66 - Math.floor(i / 2)]) as [string, string, number][]),
+  ...(["Al-Qadsiah", "Al-Taawoun", "Neom", "Al-Fateh", "Al-Khaleej", "Al-Fayha", "Damac", "Al-Riyadh", "Al-Kholood", "Al-Okhdood", "Al-Hazem", "Al-Najma"].map((n, i) => [n, "KSA", 70 - Math.floor(i * 1.1)]) as [string, string, number][]),
+];
+
+/** Clubes que solo aparecen como rivales en copas continentales. */
+const INTL: [string, string, number][] = [
+  ...(["Independiente del Valle", "LDU Quito", "Atlético Nacional", "Olimpia", "Cerro Porteño", "Libertad", "Millonarios", "Junior", "Colo-Colo", "Universidad de Chile", "Universidad Católica", "Barcelona SC", "Bolívar", "The Strongest", "Universitario", "Alianza Lima", "Sporting Cristal"].map((n, i) => [n, "INT-SA", 66 - Math.floor(i / 2)]) as [string, string, number][]),
+  ...(["Galatasaray", "Fenerbahçe", "Club Brugge", "Celtic", "Olympiacos", "Rangers", "Shakhtar Donetsk", "Slavia Praga", "Salzburg", "Copenhague", "Dinamo Zagreb", "Crvena Zvezda", "Young Boys", "Sparta Praga"].map((n, i) => [n, "INT-EU", 76 - Math.floor(i / 1.6)]) as [string, string, number][]),
+  ...(["Saprissa", "Alajuelense", "Herediano", "Olimpia (HON)", "Real Salt Lake"].map((n, i) => [n, "INT-NA", 58 - i]) as [string, string, number][]),
+  ...(["Al Sadd", "Al Ain", "Urawa Reds", "Yokohama F. Marinos", "Ulsan HD", "Shanghai Port", "Al-Duhail", "Shabab Al-Ahli", "Johor Darul Ta'zim", "Buriram United"].map((n, i) => [n, "INT-AS", 67 - Math.floor(i / 2)]) as [string, string, number][]),
+];
+const INTL_CONT: Record<string, Continent> = { "INT-SA": "CONMEBOL", "INT-EU": "UEFA", "INT-NA": "CONCACAF", "INT-AS": "AFC" };
+
+/** Clásicos: partidos con más presión y más premio. */
+const DERBIES: [string, string][] = [
+  ["Boca Juniors", "River Plate"], ["Racing Club", "Independiente"], ["Rosario Central", "Newell's Old Boys"], ["Estudiantes", "Gimnasia y Esgrima LP"],
+  ["San Lorenzo", "Huracán"], ["Talleres", "Belgrano"], ["Colón", "Unión"], ["Lanús", "Banfield"], ["Vélez Sarsfield", "Ferro Carril Oeste"],
+  ["Peñarol", "Nacional"], ["Flamengo", "Fluminense"], ["Corinthians", "Palmeiras"], ["Grêmio", "Internacional"], ["Atlético Mineiro", "Cruzeiro"],
+  ["Real Madrid", "Barcelona"], ["Real Madrid", "Atlético de Madrid"], ["Sevilla", "Real Betis"], ["Athletic Club", "Real Sociedad"],
+  ["Manchester United", "Manchester City"], ["Manchester United", "Liverpool"], ["Liverpool", "Everton"], ["Arsenal", "Tottenham"],
+  ["Inter", "Milan"], ["Roma", "Lazio"], ["Juventus", "Torino"], ["Bayern Múnich", "Borussia Dortmund"], ["Paris Saint-Germain", "Olympique de Marsella"],
+  ["Benfica", "Sporting CP"], ["Benfica", "Porto"], ["Ajax", "Feyenoord"], ["Club América", "Chivas"], ["Tigres", "Monterrey"],
+  ["Al Hilal", "Al Nassr"], ["LA Galaxy", "LAFC"],
+];
+export const isDerby = (a: string, b: string) => DERBIES.some(([x, y]) => (x === a && y === b) || (x === b && y === a));
+export const derbyRival = (club: string) => DERBIES.find(([x, y]) => x === club || y === club)?.find((c) => c !== club);
+
 export interface WorldClub {
   name: string;
   league: string;
   strength: number;
 }
-export const CLUBS_W: WorldClub[] = C.map(([name, league, strength]) => ({ name, league, strength }));
-const BY_NAME = new Map(CLUBS_W.map((c) => [c.name, c]));
+export const CLUBS_W: WorldClub[] = [...C, ...FILL].map(([name, league, strength]) => ({ name, league, strength }));
+export const INTL_CLUBS: (WorldClub & { continent: Continent })[] = INTL.map(([name, league, strength]) => ({ name, league, strength, continent: INTL_CONT[league] }));
+/** Clubes que se pueden fichar (excluye relleno de ascenso de otras zonas). */
+export const SIGNABLE = CLUBS_W;
+const BY_NAME = new Map<string, WorldClub>([...CLUBS_W, ...INTL_CLUBS].map((c) => [c.name, c]));
 export const clubInfo = (name: string): WorldClub => BY_NAME.get(name) ?? { name, league: "ARG1", strength: 60 };
 export const clubsOf = (league: string) => CLUBS_W.filter((c) => c.league === league);
-export const leagueOf = (club: string, override?: Record<string, string>) => LEAGUES[override?.[club] ?? clubInfo(club).league];
+export const leagueOf = (club: string, override?: Record<string, string>) => LEAGUES[override?.[club] ?? clubInfo(club).league] ?? LEAGUES.ARG1;
+/** Clubes de una liga teniendo en cuenta ascensos/descensos de la carrera. */
+export const clubsInLeague = (league: string, override: Record<string, string>) =>
+  CLUBS_W.filter((c) => (override[c.name] ?? c.league) === league);
+/** Rivales posibles en copas continentales (de otros países del mismo continente). */
+export const continentalPool = (cont: Continent, country: string) => [
+  ...CLUBS_W.filter((c) => LEAGUES[c.league].continent === cont && LEAGUES[c.league].country !== country),
+  ...INTL_CLUBS.filter((c) => c.continent === cont),
+];
 
 /** Selecciones: nombre del equipo (con estilo en clubs.ts) y fuerza. */
 export const NATIONS: Record<string, { team: string; strength: number; name: string; flag: string; confed: Continent | "CAF" }> = {

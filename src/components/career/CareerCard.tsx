@@ -8,7 +8,7 @@ import { NATIONS } from "@/lib/career/world";
 const SHIRT = "M30 6 L42 2 Q50 9 58 2 L70 6 L96 22 L86 42 L76 37 L76 96 L24 96 L24 37 L14 42 L4 22 Z";
 
 /** Ficha final dibujada en canvas para guardar o compartir como imagen. */
-export function CareerCard({ s }: { s: CareerState }) {
+export function CareerCard({ s, achievements = [] }: { s: CareerState; achievements?: string[] }) {
   const ref = useRef<HTMLCanvasElement>(null);
   const [url, setUrl] = useState("");
 
@@ -84,7 +84,7 @@ export function CareerCard({ s }: { s: CareerState }) {
     });
     g.fillStyle = "#c9cfe6";
     g.font = "700 32px system-ui, sans-serif";
-    g.fillText(`Selección: ${s.caps} partidos · ${s.natGoals} goles`, 60, 800);
+    g.fillText(`Selección: ${s.caps} partidos · ${s.natGoals} goles · ${s.awards.length} premios individuales`, 60, 800);
 
     g.fillStyle = "#fff";
     g.font = "900 34px system-ui, sans-serif";
@@ -96,7 +96,7 @@ export function CareerCard({ s }: { s: CareerState }) {
       else stints.push({ club: h.club, from: h.year, to: h.year });
     }
     g.font = "700 32px system-ui, sans-serif";
-    stints.slice(-8).forEach((st, i) => {
+    stints.slice(-(achievements.length ? 5 : 8)).forEach((st, i) => {
       const y = 935 + i * 46;
       g.fillStyle = clubStyle(st.club).colors[0] === "#FFFFFF" ? clubStyle(st.club).colors[1] : clubStyle(st.club).colors[0];
       g.fillRect(60, y - 26, 14, 32);
@@ -105,11 +105,16 @@ export function CareerCard({ s }: { s: CareerState }) {
       g.fillStyle = "#c9cfe6";
       g.fillText(st.from === st.to ? `${st.from}` : `${st.from}–${st.to}`, 760, y);
     });
+    if (achievements.length) {
+      g.fillStyle = "#ffc23d";
+      g.font = "800 30px system-ui, sans-serif";
+      achievements.slice(0, 3).forEach((a, i) => g.fillText(a, 60, H - 150 + i * 38 - (stints.length > 5 ? 0 : 0)));
+    }
     g.fillStyle = "#ff7a1a";
     g.font = "800 28px system-ui, sans-serif";
-    g.fillText("¿Podés superarla? futboldeprimera", 60, H - 50);
+    g.fillText("¿Podés superarla? futboldeprimera", 60, H - 34);
     setUrl(cv.toDataURL("image/png"));
-  }, [s]);
+  }, [s, achievements]);
 
   const share = async () => {
     try {

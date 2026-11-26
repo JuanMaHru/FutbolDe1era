@@ -42,7 +42,7 @@ function base(h: number, sat: number): Tokens {
 }
 
 export function defaultTokens(): Tokens {
-  return { ...base(228, 38), "--accent": "#ff7a1a", "--accent-ink": "#1d0b00", "--accent-2": "#ffc23d" };
+  return { ...base(228, 38), "--accent": "#ff7a1a", "--accent-ink": "#1d0b00", "--accent-2": "#ffc23d", "--club-1": "#ff7a1a", "--club-2": "#ffc23d", "--club-3": "#ffffff" };
 }
 
 /** Elige el color "fuerte" del club y lo hace legible sobre fondo oscuro. */
@@ -62,8 +62,14 @@ export function clubTokens(colors: string[]): Tokens {
   }
   const accent = hsl(ah, as, al);
   const second = vivid.find((c) => c !== vivid[0]);
+  const raw = colors.filter(Boolean);
+  const c1 = raw[0]?.toUpperCase() === "#FFFFFF" ? raw[1] : raw[0];
+  const c2 = raw.find((c) => c && c.toUpperCase() !== c1?.toUpperCase()) ?? "#ffffff";
   return {
     ...t,
+    "--club-1": c1 ?? accent,
+    "--club-2": c2,
+    "--club-3": raw[2] ?? "#ffffff",
     "--accent": accent,
     "--accent-ink": al > 60 || neutral ? "#111111" : "#ffffff",
     "--accent-2": second ? hsl(second[0], Math.max(second[1], 50), Math.max(Math.min(second[2], 70), 55)) : accent,
@@ -90,6 +96,7 @@ export function setTheme(theme: string) {
   write("theme", theme);
   write("themeTokens", t); // lo lee el script de arranque para pintar sin parpadeo
   applyTokens(t);
+  try { window.dispatchEvent(new Event("primera:theme")); } catch { /* noop */ }
 }
 
 /** Script inline para <head>: aplica el tema guardado antes del primer pintado. */

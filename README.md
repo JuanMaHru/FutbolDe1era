@@ -11,12 +11,14 @@ Minijuegos diarios de fútbol conectados a un modo carrera. *Tu conocimiento rea
 - **Palabra Crack**: el apellido letra por letra.
 - **Bingo Futbolero**: ubicá a cada jugador que sale en la casilla que cumple.
 
-**Modo Carrera**: creás un jugador (puesto, estilo de juego, pie hábil, apodo, dorsal) y jugás temporadas con
-calendario real: liga, copa nacional, copa continental si clasificás (Libertadores, Sudamericana, Champions,
-Europa League…), ascensos y descensos, y Mundial / Copa América / Eurocopa con tu selección si te convocan.
-Entre partidos hay ~60 eventos con resultados variables. En cada partido jugás minijuegos según tu puesto:
-definir, mano a mano, penales (patear y atajar), tiros libres (patear y atajar), pase filtrado, anticipo,
-cabezazo, tres en raya y trivia con preguntas generadas de la base. Ficha final como imagen.
+**Modo Carrera**: creás un jugador (puesto, estilo, pie, apodo, dorsal) y la suerte decide su potencial
+(de "jugador de oficio" a "fenómeno generacional"). Temporadas con formato real: ligas completas con tabla
+(38 fechas en Europa, Apertura/Clausura con playoffs en Argentina y México), copas nacionales por rondas,
+copas continentales con fase de grupos o fase liga e ida y vuelta, ascensos/descensos y Mundial, Copa América
+o Eurocopa con tu selección. Los partidos clave se juegan con minijuegos (con minuto, marcador y situación);
+el resto se simula pero cuenta. ~90 eventos con resultados variables y tope de repeticiones. Premios
+(Balón de Oro, Bota de Oro, goleador y mejor jugador de la liga, Guante de Oro, Golden Boy), logros de carrera,
+ofertas millonarias de Arabia y vuelta al club de origen. Se puede simular una temporada entera.
 
 **Ligas entre amigos** (simuladas en local), **resultado compartible**, **sonidos**, **temas por club**
 (la página toma los colores de tu club o selección).

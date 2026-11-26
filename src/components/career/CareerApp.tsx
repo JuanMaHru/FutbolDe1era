@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import * as E from "@/lib/career/engine";
-import type { CareerState, Fixture, MatchResult, Moment, MomentKind } from "@/lib/career/engine";
-import { CAREER_COUNTRIES, LEAGUES, NATIONS, clubInfo, startingOffers, strengthOf } from "@/lib/career/world";
+import type { CareerState, Fixture, MatchResult, Moment, MomentKind, Offer } from "@/lib/career/engine";
+import { CAREER_COUNTRIES, LEAGUES, NATIONS, clubInfo, isDerby, startingOffers, strengthOf } from "@/lib/career/world";
 import { eventById, resolveChoice, type Effect } from "@/lib/career/events";
+import { achievements } from "@/lib/career/awards";
+import { matchComments, situation } from "@/lib/career/comments";
 import { POSITIONS, COUNTRIES } from "@/lib/game/meta";
 import { dateKey } from "@/lib/game/daily";
 import { loadProfile } from "@/lib/progress";
@@ -15,31 +17,40 @@ import { Kit } from "../art/Kit";
 import { Confetti } from "../Confetti";
 import { CareerCard } from "./CareerCard";
 import { MomentRunner, PenaltySave, PenaltyShoot } from "./Moments";
+import { Burst } from "./Burst";
+import { TrophyIcon } from "./Trophy";
 
 const KEY = "career";
 const POS_OPTS = ["ARQ", "DFC", "LAT", "MC", "MCO", "EXT", "DC"];
 const R = Math.random;
+const plural = (n: number, a: string, b: string) => `${n} ${n === 1 ? a : b}`;
+const COMP_ICON: Record<string, string> = { league: "🏟️", playoff: "⚔️", cup: "🏆", intl: "🌎", national: "🎽" };
+/** Colores de un club para festejos (el blanco se reemplaza por el segundo color). */
+export const clubColors = (club: string): [string, string] => {
+  const c = clubStyle(club).colors;
+  const a = c[0].toUpperCase() === "#FFFFFF" ? c[1] : c[0];
+  const b = c[1].toUpperCase() === a.toUpperCase() ? (c[2] ?? "#ffffff") : c[1];
+  return [a, b];
+};
 
 export function CareerApp() {
   const [s, setS] = useState<CareerState | null | undefined>(undefined);
   const [migrated, setMigrated] = useState(false);
   useEffect(() => {
     const saved = read<CareerState | { v: number } | null>(KEY, null);
-    if (saved && saved.v !== 2) {
-      setMigrated(true);
-      setS(null);
-    } else setS(saved as CareerState | null);
+    if (saved && saved.v !== 3) { setMigrated(true); setS(null); } else setS(saved as CareerState | null);
   }, []);
-  const save = (n: CareerState | null) => {
-    setS(n);
-    write(KEY, n);
-  };
+  const save = (n: CareerState | null) => { setS(n); write(KEY, n); };
   if (s === undefined) return <div className="card muted" style={{ marginTop: 24 }}>Cargando tu carrera…</div>;
   if (!s) return <Create onCreate={save} migrated={migrated} />;
   return <Hub s={s} save={save} />;
 }
 
 /* ================= Creación ================= */
+
+function Stars({ n }: { n: number }) {
+  return <span className="stars" aria-label={`${n} estrellas`}>{"★".repeat(n)}<span className="dim">{"★".repeat(5 - n)}</span></span>;
+}
 
 function Create({ onCreate, migrated }: { onCreate: (s: CareerState) => void; migrated: boolean }) {
   const [rep, setRep] = useState(0);
@@ -52,22 +63,31 @@ function Create({ onCreate, migrated }: { onCreate: (s: CareerState) => void; mi
   const [num, setNum] = useState(9);
   const [age, setAge] = useState(18);
   const [club, setClub] = useState<string | null>(null);
+  const [talent, setTalent] = useState<E.TalentId | null>(null);
+  const [rolling, setRolling] = useState(false);
+  const [face, setFace] = useState(0);
   const offers = useMemo(() => startingOffers(rep, nat, R), [rep, nat]);
-
   useEffect(() => setRep(loadProfile().reputation), []);
   useEffect(() => setClub(null), [nat]);
   const role = E.ROLE_OF[pos];
   useEffect(() => setArche(E.ARCHETYPES[role][0].id), [role]);
-
   const bonus = E.repToBonus(rep);
-  const ready = name.trim().length >= 2 && club;
+  const ready = name.trim().length >= 2 && club && talent;
+  const t = talent ? E.TALENTS.find((x) => x.id === talent)! : null;
+
+  const roll = () => {
+    if (talent || rolling) return;
+    setRolling(true);
+    play("click");
+    let i = 0;
+    const id = setInterval(() => { setFace((f) => (f + 1) % 4); play("flip"); if (++i > 14) { clearInterval(id); const r = E.rollTalent(R); setTalent(r); setRolling(false); play(r === "crack" || r === "fenomeno" ? "win" : "hit"); } }, 110);
+  };
 
   return (
     <div className="career-create">
       <h1 className="hero-title" style={{ fontSize: "clamp(28px,7vw,44px)" }}>Modo <span className="hl">Carrera</span></h1>
-      <p className="lead">Creá tu jugador y viví toda su carrera: liga, copas, torneos internacionales y la selección. En cada partido, tus decisiones y tu conocimiento definen las jugadas.</p>
-      {migrated && <p className="notice">Actualizamos el Modo Carrera con copas, selecciones y nuevos minijuegos. Tu carrera anterior no es compatible: empezá una nueva.</p>}
-
+      <p className="lead">Creá tu jugador y viví toda su carrera: liga completa, copas, torneos internacionales y la selección. Los partidos importantes los jugás vos; el resto se simula pero cuenta.</p>
+      {migrated && <p className="notice">Actualizamos el Modo Carrera (formatos reales, ida y vuelta, premios y logros). Tu carrera anterior no es compatible: empezá una nueva.</p>}
       <div className="rep-note">
         <span className="rep-big">⭐ {rep}</span>
         <span>Tu reputación de los retos diarios te da <b>+{bonus} de nivel inicial</b>{rep >= 80 ? " y pruebas en clubes de Primera" : ". Jugá los retos para abrir mejores pruebas"}.</span>
@@ -80,37 +100,18 @@ function Create({ onCreate, migrated }: { onCreate: (s: CareerState) => void; mi
           <input id="career-nick" className="input" maxLength={16} placeholder="Apodo (opcional, ej.: El Tanque)" value={nick} onChange={(e) => setNick(e.target.value)} />
         </div>
       </section>
-
       <section className="create-step">
         <h2>2 · Nacionalidad</h2>
-        <div className="chips">
-          {CAREER_COUNTRIES.map((c) => (
-            <button key={c.code} className={`chip-btn ${nat === c.code ? "on" : ""}`} onClick={() => { play("click"); setNat(c.code); }}>{c.flag} {c.name}</button>
-          ))}
-        </div>
+        <div className="chips">{CAREER_COUNTRIES.map((c) => <button key={c.code} className={`chip-btn ${nat === c.code ? "on" : ""}`} onClick={() => { play("click"); setNat(c.code); }}>{c.flag} {c.name}</button>)}</div>
       </section>
-
       <section className="create-step">
         <h2>3 · Puesto</h2>
-        <div className="chips">
-          {POS_OPTS.map((p) => (
-            <button key={p} className={`chip-btn ${pos === p ? "on" : ""}`} onClick={() => { play("click"); setPos(p); }}><b>{p}</b> {POSITIONS[p].label}</button>
-          ))}
-        </div>
+        <div className="chips">{POS_OPTS.map((p) => <button key={p} className={`chip-btn ${pos === p ? "on" : ""}`} onClick={() => { play("click"); setPos(p); }}><b>{p}</b> {POSITIONS[p].label}</button>)}</div>
       </section>
-
       <section className="create-step">
         <h2>4 · Tu estilo de juego</h2>
-        <div className="arche-grid">
-          {E.ARCHETYPES[role].map((a) => (
-            <button key={a.id} className={`arche ${arche === a.id ? "on" : ""}`} onClick={() => { play("click"); setArche(a.id); }}>
-              <b>{a.name}</b>
-              <span className="muted small">{a.desc}</span>
-            </button>
-          ))}
-        </div>
+        <div className="arche-grid">{E.ARCHETYPES[role].map((a) => <button key={a.id} className={`arche ${arche === a.id ? "on" : ""}`} onClick={() => { play("click"); setArche(a.id); }}><b>{a.name}</b><span className="muted small">{a.desc}</span></button>)}</div>
       </section>
-
       <section className="create-step two">
         <div>
           <h2>5 · Dorsal</h2>
@@ -122,29 +123,39 @@ function Create({ onCreate, migrated }: { onCreate: (s: CareerState) => void; mi
         </div>
         <div>
           <h2>6 · Edad y pie</h2>
-          <div className="chips">
-            {[17, 18, 19].map((a) => <button key={a} className={`chip-btn ${age === a ? "on" : ""}`} onClick={() => { play("click"); setAge(a); }}>{a} años</button>)}
-          </div>
-          <div className="chips" style={{ marginTop: 6 }}>
-            {(["derecho", "zurdo", "ambidiestro"] as const).map((f) => <button key={f} className={`chip-btn ${foot === f ? "on" : ""}`} onClick={() => { play("click"); setFoot(f); }}>🦶 {f}</button>)}
-          </div>
+          <div className="chips">{[17, 18, 19].map((a) => <button key={a} className={`chip-btn ${age === a ? "on" : ""}`} onClick={() => { play("click"); setAge(a); }}>{a} años</button>)}</div>
+          <div className="chips" style={{ marginTop: 6 }}>{(["derecho", "zurdo", "ambidiestro"] as const).map((f) => <button key={f} className={`chip-btn ${foot === f ? "on" : ""}`} onClick={() => { play("click"); setFoot(f); }}>🦶 {f}</button>)}</div>
         </div>
       </section>
-
       <section className="create-step">
         <h2>7 · ¿Dónde debutás?</h2>
         <div className="offers">
           {offers.map((c) => (
             <button key={c} className={`offer ${club === c ? "on" : ""}`} onClick={() => { play("click"); setClub(c); }}>
-              <Crest club={c} size={46} />
-              <span className="offer-name">{c}</span>
-              <span className="muted small">{LEAGUES[clubInfo(c).league].name}</span>
+              <Crest club={c} size={46} /><span className="offer-name">{c}</span><span className="muted small">{LEAGUES[clubInfo(c).league].name}</span>
             </button>
           ))}
         </div>
       </section>
-
-      <button className="btn btn-primary big-cta" disabled={!ready} onClick={() => { play("win"); onCreate(E.newCareer({ name, nick, nationality: nat, position: pos, archetype: arche, foot, number: num, age, club: club!, repBonus: bonus })); }}>
+      <section className="create-step">
+        <h2>8 · Informe del ojeador</h2>
+        <div className={`talent-card ${t ? `t-${t.id}` : ""}`}>
+          {!t ? (
+            <>
+              <div className={`dice ${rolling ? "rolling" : ""}`} aria-hidden>{["⚽", "🎲", "⭐", "👟"][face]}</div>
+              <p className="muted small" style={{ margin: 0 }}>El talento no se elige: lo decide la suerte. Puede salir un jugador de oficio… o un fenómeno.</p>
+              <button className="btn btn-primary" onClick={roll} disabled={rolling}>{rolling ? "Mirando videos…" : "🎲 Ver mi potencial"}</button>
+            </>
+          ) : (
+            <>
+              <Stars n={t.stars} />
+              <b className="talent-name">{t.name}</b>
+              <span className="muted small">{t.desc}</span>
+            </>
+          )}
+        </div>
+      </section>
+      <button className="btn btn-primary big-cta" disabled={!ready} onClick={() => { play("win"); onCreate(E.newCareer({ name, nick, nationality: nat, position: pos, archetype: arche, foot, number: num, age, club: club!, repBonus: bonus, talent: talent! }, R)); }}>
         Firmar mi primer contrato ✍️
       </button>
     </div>
@@ -163,34 +174,30 @@ function Bar({ label, v, icon }: { label: string; v: number; icon: string }) {
   );
 }
 
-const COMP_ICON: Record<string, string> = { league: "🏟️", cup: "🏆", intl: "🌎", national: "🎽" };
-const plural = (n: number, a: string, b: string) => `${n} ${n === 1 ? a : b}`;
-
 function Hub({ s, save }: { s: CareerState; save: (s: CareerState | null) => void }) {
-  const [confirmReset, setConfirmReset] = useState(false);
+  const [confirm, setConfirm] = useState<"" | "reset" | "sim">("");
   const [wonToday, setWonToday] = useState(false);
-  useEffect(() => {
-    const r = loadProfile().results[dateKey()] ?? {};
-    setWonToday(Object.values(r).some((p) => (p ?? 0) > 0));
-  }, []);
+  useEffect(() => { const r = loadProfile().results[dateKey()] ?? {}; setWonToday(Object.values(r).some((p) => (p ?? 0) > 0)); }, []);
   const today = dateKey();
   const canBonus = wonToday && s.bonusDay !== today && s.phase !== "retired";
   const team = E.myTeam(s);
-  const cs = clubStyle(team);
+  const [c1] = clubColors(s.club);
   const r = E.role(s);
   const lg = E.leagueOfState(s);
-  const arche = E.archetypeOf(s);
-  const next = s.phase === "event" || s.phase === "match" || s.phase === "national" ? E.nextFixture(s.pendingEvent === "national-call" ? s : s) : null;
+  const t = E.talentOf(s);
+  const inSeason = s.phase === "event" || s.phase === "match" || s.phase === "national";
+  const next = inSeason && s.pendingEvent !== "national-call" ? E.nextFixture(s.national && s.phase !== "national" ? { ...s, phase: "national" } : s) : null;
+  const myTable = s.tables.find((x) => x.rows[s.club] && x.played > 0 && x.played < x.rounds.length) ?? s.tables.filter((x) => x.rows[s.club] && x.played > 0).slice(-1)[0];
 
   return (
     <div className="career">
-      <section className="career-head" style={{ "--club": cs.colors[0].toUpperCase() === "#FFFFFF" ? cs.colors[1] : cs.colors[0] } as React.CSSProperties}>
+      <section className="career-head" style={{ "--club": c1 } as React.CSSProperties}>
         <Kit club={team} label={s.number} size={88} />
         <div className="ch-main">
           <div className="ch-name">{s.nick ? `“${s.nick}”` : s.name}</div>
           {s.nick && <div className="ch-real">{s.name}</div>}
-          <div className="ch-sub"><Crest club={s.club} size={20} /> {clubStyle(s.club).short} · {POSITIONS[s.position]?.label} · {COUNTRIES[s.nationality]?.flag ?? NATIONS[s.nationality]?.flag} · {s.age} años</div>
-          <div className="ch-season">Temporada {s.season} ({E.currentYear(s)}) · {lg.name} · {arche.name}</div>
+          <div className="ch-sub"><Crest club={s.club} size={20} /> {clubStyle(s.club).short} · {POSITIONS[s.position]?.label} · {NATIONS[s.nationality]?.flag ?? COUNTRIES[s.nationality]?.flag} · {s.age} años</div>
+          <div className="ch-season">Temporada {s.season} ({E.currentYear(s)}) · {lg.name} · <Stars n={t.stars} /></div>
         </div>
         <div className="ovr"><b>{s.ovr}</b><span>NIVEL</span></div>
       </section>
@@ -207,7 +214,8 @@ function Hub({ s, save }: { s: CareerState; save: (s: CareerState | null) => voi
         {r === "MED" ? <><span>🅰️ {plural(s.totals.assists, "asistencia", "asistencias")}</span><span>⚽ {plural(s.totals.goals, "gol", "goles")}</span></> : null}
         {r === "DEL" ? <><span>⚽ {plural(s.totals.goals, "gol", "goles")}</span><span>🅰️ {s.totals.assists}</span></> : null}
         <span>🏆 {s.trophies.length}</span>
-        <span>💰 {s.money} mil USD</span>
+        {s.awards.length > 0 && <span>🏅 {s.awards.length}</span>}
+        <span>💰 {s.money >= 1000 ? `${(s.money / 1000).toFixed(1)} M` : `${s.money} mil`} USD</span>
         {s.caps > 0 && <span>{NATIONS[s.nationality]?.flag} {s.caps} PJ · {s.natGoals} G</span>}
       </div>
 
@@ -217,8 +225,12 @@ function Hub({ s, save }: { s: CareerState; save: (s: CareerState | null) => voi
         </button>
       )}
 
-      {next && s.phase !== "national" && s.pendingEvent !== "national-call" && !s.national && (
-        <div className="next-fx"><span>{COMP_ICON[next.fx.kind]}</span> Próximo: <b>{next.fx.comp}</b> · {next.fx.round}</div>
+      {next && (
+        <div className="next-fx">
+          <span>{COMP_ICON[next.fx.kind]}</span> Próximo: <b>{next.fx.comp}</b> · {next.fx.stage}
+          {next.fx.rival && <> · vs <Crest club={next.fx.rival} size={16} /> <b>{clubStyle(next.fx.rival).short}</b></>}
+          {next.fx.rival && isDerby(team, next.fx.rival) && <span className="derby-tag">CLÁSICO</span>}
+        </div>
       )}
 
       {s.phase === "event" && <EventStep s={s} save={save} />}
@@ -226,15 +238,32 @@ function Hub({ s, save }: { s: CareerState; save: (s: CareerState | null) => voi
       {s.phase === "season-end" && <SeasonEnd s={s} save={save} />}
       {s.phase === "retired" && <Retired s={s} save={save} />}
 
-      {s.fixtures.some((f) => f.result) && s.phase !== "season-end" && (
-        <details className="history" open={false}>
-          <summary>Partidos de la temporada</summary>
-          <ul className="fx-list">
-            {s.fixtures.filter((f) => f.result).map((f, i) => <FxRow key={i} f={f} />)}
-          </ul>
-        </details>
+      {inSeason && (
+        <div className="row" style={{ marginTop: 10 }}>
+          {confirm === "sim" ? (
+            <>
+              <span className="small">¿Simular {s.national ? "el resto del torneo" : "el resto de la temporada"} sin jugar?</span>
+              <button className="btn btn-primary" onClick={() => { play("whistle"); setConfirm(""); save(E.simulateRest(s, R)); }}>Sí, simular</button>
+              <button className="btn btn-ghost" onClick={() => setConfirm("")}>Cancelar</button>
+            </>
+          ) : (
+            <button className="btn btn-ghost" onClick={() => setConfirm("sim")}>⏩ Simular {s.national ? "torneo" : "temporada"}</button>
+          )}
+        </div>
       )}
 
+      {myTable && s.phase !== "retired" && (
+        <details className="history">
+          <summary>Tabla · {myTable.name}</summary>
+          <TableView table={myTable} me={s.club} />
+        </details>
+      )}
+      {s.fixtures.some((f) => f.result) && s.phase !== "season-end" && (
+        <details className="history">
+          <summary>Partidos de la temporada ({s.fixtures.filter((f) => f.result).length})</summary>
+          <ul className="fx-list">{s.fixtures.filter((f) => f.result).slice().reverse().map((f) => <FxRow key={f.id} f={f} />)}</ul>
+        </details>
+      )}
       {s.history.length > 0 && (
         <details className="history">
           <summary>Historial de temporadas</summary>
@@ -245,7 +274,7 @@ function Hub({ s, save }: { s: CareerState; save: (s: CareerState | null) => voi
                 {s.history.map((h) => (
                   <tr key={h.season}>
                     <td>{h.year}</td>
-                    <td className="name"><Crest club={h.club} size={18} /> {clubStyle(h.club).short} {h.titles.length > 0 && "🏆".repeat(Math.min(3, h.titles.length))}</td>
+                    <td className="name"><Crest club={h.club} size={18} /> {clubStyle(h.club).short} {[...h.titles, ...h.awards].slice(0, 4).map((x) => <TrophyIcon key={x} name={x} size={16} />)}</td>
                     <td>{h.pj}</td><td>{r === "ARQ" || r === "DEF" ? h.cleanSheets : h.goals}</td><td>{r === "ARQ" ? h.goals : h.assists}</td><td>{h.avg}</td><td>{h.place}º</td>
                   </tr>
                 ))}
@@ -254,20 +283,23 @@ function Hub({ s, save }: { s: CareerState; save: (s: CareerState | null) => voi
           </div>
         </details>
       )}
-      {s.trophies.length > 0 && (
-        <details className="history"><summary>Vitrina ({s.trophies.length})</summary><ul className="trophies">{s.trophies.map((t, i) => <li key={i}>🏆 {t}</li>)}</ul></details>
+      {(s.trophies.length > 0 || s.awards.length > 0) && (
+        <details className="history">
+          <summary>Vitrina ({s.trophies.length} títulos · {s.awards.length} premios)</summary>
+          <Showcase s={s} />
+        </details>
       )}
 
       {s.phase !== "retired" && (
         <div className="row" style={{ marginTop: 14 }}>
-          {confirmReset ? (
+          {confirm === "reset" ? (
             <>
               <span className="small">¿Borrar esta carrera y empezar otra?</span>
               <button className="btn" style={{ borderColor: "var(--danger)", color: "var(--danger)" }} onClick={() => save(null)}>Sí, borrar</button>
-              <button className="btn btn-ghost" onClick={() => setConfirmReset(false)}>Cancelar</button>
+              <button className="btn btn-ghost" onClick={() => setConfirm("")}>Cancelar</button>
             </>
           ) : (
-            <button className="btn btn-ghost small" style={{ color: "var(--muted)" }} onClick={() => setConfirmReset(true)}>Empezar otra carrera</button>
+            <button className="btn btn-ghost small" style={{ color: "var(--muted)" }} onClick={() => setConfirm("reset")}>Empezar otra carrera</button>
           )}
         </div>
       )}
@@ -275,21 +307,63 @@ function Hub({ s, save }: { s: CareerState; save: (s: CareerState | null) => voi
   );
 }
 
+function TableView({ table, me }: { table: E.Table; me: string }) {
+  const rows = E.standings(table);
+  const pos = rows.findIndex(([c]) => c === me);
+  const shown = rows.filter((_, i) => i < 6 || Math.abs(i - pos) <= 1);
+  return (
+    <div className="table-scroll">
+      <table className="table mini">
+        <thead><tr><th>#</th><th className="name">Equipo</th><th>PJ</th><th>DG</th><th>Pts</th></tr></thead>
+        <tbody>
+          {shown.map(([c, r]) => {
+            const i = rows.findIndex(([x]) => x === c);
+            return <tr key={c} className={c === me ? "me" : ""}><td>{i + 1}</td><td className="name"><Crest club={c} size={16} /> {clubStyle(c).short}</td><td>{r.pj}</td><td>{r.gf - r.ga}</td><td className="total">{r.pts}</td></tr>;
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function Showcase({ s }: { s: CareerState }) {
+  const groups = new Map<string, number>();
+  [...s.trophies, ...s.awards].forEach((t) => {
+    const k = t.replace(/ \d{4}( \(.*\))?$/, "").replace(/ con .*$/, "").replace(/^(Ascenso a .*?) \d{4}.*$/, "$1");
+    groups.set(k, (groups.get(k) ?? 0) + 1);
+  });
+  const all = [...s.trophies, ...s.awards];
+  return (
+    <div className="showcase">
+      {[...groups.entries()].map(([k, n]) => {
+        const sample = all.find((t) => t.startsWith(k))!;
+        return (
+          <div key={k} className="show-item" title={all.filter((t) => t.startsWith(k)).join("\n")}>
+            <TrophyIcon name={sample} size={42} />
+            <span className="show-n">{n > 1 ? `×${n}` : ""}</span>
+            <span className="show-name">{k}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function FxRow({ f }: { f: Fixture }) {
   const r = f.result!;
-  const won = r.gf > r.ga || (r.pens ? r.pens[0] > r.pens[1] : false);
+  const won = r.gf > r.ga || (!!r.pens && r.pens[0] > r.pens[1]);
   const draw = r.gf === r.ga && !r.pens;
   return (
-    <li className={`fx ${won ? "w" : draw ? "d" : "l"}`}>
-      <span className="fx-comp">{COMP_ICON[f.kind]} {f.round}</span>
-      <span className="fx-rival"><Crest club={f.rival ?? ""} size={16} /> {clubStyle(f.rival ?? "").short}</span>
+    <li className={`fx ${won ? "w" : draw ? "d" : "l"} ${r.key ? "" : "sim"}`}>
+      <span className="fx-comp">{COMP_ICON[f.kind]} {f.stage}</span>
+      <span className="fx-rival"><Crest club={f.rival} size={16} /> {clubStyle(f.rival).short}</span>
       <span className="fx-score">{r.gf}-{r.ga}{r.pens ? ` (${r.pens[0]}-${r.pens[1]})` : ""}</span>
-      <span className="fx-rating">{r.played ? r.rating : "—"}</span>
+      <span className="fx-rating">{r.played ? (r.goals ? "⚽".repeat(Math.min(r.goals, 3)) : r.rating) : "—"}</span>
     </li>
   );
 }
 
-/* ================= Evento entre partidos ================= */
+/* ================= Evento ================= */
 
 function EffectChips({ e }: { e: Effect }) {
   const up = (v?: number) => (v ? (v > 0 ? "up" : "down") : "");
@@ -308,113 +382,129 @@ function EffectChips({ e }: { e: Effect }) {
   );
 }
 
+function AutoLog({ lines }: { lines: string[] }) {
+  if (!lines.length) return null;
+  const goals = lines.reduce((a, l) => a + (l.split("|")[4]?.length ?? 0) / 2, 0);
+  const w = lines.filter((l) => l.startsWith("G")).length, d = lines.filter((l) => l.startsWith("E")).length, p = lines.filter((l) => l.startsWith("P")).length;
+  return (
+    <details className="autolog" open={lines.length <= 4}>
+      <summary>Mientras tanto: {lines.length} partidos simulados · {w}G {d}E {p}P{goals ? ` · ${Math.round(goals)} gol${Math.round(goals) === 1 ? "" : "es"} tuyos` : ""}</summary>
+      <ul>
+        {lines.map((l, i) => {
+          const [res, comp, rival, score, mine] = l.split("|");
+          return <li key={i} className={`al-${res}`}><span>{comp}</span><span><Crest club={rival} size={14} /> {clubStyle(rival).short}</span><b>{score}</b><span>{mine}</span></li>;
+        })}
+      </ul>
+    </details>
+  );
+}
+
 function EventStep({ s, save }: { s: CareerState; save: (s: CareerState) => void }) {
   const [effect, setEffect] = useState<Effect | null>(null);
   const [next, setNext] = useState<CareerState | null>(null);
   const go = (n: CareerState) => { play("kick"); save(E.afterEvent(n, s.pendingEvent)); };
-
+  const log = <AutoLog lines={s.autoLog} />;
   if (s.pendingEvent === "debut") {
-    return (
-      <section className="event card">
-        <div className="event-icon">🏟️</div>
-        <h2>¡Te citaron!</h2>
-        <p>El DT de {s.club} te incluye en la lista para la primera fecha. Tu familia ya sacó entradas.</p>
-        <button className="btn btn-primary big-cta" onClick={() => go(s)}>Ir al partido →</button>
-      </section>
-    );
+    return (<>{log}<section className="event card"><div className="event-icon">🏟️</div><h2>¡Te citaron!</h2><p>El DT de {s.club} te incluye en la lista para la primera fecha. Tu familia ya sacó entradas.</p><button className="btn btn-primary big-cta" onClick={() => go(s)}>Ir al partido →</button></section></>);
   }
   if (s.pendingEvent === "national-call" && s.national) {
-    return (
-      <section className="event card national">
-        <div className="event-icon">{NATIONS[s.nationality]?.flag}</div>
-        <h2>¡Convocado para la {s.national.name}!</h2>
-        <p>El DT de {NATIONS[s.nationality]?.name} te incluyó en la lista. Vas a defender la camiseta de tu país.</p>
-        <button className="btn btn-primary big-cta" onClick={() => go(s)}>Viajar con la selección ✈️</button>
-      </section>
-    );
+    return (<>{log}<section className="event card national"><div className="event-icon">{NATIONS[s.nationality]?.flag}</div><h2>¡Convocado para la {s.national.name}!</h2><p>El DT de {NATIONS[s.nationality]?.name} te incluyó en la lista. Vas a defender la camiseta de tu país.</p><button className="btn btn-primary big-cta" onClick={() => go(s)}>Viajar con la selección ✈️</button></section></>);
   }
   const ev = eventById(s.pendingEvent ?? "") ?? eventById("asado")!;
   if (effect && next) {
-    return (
+    return (<>{log}<section className="event card"><div className="event-icon">{ev.icon}</div><h2>{ev.title}</h2><p className="effect-text">{effect.text}</p><EffectChips e={effect} /><button className="btn btn-primary big-cta" onClick={() => go(next)}>Ir al partido →</button></section></>);
+  }
+  return (
+    <>
+      {log}
       <section className="event card">
         <div className="event-icon">{ev.icon}</div>
         <h2>{ev.title}</h2>
-        <p className="effect-text">{effect.text}</p>
-        <EffectChips e={effect} />
-        <button className="btn btn-primary big-cta" onClick={() => go(next)}>Ir al partido →</button>
+        <p>{ev.body(s)}</p>
+        <div className="choices">{ev.choices.map((c, i) => <button key={i} className="btn choice" onClick={() => { play("click"); const e = resolveChoice(c, s, R); setEffect(e); setNext(E.applyEffect(s, e)); }}>{c.label}</button>)}</div>
       </section>
-    );
-  }
-  return (
-    <section className="event card">
-      <div className="event-icon">{ev.icon}</div>
-      <h2>{ev.title}</h2>
-      <p>{ev.body(s)}</p>
-      <div className="choices">
-        {ev.choices.map((c, i) => (
-          <button key={i} className="btn choice" onClick={() => { play("click"); const e = resolveChoice(c, s, R); setEffect(e); setNext(E.applyEffect(s, e)); }}>{c.label}</button>
-        ))}
-      </div>
-    </section>
+    </>
   );
 }
 
-/* ================= Partido ================= */
+/* ================= Partido en vivo ================= */
 
 function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void }) {
   const nx = useMemo(() => E.nextFixture(s), [s]);
-  const rival = useMemo(() => (nx ? E.rivalFor(s, nx.fx, R) : ""), [nx]); // eslint-disable-line react-hooks/exhaustive-deps
+  const fx = nx?.fx;
+  const team = E.myTeam(s);
+  const rival = fx?.rival ?? "";
   const [started] = useState(() => R() < E.startChance(s));
-  const plan = useMemo(() => E.planMoments(s, started, R), [started]); // eslint-disable-line react-hooks/exhaustive-deps
-  const [phase, setPhase] = useState<"pre" | "play" | "pens" | "post">("pre");
-  const [results, setResults] = useState<Moment[]>([]);
+  const [plan] = useState(() => E.prepareMatch(s, rival, E.planMoments(s, started, R), R));
+  const [phase, setPhase] = useState<"pre" | "play" | "burst" | "pens" | "post">("pre");
+  const [moments, setMoments] = useState<Moment[]>([]);
+  const [effects, setEffects] = useState<E.Effect3[]>([]);
   const [res, setRes] = useState<MatchResult | null>(null);
   const [after, setAfter] = useState<CareerState | null>(null);
   const [confetti, setConfetti] = useState(0);
-  if (!nx) return null;
-  const fx = nx.fx;
-  const team = E.myTeam(s);
+  if (!nx || !fx) return null;
+  const colors = clubColors(team);
+  const agg = E.aggregateBefore(s, fx);
+  const derby = isDerby(team, rival);
   const absent = s.injury > 0 || s.suspension > 0;
   const d = E.difficulty(s, rival);
 
   const finishMatch = (r: MatchResult) => {
-    if (fx.knockout && r.gf === r.ga && !r.pens) {
-      setRes(r);
-      setPhase("pens");
-      return;
-    }
-    const n = E.applyResult({ ...s, lastKinds: plan }, nx.idx, rival, r, R);
-    setRes(r);
-    setAfter(n);
-    setPhase("post");
-    const won = r.gf > r.ga || (r.pens ? r.pens[0] > r.pens[1] : false);
-    if (won) { play("win"); setConfetti((x) => x + 1); } else if (r.gf < r.ga || r.pens) play("lose"); else play("flip");
+    if (E.needsPens(s, fx, r) && !r.pens) { setRes(r); setPhase("pens"); return; }
+    const n = E.applyResult({ ...s, lastKinds: plan.kinds }, nx.idx, r, R);
+    setRes(r); setAfter(n); setPhase("post");
+    const tot = agg ? [agg[0] + r.gf, agg[1] + r.ga] : null;
+    const won = r.gf > r.ga || (!!r.pens && r.pens[0] > r.pens[1]) || (!!tot && tot[0] > tot[1] && fx.leg === 2);
+    if (won) { play("win"); setConfetti((x) => x + 1); } else if (r.gf < r.ga) play("lose"); else play("flip");
   };
   const onMoment = (ok: boolean) => {
-    const list = [...results, { kind: plan[results.length], ok }];
-    setResults(list);
-    if (list.length >= plan.length) finishMatch(E.simMatch(s, rival, list, started, R));
+    const k = plan.kinds[moments.length] as MomentKind;
+    const e = E.momentEffect(s, k, ok, R);
+    const ms = [...moments, { kind: k, ok }];
+    const es = [...effects, e];
+    setMoments(ms); setEffects(es);
+    setPhase("burst");
+    if (e.us) { play("win"); setConfetti((x) => x + 1); } else if (e.them) play("lose");
+    setTimeout(() => {
+      if (ms.length >= plan.kinds.length) finishMatch(E.resolveMatch(s, plan, es, ms, started));
+      else setPhase("play");
+    }, 1700);
   };
+
+  const i = Math.min(moments.length, Math.max(0, plan.kinds.length - 1));
+  const [us, them] = phase === "post" && res ? [res.gf, res.ga] : E.scoreAt(plan, effects, phase === "burst" ? moments.length : i);
+  const minuteNow = phase === "pre" ? 0 : phase === "post" ? 90 : plan.minutes[phase === "burst" ? moments.length - 1 : i];
 
   const header = (
     <>
-      <p className="comp-badge"><span>{COMP_ICON[fx.kind]}</span> {fx.comp} · {fx.round}</p>
-      <div className="scoreboard">
-        <div className="sb-team"><Crest club={team} size={52} /><span>{clubStyle(team).short}</span></div>
-        {res ? <div className="sb-score">{res.gf} <span>-</span> {res.ga}</div> : <div className="sb-vs">VS</div>}
-        <div className="sb-team"><Crest club={rival} size={52} /><span>{clubStyle(rival).short}</span></div>
+      <p className="comp-badge"><span>{COMP_ICON[fx.kind]}</span> {fx.comp} · {fx.stage}</p>
+      {derby && <p className="derby-banner">🔥 CLÁSICO 🔥</p>}
+      <div className="scoreboard live" style={{ "--b1": colors[0], "--b2": colors[1] } as React.CSSProperties}>
+        <div className="sb-team"><Crest club={team} size={50} /><span>{clubStyle(team).short}</span></div>
+        <div className="sb-center">
+          {phase === "pre" ? <div className="sb-vs">VS</div> : <div className="sb-score">{us} <span>-</span> {them}</div>}
+          {phase !== "pre" && phase !== "post" && <div className="sb-min">⏱️ {minuteNow > 90 ? `90+${minuteNow - 90}` : minuteNow}&apos;</div>}
+          {agg && <div className="sb-agg">Ida: {agg[0]}-{agg[1]}</div>}
+        </div>
+        <div className="sb-team"><Crest club={rival} size={50} /><span>{clubStyle(rival).short}</span></div>
       </div>
     </>
   );
 
   if (phase === "post" && res && after) {
-    const won = res.gf > res.ga || (res.pens ? res.pens[0] > res.pens[1] : false);
+    const tot: [number, number] | null = agg ? [agg[0] + res.gf, agg[1] + res.ga] : null;
+    const comments = matchComments(s, fx, res, tot);
+    const won = res.gf > res.ga || (!!res.pens && res.pens[0] > res.pens[1]);
     return (
       <section className="match card">
-        <Confetti fire={confetti} />
+        <Confetti fire={won ? confetti + 1000 : 0} colors={colors} />
         {header}
         {res.pens && <p className="match-note">Penales: {res.pens[0]} - {res.pens[1]}</p>}
         <p className="match-note">{won ? "¡Victoria!" : res.gf === res.ga && !res.pens ? "Empate" : "Derrota"} · {res.note}</p>
+        <ul className="comments">{comments.map((c, k) => <li key={k} style={{ animationDelay: `${k * 120}ms` }}>{c}</li>)}</ul>
+        {res.timeline.length > 0 && (
+          <div className="goals-line">{res.timeline.map((g, k) => <span key={k} className={g.us ? "us" : "them"}>{g.mine ? "⚽" : g.us ? "•" : "○"} {g.min}&apos;</span>)}</div>
+        )}
         {res.played && (
           <div className="reward">
             <div><b>{res.rating}</b><small>tu nota</small></div>
@@ -422,7 +512,6 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
             <div><b>{res.assists}</b><small>{res.assists === 1 ? "asistencia" : "asistencias"}</small></div>
           </div>
         )}
-        {res.played && <p className="muted small">{res.started ? "Fuiste titular." : plan.length ? "Entraste desde el banco." : "No entraste: te quedaste en el banco."}{results.length ? ` Jugadas ganadas: ${results.filter((x) => x.ok).length}/${results.length}` : ""}</p>}
         <button className="btn btn-primary big-cta" onClick={() => { play("click"); save(after); }}>
           {after.phase === "season-end" || after.phase === "retired" ? "Ver cierre de temporada →" : "Seguir →"}
         </button>
@@ -437,14 +526,10 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
     return (
       <section className="match card">
         {header}
-        <p className="match-note">¡Empate! Se define por penales.</p>
-        {!res.played ? (
-          <button className="btn btn-primary big-cta" onClick={() => done(R() < 0.5)}>Ver la tanda desde afuera</button>
-        ) : isGk ? (
-          <PenaltySave {...p} onDone={done} title="Tanda de penales: atajá el primero" />
-        ) : (
-          <PenaltyShoot {...p} onDone={done} title="Tanda de penales: pateás el primero" />
-        )}
+        <p className="match-note">{agg ? "¡Global empatado!" : "¡Empate!"} Se define por penales.</p>
+        {!res.played ? <button className="btn btn-primary big-cta" onClick={() => done(R() < 0.5)}>Ver la tanda desde afuera</button>
+          : isGk ? <PenaltySave {...p} onDone={done} title="Tanda de penales: atajá el primero" />
+          : <PenaltyShoot {...p} onDone={done} title="Tanda de penales: pateás el primero" />}
       </section>
     );
   }
@@ -464,87 +549,118 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
     return (
       <section className="match card">
         {header}
-        <p className="muted small" style={{ margin: 0 }}>Fuerza {Math.round(strengthOf(team))} vs {Math.round(strengthOf(rival))}{fx.knockout ? " · Eliminación directa: si empatan, penales" : ""}</p>
-        <p className={`starter ${started ? "yes" : "no"}`}>{started ? `✅ Sos titular: vas a tener ${plan.length} jugadas.` : plan.length ? "🪑 Arrancás en el banco: vas a tener 1 jugada." : "🪑 Arrancás en el banco y no se sabe si vas a entrar."}</p>
-        {plan.length > 0 ? (
+        <p className="muted small" style={{ margin: 0 }}>Fuerza {Math.round(strengthOf(team))} vs {Math.round(strengthOf(rival))}{fx.knockout ? (fx.leg === 1 ? " · Partido de ida" : " · Eliminación: si empatan, penales") : ""}</p>
+        <p className={`starter ${started ? "yes" : "no"}`}>{started ? `✅ Sos titular: vas a tener ${plan.kinds.length} jugadas.` : plan.kinds.length ? "🪑 Arrancás en el banco: vas a tener 1 jugada." : "🪑 Arrancás en el banco y no se sabe si vas a entrar."}</p>
+        {plan.kinds.length > 0 ? (
           <>
             <button className="btn btn-primary big-cta" onClick={() => { play("whistle"); setTimeout(() => setPhase("play"), 50); }}>¡Que ruede la pelota! 🟢</button>
             <button className="btn btn-ghost" style={{ width: "100%", marginTop: 6 }} onClick={() => finishMatch(E.simQuick(s, rival, R, "simulate"))}>⏩ Simular partido</button>
           </>
         ) : (
-          <button className="btn btn-primary big-cta" onClick={() => finishMatch(E.simMatch(s, rival, [], false, R))}>Ver el partido desde el banco →</button>
+          <button className="btn btn-primary big-cta" onClick={() => finishMatch(E.resolveMatch(s, plan, [], [], false))}>Ver el partido desde el banco →</button>
         )}
       </section>
     );
   }
 
-  const kind = plan[results.length] as MomentKind;
+  const kind = plan.kinds[i] as MomentKind;
+  const defensive = ["tackle", "intercept", "save", "penalty-save", "freekick-save"].includes(kind) || ((kind === "trivia" || kind === "ttt") && (E.role(s) === "ARQ" || E.role(s) === "DEF"));
+  const [sa, sb] = E.scoreAt(plan, effects, i);
+  const sit = situation(fx, plan.minutes[i], sa, sb, agg, defensive, derby);
   return (
-    <section className="match card">
-      <p className="comp-badge"><span>{COMP_ICON[fx.kind]}</span> {fx.comp} · {fx.round}</p>
-      <div className="moment-progress">
-        {plan.map((_, i) => <span key={i} className={i < results.length ? (results[i].ok ? "ok" : "bad") : i === results.length ? "cur" : ""} />)}
-        <span className="muted small">Jugada {results.length + 1}/{plan.length} · min {Math.round(((results.length + 1) / (plan.length + 1)) * 90)}&apos; · vs {clubStyle(rival).short}</span>
-      </div>
-      <MomentRunner key={results.length} kind={kind} d={d} bonus={E.signatureBonus(s, kind)} foot={s.foot} onDone={onMoment} />
+    <section className="match card live-card">
+      {header}
+      {phase === "burst" && effects.length ? (
+        <Burst kind={moments[moments.length - 1].kind} ok={moments[moments.length - 1].ok} effect={effects[effects.length - 1]} colors={colors} />
+      ) : (
+        <>
+          <div className={`situation ${plan.minutes[i] >= 85 ? "late" : ""}`}>
+            <div className="sit-top"><span className="sit-min">{sit.minute}</span>{sit.tags.map((t) => <span key={t} className="sit-tag">{t}</span>)}</div>
+            <p className="sit-head">{sit.headline}</p>
+          </div>
+          <div className="moment-progress">
+            {plan.kinds.map((_, k) => <span key={k} className={k < moments.length ? (moments[k].ok ? "ok" : "bad") : k === moments.length ? "cur" : ""} />)}
+            <span className="muted small">Jugada {i + 1}/{plan.kinds.length}</span>
+          </div>
+          <MomentRunner key={i} kind={kind} d={d} bonus={E.signatureBonus(s, kind)} foot={s.foot} onDone={onMoment} />
+        </>
+      )}
+      <Confetti fire={confetti} colors={colors} />
     </section>
   );
 }
 
 /* ================= Fin de temporada ================= */
 
+const TAG: Record<string, string> = { arabia: "💰 Oferta millonaria", vuelta: "🏠 Volver a casa", salto: "🚀 Salto de calidad" };
+
 function SeasonEnd({ s, save }: { s: CareerState; save: (s: CareerState) => void }) {
   const h = s.history[s.history.length - 1];
-  const [confetti] = useState(h?.titles.length ? 1 : 0);
-  useEffect(() => { if (h?.titles.length) play("win"); }, [h?.titles.length]);
+  const [confetti] = useState(h?.titles.length || h?.awards.length ? 1 : 0);
+  useEffect(() => { if (h?.titles.length || h?.awards.length) play("win"); }, [h?.titles.length, h?.awards.length]);
   const natNews = s.log.find((l) => l.startsWith("🎽") || l.startsWith("📺") || l.includes("CAMPEÓN de la") || l.includes("quedó afuera de la"));
+  const bo = s.log.find((l) => l.startsWith("🗳️"));
+  const { place, size } = E.annualPlace(s);
   return (
-    <section className="event card">
-      <Confetti fire={confetti} />
-      <div className="event-icon">{h?.titles.length ? "🏆" : "📊"}</div>
-      <h2>Fin de la temporada {h?.year}</h2>
-      {h?.titles.map((t) => <p key={t} className="title-won">🏆 {t}</p>)}
-      <div className="season-sum">
-        <div><span>🏟️ {h?.league}</span><b>{h?.place}º</b></div>
-        <div><span>🏆 Copa</span><b>{h?.cup}</b></div>
-        {h?.intl && <div><span>🌎 Internacional</span><b>{h.intl.split(": ")[1]}</b></div>}
-      </div>
-      <div className="reward">
-        <div><b>{h?.pj}</b><small>partidos</small></div>
-        <div><b>{E.role(s) === "ARQ" || E.role(s) === "DEF" ? h?.cleanSheets : h?.goals}</b><small>{E.role(s) === "ARQ" || E.role(s) === "DEF" ? "vallas invictas" : "goles"}</small></div>
-        <div><b>{h?.avg}</b><small>nota media</small></div>
-      </div>
-      {natNews && <p className="notice">{natNews}</p>}
-      {s.nextIntl && <p className="notice">🌎 ¡Clasificaron a la {s.nextIntl}!</p>}
-      <p>Cumpliste {s.age} años. Tu nivel ahora es <b>{s.ovr}</b>.</p>
-      <h3 className="offers-title">Ofertas para la próxima temporada</h3>
-      <div className="offers">
-        <button className="offer on" onClick={() => { play("click"); save(E.startNextSeason(s, null, R)); }}>
-          <Crest club={s.club} size={46} />
-          <span className="offer-name">Quedarme en {clubStyle(s.club).short}</span>
-          <span className="muted small">{s.nextIntl ? `Jugás ${s.nextIntl}` : "Más confianza del DT"}</span>
-        </button>
-        {(s.offers ?? []).map((c) => (
-          <button key={c} className="offer" onClick={() => { play("win"); save(E.startNextSeason(s, c, R)); }}>
-            <Crest club={c} size={46} />
-            <span className="offer-name">{c}</span>
-            <span className="muted small">{LEAGUES[clubInfo(c).league].name} · fuerza {clubInfo(c).strength}</span>
+    <>
+      <AutoLog lines={s.autoLog} />
+      <section className="event card">
+        <Confetti fire={confetti} colors={clubColors(s.club)} />
+        <div className="event-icon">{h?.titles.length ? "🏆" : "📊"}</div>
+        <h2>Fin de la temporada {h?.year}</h2>
+        {[...(h?.titles ?? []), ...(h?.awards ?? [])].length > 0 && (
+          <div className="season-trophies">{[...(h?.titles ?? []), ...(h?.awards ?? [])].map((t) => <div key={t} className="st-item"><TrophyIcon name={t} size={48} /><span>{t}</span></div>)}</div>
+        )}
+        <div className="season-sum">
+          <div><span>🏟️ {h?.league} (tabla anual)</span><b>{place}º de {size}</b></div>
+          <div><span>🏆 Copa</span><b>{h?.cup}</b></div>
+          {h?.intl && <div><span>🌎 Internacional</span><b>{h.intl.split(": ")[1]}</b></div>}
+        </div>
+        <div className="reward">
+          <div><b>{h?.pj}</b><small>partidos</small></div>
+          <div><b>{E.role(s) === "ARQ" || E.role(s) === "DEF" ? h?.cleanSheets : h?.goals}</b><small>{E.role(s) === "ARQ" || E.role(s) === "DEF" ? "vallas invictas" : "goles"}</small></div>
+          <div><b>{h?.avg}</b><small>nota media</small></div>
+        </div>
+        {natNews && <p className="notice">{natNews}</p>}
+        {bo && <p className="notice">{bo}</p>}
+        {s.nextIntl && <p className="notice">🌎 ¡Clasificaron a la {s.nextIntl}!</p>}
+        <p>Cumpliste {s.age} años. Tu nivel ahora es <b>{s.ovr}</b>.</p>
+        <h3 className="offers-title">Ofertas para la próxima temporada</h3>
+        <div className="offers">
+          <button className="offer on" onClick={() => { play("click"); save(E.startNextSeason(s, null, R)); }}>
+            <Crest club={s.club} size={46} /><span className="offer-name">Quedarme en {clubStyle(s.club).short}</span><span className="muted small">{s.nextIntl ? `Jugás ${s.nextIntl}` : "Más confianza del DT"}</span>
           </button>
-        ))}
-      </div>
-      {s.age >= 30 && <button className="btn btn-ghost" style={{ marginTop: 10 }} onClick={() => { play("lose"); save({ ...s, phase: "retired" }); }}>Colgar los botines 👟</button>}
-    </section>
+          {(s.offers ?? []).map((o: Offer) => (
+            <button key={o.club} className={`offer ${o.tag ? `tag-${o.tag}` : ""}`} onClick={() => { play("win"); save(E.startNextSeason(s, o, R)); }}>
+              {o.tag && <span className="offer-tag">{TAG[o.tag]}</span>}
+              <Crest club={o.club} size={46} />
+              <span className="offer-name">{o.club}</span>
+              <span className="muted small">{LEAGUES[clubInfo(o.club).league].name} · fuerza {clubInfo(o.club).strength}</span>
+              <span className="offer-salary">💰 {o.salary >= 1000 ? `${(o.salary / 1000).toFixed(1)} M` : `${o.salary} mil`} USD/partido</span>
+            </button>
+          ))}
+        </div>
+        {s.age >= 30 && <button className="btn btn-ghost" style={{ marginTop: 10 }} onClick={() => { play("lose"); save({ ...s, phase: "retired" }); }}>Colgar los botines 👟</button>}
+      </section>
+    </>
   );
 }
 
 function Retired({ s, save }: { s: CareerState; save: (s: CareerState | null) => void }) {
+  const ach = achievements(s);
   return (
     <section className="event card">
       <div className="event-icon">👟</div>
       <h2>Fin de una carrera</h2>
       <p>{s.totals.pj} partidos, {plural(s.totals.goals, "gol", "goles")}, {plural(s.trophies.length, "título", "títulos")}{s.caps ? ` y ${s.caps} partidos con ${NATIONS[s.nationality]?.name ?? "la selección"}` : ""}.</p>
-      {s.trophies.length > 0 && <ul className="trophies">{s.trophies.map((t, i) => <li key={i}>🏆 {t}</li>)}</ul>}
-      <CareerCard s={s} />
+      {ach.length > 0 && (
+        <>
+          <h3 className="offers-title">Logros de tu carrera</h3>
+          <div className="achievements">{ach.map((a, i) => <div key={a.id} className="ach" style={{ animationDelay: `${i * 90}ms` }}><span className="ach-icon">{a.icon}</span><div><b>{a.title}</b><span className="muted small">{a.desc}</span></div></div>)}</div>
+        </>
+      )}
+      {(s.trophies.length > 0 || s.awards.length > 0) && <><h3 className="offers-title">Vitrina</h3><Showcase s={s} /></>}
+      <CareerCard s={s} achievements={ach.map((a) => `${a.icon} ${a.title}`)} />
       <button className="btn btn-primary big-cta" onClick={() => save(null)}>Empezar una nueva carrera</button>
     </section>
   );

@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { Header } from "@/components/Header";
 import { GuessGame } from "@/components/GuessGame";
 import { HomeCards } from "@/components/HomeCards";
+import { ClubBanner } from "@/components/ClubBanner";
 import { LeaguesHome } from "@/components/LeaguesHome";
 import { LeagueTable } from "@/components/LeagueTable";
 import { Archive } from "@/components/Archive";
@@ -60,6 +61,7 @@ function Page({ path }: { path: string }) {
       <p className="lead">
         Retos diarios iguales para todos. Tu conocimiento de fútbol es tu stat: cada acierto suma para tu liga y para tu carrera.
       </p>
+      <ClubBanner />
       <HomeCards />
     </>
   );

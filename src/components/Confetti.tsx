@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 /** Explosión breve de papelitos (colores de la app). Respeta prefers-reduced-motion. */
-export function Confetti({ fire }: { fire: number }) {
+export function Confetti({ fire, colors: custom }: { fire: number; colors?: string[] }) {
   const ref = useRef<HTMLCanvasElement>(null);
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -18,7 +18,10 @@ export function Confetti({ fire }: { fire: number }) {
     const g = cv.getContext("2d");
     if (!g) return;
     g.scale(dpr, dpr);
-    const colors = ["#f4c542", "#2e9e5b", "#eef4ef", "#6cb4e4", "#d6a019"];
+    // Colores del club elegido (o del que se pase), con blanco para contraste.
+    const css = getComputedStyle(document.documentElement);
+    const colors = (custom?.length ? custom : [css.getPropertyValue("--club-1"), css.getPropertyValue("--club-2"), css.getPropertyValue("--accent")])
+      .map((c) => c.trim()).filter(Boolean).concat(["#ffffff"]);
     const W = window.innerWidth;
     const parts = Array.from({ length: 140 }, () => ({
       x: W / 2 + (Math.random() - 0.5) * 80,

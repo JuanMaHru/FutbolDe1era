@@ -27,9 +27,9 @@ function Goal({ keeper, ball, wall, result }: { keeper: "L" | "C" | "R" | "idle"
   const rot = keeper === "L" ? -60 : keeper === "R" ? 60 : 0;
   const [bx, by] = ball ? ZONE_XY[ball] : [50, 94];
   return (
-    <svg viewBox="0 0 100 100" className="goal-svg" aria-hidden>
+    <svg viewBox="0 0 100 100" className={`goal-svg ${result ? "net-hit" : result === false ? "net-miss" : ""}`} aria-hidden>
       <rect x="0" y="0" width="100" height="100" fill="#1b6d3c" />
-      <g stroke="rgba(255,255,255,0.18)" strokeWidth="0.5">
+      <g className="net" stroke="rgba(255,255,255,0.22)" strokeWidth="0.5">
         {Array.from({ length: 12 }, (_, i) => <line key={`v${i}`} x1={8 + i * 7.7} y1="8" x2={8 + i * 7.7} y2="72" />)}
         {Array.from({ length: 8 }, (_, i) => <line key={`h${i}`} x1="8" y1={8 + i * 9} x2="92" y2={8 + i * 9} />)}
       </g>
@@ -46,9 +46,7 @@ function Goal({ keeper, ball, wall, result }: { keeper: "L" | "C" | "R" | "idle"
         <g>{[38, 45, 52, 59].map((x) => <g key={x}><rect x={x - 3} y="78" width="6" height="14" rx="2" fill="#c33" /><circle cx={x} cy="75" r="3" fill="#f1c9a0" /></g>)}</g>
       )}
       <circle className="ball" cx={bx} cy={by} r="3.6" fill="#fff" stroke="#111" strokeWidth="0.8" style={{ transition: "cx .5s ease-out, cy .5s ease-out" }} />
-      {result !== undefined && result !== null && (
-        <text x="50" y="88" textAnchor="middle" fontSize="12" fontWeight="900" fill={result ? "#8ff0b6" : "#ffb4a8"} fontFamily="system-ui">{result ? "¡ADENTRO!" : "¡NO!"}</text>
-      )}
+
     </svg>
   );
 }
@@ -78,7 +76,7 @@ export function PenaltyShoot({ d, bonus, onDone, title = "¡Penal!" }: MomentPro
       else if (k === side) ok = Math.random() < (high ? 0.62 : 0.28) + bonus;
       else ok = true;
     }
-    setTimeout(() => { setRes(ok); finish(ok, onDone, 1100); }, 650);
+    setTimeout(() => { setRes(ok); finish(ok, onDone, 650); }, 600);
   };
   const OPTS: [Zone, string][] = [["TL", "↖ Ángulo izq."], ["CH", "🥄 Picarla"], ["TR", "Ángulo der. ↗"], ["BL", "↙ Abajo izq."], ["C", "Al medio"], ["BR", "Abajo der. ↘"]];
   return (
@@ -120,7 +118,7 @@ export function PenaltySave({ d, bonus, onDone, title = "Penal en contra" }: Mom
     if (Math.random() < 0.07) saved = true; // la tiró afuera
     else if (to === k) saved = Math.random() < (to === "C" ? 0.92 : high ? 0.45 : 0.78) + bonus - (d - 0.5) * 0.2;
     else saved = false;
-    setTimeout(() => { setRes(!saved); finish(saved, onDone, 1100); }, 650);
+    setTimeout(() => { setRes(!saved); finish(saved, onDone, 650); }, 600);
   };
   return (
     <div className="moment">
@@ -134,7 +132,6 @@ export function PenaltySave({ d, bonus, onDone, title = "Penal en contra" }: Mom
         <button className="btn zone-btn" disabled={!!dive} onClick={() => go("C")}>Me quedo</button>
         <button className="btn zone-btn" disabled={!!dive} onClick={() => go("R")}>Derecha ➡</button>
       </div>
-      {res !== null && <p className={`moment-result ${res ? "bad" : "ok"}`}>{res ? "Gol del rival…" : "¡LO ATAJASTE! 🧤"}</p>}
     </div>
   );
 }
@@ -172,7 +169,7 @@ export function FreeKick({ d, bonus, foot, onDone }: MomentProps) {
     if (foot === "ambidiestro") p += 0.05;
     p += good ? 0.2 : -0.35;
     const ok = Math.random() < clamp01(p);
-    setTimeout(() => { setRes(ok); finish(ok, onDone, 1100); }, 500);
+    setTimeout(() => { setRes(ok); finish(ok, onDone, 650); }, 500);
   };
   return (
     <div className="moment">
@@ -196,7 +193,6 @@ export function FreeKick({ d, bonus, foot, onDone }: MomentProps) {
           {res === null && <button className="btn btn-primary big-cta" onClick={kick}>¡Patear!</button>}
         </>
       )}
-      {res !== null && <p className={`moment-result ${res ? "ok" : "bad"}`}>{res ? "¡GOLAZO DE TIRO LIBRE! 🚀" : choice === "UNDER" && !wallJumps ? "La barrera no saltó…" : "Atajó / se fue cerca…"}</p>}
     </div>
   );
 }
@@ -215,7 +211,7 @@ export function FreeKickSave({ d, bonus, onDone }: MomentProps) {
     setPick(k);
     play("kick");
     const saved = k === target ? Math.random() < 0.8 + bonus - (d - 0.5) * 0.2 : Math.random() < 0.15;
-    setTimeout(() => { setRes(!saved); finish(saved, onDone, 1100); }, 600);
+    setTimeout(() => { setRes(!saved); finish(saved, onDone, 650); }, 600);
   };
   const ball: Zone = target === "far" ? "TR" : target === "wall" ? "TL" : "BL";
   return (
@@ -228,7 +224,6 @@ export function FreeKickSave({ d, bonus, onDone }: MomentProps) {
         <button className="btn zone-btn" disabled={!!pick} onClick={() => go("under")}>Abajo (por si pasa por abajo)</button>
         <button className="btn zone-btn" disabled={!!pick} onClick={() => go("far")}>Mi palo</button>
       </div>
-      {res !== null && <p className={`moment-result ${res ? "bad" : "ok"}`}>{res ? "Se metió…" : "¡VOLASTE! 🧤"}</p>}
     </div>
   );
 }
@@ -249,7 +244,7 @@ export function Placement({ d, bonus, onDone }: MomentProps) {
     setChoice(k);
     play("kick");
     const ok = Math.random() < clamp01(st.odds[k] + bonus - (d - 0.5) * 0.3);
-    setTimeout(() => { setRes(ok); finish(ok, onDone, 1100); }, 400);
+    setTimeout(() => { setRes(ok); finish(ok, onDone, 650); }, 400);
   };
   const kx = st.id === "cargado" ? 34 : 50, ky = st.id === "adelantado" ? 46 : st.id === "linea" ? 20 : 28;
   return (
@@ -266,7 +261,7 @@ export function Placement({ d, bonus, onDone }: MomentProps) {
         </g>
         <circle cx="50" cy="66" r="4" fill="#fff" stroke="#111" strokeWidth="0.6" />
         <circle cx="54" cy="61" r="1.8" fill="#fff" stroke="#111" strokeWidth="0.4" />
-        {choice && res !== null && <text x="50" y="45" textAnchor="middle" fontSize="9" fontWeight="900" fill={res ? "#8ff0b6" : "#ffb4a8"} fontFamily="system-ui">{res ? "¡GOL!" : "¡NO!"}</text>}
+  
       </svg>
       <div className="zone-grid two">
         <button className="btn zone-btn" disabled={!!choice} onClick={() => go("cruzado")}>↘ Cruzado abajo</button>
@@ -325,7 +320,6 @@ export function PassMoment({ d, bonus, onDone, mode }: MomentProps & { mode: "pa
       <div className="zone-grid three">
         {[0, 1, 2].map((i) => <button key={i} className="btn zone-btn" disabled={pick !== null} onClick={() => choose(i)}>Jugador {i + 1}</button>)}
       </div>
-      {pick !== null && <p className={`moment-result ${pick === layout.free ? "ok" : "bad"}`}>{pick === layout.free ? (mode === "pass" ? "¡Pase gol!" : "¡Lo cortaste!") : pick === -1 ? "Te quedaste pensando…" : mode === "pass" ? "Lo interceptaron…" : "Te ganaron la espalda…"}</p>}
     </div>
   );
 }
@@ -362,7 +356,7 @@ export function TimingMoment({ kind, d, bonus, onDone }: MomentProps & { kind: s
     const ok = pos >= lo && pos <= hi;
     setResult(ok);
     play(ok ? "kick" : "flip");
-    setTimeout(() => onDone(ok), 1000);
+    setTimeout(() => onDone(ok), 450);
   };
   const L = TIMING_LABEL[kind] ?? TIMING_LABEL.finish;
   return (
@@ -373,7 +367,7 @@ export function TimingMoment({ kind, d, bonus, onDone }: MomentProps & { kind: s
         <div className="timing-zone" style={{ left: `${lo * 100}%`, width: `${(hi - lo) * 100}%` }} />
         <div className="timing-cursor" style={{ left: `${pos * 100}%` }} />
       </div>
-      {result === null ? <button className="btn btn-primary big-cta" onClick={hit}>{L.cta}</button> : <p className={`moment-result ${result ? "ok" : "bad"}`}>{result ? L.ok : L.bad}</p>}
+      <button className="btn btn-primary big-cta" onClick={hit} disabled={result !== null}>{L.cta}</button>
     </div>
   );
 }
@@ -414,16 +408,13 @@ const LINES3 = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8]
 const winner = (b: (string | null)[]) => LINES3.find(([a, c, e]) => b[a] && b[a] === b[c] && b[a] === b[e])?.map((i) => i);
 function cpuMove(b: (string | null)[]): number {
   const empty = b.map((x, i) => (x ? -1 : i)).filter((i) => i >= 0);
-  for (const who of ["O", "X"]) for (const i of empty) { const t = [...b]; t[i] = who; if (winner(t)) return i; }
-  if (!b[4]) return 4;
+  for (const i of empty) { const t = [...b]; t[i] = "O"; if (winner(t)) return i; }
+  if (Math.random() < 0.45) for (const i of empty) { const t = [...b]; t[i] = "X"; if (winner(t)) return i; }
   return empty[Math.floor(Math.random() * empty.length)];
 }
 export function TicTacToe({ onDone }: MomentProps) {
-  const [board, setBoard] = useState<(string | null)[]>(() => {
-    const b = Array(9).fill(null);
-    b[[0, 2, 6, 8][Math.floor(Math.random() * 4)]] = "O"; // arranca el rival
-    return b;
-  });
+  // Arrancás vos. El rival no juega perfecto: completa si puede, y a veces se olvida de bloquear.
+  const [board, setBoard] = useState<(string | null)[]>(() => Array(9).fill(null));
   const [asking, setAsking] = useState<number | null>(null);
   const [done, setDone] = useState<null | "win" | "lose" | "draw">(null);
   const end = (b: (string | null)[]): "win" | "lose" | "draw" | null => {
@@ -445,7 +436,7 @@ export function TicTacToe({ onDone }: MomentProps) {
     setBoard(b);
     if (r) {
       setDone(r);
-      const ok2 = r === "win" || (r === "draw" && Math.random() < 0.4);
+      const ok2 = r === "win" || r === "draw";
       play(r === "win" ? "win" : r === "lose" ? "lose" : "flip");
       setTimeout(() => onDone(ok2), 1500);
     }
@@ -454,7 +445,7 @@ export function TicTacToe({ onDone }: MomentProps) {
   return (
     <div className="moment">
       <p className="moment-title">❌⭕ Tres en raya táctico</p>
-      <p className="muted small" style={{ margin: 0 }}>Para ocupar una casilla, respondé bien. Si fallás, la casilla es del rival. ¡Hacé tres en línea!</p>
+      <p className="muted small" style={{ margin: 0 }}>Arrancás vos. Para ocupar una casilla, respondé bien; si fallás, es del rival. Tres en línea o empate: jugada ganada.</p>
       <div className="ttt">
         {board.map((c, i) => (
           <button key={i} className={`ttt-cell ${c ? `m-${c}` : ""} ${line.includes(i) ? "win" : ""}`} disabled={!!c || asking !== null || !!done} onClick={() => { play("click"); setAsking(i); }}>
@@ -463,7 +454,7 @@ export function TicTacToe({ onDone }: MomentProps) {
         ))}
       </div>
       {asking !== null && <TriviaMoment key={asking} onDone={answer} seconds={10} compact />}
-      {done && <p className={`moment-result ${done === "win" ? "ok" : "bad"}`}>{done === "win" ? "¡Tres en raya! Jugada ganada." : done === "lose" ? "El rival hizo la línea…" : "Empate táctico."}</p>}
+      {done && <p className="muted small" style={{ margin: 0 }}>{done === "win" ? "¡Tres en raya!" : done === "lose" ? "El rival hizo la línea…" : "Empate táctico: jugada a favor."}</p>}
     </div>
   );
 }

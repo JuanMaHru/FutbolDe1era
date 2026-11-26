@@ -113,6 +113,7 @@ export function Header() {
         </nav>
       </div>
       </header>
+      <div className="club-ribbon" aria-hidden />
       {langMsg && <div className="toast" role="status">{langMsg}</div>}
       <ThemePicker open={themeOpen} onClose={() => { setThemeOpen(false); setThemeName(currentTheme()); }} />
     </>
