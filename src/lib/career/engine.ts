@@ -160,6 +160,8 @@ export interface CareerState {
   nextQual?: string[];
   /** Conteo de decisiones personales (para logros de personalidad). */
   choices?: Record<string, number>;
+  /** Cuántas veces se te presentó la oportunidad de cada decisión (para medir proporciones). */
+  chances?: Record<string, number>;
   lastKinds: MomentKind[];
   autoLog: string[]; // partidos simulados desde el último partido jugado
   pendingEvent?: string;
@@ -200,9 +202,11 @@ export const archetypeOf = (s: CareerState) => ARCHETYPES[role(s)].find((a) => a
 export const isClubWC = (s: CareerState) => s.national?.kind === "clubwc";
 export const myTeam = (s: CareerState) => (s.phase === "national" && s.national && !isClubWC(s) ? NATIONS[s.nationality]?.team ?? s.club : s.club);
 /** Suma una decisión personal (o del mercado) al perfil del jugador. */
-export function addChoice(s: CareerState, tag?: string): CareerState {
-  if (!tag) return s;
-  return { ...s, choices: { ...(s.choices ?? {}), [tag]: (s.choices?.[tag] ?? 0) + 1 } };
+export function addChoice(s: CareerState, tag?: string, offered: (string | undefined)[] = [tag]): CareerState {
+  const chances = { ...(s.chances ?? {}) };
+  for (const t of new Set(offered)) if (t) chances[t] = (chances[t] ?? 0) + 1;
+  if (!tag) return { ...s, chances };
+  return { ...s, chances, choices: { ...(s.choices ?? {}), [tag]: (s.choices?.[tag] ?? 0) + 1 } };
 }
 /** Rival para el Mundial de Clubes: los mejores del mundo, sin repetir. */
 function clubWorldRival(s: CareerState, used: string[], rand: () => number, top = 24): string {
@@ -1057,8 +1061,9 @@ export function startNextSeason(s: CareerState, offer: Offer | null, rand: () =>
   let qual = s.nextQual ?? [];
   // Decisiones de mercado: quedarse rechazando ofertas mejores suma lealtad.
   const better = (s.offers ?? []).some((o) => clubInfo(o.club).strength > clubInfo(s.club).strength);
-  if (!offer && better) n = addChoice(n, "fiel");
-  if (offer && offer.club !== s.club) n = addChoice(n, "aventurero");
+  const moved = !!offer && offer.club !== s.club;
+  const offered = [better ? "fiel" : undefined, (s.offers ?? []).some((o) => o.club !== s.club) ? "aventurero" : undefined];
+  n = addChoice(n, moved ? "aventurero" : !offer && better ? "fiel" : undefined, offered);
   if (offer && offer.club !== s.club) {
     qual = [];
     n.club = offer.club;

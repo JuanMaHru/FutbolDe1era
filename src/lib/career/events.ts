@@ -275,7 +275,7 @@ export const EVENTS: CareerEvent[] = [
         o(1, { money: 5, fame: 2, text: "Le pusieron tu nombre a una cancha. Algo ganaste." }) ] },
       { label: "Ahorro", outcomes: [ o(1, { text: "Mejor no arriesgar." }) ] },
     ] },
-  { id: "prestamo-companero", max: 2, icon: "💸", title: "Un compañero te pide plata", when: (s) => s.money >= 15, body: () => "Un compañero con problemas te pide un préstamo.",
+  { id: "prestamo-companero", max: 4, icon: "💸", title: "Un compañero te pide plata", when: (s) => s.money >= 15, body: () => "Un compañero con problemas te pide un préstamo.",
     choices: [
       { label: "Lo ayudo", outcomes: [
         o(2, { money: -10, confidence: 4, text: "Te lo devolvió y quedaron amigos para siempre." }),

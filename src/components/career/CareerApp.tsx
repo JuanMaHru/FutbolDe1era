@@ -434,7 +434,7 @@ function EventStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
         <div className="event-icon">{ev.icon}</div>
         <h2>{ev.title}</h2>
         <p>{ev.body(s)}</p>
-        <div className="choices">{ev.choices.map((c, i) => <button key={i} className="btn choice" onClick={() => { play("click"); const e = resolveChoice(c, s, R); setEffect(e); setNext(E.addChoice(E.applyEffect(s, e), c.tag)); }}>{c.label}</button>)}</div>
+        <div className="choices">{ev.choices.map((c, i) => <button key={i} className="btn choice" onClick={() => { play("click"); const e = resolveChoice(c, s, R); setEffect(e); setNext(E.addChoice(E.applyEffect(s, e), c.tag, ev.choices.map((x) => x.tag))); }}>{c.label}</button>)}</div>
       </section>
     </>
   );

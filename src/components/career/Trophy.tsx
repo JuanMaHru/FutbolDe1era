@@ -3,7 +3,7 @@ import { useId } from "react";
 
 /** Íconos propios (SVG) para cada tipo de título o premio. Inspirados en los reales, sin copiar diseños oficiales. */
 export type TrophyKind =
-  | "league" | "cup" | "libertadores" | "champions" | "continental" | "world" | "clubwc" | "intercont" | "america" | "euro"
+  | "league" | "premier" | "plate" | "cup" | "libertadores" | "champions" | "continental" | "world" | "clubwc" | "intercont" | "america" | "euro"
   | "supercup" | "promotion" | "ballon" | "boot" | "glove" | "scorer" | "mvp" | "young" | "shield";
 
 export function trophyKind(name: string): TrophyKind {
@@ -24,6 +24,8 @@ export function trophyKind(name: string): TrophyKind {
   if (/Europa League|Sudamericana|Concacaf/.test(name)) return "continental";
   if (/^Ascenso/.test(name)) return "promotion";
   if (/^Supporters/.test(name)) return "shield";
+  if (/^Premier League/.test(name)) return "premier";
+  if (/^Bundesliga/.test(name)) return "plate";
   if (/^(Liga Profesional|Torneo Apertura|Torneo Clausura|Apertura|Clausura|Primera Nacional|Premier League|LaLiga|Serie A|Bundesliga|Ligue 1|Primeira Liga|Eredivisie|Brasileirão|Liga Uruguaya|Liga MX|MLS|Saudi Pro League)/.test(name)) return "league";
   return "cup";
 }
@@ -54,9 +56,9 @@ const SILVER = ["#4b545d", "#8a96a3", "#d7dee5", "#ffffff", "#b9c3cc", "#5c6670"
 export function TrophyIcon({ name, size = 28 }: { name: string; size?: number }) {
   const k = trophyKind(name);
   const uid = useId().replace(/:/g, "");
-  const silver = ["champions", "continental", "euro", "libertadores", "america", "cup"].includes(k) || (k === "supercup" && /Recopa|Europa/.test(name));
+  const silver = ["premier", "plate", "champions", "continental", "euro", "libertadores", "america", "cup"].includes(k) || (k === "supercup" && /Recopa|Europa/.test(name));
   const pal = silver ? SILVER : GOLD;
-  const M = `url(#m${uid})`, MV = `url(#v${uid})`, SH = `url(#s${uid})`, W = `url(#w${uid})`, MB = `url(#b${uid})`;
+  const GC = `url(#c${uid})`, M = `url(#m${uid})`, MV = `url(#v${uid})`, SH = `url(#s${uid})`, W = `url(#w${uid})`, MB = `url(#b${uid})`;
   const [r1, r2] = ribbon(name);
 
   const Shadow = <ellipse cx="50" cy="106" rx="30" ry="3.5" fill="rgba(0,0,0,0.35)" />;
@@ -101,6 +103,37 @@ export function TrophyIcon({ name, size = 28 }: { name: string; size?: number })
         <Sparkle x={68} y={14} s={0.8} />
       </>);
       break;
+    case "premier":
+      body = (<>
+        {Shadow}<Base marble />
+        <path d="M44 66 H56 L59 84 H41 Z" fill={M} />
+        <path d="M28 26 H72 C72 48 64 62 50 66 C36 62 28 48 28 26 Z" fill={M} />
+        {/* asas con forma de garra */}
+        <path d="M28 30 C16 28 14 40 20 46 C24 50 30 50 34 54 M72 30 C84 28 86 40 80 46 C76 50 70 50 66 54" fill="none" stroke={M} strokeWidth="4.5" strokeLinecap="round" />
+        <circle cx="18" cy="38" r="3.4" fill={MV} /><circle cx="82" cy="38" r="3.4" fill={MV} />
+        <ellipse cx="50" cy="26" rx="22" ry="4.5" fill={MV} />
+        <path d="M36 25 C38 18 62 18 64 25 Z" fill={M} />
+        {/* corona dorada */}
+        <path d="M37 18 L36 6 L43 11 L50 2 L57 11 L64 6 L63 18 Z" fill={GC} stroke="#7a5404" strokeWidth="0.8" />
+        <rect x="36" y="16" width="28" height="3.5" rx="1" fill={GC} stroke="#7a5404" strokeWidth="0.6" />
+        <circle cx="43" cy="17.7" r="1" fill="#c62828" /><circle cx="50" cy="17.7" r="1" fill="#1e63b8" /><circle cx="57" cy="17.7" r="1" fill="#c62828" />
+        <Shine d="M32 29 C33 44 38 55 44 60 C39 52 36 42 36 29 Z" />
+        <Ribbons y={32} x1={30} x2={70} />
+      </>);
+      break;
+    case "plate":
+      body = (<>
+        {Shadow}<Base marble />
+        <path d="M44 70 H56 L58 84 H42 Z" fill={M} />
+        <circle cx="50" cy="42" r="36" fill={M} stroke="rgba(60,70,80,0.7)" strokeWidth="1.5" />
+        <circle cx="50" cy="42" r="30" fill="none" stroke="rgba(60,70,80,0.55)" strokeWidth="1.2" />
+        {Array.from({ length: 16 }, (_, i) => { const a = (i / 16) * Math.PI * 2; return <circle key={i} cx={50 + Math.cos(a) * 33} cy={42 + Math.sin(a) * 33} r="1.9" fill="#2e8b57" stroke={GC} strokeWidth="0.8" />; })}
+        <circle cx="50" cy="42" r="20" fill={MV} stroke="rgba(60,70,80,0.55)" strokeWidth="1" />
+        {Array.from({ length: 5 }, (_, i) => <circle key={i} cx="50" cy="42" r={18 - i * 3.5} fill="none" stroke="rgba(60,70,80,0.3)" strokeWidth="0.6" />)}
+        <circle cx="50" cy="42" r="5" fill={GC} />
+        <path d="M24 26 C30 14 42 8 54 8 C42 12 32 20 27 32 Z" fill={SH} opacity="0.8" />
+      </>);
+      break;
     case "cup":
     case "supercup":
       body = (<>
@@ -118,29 +151,39 @@ export function TrophyIcon({ name, size = 28 }: { name: string; size?: number })
     case "libertadores":
       body = (<>
         {Shadow}
-        <rect x="30" y="64" width="40" height="40" rx="2" fill="#1c1d22" />
-        <rect x="27" y="62" width="46" height="4" rx="1.5" fill="#2c2d33" />
-        {Array.from({ length: 16 }, (_, i) => <rect key={i} x={33 + (i % 4) * 9} y={69 + Math.floor(i / 4) * 8} width="7" height="5" rx="0.6" fill={`url(#v${uid})`} opacity="0.95" />)}
-        <path d="M46 48 H54 L56 62 H44 Z" fill={M} />
-        <path d="M34 14 H66 L62 40 C60 46 55 49 50 49 C45 49 40 46 38 40 Z" fill={M} />
-        <path d="M34 18 C26 18 26 34 38 36 M66 18 C74 18 74 34 62 36" fill="none" stroke={M} strokeWidth="3" />
-        <ellipse cx="50" cy="14" rx="16" ry="3.5" fill={MV} />
-        <circle cx="50" cy="6" r="3" fill={MV} /><path d="M47 9 h6 l-1 5 h-4z" fill={M} />
-        <Shine d="M38 17 C39 30 42 38 45 44 C42 36 41 28 41 17 Z" />
-        <Sparkle x={70} y={10} s={0.8} />
+        <rect x="30" y="64" width="40" height="40" rx="2" fill={W} />
+        <rect x="27" y="62" width="46" height="4" rx="1.5" fill="#3a2210" />
+        {Array.from({ length: 16 }, (_, i) => <rect key={i} x={33 + (i % 4) * 9} y={69 + Math.floor(i / 4) * 8} width="7" height="5" rx="0.6" fill={MV} opacity="0.95" />)}
+        <path d="M46 50 H54 L56 62 H44 Z" fill={M} />
+        <ellipse cx="50" cy="51" rx="7" ry="1.8" fill={MV} />
+        <path d="M33 20 H67 L63 40 C61 46 56 50 50 50 C44 50 39 46 37 40 Z" fill={M} />
+        <path d="M33 23 C24 22 24 38 38 40 M67 23 C76 22 76 38 62 40" fill="none" stroke={M} strokeWidth="3" />
+        <ellipse cx="50" cy="20" rx="17" ry="3.5" fill={MV} />
+        <path d="M40 19 C42 14 58 14 60 19 Z" fill={M} />
+        {/* jugador pateando sobre la tapa */}
+        <circle cx="49" cy="2.8" r="2.2" fill={MV} />
+        <path d="M47.5 5 H50.5 L51.5 9.5 L55.5 12.5 L54.5 13.8 L50.5 11.2 L48.6 15 L46.8 14.4 L47.8 9.6 L45 8.6 L45.6 7.4 Z" fill={MV} />
+        <circle cx="57" cy="14" r="1.6" fill={MV} />
+        <Shine d="M37 23 C38 33 41 41 45 46 C42 39 40 31 40 23 Z" />
+        <Sparkle x={72} y={10} s={0.8} />
       </>);
       break;
     case "champions":
       body = (<>
-        {Shadow}<Base marble />
-        <path d="M45 62 H55 L59 84 H41 Z" fill={M} />
-        <path d="M36 10 H64 C66 30 62 50 50 62 C38 50 34 30 36 10 Z" fill={M} />
-        <path d="M37 14 C10 4 4 52 41 56" fill="none" stroke={M} strokeWidth="6" strokeLinecap="round" />
-        <path d="M63 14 C90 4 96 52 59 56" fill="none" stroke={M} strokeWidth="6" strokeLinecap="round" />
-        <ellipse cx="50" cy="10" rx="14" ry="3.5" fill={MV} />
-        <Shine d="M39 13 C39 30 42 44 47 54 C43 44 42 30 42 13 Z" />
-        <path d="M50 88 l1.6 3.2 3.6.5-2.6 2.5.6 3.5-3.2-1.7-3.2 1.7.6-3.5-2.6-2.5 3.6-.5z" fill="#fff" opacity="0.8" />
-        <Sparkle x={20} y={14} s={0.8} />
+        {Shadow}
+        <ellipse cx="50" cy="100" rx="17" ry="4" fill={MV} />
+        <path d="M34 100 C38 92 45 88 46 80 H54 C55 88 62 92 66 100 Z" fill={M} />
+        <rect x="45" y="66" width="10" height="15" fill={M} />
+        <ellipse cx="50" cy="66" rx="8" ry="2.2" fill={MV} />
+        <path d="M37 10 H63 C64 30 61 50 50 64 C39 50 36 30 37 10 Z" fill={M} />
+        {/* las "orejas": asas enormes de arriba hasta abajo */}
+        <path d="M38 14 C12 2 2 36 18 54 C24 61 36 64 43 58" fill="none" stroke={M} strokeWidth="6.5" strokeLinecap="round" />
+        <path d="M62 14 C88 2 98 36 82 54 C76 61 64 64 57 58" fill="none" stroke={M} strokeWidth="6.5" strokeLinecap="round" />
+        <path d="M38 14 C14 4 6 34 20 51" fill="none" stroke="#fff" strokeOpacity="0.55" strokeWidth="1.4" />
+        <ellipse cx="50" cy="10" rx="13" ry="3.2" fill={MV} />
+        <ellipse cx="50" cy="10" rx="10" ry="2" fill="#5c6670" opacity="0.6" />
+        <Shine d="M40 13 C40 30 43 44 48 56 C44 44 43 30 43 13 Z" />
+        <Sparkle x={86} y={8} s={0.8} />
       </>);
       break;
     case "continental":
@@ -156,16 +199,19 @@ export function TrophyIcon({ name, size = 28 }: { name: string; size?: number })
     case "world":
       body = (<>
         {Shadow}
-        <ellipse cx="50" cy="98" rx="18" ry="5" fill={MV} />
-        <rect x="32" y="84" width="36" height="14" fill={M} />
-        <rect x="32" y="86" width="36" height="3" fill="#1f7a3a" /><rect x="32" y="92" width="36" height="3" fill="#1f7a3a" />
-        <ellipse cx="50" cy="84" rx="18" ry="5" fill={MV} />
-        <path d="M38 84 C34 70 40 60 36 50 C33 42 38 34 44 32 L56 32 C62 34 67 42 64 50 C60 60 66 70 62 84 Z" fill={M} />
-        <path d="M40 80 C44 64 52 58 50 46 M60 80 C56 64 48 58 50 46 M38 52 C44 50 50 54 56 44" stroke="rgba(90,60,5,0.55)" strokeWidth="1.4" fill="none" />
-        <circle cx="50" cy="20" r="15" fill={M} />
-        <path d="M35 20 H65 M50 5 C42 12 42 28 50 35 M50 5 C58 12 58 28 50 35 M38 12 C46 15 54 15 62 12 M38 28 C46 25 54 25 62 28" stroke="rgba(90,60,5,0.55)" strokeWidth="1" fill="none" />
-        <Shine d="M39 12 C40 9 44 7 47 7 C42 10 41 16 41 22 C39 19 38 15 39 12 Z" />
-        <Sparkle x={72} y={10} s={0.9} />
+        <ellipse cx="50" cy="100" rx="17" ry="4.5" fill={MV} />
+        <rect x="33" y="86" width="34" height="14" fill={M} />
+        <rect x="33" y="88" width="34" height="3.2" fill="#1d7a3c" /><rect x="33" y="94" width="34" height="3.2" fill="#1d7a3c" />
+        <ellipse cx="50" cy="86" rx="17" ry="4.5" fill={MV} />
+        {/* dos figuras en espiral que sostienen el mundo */}
+        <path d="M37 86 C37 76 43 68 43 60 C43 52 34 48 31 40 C30 35 34 31 38 33 C42 40 46 43 50 43 C54 43 58 40 62 33 C66 31 70 35 69 40 C66 48 57 52 57 60 C57 68 63 76 63 86 Z" fill={M} />
+        <path d="M40 84 C44 72 56 66 54 54 C52 46 43 43 38 35 M60 84 C56 72 44 66 46 54 C48 46 57 43 62 35" stroke="rgba(90,60,5,0.6)" strokeWidth="1.5" fill="none" />
+        <path d="M44 80 C47 72 52 70 51 62" stroke="#fff" strokeOpacity="0.5" strokeWidth="1.2" fill="none" />
+        <circle cx="50" cy="22" r="17" fill={M} />
+        <path d="M35 17 C40 14 44 18 47 15 C50 12 54 16 58 13 M38 29 C42 26 47 30 51 26 C55 23 60 27 64 25 M42 10 C44 13 48 11 50 9 M44 36 C47 33 52 35 56 33" stroke="rgba(90,60,5,0.7)" strokeWidth="1.6" fill="none" strokeLinecap="round" />
+        <circle cx="50" cy="22" r="17" fill="none" stroke="rgba(90,60,5,0.5)" strokeWidth="1" />
+        <Shine d="M38 13 C40 9 44 6 48 6 C43 10 41 16 41 23 C38 20 37 16 38 13 Z" />
+        <Sparkle x={74} y={10} s={0.9} />
       </>);
       break;
     case "clubwc":
@@ -192,17 +238,36 @@ export function TrophyIcon({ name, size = 28 }: { name: string; size?: number })
       </>);
       break;
     case "america":
+      body = (<>
+        {Shadow}
+        <rect x="24" y="80" width="52" height="24" rx="2" fill={W} />
+        <rect x="29" y="70" width="42" height="11" rx="1.5" fill={W} />
+        <rect x="22" y="78" width="56" height="3" rx="1" fill="#3a2210" /><rect x="27" y="68" width="46" height="3" rx="1" fill="#3a2210" />
+        {Array.from({ length: 10 }, (_, i) => <rect key={i} x={27 + (i % 5) * 9.5} y={84 + Math.floor(i / 5) * 8} width="7" height="5" rx="0.5" fill={MV} opacity="0.95" />)}
+        <path d="M45 56 H55 L57 68 H43 Z" fill={M} />
+        <path d="M30 22 H70 C70 42 63 54 50 57 C37 54 30 42 30 22 Z" fill={M} />
+        <path d="M30 26 C16 26 16 46 36 47 M70 26 C84 26 84 46 64 47" fill="none" stroke={M} strokeWidth="4" />
+        <path d="M33 36 H67" stroke="rgba(60,70,80,0.4)" strokeWidth="1.2" />
+        <ellipse cx="50" cy="22" rx="20" ry="4" fill={MV} />
+        <path d="M36 21 C38 11 62 11 64 21 Z" fill={M} />
+        <circle cx="50" cy="7" r="3" fill={MV} /><path d="M48 9 h4 l1 4 h-6z" fill={MV} />
+        <Shine d="M34 25 C35 38 40 48 45 53 C41 46 38 36 38 25 Z" />
+      </>);
+      break;
     case "euro":
       body = (<>
-        {Shadow}{k === "america" ? <Base tall /> : <Base marble />}
-        <path d={k === "america" ? "M45 58 H55 L57 74 H43 Z" : "M45 62 H55 L57 84 H43 Z"} fill={M} />
-        <path d={k === "america" ? "M32 18 H68 C68 38 62 54 50 58 C38 54 32 38 32 18 Z" : "M36 14 H64 C64 38 60 56 50 62 C40 56 36 38 36 14 Z"} fill={M} />
-        <path d={k === "america" ? "M32 22 C18 22 18 42 36 44 M68 22 C82 22 82 42 64 44" : "M36 20 C28 20 28 34 38 36 M64 20 C72 20 72 34 62 36"} fill="none" stroke={M} strokeWidth="3.5" />
-        <ellipse cx="50" cy={k === "america" ? 18 : 14} rx={k === "america" ? 18 : 14} ry="4" fill={MV} />
-        <path d={k === "america" ? "M38 17 C40 8 60 8 62 17 Z" : "M38 13 C40 2 60 2 62 13 Z"} fill={M} />
-        {k === "america" ? <><circle cx="50" cy="3.5" r="2.5" fill={MV} /><path d="M48 6 h4 l1 4 h-6z" fill={MV} /></> : <circle cx="50" cy="1.5" r="2" fill={MV} />}
-        <Shine d={k === "america" ? "M36 21 C37 36 41 47 46 54 C42 46 40 36 40 21 Z" : "M39 18 C40 34 43 48 47 57 C44 48 43 34 43 18 Z"} />
-        {k === "america" && Array.from({ length: 8 }, (_, i) => <rect key={i} x={30 + (i % 4) * 10} y={80 + Math.floor(i / 4) * 7} width="7" height="4" rx="0.5" fill={MV} opacity="0.9" />)}
+        {Shadow}
+        <ellipse cx="50" cy="101" rx="19" ry="4" fill={MV} />
+        <rect x="31" y="92" width="38" height="9" fill={M} />
+        <ellipse cx="50" cy="92" rx="19" ry="4" fill={MV} />
+        <path d="M38 92 C42 86 46 84 46 78 H54 C54 84 58 86 62 92 Z" fill={M} />
+        {/* jarrón alto y esbelto, boca ancha y asas chicas arriba */}
+        <path d="M33 6 H67 C66 14 60 20 58 30 C56 44 56 60 54 78 H46 C44 60 44 44 42 30 C40 20 34 14 33 6 Z" fill={M} />
+        <path d="M39 14 C30 14 29 26 41 28 M61 14 C70 14 71 26 59 28" fill="none" stroke={M} strokeWidth="2.6" />
+        <ellipse cx="50" cy="6" rx="17" ry="3.2" fill={MV} />
+        <ellipse cx="50" cy="6" rx="13" ry="1.8" fill="#5c6670" opacity="0.6" />
+        <Shine d="M40 9 C43 22 46 40 47 72 C49 46 47 24 44 9 Z" />
+        <Sparkle x={74} y={14} s={0.8} />
       </>);
       break;
     case "promotion":
@@ -230,13 +295,15 @@ export function TrophyIcon({ name, size = 28 }: { name: string; size?: number })
     case "boot":
       body = (<>
         {Shadow}<Base marble />
-        <path d="M22 18 H50 V48 L78 56 C90 60 90 76 80 78 H20 C14 78 14 70 16 64 Z" fill={M} stroke="rgba(90,60,5,0.6)" strokeWidth="1.5" />
-        <path d="M22 18 H50 V24 H22 Z" fill={MV} />
-        <path d="M28 30 L46 34 M28 38 L46 42 M30 46 L48 50" stroke="rgba(90,60,5,0.7)" strokeWidth="2" strokeLinecap="round" />
-        <path d="M16 70 H86" stroke="rgba(90,60,5,0.5)" strokeWidth="1.5" />
-        {[26, 40, 56, 72].map((x) => <rect key={x} x={x - 2.5} y="78" width="5" height="6" rx="1.5" fill={MV} />)}
-        <Shine d="M24 26 C24 40 22 52 20 62 C25 52 27 40 27 26 Z" />
-        <Sparkle x={74} y={36} s={0.9} />
+        {/* botín de perfil, apuntando a la derecha */}
+        <path d="M16 22 C22 19 32 19 40 22 C42 34 46 42 54 46 C66 50 80 52 86 58 C91 63 89 72 82 74 H20 C15 74 13 69 14 63 C16 52 16 36 16 22 Z" fill={M} stroke="rgba(90,60,5,0.65)" strokeWidth="1.4" />
+        <path d="M16 22 C22 19 32 19 40 22 L39 27 C32 25 23 25 16 27 Z" fill={MV} />
+        <path d="M38 30 L32 34 M42 36 L36 40 M46 41 L40 45 M51 45 L45 49 M57 48 L52 52" stroke="rgba(90,60,5,0.75)" strokeWidth="2" strokeLinecap="round" />
+        <path d="M14 66 C40 68 64 68 88 66" stroke="rgba(90,60,5,0.55)" strokeWidth="1.6" fill="none" />
+        <path d="M20 54 C30 50 36 56 44 60" stroke="rgba(90,60,5,0.4)" strokeWidth="1.2" fill="none" />
+        {[24, 36, 58, 70, 80].map((x) => <path key={x} d={`M${x - 3} 74 h6 l-1 7 h-4 z`} fill={MV} stroke="rgba(90,60,5,0.5)" strokeWidth="0.6" />)}
+        <Shine d="M19 28 C19 42 18 54 17 64 C21 54 22 42 22 28 Z" />
+        <Sparkle x={76} y={40} s={0.9} />
       </>);
       break;
     case "glove":
@@ -300,6 +367,7 @@ export function TrophyIcon({ name, size = 28 }: { name: string; size?: number })
         <linearGradient id={`b${uid}`} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#3a3f4b" /><stop offset="0.5" stopColor="#1b1e25" /><stop offset="1" stopColor="#2a2e38" />
         </linearGradient>
+        <linearGradient id={`c${uid}`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#fff3b0" /><stop offset="0.5" stopColor="#e0b030" /><stop offset="1" stopColor="#8a6008" /></linearGradient>
       </defs>
       {body}
     </svg>

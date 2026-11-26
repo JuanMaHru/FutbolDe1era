@@ -7,7 +7,9 @@ import { Badge } from "./Badge";
 import { TrophyIcon } from "./Trophy";
 
 const TITLES: [string, string, string][] = [
-  ["Liga Profesional 2027", "Ligas", "Liga Profesional, Apertura, Clausura, Premier, LaLiga, Serie A, Bundesliga…"],
+  ["Liga Profesional 2027", "Ligas", "Liga Profesional, Apertura, Clausura, LaLiga, Serie A, Brasileirão…"],
+  ["Premier League 2027", "Premier League", "Plateada y con la corona arriba"],
+  ["Bundesliga 2027", "Bundesliga", "La ensaladera: un plato de plata"],
   ["Copa Argentina 2027", "Copas nacionales", "Copa Argentina, FA Cup, Copa del Rey, Copa do Brasil…"],
   ["Copa Libertadores 2027", "Copa Libertadores", "La gloria eterna de Sudamérica"],
   ["Champions League 2027", "Champions League", "La orejona: el título de clubes más grande"],
