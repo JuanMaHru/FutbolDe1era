@@ -10,6 +10,7 @@ import { Countdown } from "./Countdown";
 import { ModeArt, type ModeId } from "./art/ModeArt";
 import { useProfile } from "./useProfile";
 import { DonateButton } from "./Donate";
+import { Efemerides } from "./Efemerides";
 
 interface Mode {
   id: ModeId;
@@ -77,6 +78,8 @@ export function HomeCards() {
           })}
         </div>
       </section>
+
+      <Efemerides />
 
       <h2 className="section-title">{t("home.pick")}</h2>
       <div className="modes">
