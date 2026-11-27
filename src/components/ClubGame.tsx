@@ -37,7 +37,7 @@ export function ClubGame({ day }: { day?: number }) {
   const t = pickDaily(clubPool.length >= 15 ? clubPool : CLUB_TARGETS, levelSeed(6061, lv.diff.level), g.key);
   const wrong = s.guesses.filter((x) => x !== t.id).length;
   const clues: { label: string; value: React.ReactNode }[] = [
-    { label: "Colores", value: <span className="cl-kit"><Kit club={t.name} label="" size={56} /> <span className="muted small">{clubStyle(t.name).pattern === "plain" ? "lisa" : "con diseño"}</span></span> },
+    { label: "Colores", value: <span className="cl-kit"><Kit club={t.name} label="" size={56} real={false} /> <span className="muted small">{clubStyle(t.name).pattern === "plain" ? "lisa" : "con diseño"}</span></span> },
     { label: "Liga", value: t.league ?? "—" },
     { label: "Fundación", value: t.fundacion },
     { label: "Estadio", value: t.estadio?.replace(/^Estadio\s+/i, "Estadio ") },
