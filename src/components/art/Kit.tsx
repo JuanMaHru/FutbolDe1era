@@ -12,10 +12,10 @@ const SLEEVE_R = "M90.5 23 L84.5 38.5 L74 34.5 L74 22 L89 20 Z";
 const hash = (s: string) => [...s].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 11);
 
 /**
- * Camiseta dibujada (estilo propio, sin marcas): patrón del club, cuello y puños en el color de detalle,
- * sombras de la tela, escudo en el pecho y dorsal. `hidden` = silueta sin colores (para adivinar).
+ * Camiseta dibujada (estilo propio, sin marcas): patrón del club, cuello y puños en el color de detalle
+ * y sombras de la tela. Con `label` se ve de espalda con el dorsal; sin él, de frente con el escudo en el pecho. `hidden` = silueta sin colores (para adivinar).
  */
-export function Kit({ club, label, size = 96, hidden = false, colors, pattern }: { club: string; label: string | number; size?: number; hidden?: boolean; real?: boolean; colors?: [string, string, string?]; pattern?: Pattern }) {
+export function Kit({ club, label, size = 96, hidden = false, colors, pattern, crest = true }: { club: string; label: string | number; size?: number; hidden?: boolean; real?: boolean; colors?: [string, string, string?]; pattern?: Pattern; crest?: boolean }) {
   const id = useId().replace(/:/g, "");
   const s0 = clubStyle(club);
   const s = colors ? { ...s0, colors, pattern: pattern ?? s0.pattern } : s0;
@@ -26,7 +26,9 @@ export function Kit({ club, label, size = 96, hidden = false, colors, pattern }:
   const h = hash(club || "x");
   const vneck = h % 3 === 0;
   const str = String(label);
-  const showCrest = !hidden && !!club && !colors;
+  // Con número se ve la espalda (como las reales: el escudo va adelante, el dorsal atrás).
+  const back = str !== "";
+  const showCrest = !back && crest && !hidden && !!club && !colors;
   return (
     <span className="kit kit-draw" style={{ width: size, height: size }}>
       <svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden>
@@ -58,14 +60,16 @@ export function Kit({ club, label, size = 96, hidden = false, colors, pattern }:
           <path d="M25.5 90.5 Q50 93.5 74.5 90.5" stroke={trim} strokeWidth="1.6" fill="none" opacity="0.85" />
         </g>
         {/* Cuello */}
-        {vneck ? (
+        {back ? (
+          <path d="M41 5.5 Q50 9.5 59 5.5 L57.6 4.3 Q50 7.4 42.4 4.3 Z" fill={trim} stroke="rgba(0,0,0,0.25)" strokeWidth="0.5" />
+        ) : vneck ? (
           <path d="M41 5.5 L50 17 L59 5.5 L56.5 4.6 L50 12.6 L43.5 4.6 Z" fill={trim} stroke="rgba(0,0,0,0.25)" strokeWidth="0.5" />
         ) : (
           <path d="M41 5.5 Q50 13.5 59 5.5 L57 4.2 Q50 10 43 4.2 Z" fill={trim} stroke="rgba(0,0,0,0.25)" strokeWidth="0.5" />
         )}
         <path d={BODY} fill="none" stroke="rgba(0,0,0,0.4)" strokeWidth="1.6" strokeLinejoin="round" />
         {str !== "" && (
-          <text x="50" y={showCrest ? 74 : 70} textAnchor="middle" fontSize={str.length > 2 ? 20 : 30} fontWeight="900" fontStyle="italic"
+          <text x="50" y={68} textAnchor="middle" fontSize={str.length > 2 ? 22 : 36} fontWeight="900" fontStyle="italic"
             style={{ fill: numberColor, fontFamily: "var(--display), Impact, sans-serif" }}
             stroke={hidden ? "none" : isLight(base) ? "rgba(255,255,255,0.65)" : "rgba(0,0,0,0.4)"} strokeWidth="1.4" paintOrder="stroke">
             {str}
