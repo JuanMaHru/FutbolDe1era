@@ -9,7 +9,7 @@ import { CLUBS } from "@/lib/clubs";
 import { CLUBS_W, INTL_CLUBS, LEAGUES, clubInfo } from "@/lib/career/world";
 
 const OUT = "src/data/crests.json";
-const KEY = process.env.SPORTSDB_KEY || "3"; // clave pública gratuita de TheSportsDB
+const KEY = process.env.SPORTSDB_KEY || "123"; // clave pública gratuita de TheSportsDB
 const ALL = process.argv.includes("--all");
 
 const COUNTRY: Record<string, string> = { ARG: "Argentina", BRA: "Brazil", ENG: "England", ESP: "Spain", FRA: "France", GER: "Germany", ITA: "Italy", KSA: "Saudi Arabia", MEX: "Mexico", NED: "Netherlands", POR: "Portugal", URU: "Uruguay", USA: "United States" };
@@ -35,12 +35,15 @@ const ALIAS: Record<string, [string, string?]> = {
 const strip = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+let logged = false;
 async function search(q: string): Promise<any[]> {
   for (let i = 0; i < 4; i++) {
     const r = await fetch(`https://www.thesportsdb.com/api/v1/json/${KEY}/searchteams.php?t=${encodeURIComponent(q)}`);
     if (r.status === 429) { await sleep(20000); continue; }
-    if (!r.ok) return [];
-    const j: any = await r.json().catch(() => null);
+    if (!r.ok) { console.log(`  HTTP ${r.status} buscando "${q}"`); return []; }
+    const txt = await r.text();
+    if (!logged) { logged = true; console.log("  respuesta de ejemplo:", txt.slice(0, 200)); }
+    let j: any = null; try { j = JSON.parse(txt); } catch { console.log("  respuesta no JSON:", txt.slice(0, 120)); }
     return (j?.teams ?? []).filter((t: any) => t.strSport === "Soccer");
   }
   return [];
