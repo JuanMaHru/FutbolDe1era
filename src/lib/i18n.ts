@@ -44,6 +44,7 @@ const es = {
   "mode.masomenos": "Más o Menos",
   "mode.intruso": "El intruso",
   "mode.anios": "¿En qué año?",
+  "mode.club": "¿De qué club es?",
   "mode.conexion": "¿Quién jugó con quién?",
   "game.guessThe": "Adiviná el",
   "game.placeholder": "Escribí un",

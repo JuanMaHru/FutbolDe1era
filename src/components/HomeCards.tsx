@@ -27,6 +27,7 @@ const MODES: Mode[] = [
   { id: "wordle", href: "/palabra", badge: "new", desc: "Adiviná el apellido letra por letra" },
   { id: "bingo", href: "/bingo", badge: "new", desc: "Ubicá a cada jugador en su casilla" },
   { id: "intruso", href: "/intruso", badge: "new", desc: "Tres comparten algo. ¿Quién no encaja?" },
+  { id: "club", href: "/club", badge: "new", desc: "Colores, estadio, fundación… ¿qué club es?" },
   { id: "anios", href: "/en-que-anio", badge: "new", desc: "Momentos históricos: ¿en qué año fue?" },
   { id: "conexion", href: "/conexion", badge: "new", desc: "Uní dos jugadores con compañeros de equipo" },
   { id: "masomenos", href: "/mas-o-menos", badge: "new", desc: "¿Vale más o menos? Valores, goles, estadios…" },

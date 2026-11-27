@@ -298,3 +298,9 @@ export function startingOffers(reputation: number, nat: string, rand: () => numb
   }
   return [...out];
 }
+
+/** Nombre de la liga de un club (si está en el mundo de la carrera). */
+export const BY_NAME_LEAGUE = (name: string): string | undefined => {
+  const c = BY_NAME.get(name);
+  return c ? LEAGUES[c.league]?.name ?? undefined : undefined;
+};

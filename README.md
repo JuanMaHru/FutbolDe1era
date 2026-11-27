@@ -16,6 +16,7 @@ Minijuegos diarios de fútbol conectados a un modo carrera. *Tu conocimiento rea
 - **El intruso**: 4 jugadores, tres comparten algo; ¿quién no encaja?
 - **¿Quién jugó con quién?**: uní dos jugadores con una cadena de compañeros de equipo.
 - **¿En qué año?**: cinco momentos históricos para ubicar en el tiempo.
+- **¿De qué club es?**: colores, liga, fundación, estadio y un jugador que pasó por ahí.
 
 **Álbum de figuritas** (`/album`): cada reto terminado da un sobre gratis; fotos libres de Wikimedia Commons con crédito.
 **Datos**: verificados contra Wikidata (`tools/resolve_ids.py`, `verify_data.py`, `apply_fixes.py`, `build_bios.py`, `build_hol.py`, `fetch_photos.py`).

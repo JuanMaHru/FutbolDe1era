@@ -851,3 +851,4 @@ a.mode .mode-cta { color: var(--accent); }
 .stk.missing { background: var(--surface); border: 2px dashed var(--line); box-shadow: none; aspect-ratio: 4 / 6; align-items: center; justify-content: center; color: var(--muted); }
 .stk-q { font-family: var(--display); font-size: 40px; font-weight: 900; }
 .stk.fresh { animation: tile .7s cubic-bezier(.2,1.6,.4,1) both; }
+.cl-clues { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin: 12px 0; } .cl-kit { display: flex; align-items: center; gap: 6px; } .cl-answer { display: inline-flex; align-items: center; gap: 6px; }

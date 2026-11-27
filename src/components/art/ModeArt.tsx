@@ -1,7 +1,7 @@
 import { Kit } from "./Kit";
 import { Crest } from "./Crest";
 
-export type ModeId = "jugador" | "dt" | "tray" | "traydt" | "ligas" | "archivo" | "carrera" | "wordle" | "bingo" | "once" | "masomenos" | "intruso" | "conexion" | "anios";
+export type ModeId = "jugador" | "dt" | "tray" | "traydt" | "ligas" | "archivo" | "carrera" | "wordle" | "bingo" | "once" | "masomenos" | "intruso" | "conexion" | "anios" | "club";
 
 const G = "#22a95b", Y = "#e4a91c", M = "var(--miss)", CH = "#eef4ef", AC = "var(--accent)";
 
@@ -99,6 +99,10 @@ export function ModeArt({ mode }: { mode: ModeId }) {
             <span key={i} style={{ background: [G, Y, M, G, G][i], animationDelay: `${i * 110}ms` }}>{l}</span>
           ))}
         </div>
+      );
+    case "club":
+      return (
+        <div className="art art-yr"><span style={{ fontSize: 40 }}>🏟️</span><b style={{ fontSize: 44 }}>?</b></div>
       );
     case "anios":
       return (

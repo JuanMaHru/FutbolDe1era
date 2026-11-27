@@ -13,6 +13,7 @@ import { OrderGame } from "@/components/OrderGame";
 import { MasOMenosGame } from "@/components/MasOMenosGame";
 import { IntrusoGame } from "@/components/IntrusoGame";
 import { AniosGame } from "@/components/AniosGame";
+import { ClubGame } from "@/components/ClubGame";
 import { ConexionGame } from "@/components/ConexionGame";
 import { OnceGame } from "@/components/OnceGame";
 import { PalabraGame } from "@/components/PalabraGame";
@@ -32,6 +33,8 @@ function Page({ path }: { path: string }) {
   }
   const tray = path.match(/^\/trayectoria(\/dt)?(?:\/(\d+))?$/);
   if (tray) return tray[1] ? <OrderGame key={path} day={tray[2] ? Number(tray[2]) : undefined} /> : <TrayectoriaGame key={path} kind="jugador" day={tray[2] ? Number(tray[2]) : undefined} />;
+  const cl = path.match(/^\/club(?:\/(\d+))?$/);
+  if (cl) return <ClubGame key={path} day={cl[1] ? Number(cl[1]) : undefined} />;
   const yr = path.match(/^\/en-que-anio(?:\/(\d+))?$/);
   if (yr) return <AniosGame key={path} day={yr[1] ? Number(yr[1]) : undefined} />;
   const ic = path.match(/^\/(intruso|conexion)(?:\/(\d+))?$/);
