@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   alternates: { canonical: "/" },
   openGraph: { type: "website", locale: "es_AR", url: SITE_URL, siteName: "Fútbol de Primera", title: "Fútbol de Primera · El que sabe, juega", description: DESCRIPTION },
+  appleWebApp: { capable: true, title: "Fútbol de 1era", statusBarStyle: "black-translucent" },
+  icons: { apple: "/icons/apple-touch-icon.png" },
   twitter: { card: "summary_large_image", title: "Fútbol de Primera · El que sabe, juega", description: DESCRIPTION },
 };
 

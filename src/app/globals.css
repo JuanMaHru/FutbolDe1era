@@ -976,3 +976,32 @@ body[data-swipe="right"] main { animation: swipeR .32s ease-out; }
 .donate-pill { height: 32px; padding: 0 12px; border: 0; background: linear-gradient(135deg, #f5c542, #ffdf7a); color: #1a1300; font-size: 12px; box-shadow: 0 4px 12px rgba(245,197,66,.35); }
 .donate-pill:hover { background: linear-gradient(135deg, #ffd65c, #fff0a8); }
 @media (max-width: 440px) { .donate-txt { display: inline; } }
+
+/* Instalar la app */
+.install-banner { display: grid; grid-template-columns: auto 1fr auto auto; gap: 10px; align-items: center; margin: 12px 0; padding: 10px 12px; border-radius: 16px; background: linear-gradient(135deg, var(--surface-2), var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 50%, var(--line)); }
+.install-banner img { border-radius: 10px; }
+.install-banner div { display: grid; gap: 2px; min-width: 0; }
+.install-banner .btn.small { padding: 8px 12px; font-size: 13px; }
+
+/* Perfil */
+.pf-head { display: flex; gap: 16px; align-items: center; margin-top: 12px; }
+.pf-avatar { position: relative; width: 92px; height: 92px; border-radius: 50%; border: 3px solid var(--accent); background: var(--surface-2); padding: 0; cursor: pointer; flex-shrink: 0; display: grid; place-items: center; color: var(--chalk); font-family: var(--display); font-weight: 900; font-size: 34px; }
+.pf-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.pf-cam { position: absolute; bottom: -2px; left: -2px; font-size: 16px; background: var(--bg-2); border-radius: 50%; width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--line); }
+.pf-crest { position: absolute; bottom: -4px; right: -6px; }
+.pf-id { display: grid; gap: 6px; min-width: 0; flex: 1; }
+.pf-name { background: none; border: 0; padding: 0; text-align: left; color: var(--chalk); font-family: var(--display); font-style: italic; font-weight: 900; font-size: 26px; text-transform: uppercase; cursor: pointer; overflow-wrap: anywhere; }
+.pf-club { display: flex; gap: 6px; align-items: center; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+.pf-club select { background: var(--surface); color: var(--chalk); border: 1px solid var(--line); border-radius: 10px; padding: 6px 8px; font: inherit; max-width: 100%; }
+.pf-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 12px 0; }
+.pf-stat { display: grid; justify-items: center; gap: 2px; padding: 12px 6px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); text-align: center; }
+.pf-stat b { font-family: var(--display); font-size: 26px; font-style: italic; }
+.pf-stat span { font-size: 11px; color: var(--muted); font-weight: 700; }
+.pf-logros { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.pf-logro { display: grid; gap: 2px; padding: 10px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); opacity: .55; }
+.pf-logro.ok { opacity: 1; border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
+.pf-logro-ico { font-size: 26px; }
+.pf-games { display: grid; gap: 6px; }
+.pf-game { display: flex; justify-content: space-between; gap: 8px; padding: 10px 12px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); color: var(--chalk); text-decoration: none; font-weight: 700; }
+.pf-account { display: grid; gap: 8px; margin-top: 16px; }
+.pf-club select { width: 100%; min-width: 0; }

@@ -40,6 +40,7 @@ export function Header() {
     { href: "/album", label: "Álbum", active: path.startsWith("/album") },
     { href: "/ligas", label: t("nav.leagues"), active: path.startsWith("/ligas") },
     { href: "/archivo", label: t("nav.archive"), active: path.startsWith("/archivo") },
+    { href: "/perfil", label: "Perfil", active: path.startsWith("/perfil") },
   ];
 
   return (
@@ -111,9 +112,9 @@ export function Header() {
               {l.label}{l.href === "/album" && <PackBadge />}
             </Link>
           ))}
-          <span className="rep-pill" title="Reputación: la vas a usar en el Modo Carrera">
+          <Link href="/perfil" className="rep-pill" title="Tu perfil · reputación">
             ⭐ {profile?.reputation ?? 0}
-          </span>
+          </Link>
         </nav>
       </div>
       </header>

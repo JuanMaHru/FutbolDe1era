@@ -24,6 +24,7 @@ import { Footer, LegalNotice } from "@/components/LegalNotice";
 import { FONTS_URL } from "@/lib/site";
 import { Album } from "@/components/Album";
 import { TabBar } from "@/components/TabBar";
+import { Perfil } from "@/components/Perfil";
 
 function Page({ path }: { path: string }) {
   const game = path.match(/^\/(jugador|dt)(?:\/(\d+))?$/);
@@ -51,6 +52,7 @@ function Page({ path }: { path: string }) {
   }
   if (path === "/carrera") return <CareerApp />;
   if (path === "/aviso-legal") return <LegalNotice />;
+  if (path === "/perfil") return <><h1 className="hero-title" style={{ fontSize: "clamp(28px,7vw,44px)" }}>Tu <span className="hl">perfil</span></h1><Perfil /></>;
   if (path === "/album") return <><h1 className="hero-title" style={{ fontSize: "clamp(28px,7vw,44px)" }}>El <span className="hl">álbum</span></h1><Album /></>;
   if (path === "/vitrina")
     return (

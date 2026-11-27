@@ -1,3 +1,4 @@
+import { InstallApp } from "@/components/InstallApp";
 import { HomeCards } from "@/components/HomeCards";
 import { ClubBanner } from "@/components/ClubBanner";
 
@@ -8,6 +9,7 @@ export default function Home() {
       <p className="lead">
         Retos diarios iguales para todos. Tu conocimiento de fútbol es tu stat: cada acierto suma para tu liga y para tu carrera.
       </p>
+      <InstallApp />
       <ClubBanner />
       <HomeCards />
     </>

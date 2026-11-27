@@ -13,7 +13,7 @@ export const TABS = [
   { href: "/carrera", label: "Carrera", icon: I(<><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z" /></>) },
   { href: "/album", label: "Álbum", icon: I(<><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z" /><path d="M8 7h6M8 11h6" /><path d="M4 17h14" /></>) },
   { href: "/ligas", label: "Ligas", icon: I(<><path d="M8 4h8v4a4 4 0 0 1-8 0z" /><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4" /><path d="M12 12v4M9 20h6M10 16h4v4h-4z" /></>) },
-  { href: "/archivo", label: "Archivo", icon: I(<><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18M8 3v4M16 3v4" /><path d="M8 14h2M14 14h2M8 17h2" /></>) },
+  { href: "/perfil", label: "Perfil", icon: I(<><circle cx="12" cy="8" r="4" /><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" /></>) },
 ];
 const tabIndex = (path: string) => TABS.findIndex((t) => (t.href === "/" ? path === "/" : path === t.href));
 const activeIndex = (path: string) => TABS.findIndex((t) => (t.href === "/" ? path === "/" : path.startsWith(t.href)));
