@@ -51,8 +51,8 @@ export function ThemePicker({ open, onClose }: { open: boolean; onClose: () => v
         {!q && (
           <div className="theme-grid">
             <button className={`theme-opt ${active === DEFAULT_THEME ? "active" : ""}`} onClick={() => pick(DEFAULT_THEME)}>
-              <span className="swatch" style={{ "--a": "#ff7a1a", "--b": "#0f1530" } as React.CSSProperties} />
-              <span>Noche de estadio</span>
+              <span className="swatch" style={{ "--a": "#22D169", "--b": "#0B1D3A" } as React.CSSProperties} />
+              <span>Fútbol de Primera</span>
             </button>
           </div>
         )}

@@ -75,4 +75,7 @@ Definí un `GameDefinition` (items + atributos con su `compare`) en `lib/game/ga
 3. **Fase 2**: el Modo Carrera consume `profile.reputation` y `profile.results`.
 
 ## Legal
-Solo usamos nombres y datos públicos. No usamos escudos, fotos ni marcas oficiales.
+Usamos nombres y datos públicos. Los escudos de clubes (TheSportsDB) se muestran solo para identificarlos, con aviso legal y contacto para bajas; se apagan con `REAL_CRESTS` en `src/lib/site.ts`. Trofeos e ilustraciones son propios. No usamos fotos.
+
+## Marca
+Ver `docs/marca.md` y `public/brand/`. Colores: azul noche `#0B1D3A`, verde cancha `#22D169`, blanco humo `#F4F7FA`. Tipografías: Barlow Condensed y Montserrat.

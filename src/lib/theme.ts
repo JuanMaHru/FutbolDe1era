@@ -8,7 +8,7 @@ import { read, write } from "./storage";
 
 export type Tokens = Record<string, string>;
 
-/** "Noche de estadio": azul noche + naranja bengala. */
+/** Tema de marca: azul noche + verde cancha (ver docs/marca.md). */
 export const DEFAULT_THEME = "default";
 
 function hexToHsl(hex: string): [number, number, number] {
@@ -42,7 +42,7 @@ function base(h: number, sat: number): Tokens {
 }
 
 export function defaultTokens(): Tokens {
-  return { ...base(228, 38), "--accent": "#ff7a1a", "--accent-ink": "#1d0b00", "--accent-2": "#ffc23d", "--club-1": "#ff7a1a", "--club-2": "#ffc23d", "--club-3": "#ffffff" };
+  return { ...base(218, 55), "--accent": "#22D169", "--accent-ink": "#0B1D3A", "--accent-2": "#9BF2BE", "--club-1": "#22D169", "--club-2": "#F4F7FA", "--club-3": "#0B1D3A" };
 }
 
 /** Elige el color "fuerte" del club y lo hace legible sobre fondo oscuro. */

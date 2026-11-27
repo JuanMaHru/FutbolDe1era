@@ -9,6 +9,7 @@ import { IconInstagram, IconSound, IconTikTok, IconX } from "./Icons";
 import { ThemePicker } from "./ThemePicker";
 import { DonateButton } from "./Donate";
 import { Crest } from "./art/Crest";
+import { BrandLogo, BrandSymbol } from "./Brand";
 import { DEFAULT_THEME, currentTheme, setTheme } from "@/lib/theme";
 import { useProfile } from "./useProfile";
 
@@ -98,10 +99,8 @@ export function Header() {
       <header className="header">
       <div className="header-inner">
         <Link href="/" className="brand" aria-label="Fútbol de Primera, inicio">
-          <span className="brand-mark">1ª</span>
-          <span className="brand-name">
-            Fútbol de <em>Primera</em>
-          </span>
+          <span className="brand-full"><BrandLogo height={46} /></span>
+          <span className="brand-small"><BrandSymbol size={38} /></span>
         </Link>
         <nav className="nav">
           {links.map((l) => (

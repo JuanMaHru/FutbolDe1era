@@ -1,3 +1,6 @@
+/** Tipografías de la marca: Barlow Condensed (títulos) y Montserrat (interfaz). */
+export const FONTS_URL = "https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Montserrat:wght@400;500;600;700;800&display=swap";
+
 /** Dirección pública del sitio (Vercel). Si se cambia el dominio, cambiarlo acá. */
 export const SITE_URL = "https://futbol-de1era.vercel.app";
 

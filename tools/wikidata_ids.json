@@ -1,17 +1,2352 @@
 {
  "lionel-messi": {
   "qid": "Q615",
-  "score": 11.0,
+  "score": 11,
   "name": "Lionel Messi"
  },
  "julian-alvarez": {
-  "qid": "Q59381180",
-  "score": 11.0,
+  "qid": null,
+  "score": 0,
   "name": "Julián Álvarez"
  },
  "lautaro-martinez": {
   "qid": "Q21484126",
-  "score": 11.0,
+  "score": 11,
   "name": "Lautaro Martínez"
+ },
+ "enzo-fernandez": {
+  "qid": "Q96105248",
+  "score": 11,
+  "name": "Enzo Fernández"
+ },
+ "alexis-mac-allister": {
+  "qid": "Q33297140",
+  "score": 11,
+  "name": "Alexis Mac Allister"
+ },
+ "emiliano-martinez": {
+  "qid": "Q3275904",
+  "score": 8,
+  "name": "Emiliano Martínez"
+ },
+ "cristian-romero": {
+  "qid": "Q28058687",
+  "score": 11,
+  "name": "Cristian Romero"
+ },
+ "lisandro-martinez": {
+  "qid": "Q30881092",
+  "score": 11,
+  "name": "Lisandro Martínez"
+ },
+ "rodrigo-de-paul": {
+  "qid": "Q6110670",
+  "score": 11,
+  "name": "Rodrigo De Paul"
+ },
+ "nicolas-otamendi": {
+  "qid": "Q182063",
+  "score": 11,
+  "name": "Nicolás Otamendi"
+ },
+ "franco-mastantuono": {
+  "qid": "Q123289726",
+  "score": 11,
+  "name": "Franco Mastantuono"
+ },
+ "nico-paz": {
+  "qid": "Q111336539",
+  "score": 11,
+  "name": "Nico Paz"
+ },
+ "thiago-almada": {
+  "qid": "Q57293140",
+  "score": 11,
+  "name": "Thiago Almada"
+ },
+ "alejandro-garnacho": {
+  "qid": "Q111366053",
+  "score": 11,
+  "name": "Alejandro Garnacho"
+ },
+ "giuliano-simeone": {
+  "qid": "Q111672750",
+  "score": 11,
+  "name": "Giuliano Simeone"
+ },
+ "nahuel-molina": {
+  "qid": "Q22082590",
+  "score": 11,
+  "name": "Nahuel Molina"
+ },
+ "paulo-dybala": {
+  "qid": "Q166317",
+  "score": 11,
+  "name": "Paulo Dybala"
+ },
+ "giovani-lo-celso": {
+  "qid": "Q20743436",
+  "score": 11,
+  "name": "Giovani Lo Celso"
+ },
+ "matias-soule": {
+  "qid": "Q107075915",
+  "score": 11,
+  "name": "Matías Soulé"
+ },
+ "exequiel-palacios": {
+  "qid": "Q19345715",
+  "score": 11,
+  "name": "Exequiel Palacios"
+ },
+ "facundo-medina": {
+  "qid": "Q28056787",
+  "score": 11,
+  "name": "Facundo Medina"
+ },
+ "angel-correa": {
+  "qid": "Q10855654",
+  "score": 11,
+  "name": "Ángel Correa"
+ },
+ "edinson-cavani": {
+  "qid": "Q167790",
+  "score": 11,
+  "name": "Edinson Cavani"
+ },
+ "miguel-merentiel": {
+  "qid": "Q35066509",
+  "score": 11,
+  "name": "Miguel Merentiel"
+ },
+ "leandro-paredes": {
+  "qid": "Q630170",
+  "score": 11,
+  "name": "Leandro Paredes"
+ },
+ "agustin-marchesin": {
+  "qid": null,
+  "score": 2,
+  "name": "Agustín Marchesín"
+ },
+ "exequiel-zeballos": {
+  "qid": "Q71735627",
+  "score": 11,
+  "name": "Exequiel Zeballos"
+ },
+ "milton-gimenez": {
+  "qid": "Q63384958",
+  "score": 11,
+  "name": "Milton Giménez"
+ },
+ "franco-armani": {
+  "qid": "Q5484508",
+  "score": 11,
+  "name": "Franco Armani"
+ },
+ "miguel-borja": {
+  "qid": "Q4094820",
+  "score": 11,
+  "name": "Miguel Borja"
+ },
+ "facundo-colidio": {
+  "qid": "Q42126337",
+  "score": 11,
+  "name": "Facundo Colidio"
+ },
+ "maximiliano-salas": {
+  "qid": "Q23011966",
+  "score": 11,
+  "name": "Maximiliano Salas"
+ },
+ "juan-fernando-quintero": {
+  "qid": "Q2092409",
+  "score": 11,
+  "name": "Juan Fernando Quintero"
+ },
+ "german-pezzella": {
+  "qid": "Q3761173",
+  "score": 11,
+  "name": "Germán Pezzella"
+ },
+ "marcos-acuna": {
+  "qid": "Q17462635",
+  "score": 11,
+  "name": "Marcos Acuña"
+ },
+ "gonzalo-montiel": {
+  "qid": "Q26255087",
+  "score": 11,
+  "name": "Gonzalo Montiel"
+ },
+ "adrian-martinez": {
+  "qid": null,
+  "score": 0,
+  "name": "Adrián Martínez"
+ },
+ "gabriel-arias": {
+  "qid": "Q28005145",
+  "score": 11,
+  "name": "Gabriel Arias"
+ },
+ "gaston-martirena": {
+  "qid": "Q109225751",
+  "score": 8,
+  "name": "Gastón Martirena"
+ },
+ "angel-di-maria": {
+  "qid": "Q251683",
+  "score": 11,
+  "name": "Ángel Di María"
+ },
+ "ignacio-malcorra": {
+  "qid": "Q17478131",
+  "score": 8,
+  "name": "Ignacio Malcorra"
+ },
+ "gabriel-avalos": {
+  "qid": "Q14592575",
+  "score": 11,
+  "name": "Gabriel Ávalos"
+ },
+ "rodrigo-rey": {
+  "qid": "Q6110784",
+  "score": 11,
+  "name": "Rodrigo Rey"
+ },
+ "guido-carrillo": {
+  "qid": "Q3779221",
+  "score": 11,
+  "name": "Guido Carrillo"
+ },
+ "fernando-muslera": {
+  "qid": "Q203749",
+  "score": 11,
+  "name": "Fernando Muslera"
+ },
+ "santiago-ascacibar": {
+  "qid": "Q23927885",
+  "score": 11,
+  "name": "Santiago Ascacíbar"
+ },
+ "jose-sosa": {
+  "qid": "Q314241",
+  "score": 11,
+  "name": "José Sosa"
+ },
+ "edwuin-cetre": {
+  "qid": "Q30186091",
+  "score": 8,
+  "name": "Edwuin Cetré"
+ },
+ "walter-bou": {
+  "qid": "Q19362957",
+  "score": 11,
+  "name": "Walter Bou"
+ },
+ "claudio-aquino": {
+  "qid": "Q5129320",
+  "score": 11,
+  "name": "Claudio Aquino"
+ },
+ "sebastian-villa": {
+  "qid": "Q47494583",
+  "score": 11,
+  "name": "Sebastián Villa"
+ },
+ "federico-valverde": {
+  "qid": "Q19509544",
+  "score": 11,
+  "name": "Federico Valverde"
+ },
+ "darwin-nunez": {
+  "qid": "Q46372260",
+  "score": 11,
+  "name": "Darwin Núñez"
+ },
+ "luis-suarez": {
+  "qid": null,
+  "score": 0,
+  "name": "Luis Suárez"
+ },
+ "luis-diaz": {
+  "qid": "Q28531111",
+  "score": 11,
+  "name": "Luis Díaz"
+ },
+ "james-rodriguez": {
+  "qid": "Q368441",
+  "score": 11,
+  "name": "James Rodríguez"
+ },
+ "vinicius-junior": {
+  "qid": "Q28973866",
+  "score": 11,
+  "name": "Vinícius Júnior"
+ },
+ "raphinha": {
+  "qid": "Q28861547",
+  "score": 11,
+  "name": "Raphinha"
+ },
+ "neymar": {
+  "qid": "Q142794",
+  "score": 11,
+  "name": "Neymar"
+ },
+ "moises-caicedo": {
+  "qid": "Q87715532",
+  "score": 11,
+  "name": "Moisés Caicedo"
+ },
+ "arturo-vidal": {
+  "qid": "Q192671",
+  "score": 11,
+  "name": "Arturo Vidal"
+ },
+ "miguel-almiron": {
+  "qid": "Q16145667",
+  "score": 11,
+  "name": "Miguel Almirón"
+ },
+ "kylian-mbappe": {
+  "qid": "Q21621995",
+  "score": 11,
+  "name": "Kylian Mbappé"
+ },
+ "erling-haaland": {
+  "qid": "Q28967995",
+  "score": 11,
+  "name": "Erling Haaland"
+ },
+ "lamine-yamal": {
+  "qid": "Q113704154",
+  "score": 11,
+  "name": "Lamine Yamal"
+ },
+ "mohamed-salah": {
+  "qid": "Q1354960",
+  "score": 11,
+  "name": "Mohamed Salah"
+ },
+ "cristiano-ronaldo": {
+  "qid": "Q11571",
+  "score": 11,
+  "name": "Cristiano Ronaldo"
+ },
+ "ayrton-costa": {
+  "qid": "Q103967727",
+  "score": 11,
+  "name": "Ayrton Costa"
+ },
+ "lautaro-di-lollo": {
+  "qid": "Q116196701",
+  "score": 11,
+  "name": "Lautaro Di Lollo"
+ },
+ "carlos-palacios": {
+  "qid": "Q121639118",
+  "score": 5,
+  "name": "Carlos Palacios"
+ },
+ "luis-advincula": {
+  "qid": "Q2655086",
+  "score": 11,
+  "name": "Luis Advíncula"
+ },
+ "ander-herrera": {
+  "qid": "Q1639968",
+  "score": 11,
+  "name": "Ander Herrera"
+ },
+ "kevin-zenon": {
+  "qid": "Q101001007",
+  "score": 11,
+  "name": "Kevin Zenón"
+ },
+ "rodrigo-battaglia": {
+  "qid": "Q3940027",
+  "score": 11,
+  "name": "Rodrigo Battaglia"
+ },
+ "paulo-diaz": {
+  "qid": "Q17624699",
+  "score": 8,
+  "name": "Paulo Díaz"
+ },
+ "lucas-martinez-quarta": {
+  "qid": "Q20669464",
+  "score": 11,
+  "name": "Lucas Martínez Quarta"
+ },
+ "kevin-castano": {
+  "qid": "Q117289166",
+  "score": 11,
+  "name": "Kevin Castaño"
+ },
+ "giuliano-galoppo": {
+  "qid": "Q59209535",
+  "score": 11,
+  "name": "Giuliano Galoppo"
+ },
+ "sebastian-driussi": {
+  "qid": "Q11640549",
+  "score": 11,
+  "name": "Sebastián Driussi"
+ },
+ "fabricio-bustos": {
+  "qid": "Q29005699",
+  "score": 11,
+  "name": "Fabricio Bustos"
+ },
+ "matias-galarza-fonda": {
+  "qid": null,
+  "score": -99,
+  "name": "Matías Galarza Fonda"
+ },
+ "marcos-rojo": {
+  "qid": "Q507890",
+  "score": 11,
+  "name": "Marcos Rojo"
+ },
+ "santiago-sosa": {
+  "qid": "Q56378908",
+  "score": 11,
+  "name": "Santiago Sosa"
+ },
+ "juan-nardoni": {
+  "qid": "Q66929490",
+  "score": 11,
+  "name": "Juan Nardoni"
+ },
+ "gabriel-rojas": {
+  "qid": null,
+  "score": 2,
+  "name": "Gabriel Rojas"
+ },
+ "bruno-zuculini": {
+  "qid": "Q3645977",
+  "score": 11,
+  "name": "Bruno Zuculini"
+ },
+ "duvan-vergara": {
+  "qid": "Q25842194",
+  "score": 11,
+  "name": "Duván Vergara"
+ },
+ "ivan-marcone": {
+  "qid": "Q5408414",
+  "score": 11,
+  "name": "Iván Marcone"
+ },
+ "felipe-loyola": {
+  "qid": "Q121016559",
+  "score": 8,
+  "name": "Felipe Loyola"
+ },
+ "santiago-montiel": {
+  "qid": "Q121355674",
+  "score": 8,
+  "name": "Santiago Montiel"
+ },
+ "orlando-gill": {
+  "qid": "Q60842077",
+  "score": 8,
+  "name": "Orlando Gill"
+ },
+ "andres-vombergar": {
+  "qid": "Q30331236",
+  "score": 11,
+  "name": "Andrés Vombergar"
+ },
+ "ezequiel-cerutti": {
+  "qid": "Q5853761",
+  "score": 11,
+  "name": "Ezequiel Cerutti"
+ },
+ "cristian-medina": {
+  "qid": "Q85713528",
+  "score": 11,
+  "name": "Cristian Medina"
+ },
+ "leandro-gonzalez-pirez": {
+  "qid": "Q3829241",
+  "score": 11,
+  "name": "Leandro González Pírez"
+ },
+ "tiago-palacios": {
+  "qid": "Q105641783",
+  "score": 8,
+  "name": "Tiago Palacios"
+ },
+ "tomas-marchiori": {
+  "qid": "Q26213349",
+  "score": 11,
+  "name": "Tomás Marchiori"
+ },
+ "braian-romero": {
+  "qid": "Q19060912",
+  "score": 11,
+  "name": "Braian Romero"
+ },
+ "elias-gomez": {
+  "qid": "Q20745447",
+  "score": 11,
+  "name": "Elías Gómez"
+ },
+ "agustin-bouzat": {
+  "qid": "Q23668580",
+  "score": 8,
+  "name": "Agustín Bouzat"
+ },
+ "jorge-broun": {
+  "qid": "Q6277769",
+  "score": 11,
+  "name": "Jorge Broun"
+ },
+ "carlos-quintana": {
+  "qid": "Q3660120",
+  "score": 11,
+  "name": "Carlos Quintana"
+ },
+ "jaminton-campaz": {
+  "qid": "Q30050934",
+  "score": 11,
+  "name": "Jaminton Campaz"
+ },
+ "franco-ibarra": {
+  "qid": "Q85869869",
+  "score": 11,
+  "name": "Franco Ibarra"
+ },
+ "ever-banega": {
+  "qid": null,
+  "score": -99,
+  "name": "Ever Banega"
+ },
+ "guido-herrera": {
+  "qid": "Q5888110",
+  "score": 11,
+  "name": "Guido Herrera"
+ },
+ "ruben-botta": {
+  "qid": "Q6396836",
+  "score": 11,
+  "name": "Rubén Botta"
+ },
+ "federico-girotti": {
+  "qid": "Q61050256",
+  "score": 11,
+  "name": "Federico Girotti"
+ },
+ "lucas-zelarayan": {
+  "qid": "Q5981956",
+  "score": 11,
+  "name": "Lucas Zelarayán"
+ },
+ "franco-jara": {
+  "qid": "Q654690",
+  "score": 11,
+  "name": "Franco Jara"
+ },
+ "eduardo-salvio": {
+  "qid": "Q367644",
+  "score": 11,
+  "name": "Eduardo Salvio"
+ },
+ "carlos-izquierdoz": {
+  "qid": "Q3660080",
+  "score": 11,
+  "name": "Carlos Izquierdoz"
+ },
+ "nahuel-losada": {
+  "qid": "Q26996198",
+  "score": 8,
+  "name": "Nahuel Losada"
+ },
+ "marcelino-moreno": {
+  "qid": "Q26724160",
+  "score": 8,
+  "name": "Marcelino Moreno"
+ },
+ "hernan-galindez": {
+  "qid": "Q5742434",
+  "score": 11,
+  "name": "Hernán Galíndez"
+ },
+ "ignacio-fernandez": {
+  "qid": "Q6447402",
+  "score": 11,
+  "name": "Ignacio Fernández"
+ },
+ "giorgian-de-arrascaeta": {
+  "qid": "Q13578003",
+  "score": 11,
+  "name": "Giorgian de Arrascaeta"
+ },
+ "pedro": {
+  "qid": null,
+  "score": 2,
+  "name": "Pedro"
+ },
+ "gonzalo-plata": {
+  "qid": "Q60842120",
+  "score": 11,
+  "name": "Gonzalo Plata"
+ },
+ "jorginho": {
+  "qid": null,
+  "score": 0,
+  "name": "Jorginho"
+ },
+ "agustin-rossi": {
+  "qid": "Q20736318",
+  "score": 11,
+  "name": "Agustín Rossi"
+ },
+ "bruno-henrique": {
+  "qid": null,
+  "score": 0,
+  "name": "Bruno Henrique"
+ },
+ "saul-niguez": {
+  "qid": "Q912172",
+  "score": 11,
+  "name": "Saúl Ñíguez"
+ },
+ "weverton": {
+  "qid": "Q8040741",
+  "score": 11,
+  "name": "Weverton"
+ },
+ "gustavo-gomez": {
+  "qid": "Q1033783",
+  "score": 11,
+  "name": "Gustavo Gómez"
+ },
+ "raphael-veiga": {
+  "qid": "Q27443365",
+  "score": 11,
+  "name": "Raphael Veiga"
+ },
+ "vitor-roque": {
+  "qid": "Q111016177",
+  "score": 11,
+  "name": "Vitor Roque"
+ },
+ "jose-manuel-lopez": {
+  "qid": "Q104903216",
+  "score": 11,
+  "name": "José Manuel López"
+ },
+ "facundo-torres": {
+  "qid": "Q27982962",
+  "score": 11,
+  "name": "Facundo Torres"
+ },
+ "anibal-moreno": {
+  "qid": "Q60842143",
+  "score": 11,
+  "name": "Aníbal Moreno"
+ },
+ "agustin-giay": {
+  "qid": "Q112854266",
+  "score": 11,
+  "name": "Agustín Giay"
+ },
+ "hulk": {
+  "qid": "Q62786",
+  "score": 11,
+  "name": "Hulk"
+ },
+ "memphis-depay": {
+  "qid": "Q1894",
+  "score": 11,
+  "name": "Memphis Depay"
+ },
+ "rodrigo-garro": {
+  "qid": "Q61609728",
+  "score": 11,
+  "name": "Rodrigo Garro"
+ },
+ "thiago-silva": {
+  "qid": "Q210453",
+  "score": 11,
+  "name": "Thiago Silva"
+ },
+ "german-cano": {
+  "qid": "Q3761170",
+  "score": 11,
+  "name": "Germán Cano"
+ },
+ "ganso": {
+  "qid": null,
+  "score": 0,
+  "name": "Ganso"
+ },
+ "fabio": {
+  "qid": null,
+  "score": 0,
+  "name": "Fábio"
+ },
+ "enner-valencia": {
+  "qid": "Q2843080",
+  "score": 11,
+  "name": "Enner Valencia"
+ },
+ "sergio-rochet": {
+  "qid": "Q17086753",
+  "score": 11,
+  "name": "Sergio Rochet"
+ },
+ "jonathan-calleri": {
+  "qid": "Q16298050",
+  "score": 11,
+  "name": "Jonathan Calleri"
+ },
+ "lucas-moura": {
+  "qid": "Q312886",
+  "score": 11,
+  "name": "Lucas Moura"
+ },
+ "oscar": {
+  "qid": null,
+  "score": 0,
+  "name": "Oscar"
+ },
+ "philippe-coutinho": {
+  "qid": "Q311872",
+  "score": 11,
+  "name": "Philippe Coutinho"
+ },
+ "pablo-vegetti": {
+  "qid": "Q15146754",
+  "score": 11,
+  "name": "Pablo Vegetti"
+ },
+ "gabriel-barbosa": {
+  "qid": "Q13646572",
+  "score": 11,
+  "name": "Gabriel Barbosa"
+ },
+ "cassio": {
+  "qid": null,
+  "score": 0,
+  "name": "Cássio"
+ },
+ "charles-aranguiz": {
+  "qid": "Q797945",
+  "score": 11,
+  "name": "Charles Aránguiz"
+ },
+ "david-ospina": {
+  "qid": "Q436987",
+  "score": 11,
+  "name": "David Ospina"
+ },
+ "andre-pierre-gignac": {
+  "qid": "Q1940",
+  "score": 11,
+  "name": "André-Pierre Gignac"
+ },
+ "nahuel-guzman": {
+  "qid": "Q3869949",
+  "score": 11,
+  "name": "Nahuel Guzmán"
+ },
+ "sergio-ramos": {
+  "qid": "Q483309",
+  "score": 11,
+  "name": "Sergio Ramos"
+ },
+ "sergio-canales": {
+  "qid": "Q19422",
+  "score": 11,
+  "name": "Sergio Canales"
+ },
+ "lucas-ocampos": {
+  "qid": "Q194579",
+  "score": 11,
+  "name": "Lucas Ocampos"
+ },
+ "henry-martin": {
+  "qid": "Q18719813",
+  "score": 11,
+  "name": "Henry Martín"
+ },
+ "alvaro-fidalgo": {
+  "qid": "Q98092491",
+  "score": 11,
+  "name": "Álvaro Fidalgo"
+ },
+ "riqui-puig": {
+  "qid": "Q50315237",
+  "score": 11,
+  "name": "Riqui Puig"
+ },
+ "marco-reus": {
+  "qid": "Q152377",
+  "score": 11,
+  "name": "Marco Reus"
+ },
+ "hugo-lloris": {
+  "qid": "Q1907",
+  "score": 11,
+  "name": "Hugo Lloris"
+ },
+ "son-heung-min": {
+  "qid": "Q439722",
+  "score": 11,
+  "name": "Son Heung-min"
+ },
+ "sadio-mane": {
+  "qid": "Q209942",
+  "score": 11,
+  "name": "Sadio Mané"
+ },
+ "joao-felix": {
+  "qid": "Q27049064",
+  "score": 11,
+  "name": "João Félix"
+ },
+ "ruben-neves": {
+  "qid": "Q17486599",
+  "score": 11,
+  "name": "Rúben Neves"
+ },
+ "kalidou-koulibaly": {
+  "qid": "Q3192187",
+  "score": 11,
+  "name": "Kalidou Koulibaly"
+ },
+ "yassine-bounou": {
+  "qid": "Q3571952",
+  "score": 11,
+  "name": "Yassine Bounou"
+ },
+ "theo-hernandez": {
+  "qid": null,
+  "score": -99,
+  "name": "Theo Hernández"
+ },
+ "joao-cancelo": {
+  "qid": "Q6298063",
+  "score": 11,
+  "name": "João Cancelo"
+ },
+ "karim-benzema": {
+  "qid": "Q1912",
+  "score": 11,
+  "name": "Karim Benzema"
+ },
+ "n-golo-kante": {
+  "qid": "Q16665941",
+  "score": 11,
+  "name": "N'Golo Kanté"
+ },
+ "fabinho": {
+  "qid": null,
+  "score": 0,
+  "name": "Fabinho"
+ },
+ "riyad-mahrez": {
+  "qid": "Q8338725",
+  "score": 11,
+  "name": "Riyad Mahrez"
+ },
+ "ivan-toney": {
+  "qid": "Q16239819",
+  "score": 11,
+  "name": "Ivan Toney"
+ },
+ "edouard-mendy": {
+  "qid": "Q27736107",
+  "score": 11,
+  "name": "Édouard Mendy"
+ },
+ "rodri": {
+  "qid": "Q20994118",
+  "score": 11,
+  "name": "Rodri"
+ },
+ "phil-foden": {
+  "qid": "Q30729096",
+  "score": 11,
+  "name": "Phil Foden"
+ },
+ "ruben-dias": {
+  "qid": "Q21621168",
+  "score": 11,
+  "name": "Rúben Dias"
+ },
+ "bernardo-silva": {
+  "qid": "Q15521306",
+  "score": 11,
+  "name": "Bernardo Silva"
+ },
+ "gianluigi-donnarumma": {
+  "qid": "Q20830808",
+  "score": 11,
+  "name": "Gianluigi Donnarumma"
+ },
+ "jeremy-doku": {
+  "qid": "Q59209505",
+  "score": 11,
+  "name": "Jérémy Doku"
+ },
+ "omar-marmoush": {
+  "qid": "Q28065104",
+  "score": 11,
+  "name": "Omar Marmoush"
+ },
+ "tijjani-reijnders": {
+  "qid": "Q39500352",
+  "score": 11,
+  "name": "Tijjani Reijnders"
+ },
+ "rayan-cherki": {
+  "qid": "Q64736321",
+  "score": 11,
+  "name": "Rayan Cherki"
+ },
+ "josko-gvardiol": {
+  "qid": "Q73400656",
+  "score": 11,
+  "name": "Joško Gvardiol"
+ },
+ "virgil-van-dijk": {
+  "qid": "Q133903",
+  "score": 11,
+  "name": "Virgil van Dijk"
+ },
+ "alisson": {
+  "qid": null,
+  "score": -99,
+  "name": "Alisson"
+ },
+ "florian-wirtz": {
+  "qid": "Q94699949",
+  "score": 11,
+  "name": "Florian Wirtz"
+ },
+ "alexander-isak": {
+  "qid": "Q23759917",
+  "score": 11,
+  "name": "Alexander Isak"
+ },
+ "dominik-szoboszlai": {
+  "qid": "Q30134278",
+  "score": 11,
+  "name": "Dominik Szoboszlai"
+ },
+ "hugo-ekitike": {
+  "qid": null,
+  "score": -99,
+  "name": "Hugo Ekitiké"
+ },
+ "ryan-gravenberch": {
+  "qid": "Q56257870",
+  "score": 11,
+  "name": "Ryan Gravenberch"
+ },
+ "cody-gakpo": {
+  "qid": "Q28801927",
+  "score": 11,
+  "name": "Cody Gakpo"
+ },
+ "andrew-robertson": {
+  "qid": "Q15915040",
+  "score": 11,
+  "name": "Andrew Robertson"
+ },
+ "bukayo-saka": {
+  "qid": "Q59306386",
+  "score": 11,
+  "name": "Bukayo Saka"
+ },
+ "martin-degaard": {
+  "qid": "Q16902219",
+  "score": 11,
+  "name": "Martin Ødegaard"
+ },
+ "declan-rice": {
+  "qid": "Q30007142",
+  "score": 11,
+  "name": "Declan Rice"
+ },
+ "william-saliba": {
+  "qid": "Q56868118",
+  "score": 11,
+  "name": "William Saliba"
+ },
+ "gabriel-magalhaes": {
+  "qid": "Q25175970",
+  "score": 11,
+  "name": "Gabriel Magalhães"
+ },
+ "david-raya": {
+  "qid": "Q19665907",
+  "score": 11,
+  "name": "David Raya"
+ },
+ "viktor-gyokeres": {
+  "qid": "Q47075606",
+  "score": 11,
+  "name": "Viktor Gyökeres"
+ },
+ "martin-zubimendi": {
+  "qid": "Q63384759",
+  "score": 11,
+  "name": "Martín Zubimendi"
+ },
+ "gabriel-martinelli": {
+  "qid": "Q61460651",
+  "score": 11,
+  "name": "Gabriel Martinelli"
+ },
+ "eberechi-eze": {
+  "qid": "Q28445512",
+  "score": 11,
+  "name": "Eberechi Eze"
+ },
+ "piero-hincapie": {
+  "qid": "Q101053044",
+  "score": 11,
+  "name": "Piero Hincapié"
+ },
+ "cole-palmer": {
+  "qid": "Q99760796",
+  "score": 11,
+  "name": "Cole Palmer"
+ },
+ "reece-james": {
+  "qid": "Q39076401",
+  "score": 11,
+  "name": "Reece James"
+ },
+ "joao-pedro": {
+  "qid": null,
+  "score": 0,
+  "name": "João Pedro"
+ },
+ "robert-sanchez": {
+  "qid": "Q56043276",
+  "score": 11,
+  "name": "Robert Sánchez"
+ },
+ "estevao": {
+  "qid": null,
+  "score": -99,
+  "name": "Estêvão"
+ },
+ "pedro-neto": {
+  "qid": "Q30036972",
+  "score": 11,
+  "name": "Pedro Neto"
+ },
+ "marc-cucurella": {
+  "qid": "Q22082505",
+  "score": 11,
+  "name": "Marc Cucurella"
+ },
+ "bruno-fernandes": {
+  "qid": "Q4979316",
+  "score": 11,
+  "name": "Bruno Fernandes"
+ },
+ "matheus-cunha": {
+  "qid": "Q35831063",
+  "score": 11,
+  "name": "Matheus Cunha"
+ },
+ "bryan-mbeumo": {
+  "qid": "Q49561427",
+  "score": 11,
+  "name": "Bryan Mbeumo"
+ },
+ "benjamin-sesko": {
+  "qid": "Q65950315",
+  "score": 11,
+  "name": "Benjamin Šeško"
+ },
+ "casemiro": {
+  "qid": "Q616664",
+  "score": 11,
+  "name": "Casemiro"
+ },
+ "amad-diallo": {
+  "qid": "Q72603655",
+  "score": 11,
+  "name": "Amad Diallo"
+ },
+ "micky-van-de-ven": {
+  "qid": "Q69812902",
+  "score": 11,
+  "name": "Micky van de Ven"
+ },
+ "james-maddison": {
+  "qid": "Q17517177",
+  "score": 11,
+  "name": "James Maddison"
+ },
+ "dejan-kulusevski": {
+  "qid": "Q59914139",
+  "score": 11,
+  "name": "Dejan Kulusevski"
+ },
+ "guglielmo-vicario": {
+  "qid": "Q44083681",
+  "score": 11,
+  "name": "Guglielmo Vicario"
+ },
+ "xavi-simons": {
+  "qid": "Q65925174",
+  "score": 11,
+  "name": "Xavi Simons"
+ },
+ "mohammed-kudus": {
+  "qid": "Q56877051",
+  "score": 11,
+  "name": "Mohammed Kudus"
+ },
+ "rodrigo-bentancur": {
+  "qid": "Q18817134",
+  "score": 11,
+  "name": "Rodrigo Bentancur"
+ },
+ "richarlison": {
+  "qid": "Q20806743",
+  "score": 11,
+  "name": "Richarlison"
+ },
+ "ollie-watkins": {
+  "qid": "Q16911979",
+  "score": 11,
+  "name": "Ollie Watkins"
+ },
+ "youri-tielemans": {
+  "qid": "Q14327453",
+  "score": 11,
+  "name": "Youri Tielemans"
+ },
+ "morgan-rogers": {
+  "qid": "Q61598452",
+  "score": 11,
+  "name": "Morgan Rogers"
+ },
+ "emiliano-buendia": {
+  "qid": "Q18637343",
+  "score": 11,
+  "name": "Emiliano Buendía"
+ },
+ "pau-torres": {
+  "qid": "Q43384100",
+  "score": 11,
+  "name": "Pau Torres"
+ },
+ "bruno-guimaraes": {
+  "qid": "Q58323172",
+  "score": 11,
+  "name": "Bruno Guimarães"
+ },
+ "anthony-gordon": {
+  "qid": "Q45179405",
+  "score": 11,
+  "name": "Anthony Gordon"
+ },
+ "sandro-tonali": {
+  "qid": "Q43402334",
+  "score": 11,
+  "name": "Sandro Tonali"
+ },
+ "nick-pope": {
+  "qid": "Q15999945",
+  "score": 11,
+  "name": "Nick Pope"
+ },
+ "nick-woltemade": {
+  "qid": "Q84158344",
+  "score": 11,
+  "name": "Nick Woltemade"
+ },
+ "kaoru-mitoma": {
+  "qid": "Q44395063",
+  "score": 11,
+  "name": "Kaoru Mitoma"
+ },
+ "danny-welbeck": {
+  "qid": "Q188457",
+  "score": 11,
+  "name": "Danny Welbeck"
+ },
+ "jean-philippe-mateta": {
+  "qid": "Q26964668",
+  "score": 11,
+  "name": "Jean-Philippe Mateta"
+ },
+ "raul-jimenez": {
+  "qid": "Q1925465",
+  "score": 11,
+  "name": "Raúl Jiménez"
+ },
+ "morgan-gibbs-white": {
+  "qid": "Q28147578",
+  "score": 11,
+  "name": "Morgan Gibbs-White"
+ },
+ "chris-wood": {
+  "qid": "Q74548",
+  "score": 11,
+  "name": "Chris Wood"
+ },
+ "nicolas-dominguez": {
+  "qid": "Q29419531",
+  "score": 11,
+  "name": "Nicolás Domínguez"
+ },
+ "lucas-paqueta": {
+  "qid": "Q30089624",
+  "score": 11,
+  "name": "Lucas Paquetá"
+ },
+ "jarrod-bowen": {
+  "qid": "Q26704890",
+  "score": 11,
+  "name": "Jarrod Bowen"
+ },
+ "jordan-pickford": {
+  "qid": "Q13014035",
+  "score": 11,
+  "name": "Jordan Pickford"
+ },
+ "jack-grealish": {
+  "qid": "Q16056053",
+  "score": 11,
+  "name": "Jack Grealish"
+ },
+ "jude-bellingham": {
+  "qid": "Q66241169",
+  "score": 11,
+  "name": "Jude Bellingham"
+ },
+ "thibaut-courtois": {
+  "qid": "Q73360",
+  "score": 11,
+  "name": "Thibaut Courtois"
+ },
+ "antonio-rudiger": {
+  "qid": "Q96755",
+  "score": 11,
+  "name": "Antonio Rüdiger"
+ },
+ "rodrygo": {
+  "qid": "Q42728914",
+  "score": 11,
+  "name": "Rodrygo"
+ },
+ "arda-guler": {
+  "qid": "Q108159340",
+  "score": 11,
+  "name": "Arda Güler"
+ },
+ "aurelien-tchouameni": {
+  "qid": "Q46951844",
+  "score": 11,
+  "name": "Aurélien Tchouaméni"
+ },
+ "trent-alexander-arnold": {
+  "qid": "Q27569376",
+  "score": 11,
+  "name": "Trent Alexander-Arnold"
+ },
+ "dean-huijsen": {
+  "qid": "Q112184628",
+  "score": 11,
+  "name": "Dean Huijsen"
+ },
+ "eduardo-camavinga": {
+  "qid": "Q62960177",
+  "score": 11,
+  "name": "Eduardo Camavinga"
+ },
+ "dani-carvajal": {
+  "qid": "Q127452",
+  "score": 11,
+  "name": "Dani Carvajal"
+ },
+ "eder-militao": {
+  "qid": "Q29950055",
+  "score": 11,
+  "name": "Éder Militão"
+ },
+ "robert-lewandowski": {
+  "qid": "Q151269",
+  "score": 11,
+  "name": "Robert Lewandowski"
+ },
+ "pedri": {
+  "qid": "Q66606355",
+  "score": 11,
+  "name": "Pedri"
+ },
+ "gavi": {
+  "qid": "Q108111889",
+  "score": 11,
+  "name": "Gavi"
+ },
+ "frenkie-de-jong": {
+  "qid": "Q19898898",
+  "score": 11,
+  "name": "Frenkie de Jong"
+ },
+ "joan-garcia": {
+  "qid": null,
+  "score": -99,
+  "name": "Joan García"
+ },
+ "marc-andre-ter-stegen": {
+  "qid": "Q160472",
+  "score": 11,
+  "name": "Marc-André ter Stegen"
+ },
+ "pau-cubarsi": {
+  "qid": "Q118473161",
+  "score": 11,
+  "name": "Pau Cubarsí"
+ },
+ "ronald-araujo": {
+  "qid": null,
+  "score": -99,
+  "name": "Ronald Araujo"
+ },
+ "jules-kounde": {
+  "qid": "Q47170176",
+  "score": 11,
+  "name": "Jules Koundé"
+ },
+ "ferran-torres": {
+  "qid": "Q44297797",
+  "score": 11,
+  "name": "Ferran Torres"
+ },
+ "marcus-rashford": {
+  "qid": "Q22951255",
+  "score": 11,
+  "name": "Marcus Rashford"
+ },
+ "dani-olmo": {
+  "qid": "Q19560313",
+  "score": 11,
+  "name": "Dani Olmo"
+ },
+ "fermin-lopez": {
+  "qid": "Q117312887",
+  "score": 11,
+  "name": "Fermín López"
+ },
+ "alejandro-balde": {
+  "qid": "Q105681392",
+  "score": 11,
+  "name": "Alejandro Balde"
+ },
+ "jan-oblak": {
+  "qid": "Q2058682",
+  "score": 11,
+  "name": "Jan Oblak"
+ },
+ "antoine-griezmann": {
+  "qid": "Q455462",
+  "score": 11,
+  "name": "Antoine Griezmann"
+ },
+ "koke": {
+  "qid": null,
+  "score": 0,
+  "name": "Koke"
+ },
+ "alexander-srloth": {
+  "qid": "Q13784739",
+  "score": 11,
+  "name": "Alexander Sørloth"
+ },
+ "pablo-barrios": {
+  "qid": "Q114924158",
+  "score": 11,
+  "name": "Pablo Barrios"
+ },
+ "conor-gallagher": {
+  "qid": "Q44737408",
+  "score": 11,
+  "name": "Conor Gallagher"
+ },
+ "alex-baena": {
+  "qid": "Q97404267",
+  "score": 11,
+  "name": "Álex Baena"
+ },
+ "nico-gonzalez": {
+  "qid": null,
+  "score": -99,
+  "name": "Nico González"
+ },
+ "johnny-cardoso": {
+  "qid": "Q72219351",
+  "score": 11,
+  "name": "Johnny Cardoso"
+ },
+ "marcos-llorente": {
+  "qid": "Q21130285",
+  "score": 11,
+  "name": "Marcos Llorente"
+ },
+ "jose-maria-gimenez": {
+  "qid": "Q13634114",
+  "score": 11,
+  "name": "José María Giménez"
+ },
+ "nico-williams": {
+  "qid": "Q104414736",
+  "score": 11,
+  "name": "Nico Williams"
+ },
+ "inaki-williams": {
+  "qid": "Q18608497",
+  "score": 11,
+  "name": "Iñaki Williams"
+ },
+ "unai-simon": {
+  "qid": "Q23908113",
+  "score": 11,
+  "name": "Unai Simón"
+ },
+ "oihan-sancet": {
+  "qid": "Q66466886",
+  "score": 11,
+  "name": "Oihan Sancet"
+ },
+ "gerard-moreno": {
+  "qid": "Q5550103",
+  "score": 11,
+  "name": "Gerard Moreno"
+ },
+ "juan-foyth": {
+  "qid": "Q29841260",
+  "score": 11,
+  "name": "Juan Foyth"
+ },
+ "thomas-partey": {
+  "qid": "Q15963873",
+  "score": 11,
+  "name": "Thomas Partey"
+ },
+ "mikel-oyarzabal": {
+  "qid": "Q21195147",
+  "score": 11,
+  "name": "Mikel Oyarzabal"
+ },
+ "takefusa-kubo": {
+  "qid": "Q27067753",
+  "score": 11,
+  "name": "Takefusa Kubo"
+ },
+ "isco": {
+  "qid": "Q80892",
+  "score": 11,
+  "name": "Isco"
+ },
+ "antony": {
+  "qid": null,
+  "score": 0,
+  "name": "Antony"
+ },
+ "iago-aspas": {
+  "qid": "Q26380",
+  "score": 11,
+  "name": "Iago Aspas"
+ },
+ "marcus-thuram": {
+  "qid": "Q19903718",
+  "score": 11,
+  "name": "Marcus Thuram"
+ },
+ "nicolo-barella": {
+  "qid": "Q20090225",
+  "score": 11,
+  "name": "Nicolò Barella"
+ },
+ "hakan-calhanoglu": {
+  "qid": "Q763465",
+  "score": 11,
+  "name": "Hakan Çalhanoğlu"
+ },
+ "yann-sommer": {
+  "qid": "Q667596",
+  "score": 11,
+  "name": "Yann Sommer"
+ },
+ "alessandro-bastoni": {
+  "qid": "Q28561068",
+  "score": 11,
+  "name": "Alessandro Bastoni"
+ },
+ "federico-dimarco": {
+  "qid": "Q20204829",
+  "score": 11,
+  "name": "Federico Dimarco"
+ },
+ "denzel-dumfries": {
+  "qid": "Q19882816",
+  "score": 11,
+  "name": "Denzel Dumfries"
+ },
+ "rafael-leao": {
+  "qid": "Q30055335",
+  "score": 11,
+  "name": "Rafael Leão"
+ },
+ "christian-pulisic": {
+  "qid": "Q22279773",
+  "score": 11,
+  "name": "Christian Pulisic"
+ },
+ "mike-maignan": {
+  "qid": "Q17274709",
+  "score": 11,
+  "name": "Mike Maignan"
+ },
+ "luka-modric": {
+  "qid": "Q483837",
+  "score": 11,
+  "name": "Luka Modrić"
+ },
+ "santiago-gimenez": {
+  "qid": "Q33296979",
+  "score": 11,
+  "name": "Santiago Giménez"
+ },
+ "adrien-rabiot": {
+  "qid": "Q18962",
+  "score": 11,
+  "name": "Adrien Rabiot"
+ },
+ "dusan-vlahovic": {
+  "qid": "Q23762815",
+  "score": 11,
+  "name": "Dušan Vlahović"
+ },
+ "kenan-yldz": {
+  "qid": "Q113184832",
+  "score": 11,
+  "name": "Kenan Yıldız"
+ },
+ "gleison-bremer": {
+  "qid": "Q38693097",
+  "score": 11,
+  "name": "Gleison Bremer"
+ },
+ "jonathan-david": {
+  "qid": "Q56085180",
+  "score": 11,
+  "name": "Jonathan David"
+ },
+ "manuel-locatelli": {
+  "qid": "Q23899393",
+  "score": 11,
+  "name": "Manuel Locatelli"
+ },
+ "michele-di-gregorio": {
+  "qid": "Q42317168",
+  "score": 11,
+  "name": "Michele Di Gregorio"
+ },
+ "kevin-de-bruyne": {
+  "qid": "Q357984",
+  "score": 11,
+  "name": "Kevin De Bruyne"
+ },
+ "romelu-lukaku": {
+  "qid": "Q313316",
+  "score": 11,
+  "name": "Romelu Lukaku"
+ },
+ "scott-mctominay": {
+  "qid": "Q29624459",
+  "score": 11,
+  "name": "Scott McTominay"
+ },
+ "rasmus-hjlund": {
+  "qid": "Q66467324",
+  "score": 11,
+  "name": "Rasmus Højlund"
+ },
+ "giovanni-di-lorenzo": {
+  "qid": "Q14831282",
+  "score": 11,
+  "name": "Giovanni Di Lorenzo"
+ },
+ "lorenzo-pellegrini": {
+  "qid": "Q19773058",
+  "score": 11,
+  "name": "Lorenzo Pellegrini"
+ },
+ "artem-dovbyk": {
+  "qid": "Q20066885",
+  "score": 11,
+  "name": "Artem Dovbyk"
+ },
+ "mile-svilar": {
+  "qid": "Q38245742",
+  "score": 11,
+  "name": "Mile Svilar"
+ },
+ "ademola-lookman": {
+  "qid": "Q21484766",
+  "score": 11,
+  "name": "Ademola Lookman"
+ },
+ "charles-de-ketelaere": {
+  "qid": "Q68607008",
+  "score": 11,
+  "name": "Charles De Ketelaere"
+ },
+ "mattia-zaccagni": {
+  "qid": "Q28968068",
+  "score": 11,
+  "name": "Mattia Zaccagni"
+ },
+ "valentin-castellanos": {
+  "qid": null,
+  "score": -8,
+  "name": "Valentín Castellanos"
+ },
+ "moise-kean": {
+  "qid": "Q27889974",
+  "score": 11,
+  "name": "Moise Kean"
+ },
+ "edin-dzeko": {
+  "qid": "Q153786",
+  "score": 11,
+  "name": "Edin Džeko"
+ },
+ "riccardo-orsolini": {
+  "qid": "Q27881421",
+  "score": 11,
+  "name": "Riccardo Orsolini"
+ },
+ "santiago-castro": {
+  "qid": null,
+  "score": 2,
+  "name": "Santiago Castro"
+ },
+ "alvaro-morata": {
+  "qid": "Q48770",
+  "score": 11,
+  "name": "Álvaro Morata"
+ },
+ "maximo-perrone": {
+  "qid": "Q112338635",
+  "score": 11,
+  "name": "Máximo Perrone"
+ },
+ "harry-kane": {
+  "qid": "Q969725",
+  "score": 11,
+  "name": "Harry Kane"
+ },
+ "jamal-musiala": {
+  "qid": "Q96072055",
+  "score": 11,
+  "name": "Jamal Musiala"
+ },
+ "joshua-kimmich": {
+  "qid": "Q13865408",
+  "score": 11,
+  "name": "Joshua Kimmich"
+ },
+ "manuel-neuer": {
+  "qid": "Q107365",
+  "score": 11,
+  "name": "Manuel Neuer"
+ },
+ "michael-olise": {
+  "qid": "Q62050484",
+  "score": 11,
+  "name": "Michael Olise"
+ },
+ "dayot-upamecano": {
+  "qid": "Q20723878",
+  "score": 11,
+  "name": "Dayot Upamecano"
+ },
+ "alphonso-davies": {
+  "qid": "Q23540953",
+  "score": 11,
+  "name": "Alphonso Davies"
+ },
+ "serge-gnabry": {
+  "qid": "Q59490",
+  "score": 11,
+  "name": "Serge Gnabry"
+ },
+ "kim-min-jae": {
+  "qid": "Q28699707",
+  "score": 11,
+  "name": "Kim Min-jae"
+ },
+ "patrik-schick": {
+  "qid": "Q16910257",
+  "score": 11,
+  "name": "Patrik Schick"
+ },
+ "alejandro-grimaldo": {
+  "qid": "Q921324",
+  "score": 11,
+  "name": "Alejandro Grimaldo"
+ },
+ "serhou-guirassy": {
+  "qid": "Q18637429",
+  "score": 11,
+  "name": "Serhou Guirassy"
+ },
+ "gregor-kobel": {
+  "qid": "Q36184031",
+  "score": 11,
+  "name": "Gregor Kobel"
+ },
+ "julian-brandt": {
+  "qid": "Q3189078",
+  "score": 11,
+  "name": "Julian Brandt"
+ },
+ "karim-adeyemi": {
+  "qid": "Q56424307",
+  "score": 11,
+  "name": "Karim Adeyemi"
+ },
+ "ousmane-dembele": {
+  "qid": "Q20851003",
+  "score": 11,
+  "name": "Ousmane Dembélé"
+ },
+ "achraf-hakimi": {
+  "qid": "Q26932598",
+  "score": 11,
+  "name": "Achraf Hakimi"
+ },
+ "marquinhos": {
+  "qid": "Q39230",
+  "score": 11,
+  "name": "Marquinhos"
+ },
+ "vitinha": {
+  "qid": "Q66818509",
+  "score": 11,
+  "name": "Vitinha"
+ },
+ "joao-neves": {
+  "qid": "Q113551733",
+  "score": 11,
+  "name": "João Neves"
+ },
+ "khvicha-kvaratskhelia": {
+  "qid": "Q61780902",
+  "score": 11,
+  "name": "Khvicha Kvaratskhelia"
+ },
+ "desire-doue": {
+  "qid": "Q112170256",
+  "score": 11,
+  "name": "Désiré Doué"
+ },
+ "nuno-mendes": {
+  "qid": "Q96396963",
+  "score": 11,
+  "name": "Nuno Mendes"
+ },
+ "lucas-chevalier": {
+  "qid": "Q98102459",
+  "score": 11,
+  "name": "Lucas Chevalier"
+ },
+ "bradley-barcola": {
+  "qid": "Q99670930",
+  "score": 11,
+  "name": "Bradley Barcola"
+ },
+ "willian-pacho": {
+  "qid": "Q87767569",
+  "score": 11,
+  "name": "Willian Pacho"
+ },
+ "fabian-ruiz": {
+  "qid": "Q18637930",
+  "score": 11,
+  "name": "Fabián Ruiz"
+ },
+ "pierre-emerick-aubameyang": {
+  "qid": "Q44977",
+  "score": 11,
+  "name": "Pierre-Emerick Aubameyang"
+ },
+ "mason-greenwood": {
+  "qid": "Q61986758",
+  "score": 11,
+  "name": "Mason Greenwood"
+ },
+ "leonardo-balerdi": {
+  "qid": "Q50233588",
+  "score": 11,
+  "name": "Leonardo Balerdi"
+ },
+ "geronimo-rulli": {
+  "qid": "Q5879014",
+  "score": 11,
+  "name": "Gerónimo Rulli"
+ },
+ "nicolas-tagliafico": {
+  "qid": "Q3876530",
+  "score": 11,
+  "name": "Nicolás Tagliafico"
+ },
+ "paul-pogba": {
+  "qid": "Q129027",
+  "score": 11,
+  "name": "Paul Pogba"
+ },
+ "vangelis-pavlidis": {
+  "qid": "Q24231840",
+  "score": 11,
+  "name": "Vangelis Pavlidis"
+ },
+ "richard-rios": {
+  "qid": "Q117322318",
+  "score": 11,
+  "name": "Richard Ríos"
+ },
+ "diogo-costa": {
+  "qid": "Q26255578",
+  "score": 11,
+  "name": "Diogo Costa"
+ },
+ "samu-aghehowa": {
+  "qid": "Q116923606",
+  "score": 11,
+  "name": "Samu Aghehowa"
+ },
+ "alan-varela": {
+  "qid": "Q104375627",
+  "score": 11,
+  "name": "Alan Varela"
+ },
+ "morten-hjulmand": {
+  "qid": "Q55761514",
+  "score": 11,
+  "name": "Morten Hjulmand"
+ },
+ "luis-javier-suarez": {
+  "qid": "Q28736721",
+  "score": 11,
+  "name": "Luis Javier Suárez"
+ },
+ "luuk-de-jong": {
+  "qid": "Q313911",
+  "score": 11,
+  "name": "Luuk de Jong"
+ },
+ "ivan-perisic": {
+  "qid": "Q161054",
+  "score": 11,
+  "name": "Ivan Perišić"
+ },
+ "victor-osimhen": {
+  "qid": "Q25253293",
+  "score": 11,
+  "name": "Victor Osimhen"
+ },
+ "mauro-icardi": {
+  "qid": "Q136986",
+  "score": 11,
+  "name": "Mauro Icardi"
+ },
+ "leroy-sane": {
+  "qid": "Q16499882",
+  "score": 11,
+  "name": "Leroy Sané"
+ },
+ "lucas-torreira": {
+  "qid": "Q16302330",
+  "score": 11,
+  "name": "Lucas Torreira"
+ },
+ "ederson": {
+  "qid": null,
+  "score": 0,
+  "name": "Ederson"
+ },
+ "lionel-scaloni": {
+  "qid": "Q311586",
+  "score": 11,
+  "name": "Lionel Scaloni"
+ },
+ "marcelo-gallardo": {
+  "qid": "Q266507",
+  "score": 11,
+  "name": "Marcelo Gallardo"
+ },
+ "gustavo-costas": {
+  "qid": "Q3294412",
+  "score": 11,
+  "name": "Gustavo Costas"
+ },
+ "ariel-holan": {
+  "qid": "Q5704053",
+  "score": 11,
+  "name": "Ariel Holan"
+ },
+ "guillermo-barros-schelotto": {
+  "qid": "Q509165",
+  "score": 11,
+  "name": "Guillermo Barros Schelotto"
+ },
+ "eduardo-dominguez": {
+  "qid": "Q3288172",
+  "score": 11,
+  "name": "Eduardo Domínguez"
+ },
+ "diego-simeone": {
+  "qid": "Q258115",
+  "score": 11,
+  "name": "Diego Simeone"
+ },
+ "mauricio-pochettino": {
+  "qid": "Q313000",
+  "score": 11,
+  "name": "Mauricio Pochettino"
+ },
+ "marcelo-bielsa": {
+  "qid": "Q31575",
+  "score": 11,
+  "name": "Marcelo Bielsa"
+ },
+ "nestor-lorenzo": {
+  "qid": "Q655975",
+  "score": 8,
+  "name": "Néstor Lorenzo"
+ },
+ "sebastian-beccacece": {
+  "qid": "Q7442628",
+  "score": 11,
+  "name": "Sebastián Beccacece"
+ },
+ "gustavo-alfaro": {
+  "qid": "Q5621337",
+  "score": 11,
+  "name": "Gustavo Alfaro"
+ },
+ "jorge-sampaoli": {
+  "qid": "Q1089864",
+  "score": 11,
+  "name": "Jorge Sampaoli"
+ },
+ "carlo-ancelotti": {
+  "qid": "Q174614",
+  "score": 11,
+  "name": "Carlo Ancelotti"
+ },
+ "pep-guardiola": {
+  "qid": "Q164038",
+  "score": 11,
+  "name": "Pep Guardiola"
+ },
+ "mikel-arteta": {
+  "qid": "Q185572",
+  "score": 11,
+  "name": "Mikel Arteta"
+ },
+ "arne-slot": {
+  "qid": "Q1029223",
+  "score": 11,
+  "name": "Arne Slot"
+ },
+ "xabi-alonso": {
+  "qid": "Q208104",
+  "score": 11,
+  "name": "Xabi Alonso"
+ },
+ "hansi-flick": {
+  "qid": "Q577384",
+  "score": 11,
+  "name": "Hansi Flick"
+ },
+ "luis-enrique": {
+  "qid": "Q222789",
+  "score": 11,
+  "name": "Luis Enrique"
+ },
+ "vincent-kompany": {
+  "qid": "Q201381",
+  "score": 11,
+  "name": "Vincent Kompany"
+ },
+ "simone-inzaghi": {
+  "qid": "Q314670",
+  "score": 11,
+  "name": "Simone Inzaghi"
+ },
+ "thomas-tuchel": {
+  "qid": "Q702233",
+  "score": 11,
+  "name": "Thomas Tuchel"
+ },
+ "julian-nagelsmann": {
+  "qid": "Q21226404",
+  "score": 11,
+  "name": "Julian Nagelsmann"
+ },
+ "didier-deschamps": {
+  "qid": "Q508711",
+  "score": 11,
+  "name": "Didier Deschamps"
+ },
+ "abel-ferreira": {
+  "qid": "Q318415",
+  "score": 11,
+  "name": "Abel Ferreira"
+ },
+ "filipe-luis": {
+  "qid": "Q350547",
+  "score": 11,
+  "name": "Filipe Luís"
+ },
+ "mauricio-pellegrino": {
+  "qid": "Q313131",
+  "score": 11,
+  "name": "Mauricio Pellegrino"
+ },
+ "juan-pablo-vojvoda": {
+  "qid": "Q41777366",
+  "score": 11,
+  "name": "Juan Pablo Vojvoda"
+ },
+ "hernan-crespo": {
+  "qid": "Q160206",
+  "score": 11,
+  "name": "Hernán Crespo"
+ },
+ "fernando-diniz": {
+  "qid": "Q10281320",
+  "score": 11,
+  "name": "Fernando Diniz"
+ },
+ "leonardo-jardim": {
+  "qid": "Q2162382",
+  "score": 11,
+  "name": "Leonardo Jardim"
+ },
+ "guido-pizarro": {
+  "qid": "Q334566",
+  "score": 11,
+  "name": "Guido Pizarro"
+ },
+ "domenec-torrent": {
+  "qid": "Q24082703",
+  "score": 11,
+  "name": "Domènec Torrent"
+ },
+ "javier-mascherano": {
+  "qid": "Q161571",
+  "score": 11,
+  "name": "Javier Mascherano"
+ },
+ "jorge-jesus": {
+  "qid": "Q527550",
+  "score": 11,
+  "name": "Jorge Jesus"
+ },
+ "matthias-jaissle": {
+  "qid": "Q690028",
+  "score": 11,
+  "name": "Matthias Jaissle"
+ },
+ "enzo-maresca": {
+  "qid": "Q317282",
+  "score": 6,
+  "name": "Enzo Maresca"
+ },
+ "ruben-amorim": {
+  "qid": "Q368682",
+  "score": 11,
+  "name": "Rúben Amorim"
+ },
+ "thomas-frank": {
+  "qid": "Q13469562",
+  "score": 11,
+  "name": "Thomas Frank"
+ },
+ "unai-emery": {
+  "qid": "Q295610",
+  "score": 11,
+  "name": "Unai Emery"
+ },
+ "eddie-howe": {
+  "qid": "Q5336135",
+  "score": 11,
+  "name": "Eddie Howe"
+ },
+ "oliver-glasner": {
+  "qid": "Q874777",
+  "score": 11,
+  "name": "Oliver Glasner"
+ },
+ "marco-silva": {
+  "qid": "Q6757714",
+  "score": 11,
+  "name": "Marco Silva"
+ },
+ "andoni-iraola": {
+  "qid": "Q317216",
+  "score": 11,
+  "name": "Andoni Iraola"
+ },
+ "fabian-hurzeler": {
+  "qid": "Q115819313",
+  "score": 11,
+  "name": "Fabian Hürzeler"
+ },
+ "david-moyes": {
+  "qid": "Q297252",
+  "score": 11,
+  "name": "David Moyes"
+ },
+ "ernesto-valverde": {
+  "qid": "Q359118",
+  "score": 11,
+  "name": "Ernesto Valverde"
+ },
+ "manuel-pellegrini": {
+  "qid": "Q296036",
+  "score": 11,
+  "name": "Manuel Pellegrini"
+ },
+ "matias-almeyda": {
+  "qid": "Q359494",
+  "score": 11,
+  "name": "Matías Almeyda"
+ },
+ "jose-bordalas": {
+  "qid": "Q3323802",
+  "score": 11,
+  "name": "José Bordalás"
+ },
+ "cristian-chivu": {
+  "qid": "Q210491",
+  "score": 11,
+  "name": "Cristian Chivu"
+ },
+ "massimiliano-allegri": {
+  "qid": "Q354529",
+  "score": 11,
+  "name": "Massimiliano Allegri"
+ },
+ "antonio-conte": {
+  "qid": "Q26580",
+  "score": 11,
+  "name": "Antonio Conte"
+ },
+ "gian-piero-gasperini": {
+  "qid": "Q367846",
+  "score": 11,
+  "name": "Gian Piero Gasperini"
+ },
+ "maurizio-sarri": {
+  "qid": "Q3852721",
+  "score": 11,
+  "name": "Maurizio Sarri"
+ },
+ "cesc-fabregas": {
+  "qid": "Q17499",
+  "score": 11,
+  "name": "Cesc Fàbregas"
+ },
+ "vincenzo-italiano": {
+  "qid": "Q1091404",
+  "score": 11,
+  "name": "Vincenzo Italiano"
+ },
+ "niko-kovac": {
+  "qid": "Q154305",
+  "score": 11,
+  "name": "Niko Kovač"
+ },
+ "roberto-de-zerbi": {
+  "qid": "Q2032119",
+  "score": 11,
+  "name": "Roberto De Zerbi"
+ },
+ "paulo-fonseca": {
+  "qid": "Q10346582",
+  "score": 11,
+  "name": "Paulo Fonseca"
+ },
+ "francesco-farioli": {
+  "qid": "Q106247695",
+  "score": 11,
+  "name": "Francesco Farioli"
+ },
+ "jose-mourinho": {
+  "qid": "Q79983",
+  "score": 11,
+  "name": "José Mourinho"
+ },
+ "luis-de-la-fuente": {
+  "qid": null,
+  "score": 0,
+  "name": "Luis de la Fuente"
+ },
+ "roberto-martinez": {
+  "qid": "Q357994",
+  "score": 11,
+  "name": "Roberto Martínez"
+ },
+ "ronald-koeman": {
+  "qid": "Q192635",
+  "score": 11,
+  "name": "Ronald Koeman"
+ },
+ "gennaro-gattuso": {
+  "qid": "Q116980",
+  "score": 11,
+  "name": "Gennaro Gattuso"
+ },
+ "javier-aguirre": {
+  "qid": "Q194311",
+  "score": 11,
+  "name": "Javier Aguirre"
+ },
+ "hajime-moriyasu": {
+  "qid": "Q2428403",
+  "score": 11,
+  "name": "Hajime Moriyasu"
+ },
+ "walid-regragui": {
+  "qid": "Q3052128",
+  "score": 11,
+  "name": "Walid Regragui"
+ },
+ "jesse-marsch": {
+  "qid": "Q1336179",
+  "score": 11,
+  "name": "Jesse Marsch"
+ },
+ "hong-myung-bo": {
+  "qid": "Q313940",
+  "score": 11,
+  "name": "Hong Myung-bo"
+ },
+ "fernando-batista": {
+  "qid": "Q60841644",
+  "score": 8,
+  "name": "Fernando Batista"
+ },
+ "sergio-aguero": {
+  "qid": "Q119562",
+  "score": 5,
+  "name": "Sergio Agüero"
+ },
+ "juan-roman-riquelme": {
+  "qid": "Q192965",
+  "score": 5,
+  "name": "Juan Román Riquelme"
+ },
+ "carlos-tevez": {
+  "qid": "Q50600",
+  "score": 5,
+  "name": "Carlos Tevez"
+ },
+ "gabriel-batistuta": {
+  "qid": "Q170376",
+  "score": 5,
+  "name": "Gabriel Batistuta"
+ },
+ "gonzalo-higuain": {
+  "qid": "Q483846",
+  "score": 5,
+  "name": "Gonzalo Higuaín"
+ },
+ "diego-forlan": {
+  "qid": "Q261534",
+  "score": 5,
+  "name": "Diego Forlán"
+ },
+ "radamel-falcao": {
+  "qid": "Q138172",
+  "score": 5,
+  "name": "Radamel Falcao"
+ },
+ "jurgen-klopp": {
+  "qid": "Q83106",
+  "score": 5,
+  "name": "Jürgen Klopp"
+ },
+ "carlos-bianchi": {
+  "qid": "Q449873",
+  "score": 5,
+  "name": "Carlos Bianchi"
+ },
+ "gerardo-martino": {
+  "qid": "Q356773",
+  "score": 5,
+  "name": "Gerardo Martino"
+ },
+ "zlatan-ibrahimovic": {
+  "qid": "Q46896",
+  "score": 5,
+  "name": "Zlatan Ibrahimović"
+ },
+ "ronaldinho": {
+  "qid": "Q39444",
+  "score": 5,
+  "name": "Ronaldinho"
+ },
+ "ronaldo-nazario": {
+  "qid": null,
+  "score": -99,
+  "name": "Ronaldo Nazário"
+ },
+ "javier-zanetti": {
+  "qid": "Q52876",
+  "score": 5,
+  "name": "Javier Zanetti"
+ },
+ "pablo-aimar": {
+  "qid": "Q130215",
+  "score": 5,
+  "name": "Pablo Aimar"
+ },
+ "martin-palermo": {
+  "qid": "Q208436",
+  "score": 5,
+  "name": "Martín Palermo"
+ },
+ "javier-saviola": {
+  "qid": "Q186071",
+  "score": 5,
+  "name": "Javier Saviola"
+ },
+ "alexis-sanchez": {
+  "qid": "Q180553",
+  "score": 5,
+  "name": "Alexis Sánchez"
+ },
+ "zinedine-zidane": {
+  "qid": "Q1835",
+  "score": 5,
+  "name": "Zinedine Zidane"
+ },
+ "ricardo-gareca": {
+  "qid": "Q2553835",
+  "score": 5,
+  "name": "Ricardo Gareca"
  }
 }

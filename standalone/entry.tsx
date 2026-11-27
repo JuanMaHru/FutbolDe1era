@@ -15,6 +15,7 @@ import { BingoGame } from "@/components/BingoGame";
 import { CareerApp } from "@/components/career/CareerApp";
 import { Catalog } from "@/components/career/Catalog";
 import { Footer, LegalNotice } from "@/components/LegalNotice";
+import { FONTS_URL } from "@/lib/site";
 
 function Page({ path }: { path: string }) {
   const game = path.match(/^\/(jugador|dt)(?:\/(\d+))?$/);
@@ -94,4 +95,6 @@ function App() {
   );
 }
 
+// Tipografías de la marca.
+{ const l = document.createElement("link"); l.rel = "stylesheet"; l.href = FONTS_URL; document.head.appendChild(l); }
 createRoot(document.getElementById("root")!).render(<App />);

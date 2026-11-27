@@ -1,23 +1,23 @@
-/* Fútbol de Primera — estética "pizarrón de vestuario": verde cancha oscuro, tiza y amarillo de tarjeta. */
+/* Fútbol de Primera — identidad: azul noche, verde cancha y blanco humo; Barlow Condensed + Montserrat (docs/marca.md). */
 :root {
-  /* "Noche de estadio" (por defecto). Los temas por club reescriben estos tokens desde lib/theme.ts. */
-  --bg: hsl(228 38% 6.5%);
-  --bg-2: hsl(228 34% 9.5%);
-  --surface: hsl(228 30% 13%);
-  --surface-2: hsl(228 28% 17.5%);
-  --line: hsl(228 23% 25%);
-  --chalk: hsl(228 20% 96%);
-  --muted: hsl(228 18% 70%);
-  --miss: hsl(228 19% 21%);
-  --glow: hsl(228 48% 18%);
-  --topbar: hsl(228 38% 4.5%);
-  --header: hsl(228 38% 6.5% / 0.88);
-  --accent: #ff7a1a;
-  --accent-ink: #1d0b00;
-  --accent-2: #ffc23d;
-  --club-1: #ff7a1a;
-  --club-2: #ffc23d;
-  --club-3: #ffffff;
+  /* Tema de marca (por defecto): azul noche + verde cancha. Los temas por club reescriben estos tokens desde lib/theme.ts. */
+  --bg: hsl(218 55% 6.5%);
+  --bg-2: hsl(218 50% 9.5%);
+  --surface: hsl(218 44% 13%);
+  --surface-2: hsl(218 41% 17.5%);
+  --line: hsl(218 33% 25%);
+  --chalk: hsl(218 20% 96%);
+  --muted: hsl(218 18% 70%);
+  --miss: hsl(218 28% 21%);
+  --glow: hsl(218 60% 18%);
+  --topbar: hsl(218 55% 4.5%);
+  --header: hsl(218 55% 6.5% / 0.88);
+  --accent: #22D169;
+  --accent-ink: #0B1D3A;
+  --accent-2: #9BF2BE;
+  --club-1: #22D169;
+  --club-2: #F4F7FA;
+  --club-3: #0B1D3A;
   /* Semántica de juego: fija en todos los temas. */
   --hit: #22a95b;
   --hit-ink: #ffffff;
@@ -25,8 +25,12 @@
   --near-ink: #1d1500;
   --danger: #ef6a5a;
   --radius: 14px;
-  --font: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --display: "Arial Black", "Helvetica Neue", system-ui, sans-serif;
+  --font: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --display: "Barlow Condensed", Impact, "Arial Narrow", sans-serif;
+  /* Marca (fija: no cambia con el tema del club). */
+  --brand-navy: #0B1D3A;
+  --brand-green: #22D169;
+  --brand-white: #F4F7FA;
   color-scheme: dark;
 }
 
@@ -69,15 +73,16 @@ button { font: inherit; color: inherit; }
 .header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; backdrop-filter: blur(10px); background: var(--header); border-bottom: 1px solid var(--line); }
 .header-inner { max-width: 960px; margin: 0 auto; padding: 9px 16px; display: flex; align-items: center; gap: 12px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; letter-spacing: -0.01em; }
-.brand-mark { width: 34px; height: 34px; border-radius: 10px; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-weight: 900; font-size: 15px; transform: rotate(-4deg); transition: transform .2s; }
-.brand:hover .brand-mark { transform: rotate(4deg) scale(1.06); }
-.brand-name { font-size: 17px; font-family: var(--display); font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; }
-.brand-name em { font-style: normal; color: var(--accent); }
+.brand-full, .brand-small { display: flex; align-items: center; }
+.brand-small { display: none; }
+.brand svg { display: block; transition: transform .2s; }
+.brand:hover svg { transform: translateY(-1px); }
+.brand:focus-visible { outline: 2px solid var(--brand-green); outline-offset: 4px; border-radius: 8px; }
 .nav { margin-left: auto; display: flex; align-items: center; gap: 4px; }
 .nav a { text-decoration: none; font-size: 14px; font-weight: 700; padding: 6px 10px; border-radius: 999px; color: var(--muted); }
 .nav a:hover, .nav a.active { color: var(--chalk); background: var(--surface); }
 .rep-pill { font-size: 13px; font-weight: 800; padding: 5px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); white-space: nowrap; }
-@media (max-width: 560px) { .brand-name { display: none; } .nav a { padding: 6px 8px; font-size: 13px; } }
+@media (max-width: 560px) { .brand-full { display: none; } .brand-small { display: flex; } .nav a { padding: 6px 8px; font-size: 13px; } }
 
 /* ---------- Genérico ---------- */
 h1 { font-size: clamp(26px, 6vw, 38px); line-height: 1.08; letter-spacing: -0.02em; margin: 24px 0 8px; text-wrap: balance; }
