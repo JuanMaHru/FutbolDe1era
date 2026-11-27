@@ -118,7 +118,7 @@ export interface SeasonLine {
   age?: number; ovr?: number; highlights?: string[];
 }
 
-export interface Offer { club: string; tag?: "arabia" | "vuelta" | "salto"; salary: number }
+export interface Offer { club: string; tag?: "arabia" | "vuelta" | "salto" | "gigante"; salary: number }
 
 interface CompState {
   cupAlive: boolean;
@@ -162,6 +162,8 @@ export interface CareerState {
   choices?: Record<string, number>;
   /** Cuántas veces se te presentó la oportunidad de cada decisión (para medir proporciones). */
   chances?: Record<string, number>;
+  /** Últimas ejecuciones en cada pelota parada (los arqueros te estudian). */
+  shots?: Record<string, string[]>;
   lastKinds: MomentKind[];
   autoLog: string[]; // partidos simulados desde el último partido jugado
   pendingEvent?: string;
@@ -208,6 +210,50 @@ export function addChoice(s: CareerState, tag?: string, offered: (string | undef
   if (!tag) return { ...s, chances };
   return { ...s, chances, choices: { ...(s.choices ?? {}), [tag]: (s.choices?.[tag] ?? 0) + 1 } };
 }
+/* ---------- Los arqueros te estudian ---------- */
+export type ShotKind = "penalty" | "freekick" | "placement";
+export interface ShotRecord { kind: ShotKind; choice: string }
+/** Guarda dónde pateaste (últimas 8 por tipo). */
+export function recordShots(s: CareerState, list: ShotRecord[]): CareerState {
+  if (!list.length) return s;
+  const shots = { ...(s.shots ?? {}) };
+  for (const { kind, choice } of list) shots[kind] = [...(shots[kind] ?? []), choice].slice(-8);
+  return { ...s, shots };
+}
+/**
+ * Probabilidad de que el arquero adivine esta elección: cuanto más repetís (y más famoso sos, más te estudian), más la lee.
+ * Variar baja la lectura casi a cero.
+ */
+export function keeperRead(history: string[] | undefined, choice: string, fame = 50): number {
+  const h = (history ?? []).slice(-6);
+  if (h.length < 2) return 0;
+  const freq = h.filter((x) => x === choice).length / h.length;
+  const streak = h[h.length - 1] === choice ? (h[h.length - 2] === choice ? 0.2 : 0.08) : 0;
+  return Math.min(0.8, Math.max(0, freq * 0.85 + streak - 0.15) * (0.75 + fame / 200));
+}
+/** Lo que más repetís, para el aviso de "te estudiaron". */
+export function favoriteShot(history: string[] | undefined): { choice: string; count: number; of: number } | null {
+  const h = (history ?? []).slice(-6);
+  if (h.length < 3) return null;
+  const counts = new Map<string, number>();
+  h.forEach((x) => counts.set(x, (counts.get(x) ?? 0) + 1));
+  const [choice, count] = [...counts].sort((a, b) => b[1] - a[1])[0];
+  return count / h.length >= 0.5 ? { choice, count, of: h.length } : null;
+}
+
+/* ---------- Lesiones: más riesgo con la edad ---------- */
+export function injuryRisk(s: CareerState): number {
+  const a = s.age;
+  const base = a <= 23 ? 0.005 : a <= 27 ? 0.008 : a <= 30 ? 0.013 : a <= 32 ? 0.02 : a <= 34 ? 0.03 : 0.045;
+  const prof = (s.chances?.profesional ?? 0) >= 6 ? (s.choices?.profesional ?? 0) / (s.chances?.profesional ?? 1) : 0.5;
+  return base * (1.25 - prof * 0.5); // cuidarse (elegir lo profesional) baja el riesgo
+}
+/** Fechas afuera si te lesionás: los veteranos tardan más en volver. */
+export function injuryLength(s: CareerState, rand: () => number): number {
+  const severe = rand() < (s.age >= 32 ? 0.22 : s.age >= 29 ? 0.12 : 0.06);
+  return severe ? 5 + Math.floor(rand() * (s.age >= 32 ? 8 : 5)) : 1 + Math.floor(rand() * (s.age >= 30 ? 4 : 3));
+}
+
 /** Rival para el Mundial de Clubes: los mejores del mundo, sin repetir. */
 function clubWorldRival(s: CareerState, used: string[], rand: () => number, top = 24): string {
   const pool = worldElite([s.club, ...used]).slice(0, top);
@@ -737,6 +783,11 @@ function applyOne(s0: CareerState, idx: number, res: MatchResult, rand: () => nu
   if (!national) s.money += s.salary;
   if (fx.key) s.boost = 0;
   if (!res.played) { if (s.injury > 0) s.injury--; else if (s.suspension > 0) s.suspension--; }
+  else if (s.injury === 0 && rand() < injuryRisk(s) * (res.started === false ? 0.4 : 1)) {
+    s.injury = injuryLength(s, rand);
+    s.log = [`🩹 Te lesionaste contra ${fx.rival}: ${s.injury} ${s.injury === 1 ? "fecha" : "fechas"} afuera.`, ...s.log].slice(0, 50);
+    if (s.injury >= 5) hl(s, `🩹 Lesión larga a los ${s.age} años: ${s.injury} fechas afuera`);
+  }
 
   if (fx.table) playRound(s, stored, res, rand);
 
@@ -1025,12 +1076,13 @@ function finishYear(s0: CareerState, rand: () => number): CareerState {
   return s;
 }
 
-function makeOffers(s: CareerState, rand: () => number): Offer[] {
+export function makeOffers(s: CareerState, rand: () => number): Offer[] {
   const cur = clubInfo(s.club).strength;
   // Si tu nivel supera mucho al de tu club, te buscan clubes a tu altura.
   const jump = s.ovr >= cur + 2 ? Math.max(s.fame >= 30 ? 7 : 4, s.ovr - cur - 2) : 2;
   const reach = Math.min(90, s.ovr + 3, cur + jump + (s.fame >= 70 ? 3 : 0));
-  const floor = Math.max(45, Math.min(reach - 14, s.ovr - 18));
+  // Un crack no recibe ofertas de equipos chicos.
+  const floor = Math.max(45, Math.min(reach - 14, s.ovr - 18), s.ovr >= 84 ? Math.min(78, s.ovr - 12) : 0);
   const pool = CLUBS_W.filter((c) => c.name !== s.club && c.strength <= reach && c.strength >= floor && c.league !== "ARG2");
   const lg = leagueOfState(s);
   const sal = (club: string, mult = 1) => Math.round(LEAGUES[clubInfo(club).league].salary * (0.5 + clubInfo(club).strength / 120) * (1 + s.fame / 150) * mult);
@@ -1040,6 +1092,17 @@ function makeOffers(s: CareerState, rand: () => number): Offer[] {
   const sameCountry = pool.filter((c) => LEAGUES[c.league].country === lg.country);
   const sameCont = pool.filter((c) => LEAGUES[c.league].continent === lg.continent && LEAGUES[c.league].country !== lg.country);
   const up = pool.filter((c) => c.strength >= cur + 4);
+  // Si tu media está muy por encima de tu club (o sos un crack), los grandes del mundo vienen por vos.
+  const gap = s.ovr - cur;
+  if (gap >= 6 || s.ovr >= 85) {
+    const top = CLUBS_W.filter((c) => c.name !== s.club && c.strength > cur && c.strength >= Math.min(84, s.ovr - 6) && c.strength <= s.ovr + 6 && c.league !== "ARG2")
+      .sort((a, b) => b.strength - a.strength).slice(0, 10);
+    const n = s.ovr >= 88 || gap >= 12 ? 3 : 2;
+    for (let i = 0; i < 12 && top.length && [...out.values()].filter((o) => o.tag === "gigante" || o.tag === "salto").length < n; i++) {
+      const c = pick(top, rand);
+      add(c.name, c.strength >= 84 ? "gigante" : "salto", c.strength >= 84 ? 1.25 : 1);
+    }
+  }
   if (up.length && rand() < 0.7) add(best(up).name, "salto");
   if (sameCountry.length) add(best(sameCountry).name);
   if (sameCont.length && rand() < 0.7) add(best(sameCont).name);

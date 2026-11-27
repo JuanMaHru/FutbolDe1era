@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { makeQuestion, type Question } from "@/lib/career/trivia";
-import type { MomentKind } from "@/lib/career/engine";
+import { favoriteShot, keeperRead, type MomentKind, type ShotKind, type ShotRecord } from "@/lib/career/engine";
 import { play } from "@/lib/sound";
 
 export interface MomentProps {
@@ -10,8 +10,24 @@ export interface MomentProps {
   /** +0.15 si es la jugada del perfil del jugador */
   bonus: number;
   foot: string;
-  onDone: (ok: boolean) => void;
+  /** Dónde pateaste antes (los arqueros te estudian). */
+  shots?: Record<string, string[]>;
+  fame?: number;
+  onDone: (ok: boolean, shot?: ShotRecord) => void;
 }
+
+const SHOT_LABEL: Record<string, string> = {
+  TL: "al ángulo izquierdo", TR: "al ángulo derecho", BL: "abajo a la izquierda", BR: "abajo a la derecha", C: "al medio", CH: "picados",
+  UNDER: "por abajo de la barrera", cruzado: "cruzados", palo: "al primer palo", vaselina: "de vaselina", gambeta: "gambeteando al arquero",
+};
+const KIND_LABEL: Record<ShotKind, string> = { penalty: "penales", freekick: "tiros libres", placement: "mano a mano" };
+/** Aviso de que el arquero ya te tiene estudiado. */
+function Scouted({ kind, shots }: { kind: ShotKind; shots?: Record<string, string[]> }) {
+  const f = favoriteShot(shots?.[kind]);
+  if (!f) return null;
+  return <p className="scouted">📋 Te estudiaron: de tus últimos {f.of} {KIND_LABEL[kind]}, {f.count} fueron {SHOT_LABEL[f.choice] ?? f.choice}. Si repetís, te la van a leer.</p>;
+}
+const ReadNote = ({ on }: { on: boolean }) => (on ? <p className="scouted read">🧤 ¡Te la leyó! Ya sabía a dónde ibas a patear.</p> : null);
 const clamp01 = (x: number) => Math.max(0.03, Math.min(0.97, x));
 const finish = (ok: boolean, onDone: (ok: boolean) => void, delay = 1300) => {
   play(ok ? "hit" : "near");
@@ -52,7 +68,8 @@ function Goal({ keeper, ball, wall, result }: { keeper: "L" | "C" | "R" | "idle"
 }
 
 /* ---------- Penal: patear ---------- */
-export function PenaltyShoot({ d, bonus, onDone, title = "¡Penal!" }: MomentProps & { title?: string }) {
+export function PenaltyShoot({ d, bonus, onDone, shots, fame = 50, title = "¡Penal!" }: MomentProps & { title?: string }) {
+  const [read, setRead] = useState(false);
   const tendency = useMemo(() => (Math.random() < 0.5 ? "L" : "R") as "L" | "R", []);
   const showHint = useMemo(() => Math.random() < 0.5 + bonus * 2, [bonus]);
   const [shot, setShot] = useState<Zone | null>(null);
@@ -61,22 +78,24 @@ export function PenaltyShoot({ d, bonus, onDone, title = "¡Penal!" }: MomentPro
   const shoot = (z: Zone) => {
     if (shot) return;
     const r = Math.random();
-    const k: "L" | "C" | "R" = r < 0.18 ? "C" : r < 0.18 + 0.52 ? tendency : tendency === "L" ? "R" : "L";
+    const side = z === "TL" || z === "BL" ? "L" : z === "TR" || z === "BR" ? "R" : "C";
+    // Si repetís dónde pateás, el arquero te lee y va directo a ese lugar.
+    const guessed = Math.random() < keeperRead(shots?.penalty, z, fame);
+    const k: "L" | "C" | "R" = guessed ? side : r < 0.18 ? "C" : r < 0.18 + 0.52 ? tendency : tendency === "L" ? "R" : "L";
     setShot(z);
     play("kick");
     setTimeout(() => setKeeper(k), 120);
-    const side = z === "TL" || z === "BL" ? "L" : z === "TR" || z === "BR" ? "R" : "C";
     const high = z === "TL" || z === "TR";
     let ok: boolean;
-    if (z === "CH") ok = k !== "C" ? Math.random() < 0.95 : Math.random() < 0.08; // picarla
+    if (z === "CH") ok = k !== "C" ? Math.random() < 0.93 : Math.random() < 0.06; // picarla
     else if (side === "C") ok = k !== "C" ? Math.random() < 0.9 : Math.random() < 0.1;
     else {
       const miss = high ? 0.1 + d * 0.15 - bonus : 0.03;
       if (Math.random() < miss) ok = false;
-      else if (k === side) ok = Math.random() < (high ? 0.62 : 0.28) + bonus;
+      else if (k === side) ok = Math.random() < (guessed ? (high ? 0.45 : 0.18) : high ? 0.62 : 0.28) + bonus;
       else ok = true;
     }
-    setTimeout(() => { setRes(ok); finish(ok, onDone, 650); }, 600);
+    setTimeout(() => { setRes(ok); setRead(guessed && !ok); finish(ok, (o) => onDone(o, { kind: "penalty", choice: z }), guessed && !ok ? 1700 : 650); }, 600);
   };
   const OPTS: [Zone, string][] = [["TL", "↖ Ángulo izq."], ["CH", "🥄 Picarla"], ["TR", "Ángulo der. ↗"], ["BL", "↙ Abajo izq."], ["C", "Al medio"], ["BR", "Abajo der. ↘"]];
   return (
@@ -85,7 +104,9 @@ export function PenaltyShoot({ d, bonus, onDone, title = "¡Penal!" }: MomentPro
       <p className="muted small" style={{ margin: 0 }}>
         {showHint ? `👀 Dato: el arquero suele tirarse a su ${tendency === "L" ? "izquierda (tu derecha)" : "derecha (tu izquierda)"}.` : "Elegí dónde patear. Los ángulos son difíciles de atajar pero podés errarlo."}
       </p>
+      <Scouted kind="penalty" shots={shots} />
       <Goal keeper={keeper} ball={shot ?? undefined} result={res} />
+      <ReadNote on={read} />
       <div className="zone-grid">
         {OPTS.map(([z, label]) => (
           <button key={z} className="btn zone-btn" disabled={!!shot} onClick={() => shoot(z === "TL" ? "TL" : z)}>{label}</button>
@@ -137,7 +158,9 @@ export function PenaltySave({ d, bonus, onDone, title = "Penal en contra" }: Mom
 }
 
 /* ---------- Tiro libre: patear (elegir + potencia) ---------- */
-export function FreeKick({ d, bonus, foot, onDone }: MomentProps) {
+export function FreeKick({ d, bonus, foot, onDone, shots, fame = 50 }: MomentProps) {
+  const [read, setRead] = useState(false);
+  const [shownKeeper, setShownKeeper] = useState<"L" | "R" | null>(null);
   const keeperSide = useMemo(() => (Math.random() < 0.5 ? "L" : "R") as "L" | "R", []);
   const wallJumps = useMemo(() => Math.random() < 0.5, []);
   const [choice, setChoice] = useState<Zone | null>(null);
@@ -164,12 +187,19 @@ export function FreeKick({ d, bonus, foot, onDone }: MomentProps) {
     const good = pos >= lo && pos <= hi;
     play("kick");
     // Calidad según dónde está el arquero y si la barrera salta.
-    const freeSide = keeperSide === "L" ? "R" : "L";
-    let p = choice === "UNDER" ? (wallJumps ? 0.7 : 0.08) : choice === "TL" || choice === "TR" ? ((choice === "TL" ? "L" : "R") === freeSide ? 0.62 : 0.3) : 0.35;
+    // Si siempre le pegás igual, el arquero (o la barrera) ya te conoce.
+    const guessed = Math.random() < keeperRead(shots?.freekick, choice, fame);
+    const aim = choice === "TL" ? "L" : choice === "TR" ? "R" : null;
+    const kSide = guessed && aim ? aim : keeperSide;
+    const jumps = guessed && choice === "UNDER" ? false : wallJumps;
+    setShownKeeper(kSide);
+    const freeSide = kSide === "L" ? "R" : "L";
+    let p = choice === "UNDER" ? (jumps ? 0.7 : 0.08) : aim ? (aim === freeSide ? 0.62 : guessed ? 0.22 : 0.3) : 0.35;
     if (foot === "ambidiestro") p += 0.05;
     p += good ? 0.2 : -0.35;
     const ok = Math.random() < clamp01(p);
-    setTimeout(() => { setRes(ok); finish(ok, onDone, 650); }, 500);
+    const c = choice;
+    setTimeout(() => { setRes(ok); setRead(guessed && !ok); finish(ok, (o) => onDone(o, { kind: "freekick", choice: c }), guessed && !ok ? 1700 : 650); }, 500);
   };
   return (
     <div className="moment">
@@ -177,7 +207,9 @@ export function FreeKick({ d, bonus, foot, onDone }: MomentProps) {
       <p className="muted small" style={{ margin: 0 }}>
         El arquero se para cargado a su {keeperSide === "L" ? "izquierda (tu derecha)" : "derecha (tu izquierda)"}. {choice ? "Ahora la potencia: soltá en la zona verde." : "¿A dónde le pegás?"}
       </p>
-      <Goal keeper={res === null ? "idle" : keeperSide} ball={res !== null && choice ? choice : undefined} wall result={res} />
+      <Scouted kind="freekick" shots={shots} />
+      <Goal keeper={res === null ? "idle" : shownKeeper ?? keeperSide} ball={res !== null && choice ? choice : undefined} wall result={res} />
+      <ReadNote on={read} />
       {!choice ? (
         <div className="zone-grid three">
           <button className="btn zone-btn" onClick={() => { play("click"); setChoice("TL"); }}>↖ Ángulo izq.</button>
@@ -235,7 +267,8 @@ const KEEPER_STATES = [
   { id: "cargado", text: "El arquero está cargado hacia el primer palo.", odds: { cruzado: 0.85, palo: 0.2, vaselina: 0.4, gambeta: 0.55 } },
   { id: "tirado", text: "El arquero se tiró antes de tiempo.", odds: { cruzado: 0.35, palo: 0.5, vaselina: 0.6, gambeta: 0.85 } },
 ] as const;
-export function Placement({ d, bonus, onDone }: MomentProps) {
+export function Placement({ d, bonus, onDone, shots, fame = 50 }: MomentProps) {
+  const [read, setRead] = useState(false);
   const st = useMemo(() => KEEPER_STATES[Math.floor(Math.random() * KEEPER_STATES.length)], []);
   const [res, setRes] = useState<boolean | null>(null);
   const [choice, setChoice] = useState<string | null>(null);
@@ -243,8 +276,10 @@ export function Placement({ d, bonus, onDone }: MomentProps) {
     if (choice) return;
     setChoice(k);
     play("kick");
-    const ok = Math.random() < clamp01(st.odds[k] + bonus - (d - 0.5) * 0.3);
-    setTimeout(() => { setRes(ok); finish(ok, onDone, 650); }, 400);
+    // Los arqueros conocen tu definición favorita: repetirla siempre baja las chances.
+    const guessed = Math.random() < keeperRead(shots?.placement, k, fame) * 0.8;
+    const ok = Math.random() < clamp01((st.odds[k] + bonus - (d - 0.5) * 0.3) * (guessed ? 0.5 : 1));
+    setTimeout(() => { setRes(ok); setRead(guessed && !ok); finish(ok, (o) => onDone(o, { kind: "placement", choice: k }), guessed && !ok ? 1700 : 650); }, 400);
   };
   const kx = st.id === "cargado" ? 34 : 50, ky = st.id === "adelantado" ? 46 : st.id === "linea" ? 20 : 28;
   return (
@@ -263,6 +298,8 @@ export function Placement({ d, bonus, onDone }: MomentProps) {
         <circle cx="54" cy="61" r="1.8" fill="#fff" stroke="#111" strokeWidth="0.4" />
   
       </svg>
+      <Scouted kind="placement" shots={shots} />
+      <ReadNote on={read} />
       <div className="zone-grid two">
         <button className="btn zone-btn" disabled={!!choice} onClick={() => go("cruzado")}>↘ Cruzado abajo</button>
         <button className="btn zone-btn" disabled={!!choice} onClick={() => go("palo")}>↗ Al primer palo</button>

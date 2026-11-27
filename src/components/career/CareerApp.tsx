@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as E from "@/lib/career/engine";
 import type { CareerState, Fixture, MatchResult, Moment, MomentKind, Offer } from "@/lib/career/engine";
 import { CAREER_COUNTRIES, LEAGUES, NATIONS, clubInfo, isDerby, startingOffers, strengthOf } from "@/lib/career/world";
@@ -455,6 +455,7 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
   const [res, setRes] = useState<MatchResult | null>(null);
   const [after, setAfter] = useState<CareerState | null>(null);
   const [confetti, setConfetti] = useState(0);
+  const shots = useRef<E.ShotRecord[]>([]);
   if (!nx || !fx) return null;
   const colors = clubColors(team);
   const agg = E.aggregateBefore(s, fx);
@@ -464,13 +465,14 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
 
   const finishMatch = (r: MatchResult) => {
     if (E.needsPens(s, fx, r) && !r.pens) { setRes(r); setPhase("pens"); return; }
-    const n = E.applyResult({ ...s, lastKinds: plan.kinds }, nx.idx, r, R);
+    const n = E.recordShots(E.applyResult({ ...s, lastKinds: plan.kinds }, nx.idx, r, R), shots.current);
     setRes(r); setAfter(n); setPhase("post");
     const tot = agg ? [agg[0] + r.gf, agg[1] + r.ga] : null;
     const won = r.gf > r.ga || (!!r.pens && r.pens[0] > r.pens[1]) || (!!tot && tot[0] > tot[1] && fx.leg === 2);
     if (won) { play("win"); setConfetti((x) => x + 1); } else if (r.gf < r.ga) play("lose"); else play("flip");
   };
-  const onMoment = (ok: boolean) => {
+  const onMoment = (ok: boolean, shot?: E.ShotRecord) => {
+    if (shot) shots.current.push(shot);
     const k = plan.kinds[moments.length] as MomentKind;
     const e = E.momentEffect(s, k, ok, R);
     const ms = [...moments, { kind: k, ok }];
@@ -508,11 +510,14 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
     const tot: [number, number] | null = agg ? [agg[0] + res.gf, agg[1] + res.ga] : null;
     const comments = matchComments(s, fx, res, tot);
     const won = res.gf > res.ga || (!!res.pens && res.pens[0] > res.pens[1]);
+    const fresh = after.log.slice(0, Math.max(0, after.log.indexOf(s.log[0])));
+    const injuryNote = fresh.find((l) => l.startsWith("🩹"));
     return (
       <section className="match card">
         <Confetti fire={won ? confetti + 1000 : 0} colors={colors} />
         {header}
         {res.pens && <p className="match-note">Penales: {res.pens[0]} - {res.pens[1]}</p>}
+        {injuryNote && <p className="match-note injury-note">{injuryNote}{s.age >= 30 ? " Con los años, el cuerpo pide más cuidado." : ""}</p>}
         <p className="match-note">{won ? "¡Victoria!" : res.gf === res.ga && !res.pens ? "Empate" : "Derrota"} · {res.note}</p>
         <ul className="comments">{comments.map((c, k) => <li key={k} style={{ animationDelay: `${k * 120}ms` }}>{c}</li>)}</ul>
         {res.timeline.length > 0 && (
@@ -534,8 +539,8 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
 
   if (phase === "pens" && res) {
     const isGk = E.role(s) === "ARQ";
-    const p = { d, bonus: E.signatureBonus(s, isGk ? "penalty-save" : "penalty"), foot: s.foot };
-    const done = (ok: boolean) => finishMatch({ ...res, pens: E.shootout(s, ok, R) });
+    const p = { d, bonus: E.signatureBonus(s, isGk ? "penalty-save" : "penalty"), foot: s.foot, shots: s.shots, fame: s.fame };
+    const done = (ok: boolean, shot?: E.ShotRecord) => { if (shot) shots.current.push(shot); finishMatch({ ...res, pens: E.shootout(s, ok, R) }); };
     return (
       <section className="match card">
         {header}
@@ -595,7 +600,7 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
             {plan.kinds.map((_, k) => <span key={k} className={k < moments.length ? (moments[k].ok ? "ok" : "bad") : k === moments.length ? "cur" : ""} />)}
             <span className="muted small">Jugada {i + 1}/{plan.kinds.length}</span>
           </div>
-          <MomentRunner key={i} kind={kind} d={d} bonus={E.signatureBonus(s, kind)} foot={s.foot} onDone={onMoment} />
+          <MomentRunner key={i} kind={kind} d={d} bonus={E.signatureBonus(s, kind)} foot={s.foot} shots={s.shots} fame={s.fame} onDone={onMoment} />
         </>
       )}
       <Confetti fire={confetti} colors={colors} />
@@ -605,7 +610,7 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
 
 /* ================= Fin de temporada ================= */
 
-const TAG: Record<string, string> = { arabia: "💰 Oferta millonaria", vuelta: "🏠 Volver a casa", salto: "🚀 Salto de calidad" };
+const TAG: Record<string, string> = { arabia: "💰 Oferta millonaria", vuelta: "🏠 Volver a casa", salto: "🚀 Salto de calidad", gigante: "🌟 Un gigante te quiere" };
 
 function SeasonEnd({ s, save }: { s: CareerState; save: (s: CareerState) => void }) {
   const h = s.history[s.history.length - 1];
