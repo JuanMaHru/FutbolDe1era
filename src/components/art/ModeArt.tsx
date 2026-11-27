@@ -1,3 +1,6 @@
+"use client";
+import { useEffect, useState } from "react";
+import { DEFAULT_THEME, currentTheme } from "@/lib/theme";
 import { Kit } from "./Kit";
 import { Crest } from "./Crest";
 
@@ -83,14 +86,16 @@ export function ModeArt({ mode }: { mode: ModeId }) {
       );
     case "carrera":
       return (
-        <svg className="art" viewBox="0 0 160 110" aria-hidden>
-          <path d="M14 96 C50 96 40 60 80 62 S120 26 146 18" stroke="#9fb8a9" strokeWidth="3" fill="none" strokeDasharray="5 5" />
-          {[[22, 95, "var(--muted)"], [62, 66, G], [104, 46, G], [146, 18, AC]].map(([x, y, c], i) => (
-            <circle key={i} cx={x as number} cy={y as number} r={i === 3 ? 10 : 7} style={{ fill: c as string }} stroke="#0d1a14" strokeWidth="2" />
-          ))}
-          <text x="146" y="22" textAnchor="middle" fontSize="11" fontWeight="900" fill="#1b1400">★</text>
-          <g transform="translate(30 30) scale(0.42)"><Kit club="Boca Juniors" label="10" size={100} /></g>
-        </svg>
+        <div className="art art-career">
+          <svg viewBox="0 0 160 110" aria-hidden>
+            <path d="M14 96 C50 96 40 60 80 62 S120 26 146 18" stroke="#9fb8a9" strokeWidth="3" fill="none" strokeDasharray="5 5" />
+            {[[22, 95, "var(--muted)"], [62, 66, G], [104, 46, G], [146, 18, AC]].map(([x, y, c], i) => (
+              <circle key={i} cx={x as number} cy={y as number} r={i === 3 ? 10 : 7} style={{ fill: c as string }} stroke="#0d1a14" strokeWidth="2" />
+            ))}
+            <text x="146" y="22" textAnchor="middle" fontSize="11" fontWeight="900" fill="#1b1400">★</text>
+          </svg>
+          <ThemeKit />
+        </div>
       );
     case "wordle":
       return (
@@ -157,6 +162,23 @@ export function MiniCrests() {
       <Crest club="Boca Juniors" size={20} />
       <Crest club="River Plate" size={20} />
       <Crest club="Racing Club" size={20} />
+    </span>
+  );
+}
+
+/** Camiseta del club que eligió el usuario en "Colores" (o la de la marca). */
+function ThemeKit() {
+  const [club, setClub] = useState<string | null>(null);
+  useEffect(() => {
+    const sync = () => setClub(currentTheme());
+    sync();
+    window.addEventListener("primera:theme", sync);
+    return () => window.removeEventListener("primera:theme", sync);
+  }, []);
+  if (club === null) return null;
+  return (
+    <span className="art-career-kit">
+      {club === DEFAULT_THEME ? <Kit club="" label="10" size={58} colors={["#0B1D3A", "#22D169", "#F4F7FA"]} pattern="band" /> : <Kit club={club} label="10" size={58} />}
     </span>
   );
 }

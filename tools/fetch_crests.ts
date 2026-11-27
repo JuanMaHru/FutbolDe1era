@@ -4,11 +4,12 @@
  * Uso: npm run crests   (lo corre también la GitHub Action "Actualizar escudos").
  * Solo busca los clubes que todavía no tienen escudo, salvo con --all.
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { CLUBS } from "@/lib/clubs";
 import { CLUBS_W, INTL_CLUBS, LEAGUES, clubInfo } from "@/lib/career/world";
 
 const OUT = "src/data/crests.json";
+const KITS_OUT = "src/data/kits.json";
 const KEY = process.env.SPORTSDB_KEY || "123"; // clave pública gratuita de TheSportsDB
 const ALL = process.argv.includes("--all");
 
@@ -67,8 +68,11 @@ async function search(q: string): Promise<any[]> {
 
 async function main() {
   const out: Record<string, string> = JSON.parse(readFileSync(OUT, "utf8") || "{}");
+  // Camiseta actual (strEquipment) de cada equipo.
+  const kits: Record<string, string> = existsSync(KITS_OUT) ? JSON.parse(readFileSync(KITS_OUT, "utf8") || "{}") : {};
+  const saveKits = () => writeFileSync(KITS_OUT, JSON.stringify(Object.fromEntries(Object.entries(kits).sort()), null, 1) + "\n");
   const names = [...new Set([...Object.keys(CLUBS), ...CLUBS_W.map((c) => c.name), ...INTL_CLUBS.map((c) => c.name)])]
-    .filter((n) => ALL || !out[n]);
+    .filter((n) => ALL || !out[n] || !kits[n]);
   const miss: string[] = [];
   for (const name of names) {
     if (NATIONAL[name]) {
@@ -76,6 +80,7 @@ async function main() {
       const teams = (await search(NATIONAL[name])).filter((x: any) => x.strTeam === NATIONAL[name] && (x.strGender ?? "Male") === "Male");
       await sleep(2200);
       const badge = teams[0]?.strBadge || teams[0]?.strTeamBadge;
+      if (teams[0]?.strEquipment) { kits[name] = teams[0].strEquipment; saveKits(); }
       if (badge) { out[name] = badge; console.log("✓", name); writeFileSync(OUT, JSON.stringify(Object.fromEntries(Object.entries(out).sort()), null, 1) + "\n"); }
       else { miss.push(name); console.log("✗", name); }
       continue;
@@ -92,6 +97,7 @@ async function main() {
     }
     const pick = (country && teams.find((t) => t.strCountry === country)) || (teams.length === 1 || !country ? teams[0] : undefined);
     const badge = pick?.strBadge || pick?.strTeamBadge;
+    if (pick?.strEquipment) { kits[name] = pick.strEquipment; saveKits(); }
     if (badge) {
       out[name] = badge; console.log("✓", name, "→", pick.strTeam);
       // Guarda a medida que avanza, para no perder lo encontrado si la tarea se corta.

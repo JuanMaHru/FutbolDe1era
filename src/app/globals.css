@@ -944,3 +944,9 @@ body[data-swipe="right"] main { animation: swipeR .32s ease-out; }
 .theme-body > .btn-primary:last-child, .howto-body > .btn-primary:last-child { position: sticky; bottom: 10px; z-index: 6; box-shadow: 0 -6px 18px rgba(0,0,0,.45), 0 4px 12px rgba(0,0,0,.4); }
 .theme-body > #theme-search { position: sticky; top: 8px; z-index: 5; margin-right: 52px; }
 .theme-body > #theme-search { background: var(--bg-2); box-shadow: 0 -12px 0 var(--bg-2), 0 6px 14px rgba(0,0,0,.35); }
+.kit-real { position: relative; display: inline-grid; place-items: center; flex-shrink: 0; }
+.kit-real img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 6px 10px rgba(0,0,0,.4)); }
+.kit-num { position: absolute; right: -2px; bottom: -2px; min-width: 1.6em; text-align: center; padding: 1px 4px; border-radius: 8px; background: var(--accent); color: var(--accent-ink); font-family: var(--display); font-weight: 900; line-height: 1.2; }
+.art-career { position: relative; }
+.art-career svg { width: 100%; height: 100%; }
+.art-career-kit { position: absolute; left: 14%; top: 22%; filter: drop-shadow(0 8px 14px rgba(0,0,0,.45)); }

@@ -8,6 +8,9 @@ const photos = JSON.parse(readFileSync("src/data/photos.json", "utf8"));
 const crests = JSON.parse(readFileSync("src/data/crests.json", "utf8"));
 const OUT = "src/data/images-local.json";
 const local = existsSync(OUT) ? JSON.parse(readFileSync(OUT, "utf8")) : { photos: {}, crests: {} };
+local.kits ??= {};
+const kits = existsSync("src/data/kits.json") ? JSON.parse(readFileSync("src/data/kits.json", "utf8")) : {};
+mkdirSync("public/img/camisetas", { recursive: true });
 mkdirSync("public/img/fotos", { recursive: true });
 mkdirSync("public/img/escudos", { recursive: true });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -44,3 +47,13 @@ for (const [club, url] of Object.entries(crests)) {
 }
 save();
 console.log("escudos:", Object.keys(local.crests).length);
+
+let k = 0;
+for (const [club, url] of Object.entries(kits)) {
+  if (local.kits[club]) continue;
+  const buf = await get(`${url}/small`) ?? await get(url);
+  if (buf) { const f = `${slug(club)}.png`; writeFileSync(`public/img/camisetas/${f}`, buf); local.kits[club] = `/img/camisetas/${f}`; k++; if (k % 20 === 0) save(); }
+  await sleep(300);
+}
+save();
+console.log("camisetas:", Object.keys(local.kits).length);

@@ -1,14 +1,32 @@
-import { useId } from "react";
-import { clubStyle } from "@/lib/clubs";
+"use client";
+import { useId, useState } from "react";
+import { clubStyle, type Pattern } from "@/lib/clubs";
+import KITS from "@/data/kits.json";
+import LOCAL_IMAGES from "@/data/images-local.json";
+import { REAL_CRESTS } from "@/lib/site";
 import { PatternFill } from "./PatternFill";
 import { isLight } from "./Crest";
 
 const SHIRT = "M30 6 L42 2 Q50 9 58 2 L70 6 L96 22 L86 42 L76 37 L76 96 L24 96 L24 37 L14 42 L4 22 Z";
 
 /** Camiseta ilustrada con el patrón del club y el dorsal (o un texto corto, p. ej. "DT"). */
-export function Kit({ club, label, size = 96, hidden = false }: { club: string; label: string | number; size?: number; hidden?: boolean }) {
-  const s = clubStyle(club);
+export function Kit({ club, label, size = 96, hidden = false, real = true, colors, pattern }: { club: string; label: string | number; size?: number; hidden?: boolean; real?: boolean; colors?: [string, string, string?]; pattern?: Pattern }) {
   const id = useId().replace(/:/g, "");
+  const [broken, setBroken] = useState(false);
+  // Camiseta real (TheSportsDB, copiada al sitio si está disponible).
+  const local = (LOCAL_IMAGES as { kits?: Record<string, string> }).kits?.[club];
+  const remote = (KITS as Record<string, string>)[club];
+  const src = real && REAL_CRESTS && !hidden && !colors ? local ?? remote : undefined;
+  if (src && !broken)
+    return (
+      <span className="kit kit-real" style={{ width: size, height: size }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt="" loading="lazy" referrerPolicy="no-referrer" onError={() => setBroken(true)} />
+        {label !== "" && <b className="kit-num" style={{ fontSize: Math.max(10, size * 0.18) }}>{label}</b>}
+      </span>
+    );
+  const s0 = clubStyle(club);
+  const s = colors ? { ...s0, colors, pattern: pattern ?? s0.pattern } : s0;
   const [base, accent] = hidden ? ["var(--surface-2)", "var(--surface-2)"] : s.colors;
   const numberColor = hidden ? "var(--accent)" : isLight(base) ? (s.colors[2] ?? "#111") : "#fff";
   return (
