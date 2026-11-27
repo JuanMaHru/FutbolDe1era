@@ -66,7 +66,11 @@ async function main() {
     }
     const pick = (country && teams.find((t) => t.strCountry === country)) || (teams.length === 1 || !country ? teams[0] : undefined);
     const badge = pick?.strBadge || pick?.strTeamBadge;
-    if (badge) { out[name] = badge; console.log("✓", name, "→", pick.strTeam); }
+    if (badge) {
+      out[name] = badge; console.log("✓", name, "→", pick.strTeam);
+      // Guarda a medida que avanza, para no perder lo encontrado si la tarea se corta.
+      writeFileSync(OUT, JSON.stringify(Object.fromEntries(Object.entries(out).sort()), null, 1) + "\n");
+    }
     else { miss.push(name); console.log("✗", name); }
   }
   writeFileSync(OUT, JSON.stringify(Object.fromEntries(Object.entries(out).sort()), null, 1) + "\n");
