@@ -448,7 +448,7 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
   const team = E.myTeam(s);
   const rival = fx?.rival ?? "";
   const [started] = useState(() => R() < E.startChance(s));
-  const [plan] = useState(() => E.prepareMatch(s, rival, E.planMoments(s, started, R), R));
+  const [plan] = useState(() => E.prepareMatch(s, rival, E.planMoments(s, started, R), R, started));
   const [phase, setPhase] = useState<"pre" | "play" | "burst" | "pens" | "post">("pre");
   const [moments, setMoments] = useState<Moment[]>([]);
   const [effects, setEffects] = useState<E.Effect3[]>([]);
@@ -539,7 +539,7 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
 
   if (phase === "pens" && res) {
     const isGk = E.role(s) === "ARQ";
-    const p = { d, bonus: E.signatureBonus(s, isGk ? "penalty-save" : "penalty"), foot: s.foot, shots: s.shots, fame: s.fame };
+    const p = { d, bonus: E.signatureBonus(s, isGk ? "penalty-save" : "penalty"), foot: s.foot, shots: s.shots, fame: s.fame, team, rival };
     const done = (ok: boolean, shot?: E.ShotRecord) => { if (shot) shots.current.push(shot); finishMatch({ ...res, pens: E.shootout(s, ok, R) }); };
     return (
       <section className="match card">
@@ -568,7 +568,7 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
       <section className="match card">
         {header}
         <p className="muted small" style={{ margin: 0 }}>Fuerza {Math.round(strengthOf(team))} vs {Math.round(strengthOf(rival))}{fx.knockout ? (fx.leg === 1 ? " · Partido de ida" : " · Eliminación: si empatan, penales") : ""}</p>
-        <p className={`starter ${started ? "yes" : "no"}`}>{started ? `✅ Sos titular: vas a tener ${plan.kinds.length} jugadas.` : plan.kinds.length ? "🪑 Arrancás en el banco: vas a tener 1 jugada." : "🪑 Arrancás en el banco y no se sabe si vas a entrar."}</p>
+        <p className={`starter ${started ? "yes" : "no"}`}>{started ? `✅ Sos titular: vas a tener ${plan.kinds.length} jugadas.` : plan.kinds.length ? "🪑 Arrancás en el banco: entrás en el segundo tiempo y vas a tener 1 jugada." : "🪑 Arrancás en el banco y no se sabe si vas a entrar."}</p>
         {plan.kinds.length > 0 ? (
           <>
             <button className="btn btn-primary big-cta" onClick={() => { play("whistle"); setTimeout(() => setPhase("play"), 50); }}>¡Que ruede la pelota! 🟢</button>
@@ -600,7 +600,7 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
             {plan.kinds.map((_, k) => <span key={k} className={k < moments.length ? (moments[k].ok ? "ok" : "bad") : k === moments.length ? "cur" : ""} />)}
             <span className="muted small">Jugada {i + 1}/{plan.kinds.length}</span>
           </div>
-          <MomentRunner key={i} kind={kind} d={d} bonus={E.signatureBonus(s, kind)} foot={s.foot} shots={s.shots} fame={s.fame} onDone={onMoment} />
+          <MomentRunner key={i} kind={kind} d={d} bonus={E.signatureBonus(s, kind)} foot={s.foot} shots={s.shots} fame={s.fame} team={team} rival={rival} onDone={onMoment} />
         </>
       )}
       <Confetti fire={confetti} colors={colors} />

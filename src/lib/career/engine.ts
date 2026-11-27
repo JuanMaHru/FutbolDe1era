@@ -18,7 +18,7 @@ export const ROLE_OF: Record<string, Role> = { ARQ: "ARQ", DFC: "DEF", LAT: "DEF
 export type MomentKind =
   | "finish" | "placement" | "penalty" | "freekick" | "header" | "pass"
   | "tackle" | "intercept" | "save" | "penalty-save" | "freekick-save"
-  | "trivia" | "ttt";
+  | "trivia" | "ttt" | "corner";
 export interface Moment { kind: MomentKind; ok: boolean }
 
 export const ARCHETYPES: Record<Role, { id: string; name: string; desc: string; signature: MomentKind }[]> = {
@@ -62,8 +62,8 @@ export const talentOf = (s: { talent: TalentId }) => TALENTS.find((t) => t.id ==
 const ATTACK: MomentKind[] = ["finish", "placement", "penalty", "freekick", "header"];
 const DEFENSE: MomentKind[] = ["tackle", "intercept", "save", "penalty-save", "freekick-save"];
 const POOLS: Record<Role, [MomentKind, number][]> = {
-  DEL: [["finish", 3], ["placement", 3], ["penalty", 2], ["freekick", 1], ["header", 1], ["trivia", 2], ["ttt", 1], ["pass", 1]],
-  MED: [["pass", 3], ["intercept", 2], ["freekick", 1], ["finish", 1], ["trivia", 2], ["ttt", 1], ["penalty", 1]],
+  DEL: [["finish", 3], ["placement", 3], ["penalty", 2], ["freekick", 1], ["header", 1], ["trivia", 2], ["ttt", 1], ["pass", 1], ["corner", 1]],
+  MED: [["pass", 3], ["intercept", 2], ["freekick", 1], ["finish", 1], ["trivia", 2], ["ttt", 1], ["penalty", 1], ["corner", 2]],
   DEF: [["tackle", 3], ["header", 2], ["intercept", 2], ["trivia", 2], ["ttt", 1], ["pass", 1]],
   ARQ: [["save", 3], ["penalty-save", 2], ["freekick-save", 2], ["trivia", 2], ["ttt", 1]],
 };
@@ -553,16 +553,45 @@ export function nextFixture(s: CareerState): { fx: Fixture; idx: number } | null
   return fx ? { fx, idx: s.idx } : null;
 }
 
+/** Cuánto te sobra (o te falta) de nivel respecto de tu equipo. Positivo = sos de los mejores. */
+const edge = (s: CareerState) => s.ovr - (strengthOf(myTeam(s)) - 4);
+
+/**
+ * Techo de titularidad para los pibes (17-20): rara vez son fijos, salvo que sean cracks
+ * o se ganen al DT con buenas actuaciones (confianza y forma).
+ */
+function youthCap(s: CareerState): number {
+  const cap = s.age <= 17 ? 40 : s.age === 18 ? 55 : s.age === 19 ? 72 : s.age === 20 ? 86 : 100;
+  return cap + Math.max(0, s.ovr - 62) * 3 + (s.confidence - 50) * 0.6 + (s.form - 50) * 0.2;
+}
+/** Qué tan "pibe" sos para el plantel: 1 = recién llegado, 0 = ya es tu lugar. */
+const youthFactor = (s: CareerState) => clamp(1 - (youthCap(s) - 40) / 60, 0, 1);
+
 export function startChance(s: CareerState): number {
-  const need = strengthOf(myTeam(s)) - 4;
   const base = s.phase === "national" && !isClubWC(s) ? 45 : 50;
-  return clamp(base + (s.ovr - need) * 4 + (s.confidence - 50) * 0.5 + (s.form - 50) * 0.3, 8, 97) / 100;
+  const c = base + edge(s) * 4 + (s.confidence - 50) * 0.5 + (s.form - 50) * 0.3;
+  return clamp(Math.min(c, youthCap(s)), 8, 97) / 100;
+}
+
+/** Pelotas paradas: se las dan al referente. Depende de tu nivel en el equipo, la confianza del DT, la forma, la edad y la fama. */
+export const SET_PIECES: MomentKind[] = ["penalty", "freekick", "corner"];
+export function takerChance(s: CareerState, kind: MomentKind): number {
+  const sig = archetypeOf(s).signature;
+  const special = sig === kind || (kind === "corner" && sig === "freekick") || (kind === "freekick" && sig === "penalty");
+  const score = edge(s) * 3 + (s.confidence - 50) * 0.6 + (s.form - 50) * 0.3 + Math.min(10, (s.age - 21) * 2.5) + (s.fame - 30) * 0.15 + (special ? 25 : 0);
+  // Los córners se los dan más fácil a un volante joven que un penal; a un pibe casi nunca le dan el penal.
+  const young = 1 - youthFactor(s) * (kind === "corner" ? 0.5 : 0.75);
+  return (clamp((kind === "corner" ? 40 : 28) + score, 4, 95) / 100) * young;
 }
 
 export function planMoments(s: CareerState, started: boolean, rand: () => number): MomentKind[] {
   const n = (started ? 2 : rand() < 0.6 ? 1 : 0) + (s.boost > 0 && started ? 1 : 0);
   const sig = archetypeOf(s).signature;
-  const pool = POOLS[role(s)].map(([k, w]) => [k, k === sig ? w + 3 : w] as [MomentKind, number]);
+  // Si no sos el pateador designado este partido, no te tocan penales, tiros libres ni córners.
+  const pool = POOLS[role(s)]
+    .filter(([k]) => !SET_PIECES.includes(k) || rand() < takerChance(s, k))
+    // Ser especialista en pelota parada no hace que haya más penales: solo que los patees vos.
+    .map(([k, w]) => [k, k === sig ? w + (SET_PIECES.includes(k) ? 1 : 3) : w] as [MomentKind, number]);
   const out: MomentKind[] = [];
   for (let i = 0; i < n; i++) {
     const avail = pool.filter(([k]) => !out.includes(k) && !(s.lastKinds.includes(k) && rand() < 0.7));
@@ -580,7 +609,7 @@ export const signatureBonus = (s: CareerState, k: MomentKind) => (archetypeOf(s)
 
 /** Plan del partido en vivo: goles "de fondo" con minuto y minutos de tus jugadas. */
 export interface LivePlan { kinds: MomentKind[]; minutes: number[]; baseFor: number[]; baseAgainst: number[] }
-export function prepareMatch(s: CareerState, rival: string, kinds: MomentKind[], rand: () => number): LivePlan {
+export function prepareMatch(s: CareerState, rival: string, kinds: MomentKind[], rand: () => number, started = true): LivePlan {
   const mine = strengthOf(myTeam(s)) + Math.max(0, s.ovr - strengthOf(myTeam(s))) * 0.3;
   const diff = (mine - strengthOf(rival)) * 0.035;
   const att = kinds.filter((k) => ATTACK.includes(k) || k === "pass").length;
@@ -589,7 +618,8 @@ export function prepareMatch(s: CareerState, rival: string, kinds: MomentKind[],
   const ga = poisson(1.15 - diff - def * 0.3, rand);
   const mins = () => 2 + Math.floor(rand() * 89);
   // Jugadas del jugador: a veces la última es agónica.
-  const minutes = kinds.map(() => 8 + Math.floor(rand() * 74)).sort((a, b) => a - b);
+  // Si entrás desde el banco, tus jugadas son en el segundo tiempo.
+  const minutes = kinds.map(() => (started ? 8 + Math.floor(rand() * 74) : 60 + Math.floor(rand() * 26))).sort((a, b) => a - b);
   if (minutes.length && rand() < 0.45) minutes[minutes.length - 1] = 85 + Math.floor(rand() * 8);
   return { kinds, minutes, baseFor: Array.from({ length: gf }, mins).sort((a, b) => a - b), baseAgainst: Array.from({ length: ga }, mins).sort((a, b) => a - b) };
 }
@@ -598,6 +628,7 @@ export function prepareMatch(s: CareerState, rival: string, kinds: MomentKind[],
 export function momentEffect(s: CareerState, kind: MomentKind, ok: boolean, rand: () => number): { us: number; them: number; goal: boolean; assist: boolean; save: boolean } {
   const r = role(s);
   if (ATTACK.includes(kind)) return { us: ok ? 1 : 0, them: 0, goal: ok, assist: false, save: false };
+  if (kind === "corner") return { us: ok ? 1 : 0, them: 0, goal: false, assist: ok, save: false };
   if (kind === "pass") return { us: ok ? 1 : 0, them: 0, goal: false, assist: ok && r !== "ARQ", save: false };
   if (kind === "penalty-save") return { us: 0, them: ok ? 0 : 1, goal: false, assist: false, save: ok };
   if (DEFENSE.includes(kind)) return { us: 0, them: !ok && rand() < 0.75 ? 1 : 0, goal: false, assist: false, save: false };
@@ -652,7 +683,7 @@ export function simQuick(s: CareerState, rival: string, rand: () => number, mode
   const p = clamp(0.3 + (s.ovr - strengthOf(rival)) * 0.025 + (s.form - 50) * 0.003, 0.08, 0.72);
   const n = started ? (rand() < 0.75 ? 1 : 0) : rand() < 0.3 ? 1 : 0;
   const kinds = planMoments(s, started, rand).slice(0, n);
-  const plan = prepareMatch(s, rival, kinds, rand);
+  const plan = prepareMatch(s, rival, kinds, rand, started);
   const moments = kinds.map((k) => ({ kind: k, ok: rand() < p }));
   const effects = moments.map((m) => momentEffect(s, m.kind, m.ok, rand));
   if (!kinds.length && !started) {

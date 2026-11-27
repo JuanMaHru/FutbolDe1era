@@ -10,8 +10,8 @@ export function Burst({ kind, ok, effect, colors }: { kind: MomentKind; ok: bool
     small = { penalty: "Penal a la red", freekick: "¡Golazo de tiro libre!", header: "¡Testazo al gol!", placement: "Definición de crack", finish: "La clavaste", trivia: "Leíste la jugada y la mandaste a guardar", ttt: "Jugada perfecta" }[kind as string] ?? "¡Adentro!";
   } else if (effect.us) {
     good = true;
-    big = kind === "pass" || effect.assist ? "¡PASE GOL!" : "¡GOL!";
-    small = "Asistencia de lujo";
+    big = kind === "corner" ? "¡GOL DE CÓRNER!" : kind === "pass" || effect.assist ? "¡PASE GOL!" : "¡GOL!";
+    small = kind === "corner" ? "Centro perfecto y cabezazo a la red" : "Asistencia de lujo";
   } else if (effect.save) {
     good = true; big = "¡ATAJADÓN!"; small = "Penal contenido";
   } else if (effect.them) {
@@ -22,7 +22,7 @@ export function Burst({ kind, ok, effect, colors }: { kind: MomentKind; ok: bool
     small = "La tribuna te ovaciona";
   } else {
     good = false;
-    big = { finish: "¡AFUERA!", placement: "¡LA ATAJÓ!", penalty: "¡LO ERRASTE!", freekick: "¡EN LA BARRERA!", header: "¡POR ARRIBA!", pass: "PASE CORTADO" }[kind as string] ?? "¡UFFF!";
+    big = { finish: "¡AFUERA!", placement: "¡LA ATAJÓ!", penalty: "¡LO ERRASTE!", freekick: "¡EN LA BARRERA!", header: "¡POR ARRIBA!", pass: "PASE CORTADO", corner: "¡LA DESPEJARON!" }[kind as string] ?? "¡UFFF!";
     small = "Se salvaron por poco";
   }
   return (

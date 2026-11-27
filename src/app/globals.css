@@ -1010,3 +1010,33 @@ body[data-swipe="right"] main { animation: swipeR .32s ease-out; }
 .kit-draw svg { display: block; overflow: visible; }
 .kit-crest { position: absolute; left: 58%; top: 21%; display: grid; place-items: center; filter: drop-shadow(0 1px 1px rgba(0,0,0,.35)); }
 .kit-crest .crest, .kit-crest img { width: 100% !important; height: 100% !important; }
+
+/* ---------- Escenas ilustradas de los minijuegos ---------- */
+.scene { width: 100%; max-width: 360px; margin: 0 auto; display: block; border-radius: 16px; box-shadow: 0 8px 22px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.06) inset; overflow: hidden; }
+.scene.small { max-width: 320px; }
+.scene-hint { margin: -4px 0 0; text-align: center; }
+.sc-ball { transition: transform .58s cubic-bezier(.2,.75,.3,1); }
+.sc-spin { animation: sc-spin .6s linear; transform-box: fill-box; transform-origin: center; }
+@keyframes sc-spin { to { transform: rotate(600deg); } }
+.sc-keeper { transition: transform .5s cubic-bezier(.3,1.25,.5,1) .08s; }
+.sc-wall { transition: transform .22s ease-out; }
+.goal-scene.sc-goal .sc-net { animation: sc-net .45s ease-out .55s 2; transform-box: fill-box; transform-origin: 50% 0; }
+@keyframes sc-net { 50% { transform: scale(1.025, 1.07); } }
+.goal-scene.sc-miss { animation: shake .45s .55s; }
+.sc-target { cursor: pointer; }
+.sc-target circle + circle { animation: sc-pulse-soft 1.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes sc-pulse-soft { 50% { transform: scale(1.25); opacity: .55; } }
+.sc-token { transition: transform .5s ease; }
+.sc-token.tap { cursor: pointer; }
+.sc-pulse { animation: sc-pulse 1.4s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes sc-pulse { 0% { transform: scale(.8); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
+.sc-pball { transition: transform .62s cubic-bezier(.25,.7,.35,1); }
+.sc-loft { animation: sc-loft .62s ease-in-out; transform-box: fill-box; transform-origin: center; }
+@keyframes sc-loft { 50% { transform: scale(1.9); } }
+.sc-run { animation: sc-run 1.5s ease-in-out infinite alternate; }
+@keyframes sc-run { from { transform: translateY(-16px); } to { transform: translateY(2px); } }
+.moment .timing { height: 50px; border-radius: 25px; background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.25)), repeating-linear-gradient(90deg, #1d7a42 0 8%, #22894b 8% 16%); box-shadow: 0 4px 12px rgba(0,0,0,.35) inset; }
+.moment .timing-zone { background: linear-gradient(180deg, rgba(143,240,182,.85), rgba(34,169,91,.85)); box-shadow: 0 0 14px rgba(143,240,182,.7), 0 0 0 2px #c9ffe0 inset; border-radius: 8px; }
+.moment .timing-cursor { top: 50%; bottom: auto; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff 0 35%, #d9dde3 70%, #9aa1ab); box-shadow: 0 0 0 2px #111 inset, 0 0 14px rgba(255,255,255,.8); }
+.moment .timing-cursor::after { content: ""; position: absolute; inset: 8px; background: #16181d; clip-path: polygon(50% 0, 100% 38%, 82% 100%, 18% 100%, 0 38%); }
+.zone-btn { font-weight: 800; }
