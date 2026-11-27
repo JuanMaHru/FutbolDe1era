@@ -16,10 +16,15 @@ const COUNTRY: Record<string, string> = { ARG: "Argentina", BRA: "Brazil", ENG: 
 
 /** Nombre con el que lo conoce la API (y país para desempatar homónimos). */
 const ALIAS: Record<string, [string, string?]> = {
+  "Real Madrid": ["Real Madrid", "Spain"], "Palmeiras": ["Palmeiras", "Brazil"], "Colo-Colo": ["Colo Colo", "Chile"], "Internacional": ["Internacional", "Brazil"],
+  "West Ham": ["West Ham United"], "Bologna": ["Bologna", "Italy"], "Toluca": ["Toluca", "Mexico"], "Zenit": ["Zenit St Petersburg"], "Lille": ["Lille", "France"],
+  "Groningen": ["FC Groningen"], "Al-Ahli": ["Al-Ahli", "Saudi Arabia"], "Al-Shabab": ["Al-Shabab", "Saudi Arabia"], "Al-Ettifaq": ["Al-Ettifaq", "Saudi Arabia"],
+  "Philadelphia Union": ["Philadelphia Union"], "St. Pauli": ["St Pauli"], "Cremonese": ["Cremonese", "Italy"], "Junior": ["Junior Barranquilla"],
+  "Juventude": ["Juventude", "Brazil"], "Nottingham Forest": ["Nottingham Forest"], "The Strongest": ["The Strongest", "Bolivia"],
   "Bayern Múnich": ["Bayern Munich"], "Olympique de Marsella": ["Marseille"], "Inter": ["Inter Milan"], "Milan": ["AC Milan"], "Roma": ["AS Roma"],
   "Spartak Moscú": ["Spartak Moscow"], "Hamburgo": ["Hamburger SV"], "Colonia": ["FC Koln"], "Copenhague": ["FC Copenhagen"], "Slavia Praga": ["Slavia Prague"],
   "Sparta Praga": ["Sparta Prague"], "Crvena Zvezda": ["Red Star Belgrade"], "Atlético de Madrid": ["Atletico Madrid"], "Deportivo La Coruña": ["Deportivo La Coruna"],
-  "Celta": ["Celta Vigo"], "Gimnasia y Esgrima LP": ["Gimnasia La Plata"], "Estudiantes": ["Estudiantes"], "Club América": ["Club America"],
+  "Celta": ["Celta Vigo"], "Gimnasia y Esgrima LP": ["Gimnasia La Plata"], "Estudiantes": ["Estudiantes de La Plata", "Argentina"], "Club América": ["Club America"],
   "Universitario": ["Universitario", "Peru"], "Nacional": ["Nacional", "Uruguay"], "Junior": ["Junior", "Colombia"], "Chivas": ["Guadalajara"], "Pumas": ["Pumas UNAM"],
   "Tigres": ["Tigres UANL"], "León": ["Leon", "Mexico"], "Newcastle": ["Newcastle United"], "Olimpia": ["Olimpia", "Paraguay"], "Olimpia (HON)": ["Olimpia", "Honduras"],
   "Toronto": ["Toronto FC"], "Cincinnati": ["FC Cincinnati"], "Nashville": ["Nashville SC"], "Charlotte": ["Charlotte FC"], "PSV": ["PSV Eindhoven"], "AZ": ["AZ Alkmaar"],
