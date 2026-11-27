@@ -15,7 +15,7 @@ export interface Theme {
   label: string;
   /** Cómo se muestra el valor. */
   fmt: (v: number) => string;
-  /** Pregunta: "¿Tiene más o menos…?" */
+  /** Pregunta con {a} (referencia, arriba) y {b} (el de abajo). */
   ask: string;
   more: string;
   less: string;
@@ -33,19 +33,19 @@ const fromPlayers = (key: string) => (): HolItem[] =>
   PL.flatMap((p) => (HP[p.id]?.[key] ? [{ id: p.id, name: p.name, kind: "jugador" as const, value: HP[p.id][key], sub: p.club }] : []));
 
 export const THEMES: Theme[] = [
-  { id: "valor", kind: "jugador", label: "Valor de mercado actual", fmt: (v) => `≈ ${v} M€`, ask: "¿Vale más o menos?", more: "Vale más", less: "Vale menos", approx: true,
+  { id: "valor", kind: "jugador", label: "Valor de mercado actual", fmt: (v) => `≈ ${v} M€`, ask: "¿{b} vale más o menos que {a}?", more: "Vale más", less: "Vale menos", approx: true,
     items: () => PL.flatMap((p) => (VAL[p.id] ? [{ id: p.id, name: p.name, kind: "jugador" as const, value: VAL[p.id][0], sub: p.club }] : [])) },
-  { id: "valormax", kind: "jugador", label: "Valor de mercado máximo de su carrera", fmt: (v) => `≈ ${v} M€`, ask: "¿Llegó a valer más o menos?", more: "Más", less: "Menos", approx: true,
+  { id: "valormax", kind: "jugador", label: "Valor de mercado máximo de su carrera", fmt: (v) => `≈ ${v} M€`, ask: "¿{b} llegó a valer más o menos que {a}?", more: "Más", less: "Menos", approx: true,
     items: () => PL.flatMap((p) => (VAL[p.id] ? [{ id: p.id, name: p.name, kind: "jugador" as const, value: VAL[p.id][1], sub: p.club }] : [])) },
-  { id: "edad", kind: "jugador", label: "Edad", fmt: (v) => `${v} años`, ask: "¿Es más grande o más joven?", more: "Más grande", less: "Más joven",
+  { id: "edad", kind: "jugador", label: "Edad", fmt: (v) => `${v} años`, ask: "¿{b} es más grande o más joven que {a}?", more: "Más grande", less: "Más joven",
     items: (d) => PL.map((p) => ({ id: p.id, name: p.name, kind: "jugador" as const, value: ageOn(p.birthDate, d), sub: p.club })) },
-  { id: "altura", kind: "jugador", label: "Altura", fmt: (v) => `${(v / 100).toFixed(2).replace(".", ",")} m`, ask: "¿Es más alto o más bajo?", more: "Más alto", less: "Más bajo", items: fromPlayers("altura") },
-  { id: "partidos", kind: "jugador", label: "Partidos con su selección", fmt: (v) => `${v} partidos`, ask: "¿Jugó más o menos partidos con su selección?", more: "Más", less: "Menos", items: fromPlayers("partidosSeleccion") },
-  { id: "goles", kind: "jugador", label: "Goles con su selección", fmt: (v) => `${v} goles`, ask: "¿Hizo más o menos goles con su selección?", more: "Más", less: "Menos", items: fromPlayers("golesSeleccion") },
-  { id: "clubes", kind: "jugador", label: "Clubes en su carrera", fmt: (v) => `${v} clubes`, ask: "¿Pasó por más o menos clubes?", more: "Más", less: "Menos", items: fromPlayers("clubes") },
-  { id: "fundacion", kind: "club", label: "Año de fundación", fmt: (v) => String(v), ask: "¿Se fundó antes o después?", more: "Después", less: "Antes",
+  { id: "altura", kind: "jugador", label: "Altura", fmt: (v) => `${(v / 100).toFixed(2).replace(".", ",")} m`, ask: "¿{b} es más alto o más bajo que {a}?", more: "Más alto", less: "Más bajo", items: fromPlayers("altura") },
+  { id: "partidos", kind: "jugador", label: "Partidos con su selección", fmt: (v) => `${v} partidos`, ask: "¿{b} jugó más o menos partidos con su selección que {a}?", more: "Más", less: "Menos", items: fromPlayers("partidosSeleccion") },
+  { id: "goles", kind: "jugador", label: "Goles con su selección", fmt: (v) => `${v} goles`, ask: "¿{b} hizo más o menos goles con su selección que {a}?", more: "Más", less: "Menos", items: fromPlayers("golesSeleccion") },
+  { id: "clubes", kind: "jugador", label: "Clubes en su carrera", fmt: (v) => `${v} clubes`, ask: "¿{b} pasó por más o menos clubes que {a}?", more: "Más", less: "Menos", items: fromPlayers("clubes") },
+  { id: "fundacion", kind: "club", label: "Año de fundación", fmt: (v) => String(v), ask: "¿{b} se fundó antes o después que {a}?", more: "Después", less: "Antes",
     items: () => Object.entries(HC).flatMap(([n, c]) => (c.fundacion ? [{ id: n, name: n, kind: "club" as const, value: c.fundacion, sub: "Fundación" }] : [])) },
-  { id: "estadio", kind: "club", label: "Capacidad de su estadio", fmt: (v) => v.toLocaleString("es-AR"), ask: "¿Su estadio tiene más o menos capacidad?", more: "Más", less: "Menos",
+  { id: "estadio", kind: "club", label: "Capacidad de su estadio", fmt: (v) => v.toLocaleString("es-AR"), ask: "¿El estadio de {b} tiene más o menos capacidad que el de {a}?", more: "Más", less: "Menos",
     items: () => Object.entries(HC).flatMap(([n, c]) => (c.capacidad ? [{ id: n, name: n, kind: "club" as const, value: c.capacidad, sub: c.estadio ?? "Estadio" }] : [])) },
 ];
 export const usableThemes = (today: Date) => THEMES.filter((t) => t.items(today).length >= 12);

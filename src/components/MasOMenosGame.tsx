@@ -23,9 +23,10 @@ function Face({ item }: { item: HolItem }) {
   return <span className="mm-crest"><Crest club={item.kind === "club" ? item.name : item.sub} size={64} /></span>;
 }
 
-function Card({ item, value, hidden, result }: { item: HolItem; value: string; hidden?: boolean; result?: "ok" | "bad" | null }) {
+function Card({ item, value, hidden, result, tag }: { item: HolItem; value: string; hidden?: boolean; result?: "ok" | "bad" | null; tag: string }) {
   return (
     <div className={`mm-card ${result ? `mm-${result}` : ""}`}>
+      <span className="mm-tag">{tag}</span>
       <Face item={item} />
       <div className="mm-info">
         <span className="mm-name">{item.name}</span>
@@ -35,6 +36,9 @@ function Card({ item, value, hidden, result }: { item: HolItem; value: string; h
     </div>
   );
 }
+
+/** Apellido (o nombre corto) para los botones. */
+const short = (n: string) => (n.split(" ").length > 1 && n.length > 12 ? n.split(" ").slice(-1)[0] : n);
 
 /** Una partida (diaria o libre) sobre una lista de rondas. */
 function Board({ rounds, answers, onAnswer, done }: { rounds: Round[]; answers: string[]; onAnswer: (a: "up" | "down") => void; done: boolean }) {
@@ -56,15 +60,15 @@ function Board({ rounds, answers, onAnswer, done }: { rounds: Round[]; answers: 
   return (
     <div className="mm-board">
       <p className="mm-theme"><b>{themeOf(shownRound.theme).label}</b>{themeOf(shownRound.theme).approx && <span className="muted small"> · valores aproximados</span>}</p>
-      <Card item={shownRound.a} value={th.fmt(shownRound.a.value)} />
+      <Card item={shownRound.a} value={themeOf(shownRound.theme).fmt(shownRound.a.value)} tag="📌 Referencia" />
       <div className="mm-vs">VS</div>
-      <Card item={shownRound.b} value={themeOf(shownRound.theme).fmt(shownRound.b.value)} hidden={!reveal && !done} result={done && lastWrong ? "bad" : reveal} />
+      <Card item={shownRound.b} value={themeOf(shownRound.theme).fmt(shownRound.b.value)} hidden={!reveal && !done} result={done && lastWrong ? "bad" : reveal} tag={`¿Más o menos que ${short(shownRound.a.name)}?`} />
       {!done && (
         <>
-          <p className="mm-ask">{th.ask}</p>
+          <p className="mm-ask">{th.ask.replace("{a}", r.a.name).replace("{b}", r.b.name)}</p>
           <div className="mm-buttons">
-            <button className="btn btn-primary" disabled={!!reveal} onClick={() => pick("up")}>▲ {th.more}</button>
-            <button className="btn" disabled={!!reveal} onClick={() => pick("down")}>▼ {th.less}</button>
+            <button className="btn btn-primary" disabled={!!reveal} onClick={() => pick("up")}>▲ {th.more} que {short(r.a.name)}</button>
+            <button className="btn" disabled={!!reveal} onClick={() => pick("down")}>▼ {th.less} que {short(r.a.name)}</button>
           </div>
         </>
       )}
@@ -168,8 +172,8 @@ export function MasOMenosGame({ day }: { day?: number }) {
         open={g.showHelp}
         onClose={() => g.setShowHelp(false)}
         steps={[
-          <>Arriba ves un jugador o club <b>con su dato</b> (valor, edad, goles, estadio…).</>,
-          <>Decidí si el de abajo tiene <b>más o menos</b>.</>,
+          <>Arriba está la <b>referencia</b>, con su dato a la vista (valor, edad, goles, estadio…).</>,
+          <>Decidí si el de <b>abajo</b> tiene <b>más o menos que el de arriba</b>.</>,
           <>Si acertás, sigue la racha. Un error y se termina. La temática cambia cada 4 rondas.</>,
         ]}
       />

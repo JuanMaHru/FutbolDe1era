@@ -852,3 +852,45 @@ a.mode .mode-cta { color: var(--accent); }
 .stk-q { font-family: var(--display); font-size: 40px; font-weight: 900; }
 .stk.fresh { animation: tile .7s cubic-bezier(.2,1.6,.4,1) both; }
 .cl-clues { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin: 12px 0; } .cl-kit { display: flex; align-items: center; gap: 6px; } .cl-answer { display: inline-flex; align-items: center; gap: 6px; }
+
+/* Álbum v2: rarezas, pila para pegar, animación de pegado */
+.album-rar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; font-size: 12px; font-weight: 700; }
+.album-rar .r-esp { color: #f5c542; } .album-rar .r-ley { color: #e9b8ff; }
+.stk { cursor: default; }
+.stk-tag { position: absolute; top: 4px; right: 4px; z-index: 1; font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: .04em; padding: 1px 5px; border-radius: 6px; }
+.stk-especial { border-color: #f5c542; background: linear-gradient(160deg, #fff6cf, #f5c542 55%, #b9851c); }
+.stk-especial .stk-tag { background: #0B1D3A; color: #f5c542; }
+.stk-especial::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.55) 45%, transparent 60%); background-size: 250% 100%; animation: foil 3.2s linear infinite; pointer-events: none; mix-blend-mode: soft-light; }
+@keyframes foil { from { background-position: 150% 0; } to { background-position: -100% 0; } }
+.stk-leyenda { border-color: #c9a227; background: linear-gradient(160deg, #3b2a55, #1a1230); color: #f4e9c8; }
+.stk-leyenda img { filter: sepia(.35) contrast(1.05); }
+.stk-leyenda .stk-tag { background: #c9a227; color: #1a1230; }
+.stk-leyenda .stk-credit { color: #c8b9e0; }
+.stk-leyenda figcaption b { color: #f5c542; }
+.album-page { margin: 18px 0; padding: 12px; border-radius: 16px; background: linear-gradient(180deg, var(--surface), var(--bg-2)); border: 1px solid var(--line); }
+.album-page-title { margin: 0 0 10px; font-family: var(--display); font-style: italic; text-transform: uppercase; font-size: 22px; }
+.slot-wrap { min-width: 0; }
+.stk.missing { width: 100%; font: inherit; cursor: default; gap: 4px; padding: 8px; text-align: center; }
+.stk.missing .stk-q { font-size: 30px; opacity: .35; }
+.slot-name { font-size: 11px; font-weight: 700; color: var(--muted); overflow-wrap: anywhere; }
+.slot-especial { border-color: rgba(245,197,66,0.5); } .slot-leyenda { border-color: rgba(201,162,39,0.6); }
+.stk.missing.can { cursor: pointer; border: 2px solid var(--accent); border-style: solid; background: color-mix(in srgb, var(--accent) 14%, var(--surface)); animation: pulse 1.4s ease-in-out infinite; }
+.slot-hint { font-size: 10px; font-weight: 900; color: var(--accent); }
+.slot-wrap.just .stk { animation: stick .8s cubic-bezier(.2,1.5,.4,1) both; }
+@keyframes stick { 0% { transform: scale(1.18) rotate(-4deg); box-shadow: 0 18px 30px rgba(0,0,0,.5); } 55% { transform: scale(.96) rotate(1deg); } 100% { transform: none; } }
+.tray { margin-top: 12px; }
+.tray-row { display: flex; gap: 10px; overflow-x: auto; padding: 6px 2px 10px; scroll-snap-type: x mandatory; }
+.tray-item { flex: 0 0 110px; padding: 0; border: 0; background: none; cursor: pointer; scroll-snap-align: start; transition: transform .15s; }
+.tray-item:hover:not(:disabled) { transform: translateY(-4px) rotate(-2deg); }
+.tray-item .stk { box-shadow: 0 8px 16px rgba(0,0,0,.45); }
+.tray-item .lifting { opacity: .15; }
+.fly { position: fixed; z-index: 200; pointer-events: none; transform-origin: top left; }
+.fly .stk { box-shadow: 0 20px 36px rgba(0,0,0,.55); }
+.pack-open { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; perspective: 800px; }
+.pack-card { position: relative; transform-style: preserve-3d; transition: transform .6s cubic-bezier(.3,.1,.2,1); transform: rotateY(180deg); min-height: 150px; }
+.pack-card.shown { transform: rotateY(0); }
+.pack-card .pack-front { backface-visibility: hidden; }
+.pack-back { position: absolute; inset: 0; border-radius: 12px; display: grid; place-items: center; backface-visibility: hidden; transform: rotateY(180deg); background: repeating-linear-gradient(45deg, #0B1D3A 0 10px, #12305e 10px 20px); color: #22D169; font-family: var(--display); font-style: italic; font-weight: 900; font-size: 30px; border: 3px solid #22D169; }
+.mm-card { position: relative; padding-top: 22px; }
+.mm-tag { position: absolute; top: 6px; left: 12px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.mm-buttons .btn { white-space: normal; line-height: 1.15; }
