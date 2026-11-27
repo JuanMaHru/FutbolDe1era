@@ -81,7 +81,7 @@ export function Header() {
               ))}
             </div>
             <button className="theme-btn" onClick={() => { play("click"); setThemeOpen(true); }} aria-label="Elegir colores de tu club" title="Tus colores">
-              {theme === DEFAULT_THEME ? <span className="swatch" style={{ width: 20, height: 20, "--a": "var(--accent)", "--b": "var(--bg)" } as React.CSSProperties} /> : <Crest club={theme} size={22} real={false} />}
+              {theme === DEFAULT_THEME ? <span className="swatch" style={{ width: 20, height: 20, "--a": "var(--accent)", "--b": "var(--bg)" } as React.CSSProperties} /> : <Crest club={theme} size={22} />}
               <span>Colores</span>
             </button>
             <button

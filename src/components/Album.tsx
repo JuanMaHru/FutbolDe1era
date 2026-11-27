@@ -18,7 +18,7 @@ function Face({ s, className = "", style, onClick }: { s: Sticker; className?: s
       {ph && !bad ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={ph.url} alt={s.name} loading="lazy" referrerPolicy="no-referrer" onError={() => setBad(true)} />
-      ) : <span className="stk-crest"><Crest club={s.club} size={48} real={false} /></span>}
+      ) : <span className="stk-crest"><Crest club={s.club} size={48} /></span>}
       <figcaption>
         <b>{s.name}</b>
         <span>{COUNTRIES[s.nationality]?.flag} {s.note ?? s.club}</span>

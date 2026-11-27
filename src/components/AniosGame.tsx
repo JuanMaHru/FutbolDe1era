@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { dailyMoments, MAX_YEAR, MIN_YEAR, PER_DAY, scoreYear } from "@/lib/game/anios";
 import { dayNumber } from "@/lib/game/daily";
 import { dailyMeta } from "@/lib/game/daily-games";
@@ -7,6 +7,8 @@ import { play } from "@/lib/sound";
 import { Confetti } from "./Confetti";
 import { GameTop, HelpDialog, ResultCard, fmtKey } from "./GameParts";
 import { useDailyGame } from "./useDailyGame";
+import { RoundTimer, useLevel, useRoundClock } from "./Difficulty";
+import { levelSeed } from "@/lib/difficulty";
 
 interface AState { done: boolean; won: boolean; guesses: string[]; summary?: string }
 const MAXPTS = PER_DAY * 5;
@@ -17,7 +19,11 @@ export function AniosGame({ day }: { day?: number }) {
   const [year, setYear] = useState(2000);
   const [shown, setShown] = useState<number | null>(null); // índice cuya respuesta se está mostrando
   const [confetti, setConfetti] = useState(0);
-  const moments = useMemo(() => (g.key ? dailyMoments(dayNumber(g.key) * 41 + 9) : []), [g.key]);
+  const lv = useLevel("anios", g.key, g.state, () => {});
+  const moments = useMemo(() => (g.key && lv.diff.chosen ? dailyMoments(levelSeed(dayNumber(g.key) * 41 + 9, lv.diff.level)) : []), [g.key, lv.diff.level, lv.diff.chosen]);
+  const timeoutRef = useRef<() => void>(() => {});
+  const left = useRoundClock(lv.diff.cfg.perRound, `${g.state?.guesses.length}`, !!g.state && !g.state.done && shown === null && lv.diff.chosen, () => timeoutRef.current());
+  if (lv.gate) return lv.gate;
   if (!g.state || !g.key || !moments.length) return <div className="card muted" style={{ marginTop: 24 }}>Cargando el reto…</div>;
   const s = g.state;
   const total = s.guesses.reduce((a, y, k) => a + scoreYear(Number(y), moments[k].year), 0);
@@ -32,6 +38,8 @@ export function AniosGame({ day }: { day?: number }) {
     g.save({ ...s, guesses });
     setShown(guesses.length - 1);
   };
+  // Si se acaba el tiempo, se confirma el año que quedó marcado.
+  timeoutRef.current = () => confirm();
   const next = () => {
     const guesses = s.guesses;
     setShown(null);
@@ -40,7 +48,7 @@ export function AniosGame({ day }: { day?: number }) {
       const won = t >= 12;
       g.save({ ...s, done: true, won, summary: `${t}/${MAXPTS}` });
       if (t >= 20) { play("win"); setConfetti((n) => n + 1); } else play(won ? "win" : "lose");
-      g.finish(won, Math.max(1, Math.min(meta.max, Math.ceil((MAXPTS - t) / 4) + 1)), Math.round(t / 2.5));
+      g.finish(won, Math.max(1, Math.min(meta.max, Math.ceil((MAXPTS - t) / 4) + 1)), Math.round((t / 2.5) * lv.diff.mult));
     }
   };
   const bar = (y: string, j: number) => { const p = scoreYear(Number(y), moments[j].year); return p === 5 ? "🟩" : p >= 2 ? "🟨" : p === 1 ? "🟧" : "🟥"; };
@@ -49,7 +57,7 @@ export function AniosGame({ day }: { day?: number }) {
   return (
     <>
       <Confetti fire={confetti} />
-      <GameTop title="¿En qué año?" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={<span className="tag">{total} pts</span>} />
+      <GameTop title="¿En qué año?" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={<><span className="tag">{total} pts</span>{lv.badge}</>} />
       {!s.done && (
         <section className="card yr-card">
           <p className="muted small" style={{ margin: 0 }}>Momento {Math.min(k + 1, moments.length)} de {moments.length}</p>
@@ -62,6 +70,7 @@ export function AniosGame({ day }: { day?: number }) {
                 <button className="btn" onClick={() => setYear((y) => Math.min(MAX_YEAR, y + 1))} aria-label="Un año más">+</button>
               </div>
               <input className="yr-range" type="range" min={MIN_YEAR} max={MAX_YEAR} value={year} onChange={(e) => setYear(Number(e.target.value))} aria-label="Año" />
+              {lv.diff.cfg.perRound ? <RoundTimer left={left} total={lv.diff.cfg.perRound} /> : null}
               <button className="btn btn-primary big-cta" onClick={confirm}>Confirmar {year}</button>
             </>
           ) : (
@@ -85,7 +94,7 @@ export function AniosGame({ day }: { day?: number }) {
             title={total >= 20 ? "¡Memoria de hierro! 📚" : s.won ? "¡Bien ahí! 📅" : "A repasar la historia 😅"}
             subtitle={<><b style={{ color: "var(--chalk)" }}>{total}</b> de {MAXPTS} puntos</>}
             mode={g.mode}
-            pts={Math.round(total / 2.5)}
+            pts={Math.round((total / 2.5) * lv.diff.mult)}
             repGain={g.repGain}
             streak={g.stats?.streak}
             shareTitle={`${meta.title} ${total}/${MAXPTS}`}

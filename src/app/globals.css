@@ -920,3 +920,18 @@ body[data-swipe="left"] main { animation: swipeL .32s ease-out; }
 body[data-swipe="right"] main { animation: swipeR .32s ease-out; }
 @keyframes swipeL { from { transform: translateX(40px); opacity: .3; } to { transform: none; opacity: 1; } }
 @keyframes swipeR { from { transform: translateX(-40px); opacity: .3; } to { transform: none; opacity: 1; } }
+
+/* Niveles */
+.diff-pick { margin-top: 12px; }
+.diff-options { display: grid; gap: 8px; }
+.diff-opt { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; text-align: left; padding: 12px 14px; border-radius: 14px; border: 2px solid var(--line); background: var(--surface); color: var(--chalk); font: inherit; cursor: pointer; }
+.diff-opt:hover { border-color: var(--accent); }
+.diff-opt.pref { border-color: color-mix(in srgb, var(--accent) 60%, var(--line)); }
+.diff-name { font-family: var(--display); font-style: italic; font-weight: 900; font-size: 22px; text-transform: uppercase; }
+.diff-desc { grid-column: 1 / -1; color: var(--muted); font-size: 13px; }
+.diff-mult { grid-row: 1; grid-column: 2; align-self: center; font-weight: 800; font-size: 13px; color: var(--accent); }
+.tag.clock { font-variant-numeric: tabular-nums; }
+.tag.clock.urgent { background: var(--danger); color: #fff; animation: pulse 1s infinite; }
+.round-timer { height: 6px; border-radius: 999px; background: var(--surface-2); overflow: hidden; margin: 6px 0; }
+.round-timer span { display: block; height: 100%; background: var(--accent); transition: width .25s linear; }
+.round-timer.urgent span { background: var(--danger); }

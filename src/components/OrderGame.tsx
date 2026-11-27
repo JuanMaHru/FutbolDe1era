@@ -11,9 +11,10 @@ import { Crest } from "./art/Crest";
 import { Confetti } from "./Confetti";
 import { GameTop, HelpDialog, ResultCard, fmtKey } from "./GameParts";
 import { useDailyGame } from "./useDailyGame";
+import { useLevel } from "./Difficulty";
+import { levelSeed, poolFor } from "@/lib/difficulty";
 
 /** Errores permitidos antes de perder. */
-const LIVES = 3;
 interface OState { done: boolean; won: boolean; guesses: string[]; summary?: string; taps: string[] }
 
 /**
@@ -24,12 +25,20 @@ export function OrderGame({ day }: { day?: number }) {
   const meta = dailyMeta("traydt");
   const pool = useMemo(() => careersOf("dt").filter((c) => c.career.length >= 3), []);
   const g = useDailyGame<OState>("traydt", day, () => ({ done: false, won: false, guesses: [], taps: [] }));
-  const [confetti, setConfetti] = useState(0);
+
+  const lv = useLevel("traydt", g.key, g.state as never, () => {
+    if (!g.state || g.state.done) return;
+    g.save({ ...g.state, done: true, won: false, summary: "⏱ X" });
+    g.finish(false, meta.max, 0);
+    play("lose");
+  });  const [confetti, setConfetti] = useState(0);
   const [bad, setBad] = useState<number | null>(null);
 
   if (!g.state || !g.key) return <div className="card muted" style={{ marginTop: 24 }}>Cargando el reto…</div>;
+  if (lv.gate) return lv.gate;
 
-  const target = pickDaily(pool, 9173, g.key);
+  const LIVES = lv.diff.cfg.tries || 3;
+  const target = pickDaily(poolFor(pool, lv.diff.level), levelSeed(9173, lv.diff.level), g.key);
   const steps = sortedCareer(target);
   const s = g.state;
   // Fichas mezcladas (estables por día). Cada ficha es un índice en `steps`.
@@ -55,7 +64,7 @@ export function OrderGame({ day }: { day?: number }) {
     if (won) setConfetti((n) => n + 1);
     else if (done) setTimeout(() => play("lose"), 200);
     g.save({ ...s, taps, done, won, guesses: taps, summary: done ? (won ? `${newErrors} errores` : "X") : undefined });
-    if (done) g.finish(won, Math.min(newErrors + 1, meta.max), won ? points(true, newErrors + 1) : 0);
+    if (done) g.finish(won, Math.min(newErrors + 1, meta.max), won ? Math.round(points(true, newErrors + 1) * lv.diff.mult) : 0);
   };
 
   const tileUsed = (i: number) => okTiles.includes(i) || s.done;
@@ -64,7 +73,7 @@ export function OrderGame({ day }: { day?: number }) {
   return (
     <>
       <Confetti fire={confetti} />
-      <GameTop title="Trayectoria DT" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} />
+      <GameTop title="Trayectoria DT" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={lv.badge} />
 
       <div className="order-head card">
         {photo && (
@@ -119,7 +128,7 @@ export function OrderGame({ day }: { day?: number }) {
           title={s.won ? (errors === 0 ? "¡Perfecto! 🎯" : "¡Ordenada! 📋") : "Se te mezcló 😮‍💨"}
           subtitle={<><b style={{ color: "var(--chalk)" }}>{target.name}</b> · {steps.length} equipos · {errors} {errors === 1 ? "error" : "errores"}</>}
           mode={g.mode}
-          pts={s.won ? points(true, errors + 1) : 0}
+          pts={s.won ? Math.round(points(true, errors + 1) * lv.diff.mult) : 0}
           repGain={g.repGain}
           streak={g.stats?.streak}
           shareTitle={`${meta.title} ${s.won ? `${errors} err.` : "X"}`}

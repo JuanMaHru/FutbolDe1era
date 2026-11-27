@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { CLUB_OPTIONS, CLUB_TARGETS, MAX } from "@/lib/game/club";
+import { CLUB_OPTIONS, CLUB_TARGETS } from "@/lib/game/club";
+import { clubInfo } from "@/lib/career/world";
 import { pickDaily } from "@/lib/game/daily";
 import { dailyMeta } from "@/lib/game/daily-games";
 import { points } from "@/lib/game/scoring";
@@ -12,16 +13,28 @@ import { Confetti } from "./Confetti";
 import { GameTop, HelpDialog, ResultCard, fmtKey } from "./GameParts";
 import { GuessInput } from "./GuessInput";
 import { useDailyGame } from "./useDailyGame";
+import { useLevel } from "./Difficulty";
+import { levelSeed, poolFor } from "@/lib/difficulty";
 
 interface CState { done: boolean; won: boolean; guesses: string[]; summary?: string }
 
 export function ClubGame({ day }: { day?: number }) {
   const meta = dailyMeta("club");
   const g = useDailyGame<CState>("club", day, () => ({ done: false, won: false, guesses: [] }));
+  const lv = useLevel("club", g.key, g.state as never, () => {
+    if (!g.state || g.state.done) return;
+    g.save({ ...g.state, done: true, won: false, summary: "⏱ X" });
+    g.finish(false, meta.max, 0);
+    play("lose");
+  });
   const [confetti, setConfetti] = useState(0);
   if (!g.state || !g.key) return <div className="card muted" style={{ marginTop: 24 }}>Cargando el reto…</div>;
+  if (lv.gate) return lv.gate;
   const s = g.state;
-  const t = pickDaily(CLUB_TARGETS, 6061, g.key);
+  const MAX = lv.diff.cfg.tries || 6;
+  // Fácil y medio: clubes grandes; difícil: todos.
+  const clubPool = lv.diff.level === "dificil" ? CLUB_TARGETS : CLUB_TARGETS.filter((c) => clubInfo(c.name).strength >= (lv.diff.level === "facil" ? 78 : 70));
+  const t = pickDaily(clubPool.length >= 15 ? clubPool : CLUB_TARGETS, levelSeed(6061, lv.diff.level), g.key);
   const wrong = s.guesses.filter((x) => x !== t.id).length;
   const clues: { label: string; value: React.ReactNode }[] = [
     { label: "Colores", value: <span className="cl-kit"><Kit club={t.name} label="" size={56} /> <span className="muted small">{clubStyle(t.name).pattern === "plain" ? "lisa" : "con diseño"}</span></span> },
@@ -40,14 +53,14 @@ export function ClubGame({ day }: { day?: number }) {
     const done = won || guesses.length >= MAX;
     g.save({ guesses, won, done, summary: done ? `${won ? guesses.length : "X"}/${MAX}` : undefined });
     if (won) { play("win"); setConfetti((n) => n + 1); } else play(done ? "lose" : "near");
-    if (done) g.finish(won, guesses.length, points(won, guesses.length));
+    if (done) g.finish(won, guesses.length, Math.round(points(won, guesses.length) * lv.diff.mult));
   };
   const shareBody = s.guesses.map((x) => (x === t.id ? "✅" : "🟥")).join("") + `\n🏟️ ${open} pistas`;
 
   return (
     <>
       <Confetti fire={confetti} />
-      <GameTop title="¿De qué club es?" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={<span className="tag">{s.guesses.length}/{MAX}</span>} />
+      <GameTop title="¿De qué club es?" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={<><span className="tag">{s.guesses.length}/{MAX}</span>{lv.badge}</>} />
       <div className="cl-clues">
         {clues.map((c, i) => (
           <div key={c.label} className={`hint ${i < open ? "open" : ""}`}>
@@ -62,7 +75,7 @@ export function ClubGame({ day }: { day?: number }) {
           title={s.won ? (s.guesses.length === 1 ? "¡De primera! 🎯" : "¡Ese es! 🏟️") : "Era otro 😮‍💨"}
           subtitle={<span className="cl-answer"><Crest club={t.name} size={28} /> <b style={{ color: "var(--chalk)" }}>{t.name}</b>{t.capacidad ? ` · ${t.capacidad.toLocaleString("es-AR")} lugares` : ""}</span>}
           mode={g.mode}
-          pts={points(s.won, s.guesses.length)}
+          pts={Math.round(points(s.won, s.guesses.length) * lv.diff.mult)}
           repGain={g.repGain}
           streak={g.stats?.streak}
           shareTitle={`${meta.title} ${s.won ? s.guesses.length : "X"}/${MAX}`}

@@ -1,15 +1,17 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { buildRounds, MAX_ROUNDS, themeOf, usableThemes, type HolItem, type Round } from "@/lib/game/masomenos";
 import { dayNumber, keyToDate } from "@/lib/game/daily";
 import { dailyMeta } from "@/lib/game/daily-games";
 import { photoOf } from "@/lib/game/bios";
+import { levelSeed } from "@/lib/difficulty";
 import { read, write } from "@/lib/storage";
 import { play } from "@/lib/sound";
 import { Crest } from "./art/Crest";
 import { Confetti } from "./Confetti";
 import { GameTop, HelpDialog, ResultCard, fmtKey } from "./GameParts";
 import { useDailyGame } from "./useDailyGame";
+import { RoundTimer, useLevel, useRoundClock } from "./Difficulty";
 
 interface MState { done: boolean; won: boolean; guesses: string[]; summary?: string }
 const ptsOf = (streak: number) => Math.min(10, Math.ceil(streak / 2));
@@ -41,10 +43,13 @@ function Card({ item, value, hidden, result, tag }: { item: HolItem; value: stri
 const short = (n: string) => (n.split(" ").length > 1 && n.length > 12 ? n.split(" ").slice(-1)[0] : n);
 
 /** Una partida (diaria o libre) sobre una lista de rondas. */
-function Board({ rounds, answers, onAnswer, done }: { rounds: Round[]; answers: string[]; onAnswer: (a: "up" | "down") => void; done: boolean }) {
+function Board({ rounds, answers, onAnswer, done, seconds }: { rounds: Round[]; answers: string[]; onAnswer: (a: "up" | "down") => void; done: boolean; seconds?: number }) {
   const i = Math.min(answers.length, rounds.length - 1);
   const r = rounds[i];
   const [reveal, setReveal] = useState<null | "ok" | "bad">(null);
+  const timeoutRef = useRef<() => void>(() => {});
+  // Reloj por jugada (medio y difícil): si se acaba, cuenta como error.
+  const left = useRoundClock(seconds, `${answers.length}`, !done && !reveal && !!r, () => timeoutRef.current());
   if (!r) return null;
   const th = themeOf(r.theme);
   const correct: "up" | "down" = r.b.value > r.a.value ? "up" : "down";
@@ -55,6 +60,8 @@ function Board({ rounds, answers, onAnswer, done }: { rounds: Round[]; answers: 
     setReveal(ok ? "ok" : "bad");
     setTimeout(() => { setReveal(null); onAnswer(a); }, ok ? 1100 : 1500);
   };
+  timeoutRef.current = () => pick(correct === "up" ? "down" : "up");
+
   const lastWrong = done && answers.length > 0 && answers.length <= rounds.length && answers[answers.length - 1] !== (rounds[answers.length - 1].b.value > rounds[answers.length - 1].a.value ? "up" : "down");
   const shownRound = done && lastWrong ? rounds[answers.length - 1] : r;
   return (
@@ -65,6 +72,7 @@ function Board({ rounds, answers, onAnswer, done }: { rounds: Round[]; answers: 
       <Card item={shownRound.b} value={themeOf(shownRound.theme).fmt(shownRound.b.value)} hidden={!reveal && !done} result={done && lastWrong ? "bad" : reveal} tag={`¿Más o menos que ${short(shownRound.a.name)}?`} />
       {!done && (
         <>
+          {seconds ? <RoundTimer left={left} total={seconds} /> : null}
           <p className="mm-ask">{th.ask.replace("{a}", r.a.name).replace("{b}", r.b.name)}</p>
           <div className="mm-buttons">
             <button className="btn btn-primary" disabled={!!reveal} onClick={() => pick("up")}>▲ {th.more} que {short(r.a.name)}</button>
@@ -85,9 +93,11 @@ export function MasOMenosGame({ day }: { day?: number }) {
   useEffect(() => setBest(read<Record<string, number>>("masomenos:best", {})), []);
 
   const date = g.key ? keyToDate(g.key) : new Date();
-  const rounds = useMemo(() => (g.key ? buildRounds(dayNumber(g.key) * 97 + 13, date) : []), [g.key]); // eslint-disable-line react-hooks/exhaustive-deps
+  const lv = useLevel("masomenos", g.key, g.state, () => {});
+  const rounds = useMemo(() => (g.key && lv.diff.chosen ? buildRounds(levelSeed(dayNumber(g.key) * 97 + 13, lv.diff.level), date, undefined, lv.diff.level) : []), [g.key, lv.diff.level, lv.diff.chosen]); // eslint-disable-line react-hooks/exhaustive-deps
   const freeRounds = useMemo(() => (free ? buildRounds(free.seed, new Date(), free.theme) : []), [free?.seed, free?.theme]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  if (lv.gate) return lv.gate;
   if (!g.state || !g.key || !rounds.length) return <div className="card muted" style={{ marginTop: 24 }}>Cargando el reto…</div>;
   const s = g.state;
   const isRight = (rs: Round[], a: string, k: number) => a === (rs[k].b.value > rs[k].a.value ? "up" : "down");
@@ -102,7 +112,7 @@ export function MasOMenosGame({ day }: { day?: number }) {
     g.save({ guesses, done, won, summary: done ? `${st} seguidas` : undefined });
     if (done) {
       if (st >= 10) { play("win"); setConfetti((n) => n + 1); } else play(won ? "win" : "lose");
-      g.finish(won, Math.max(1, Math.min(meta.max, MAX_ROUNDS - st)), ptsOf(st));
+      g.finish(won, Math.max(1, Math.min(meta.max, MAX_ROUNDS - st)), Math.round(ptsOf(st) * lv.diff.mult));
     }
   };
 
@@ -122,18 +132,18 @@ export function MasOMenosGame({ day }: { day?: number }) {
   return (
     <>
       <Confetti fire={confetti} />
-      <GameTop title="Más o Menos" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={<span className="tag">🔥 {streak}</span>} />
+      <GameTop title="Más o Menos" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={<><span className="tag">🔥 {streak}</span>{lv.badge}</>} />
 
       {!free && (
         <>
-          <Board rounds={rounds} answers={s.guesses} onAnswer={answer} done={s.done} />
+          <Board rounds={rounds} answers={s.guesses} onAnswer={answer} done={s.done} seconds={lv.diff.cfg.perRound} />
           {s.done && (
             <ResultCard
               won={s.won}
               title={streak >= MAX_ROUNDS ? "¡Perfecto! 🏆" : streak >= 10 ? "¡Enciclopedia! 📚" : streak >= 5 ? "¡Bien ahí! ⚖️" : "Te la jugaste 😮‍💨"}
               subtitle={<><b style={{ color: "var(--chalk)" }}>{streak}</b> seguidas de {rounds.length}</>}
               mode={g.mode}
-              pts={ptsOf(streak)}
+              pts={Math.round(ptsOf(streak) * lv.diff.mult)}
               repGain={g.repGain}
               streak={g.stats?.streak}
               shareTitle={`${meta.title}: ${streak} seguidas`}

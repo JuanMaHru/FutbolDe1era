@@ -13,8 +13,9 @@ import { Confetti } from "./Confetti";
 import { GameTop, HelpDialog, ResultCard, fmtKey } from "./GameParts";
 import { GuessInput } from "./GuessInput";
 import { useDailyGame } from "./useDailyGame";
+import { useLevel } from "./Difficulty";
+import { levelSeed, poolFor } from "@/lib/difficulty";
 
-const MAX = 6;
 interface TState { done: boolean; won: boolean; guesses: string[]; summary?: string }
 
 export function TrayectoriaGame({ kind, day }: { kind: "jugador" | "dt"; day?: number }) {
@@ -22,12 +23,20 @@ export function TrayectoriaGame({ kind, day }: { kind: "jugador" | "dt"; day?: n
   const meta = dailyMeta(id);
   const pool = useMemo(() => careersOf(kind), [kind]);
   const g = useDailyGame<TState>(id, day, () => ({ done: false, won: false, guesses: [] }));
+  const lv = useLevel("tray", g.key, g.state, () => {
+    if (!g.state || g.state.done) return;
+    g.save({ ...g.state, done: true, won: false, summary: "⏱ X" });
+    g.finish(false, meta.max, 0);
+    play("lose");
+  });
   const [confetti, setConfetti] = useState(0);
   const [shake, setShake] = useState(false);
 
   if (!g.state || !g.key) return <div className="card muted" style={{ marginTop: 24 }}>Cargando el reto…</div>;
+  if (lv.gate) return lv.gate;
 
-  const target = pickDaily(pool, kind === "jugador" ? 7331 : 9173, g.key);
+  const MAX = lv.diff.cfg.tries || 6;
+  const target = pickDaily(poolFor(pool, lv.diff.level), levelSeed(kind === "jugador" ? 7331 : 9173, lv.diff.level), g.key);
   // Un día de cada tres, "al revés": arranca por el último club y hay que llegar antes de ver los inicios.
   const reverse = kind === "jugador" && dayNumber(g.key) % 3 === 0;
   const steps = reverse ? sortedCareer(target).reverse() : sortedCareer(target);
@@ -54,17 +63,17 @@ export function TrayectoriaGame({ kind, day }: { kind: "jugador" | "dt"; day?: n
       setShake(true);
       setTimeout(() => setShake(false), 450);
     }
-    if (done) g.finish(won, guesses.length, points(won, guesses.length));
+    if (done) g.finish(won, guesses.length, Math.round(points(won, guesses.length) * lv.diff.mult));
   };
 
   const used = new Set(s.guesses.map((gid) => CAREERS.find((c) => c.id === gid)?.name ?? ""));
-  const pts = points(s.won, s.guesses.length);
+  const pts = Math.round(points(s.won, s.guesses.length) * lv.diff.mult);
   const shareBody = (reverse ? "🔄 " : "") + s.guesses.map((x) => (x === target.id ? "✅" : "🟥")).join("") + (s.won ? "" : "") + `\n🏟️ ${shown}/${steps.length} clubes vistos`;
 
   return (
     <>
       <Confetti fire={confetti} />
-      <GameTop title={kind === "jugador" ? "Trayectoria" : "Trayectoria DT"} mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} />
+      <GameTop title={kind === "jugador" ? "Trayectoria" : "Trayectoria DT"} mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={lv.badge} />
 
       <div className="tries-bar">
         {Array.from({ length: MAX }, (_, i) => {

@@ -2,13 +2,15 @@
 import { PLAYERS } from "./games";
 import { COUNTRIES, POSITIONS } from "./meta";
 import { rng, shuffled } from "./daily";
+import { poolFor, type Level } from "../difficulty";
 import type { Player } from "./types";
 
 export interface Rule { id: string; label: string; test: (p: Player) => boolean }
 export interface IntrusoRound { rule: Rule; options: Player[]; intruder: string }
 export const ROUNDS = 5;
 
-const pool = PLAYERS.filter((p) => !p.check);
+const ALL = PLAYERS.filter((p) => !p.check);
+const pool = ALL;
 const ever = (p: Player) => new Set([...(p.clubs ?? []), p.club]);
 
 function rules(): Rule[] {
@@ -28,7 +30,8 @@ function rules(): Rule[] {
 const RULES = rules();
 
 /** Rondas del día. El intruso se parece a los otros (misma nacionalidad o liga) para que no sea obvio. */
-export function buildIntruso(seed: number): IntrusoRound[] {
+export function buildIntruso(seed: number, level: Level = "medio"): IntrusoRound[] {
+  const pool = poolFor(ALL, level);
   const r = rng(seed);
   const rounds: IntrusoRound[] = [];
   const typeCount = new Map<string, number>(); const used = new Set<string>();

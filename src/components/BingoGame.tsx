@@ -10,8 +10,9 @@ import { Kit } from "./art/Kit";
 import { Confetti } from "./Confetti";
 import { GameTop, HelpDialog, ResultCard, fmtKey, useToast } from "./GameParts";
 import { useDailyGame } from "./useDailyGame";
+import { useLevel } from "./Difficulty";
+import { levelSeed, poolFor } from "@/lib/difficulty";
 
-const MAX_STRIKES = 3;
 interface BState { done: boolean; won: boolean; placed: (string | null)[]; idx: number; strikes: number; summary?: string }
 const players = playerGame.items as Player[];
 const byId = new Map(players.map((p) => [p.id, p]));
@@ -24,6 +25,13 @@ const LINES = [
 export function BingoGame({ day }: { day?: number }) {
   const meta = dailyMeta("bingo");
   const g = useDailyGame<BState>("bingo", day, () => ({ done: false, won: false, placed: Array(BINGO_SIZE).fill(null), idx: 0, strikes: 0 }));
+  const lv = useLevel("bingo", g.key, g.state as never, () => {
+    if (!g.state || g.state.done) return;
+    g.save({ ...g.state, done: true, won: false, summary: "⏱ X" });
+    g.finish(false, meta.max, 0);
+    play("lose");
+  });
+  const MAX_STRIKES = lv.diff.cfg.tries || 3;
   const [flash, setFlash] = useState<{ i: number; ok: boolean } | null>(null);
   const [confetti, setConfetti] = useState(0);
   const toast = useToast();
@@ -31,6 +39,7 @@ export function BingoGame({ day }: { day?: number }) {
   const board = useMemo(() => (g.key ? buildBingo(players.filter((p) => !p.check), 777 + dayNumber(g.key) * 13, date) : null), [g.key]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!g.state || !board) return <div className="card muted" style={{ marginTop: 24 }}>Mezclando el bolillero…</div>;
+  if (lv.gate) return lv.gate;
   const s = g.state;
   const filled = s.placed.filter(Boolean).length;
   const current = s.idx < board.deck.length ? byId.get(board.deck[s.idx])! : null;
@@ -44,7 +53,7 @@ export function BingoGame({ day }: { day?: number }) {
     g.save({ placed, strikes, idx, won, done, summary: `${nFilled}/${BINGO_SIZE}` });
     if (won) setTimeout(() => { play("win"); setConfetti((n) => n + 1); }, 250);
     else if (done) setTimeout(() => play("lose"), 250);
-    if (done) g.finish(won, strikes + 1, won ? Math.max(10 - strikes * 2, 5) : Math.floor((nFilled / BINGO_SIZE) * 6));
+    if (done) g.finish(won, strikes + 1, Math.round((won ? Math.max(10 - strikes * 2, 5) : Math.floor((nFilled / BINGO_SIZE) * 6)) * lv.diff.mult));
   };
 
   const place = (i: number) => {
@@ -74,13 +83,13 @@ export function BingoGame({ day }: { day?: number }) {
     advance(s.placed, s.strikes);
   };
 
-  const pts = s.won ? Math.max(10 - s.strikes * 2, 5) : Math.floor((filled / BINGO_SIZE) * 6);
+  const pts = Math.round((s.won ? Math.max(10 - s.strikes * 2, 5) : Math.floor((filled / BINGO_SIZE) * 6)) * lv.diff.mult);
   const shareBody = [0, 1, 2, 3].map((r) => [0, 1, 2, 3].map((c) => (s.placed[r * 4 + c] ? "🟩" : "⬛")).join("")).join("\n");
 
   return (
     <>
       <Confetti fire={confetti} />
-      <GameTop title="Bingo Futbolero" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} />
+      <GameTop title="Bingo Futbolero" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={lv.badge} />
 
       <div className="once-status">
         <span><b>{filled}</b>/{BINGO_SIZE} · {linesDone} línea{linesDone === 1 ? "" : "s"}</span>

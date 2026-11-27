@@ -13,9 +13,10 @@ import { Confetti } from "./Confetti";
 import { GameTop, HelpDialog, ResultCard, fmtKey, useToast } from "./GameParts";
 import { GuessInput } from "./GuessInput";
 import { useDailyGame } from "./useDailyGame";
+import { useLevel } from "./Difficulty";
+import { levelSeed, poolFor } from "@/lib/difficulty";
 import { OnceCard } from "./OnceCard";
 
-const MAX_STRIKES = 3;
 interface OState { done: boolean; won: boolean; slots: (string | null)[]; strikes: number; summary?: string }
 const players = playerGame.items as Player[];
 const reliable = players.filter((p) => !p.check);
@@ -29,6 +30,13 @@ const surname = (n: string) => ((lastCount.get(last(n)) ?? 0) > 1 ? `${n[0]}. ${
 export function OnceGame({ day }: { day?: number }) {
   const meta = dailyMeta("once");
   const g = useDailyGame<OState>("once", day, () => ({ done: false, won: false, slots: Array(11).fill(null), strikes: 0 }));
+  const lv = useLevel("once", g.key, g.state as never, () => {
+    if (!g.state || g.state.done) return;
+    g.save({ ...g.state, done: true, won: false, summary: "⏱ X" });
+    g.finish(false, meta.max, 0);
+    play("lose");
+  });
+  const MAX_STRIKES = lv.diff.cfg.tries || 3;
   const [sel, setSel] = useState<number | null>(null);
   const [flash, setFlash] = useState<{ i: number; ok: boolean } | null>(null);
   const [confetti, setConfetti] = useState(0);
@@ -38,6 +46,7 @@ export function OnceGame({ day }: { day?: number }) {
   const conds = useMemo(() => (g.key ? buildOnce(reliable, 31337 + dayNumber(g.key), date) : []), [g.key]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!g.state || !g.key || !conds.length) return <div className="card muted" style={{ marginTop: 24 }}>Armando la cancha…</div>;
+  if (lv.gate) return lv.gate;
   const s = g.state;
   const filled = s.slots.filter(Boolean).length;
   const used = new Set(s.slots.filter(Boolean).map((id) => byId.get(id!)!.name));
@@ -64,7 +73,7 @@ export function OnceGame({ day }: { day?: number }) {
     g.save({ slots, strikes, won, done, summary: `${nFilled}/11` });
     setSel(null);
     if (won) setTimeout(() => { play("win"); setConfetti((n) => n + 1); }, 300);
-    if (done) g.finish(won, strikes + 1, won ? Math.max(10 - strikes * 2, 5) : Math.floor(nFilled / 2));
+    if (done) g.finish(won, strikes + 1, Math.round((won ? Math.max(10 - strikes * 2, 5) : Math.floor(nFilled / 2)) * lv.diff.mult));
   };
 
   // Ejemplos para las casillas vacías al terminar.
@@ -78,14 +87,14 @@ export function OnceGame({ day }: { day?: number }) {
       })()
     : new Map<number, string | undefined>();
 
-  const pts = s.won ? Math.max(10 - s.strikes * 2, 5) : Math.floor(filled / 2);
+  const pts = Math.round((s.won ? Math.max(10 - s.strikes * 2, 5) : Math.floor(filled / 2)) * lv.diff.mult);
   const lines = [[10], [6, 7, 8, 9], [3, 4, 5], [0, 1, 2]];
   const shareBody = lines.map((l) => l.map((i) => (s.slots[i] ? "🟩" : "⬛")).join("")).reverse().join("\n") + `\n${"🟨".repeat(Math.min(s.strikes, 2))}${s.strikes >= 3 ? "🟥" : ""}`;
 
   return (
     <>
       <Confetti fire={confetti} />
-      <GameTop title="Armá el 11" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} />
+      <GameTop title="Armá el 11" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={lv.badge} />
       <div className="once-status">
         <span><b>{filled}</b>/11 en cancha</span>
         <span className="cards" aria-label={`${s.strikes} tarjetas`}>

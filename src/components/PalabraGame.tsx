@@ -8,8 +8,9 @@ import { play } from "@/lib/sound";
 import { Confetti } from "./Confetti";
 import { GameTop, HelpDialog, ResultCard, fmtKey, useToast } from "./GameParts";
 import { useDailyGame } from "./useDailyGame";
+import { useLevel } from "./Difficulty";
+import { levelSeed, poolFor } from "@/lib/difficulty";
 
-const MAX = 6;
 const ROWS = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
 const POOL = WORDS.map((w) => ({ ...w, cat: w.cat ?? ("jugador" as WordCat), id: w.word }));
 interface PState { done: boolean; won: boolean; guesses: string[]; summary?: string; hint?: boolean }
@@ -18,12 +19,19 @@ const RANK = { miss: 0, near: 1, hit: 2 } as const;
 export function PalabraGame({ day }: { day?: number }) {
   const meta = dailyMeta("palabra");
   const g = useDailyGame<PState>("palabra", day, () => ({ done: false, won: false, guesses: [] }));
+  const lv = useLevel("palabra", g.key, g.state as never, () => {
+    if (!g.state || g.state.done) return;
+    g.save({ ...g.state, done: true, won: false, summary: "⏱ X" });
+    g.finish(false, meta.max, 0);
+    play("lose");
+  });
   const [cur, setCur] = useState("");
   const [shake, setShake] = useState(false);
   const [confetti, setConfetti] = useState(0);
   const toast = useToast();
   const cat: WordCat = g.key ? CAT_CYCLE[dayNumber(g.key) % CAT_CYCLE.length] : "jugador";
-  const target = g.key ? pickDaily(POOL.filter((w) => w.cat === cat), 424242, g.key) : null;
+  const MAX = lv.diff.cfg.tries || 6;
+  const target = g.key ? pickDaily(POOL.filter((w) => w.cat === cat), levelSeed(424242, lv.diff.level), g.key) : null;
   const N = target?.word.length ?? 5;
 
   const keyState = useMemo(() => {
@@ -57,7 +65,7 @@ export function PalabraGame({ day }: { day?: number }) {
     const end = 150 + N * 110 + 150;
     if (won) setTimeout(() => { play("win"); setConfetti((n) => n + 1); }, end);
     else if (done) setTimeout(() => play("lose"), end);
-    if (done) g.finish(won, guesses.length, points(won, guesses.length));
+    if (done) g.finish(won, guesses.length, Math.round(points(won, guesses.length) * lv.diff.mult));
   }, [cur, g, target, N, toast]);
 
   const press = useCallback(
@@ -83,18 +91,19 @@ export function PalabraGame({ day }: { day?: number }) {
   }, [press]);
 
   if (!g.state || !target) return <div className="card muted" style={{ marginTop: 24 }}>Cargando el reto…</div>;
+  if (lv.gate) return lv.gate;
   const s = g.state;
   const rows = Array.from({ length: MAX }, (_, i) => s.guesses[i] ?? (i === s.guesses.length && !s.done ? cur : ""));
   const wrong = s.guesses.filter((x) => x !== target.word).length;
   const canHint = wrong >= 3 || s.done;
-  const pts = points(s.won, s.guesses.length);
+  const pts = Math.round(points(s.won, s.guesses.length) * lv.diff.mult);
   const em = { hit: "🟩", near: "🟨", miss: "⬛" };
   const shareBody = s.guesses.map((gs) => scoreWord(gs, target.word).map((x) => em[x]).join("")).join("\n");
 
   return (
     <>
       <Confetti fire={confetti} />
-      <GameTop title="Palabra Crack" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={<><span className="tag tag-accent">{CAT_LABEL[cat]}</span><span className="tag">{N} letras</span></>} />
+      <GameTop title="Palabra Crack" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={<><span className="tag tag-accent">{CAT_LABEL[cat]}</span><span className="tag">{N} letras</span>{lv.badge}</>} />
 
       <div className="wordle" style={{ "--n": N } as React.CSSProperties}>
         {rows.map((w, r) => {

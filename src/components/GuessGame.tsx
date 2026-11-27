@@ -18,6 +18,8 @@ import { HowTo } from "./HowTo";
 import { IconHelp } from "./Icons";
 import { MysteryCard } from "./MysteryCard";
 import { DonateButton } from "./Donate";
+import { ClockBadge, DifficultyPicker, useClock, useDifficulty } from "./Difficulty";
+import { levelSeed, poolFor } from "@/lib/difficulty";
 import { Hints } from "./Hints";
 import { BioCard } from "./BioCard";
 import { hintsFor } from "@/lib/game/bios";
@@ -55,7 +57,7 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
     setMode(isArchive ? "archive" : "daily");
     setTarget(pickDaily(game.targets, game.seed, k));
     setGuessIds(loadDaily(gameId, k).guesses);
-    setStats(loadStats(gameId, game.maxGuesses));
+    setStats(loadStats(gameId, 10));
     setRepGain(null);
     setFresh(null);
   }, [game, gameId, day]);
@@ -79,6 +81,15 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const diff = useDifficulty(gameId, key, guessIds.length > 0);
+  const MAX = mode === "practice" ? game.maxGuesses : diff.cfg.tries || game.maxGuesses;
+  const mult = mode === "practice" ? 1 : diff.mult;
+  // Cada nivel tiene su propio objetivo del día (los fáciles/medios, entre los más conocidos).
+  useEffect(() => {
+    if (mode === "practice" || !key || !diff.ready) return;
+    setTarget(pickDaily(poolFor(game.targets as Item[], diff.level), levelSeed(game.seed, diff.level), key));
+  }, [key, diff.level, diff.ready, mode, game]);
+
   const today = key ? keyToDate(key) : new Date();
   const rows = useMemo(
     () =>
@@ -93,7 +104,16 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
   );
 
   const won = !!target && guessIds.includes(target.id);
-  const done = won || guessIds.length >= game.maxGuesses;
+  const [timeUp, setTimeUp] = useState(false);
+  const done = won || guessIds.length >= MAX || timeUp || (mode !== "practice" && !!loadDaily(gameId, key).done && !won && guessIds.length < MAX);
+  const left = useClock(diff.start, mode === "practice" ? 0 : diff.cfg.time, !done && diff.chosen && mode !== "practice", () => {
+    // Se terminó el tiempo: cuenta como perdido.
+    setTimeUp(true); play("lose");
+    saveDaily(gameId, key, { guesses: guessIds, done: true, won: false });
+    if (mode === "daily") { const res = recordFinish(gameId, key, false, guessIds.length || 1, 10, 0); setStats(res.stats); setRepGain(res.repGain); }
+    else setRepGain(recordArchive(gameId, key, 0).repGain);
+    notifyProfileChange();
+  });
   const used = useMemo(() => new Set(rows.map((r) => r.item.name)), [rows]);
 
   /** Sonidos escalonados al dar vuelta las casillas, y el desenlace. */
@@ -122,16 +142,16 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
     if (done || !target) return;
     const next = [...guessIds, item.id];
     const isWin = item.id === target.id;
-    const finished = isWin || next.length >= game.maxGuesses;
+    const finished = isWin || next.length >= MAX;
     setGuessIds(next);
     setFresh(item.id);
     animateReveal(attrs.map((a) => a.compare(item, target, today)), isWin, finished);
     if (mode === "practice") return;
     saveDaily(gameId, key, { guesses: next, done: finished, won: isWin });
     if (!finished) return;
-    const pts = points(isWin, next.length);
+    const pts = Math.round(points(isWin, next.length) * mult);
     if (mode === "daily") {
-      const res = recordFinish(gameId, key, isWin, next.length, game.maxGuesses, pts);
+      const res = recordFinish(gameId, key, isWin, next.length, 10, pts);
       setStats(res.stats);
       setRepGain(res.repGain);
     } else {
@@ -153,7 +173,7 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
       day: dayNumber(key),
       rows: rows.map((r) => r.cells),
       won,
-      maxGuesses: game.maxGuesses,
+      maxGuesses: MAX,
       url: shareUrl(`/${gameId}`),
     });
     if (navigator.share && /Mobi|Android/i.test(navigator.userAgent)) {
@@ -172,9 +192,16 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
     }
   };
 
-  if (!ready || !target) return <div className="card muted" style={{ marginTop: 24 }}>Cargando el reto…</div>;
+  if (!ready || !target || !diff.ready) return <div className="card muted" style={{ marginTop: 24 }}>Cargando el reto…</div>;
+  if (mode !== "practice" && !diff.chosen)
+    return (
+      <>
+        <div className="game-head"><h1>{t("game.guessThe")} {game.title}</h1></div>
+        <DifficultyPicker game={gameId} onChoose={diff.choose} />
+      </>
+    );
 
-  const pts = points(won, guessIds.length);
+  const pts = Math.round(points(won, guessIds.length) * mult);
   const n = dayNumber(key);
   const shareGrid = rows.map((r) => r.cells.map((c) => EMOJI[c.status]).join("")).join("\n");
 
@@ -185,6 +212,7 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
         <div style={{ minWidth: 0 }}>
           <div className="row" style={{ gap: 8, marginBottom: 6 }}>
             {mode === "daily" && <span className="tag tag-accent">Reto #{n} · Hoy</span>}
+            {mode !== "practice" && <ClockBadge left={done ? Infinity : left} total={diff.cfg.time} level={diff.level} />}
             {mode === "archive" && <span className="tag">{t("game.archiveTag")} · #{n} · {fmt(key)}</span>}
             {mode === "practice" && <span className="tag">{t("game.practiceTag")}</span>}
           </div>
@@ -197,13 +225,13 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
         </div>
       </div>
 
-      <div className="tries-bar" aria-label={`${guessIds.length} de ${game.maxGuesses} intentos`}>
-        {Array.from({ length: game.maxGuesses }, (_, i) => {
+      <div className="tries-bar" aria-label={`${guessIds.length} de ${MAX} intentos`}>
+        {Array.from({ length: MAX }, (_, i) => {
           const r = rows[i];
           const cls = !r ? "" : r.item.id === target.id ? "t-win" : "t-used";
           return <span key={i} className={`try ${cls}`} />;
         })}
-        <span className="tries-text"><b>{guessIds.length}</b>/{game.maxGuesses}</span>
+        <span className="tries-text"><b>{guessIds.length}</b>/{MAX}</span>
       </div>
 
       <MysteryCard gameId={gameId} rows={rows} attributes={attrs} revealed={done ? target : undefined} />
@@ -213,6 +241,7 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
       {done && (
         <section className={`card result ${won ? "" : "lost"}`} aria-live="polite">
           <p className="result-title">{won ? (guessIds.length === 1 ? `${t("result.first")} 🎯` : `${t("result.win")} ⚽`) : `${t("result.lose")} 😮‍💨`}</p>
+          {timeUp && <p className="notice">⏱ Se terminó el tiempo.</p>}
           <BioCard id={target.id} name={target.name} subtitle={game.subtitle(target)} />
 
           {mode !== "practice" ? (
@@ -223,7 +252,7 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
                 {mode === "daily" && <div><b>{stats?.streak ?? 0}🔥</b><small>{t("result.streak")}</small></div>}
               </div>
               {mode === "archive" && <p className="notice">{t("result.archiveNote")}</p>}
-              <div className="share-preview" style={{ userSelect: "all" }}>{`⚽ ${BRAND} #${n} · ${game.title} ${won ? guessIds.length : "X"}/${game.maxGuesses}\n${shareGrid}`}</div>
+              <div className="share-preview" style={{ userSelect: "all" }}>{`⚽ ${BRAND} #${n} · ${game.title} ${won ? guessIds.length : "X"}/${MAX}\n${shareGrid}`}</div>
               <div className="row">
                 <button className="btn btn-primary" onClick={share}>{t("result.share")}</button>
                 {mode === "daily" ? (

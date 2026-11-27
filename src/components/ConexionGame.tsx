@@ -10,8 +10,9 @@ import { Confetti } from "./Confetti";
 import { GameTop, HelpDialog, ResultCard, fmtKey, useToast } from "./GameParts";
 import { GuessInput } from "./GuessInput";
 import { useDailyGame } from "./useDailyGame";
+import { useLevel } from "./Difficulty";
+import { levelSeed, poolFor } from "@/lib/difficulty";
 
-const LIVES = 4;
 interface CState { done: boolean; won: boolean; guesses: string[]; summary?: string; chain: string[]; errors: number; gaveUp?: boolean }
 
 function Avatar({ p }: { p: Person }) {
@@ -30,10 +31,18 @@ function Link({ a, b }: { a: Person; b: Person }) {
 export function ConexionGame({ day }: { day?: number }) {
   const meta = dailyMeta("conexion");
   const g = useDailyGame<CState>("conexion", day, () => ({ done: false, won: false, guesses: [], chain: [], errors: 0 }));
+  const lv = useLevel("conexion", g.key, g.state as never, () => {
+    if (!g.state || g.state.done) return;
+    g.save({ ...g.state, done: true, won: false, summary: "⏱ X" });
+    g.finish(false, meta.max, 0);
+    play("lose");
+  });
+  const LIVES = lv.diff.cfg.tries || 4;
   const [confetti, setConfetti] = useState(0);
   const toast = useToast();
   const pair = useMemo(() => (g.key ? dailyPair(dayNumber(g.key) * 71 + 3) : null), [g.key]);
   if (!g.state || !g.key || !pair) return <div className="card muted" style={{ marginTop: 24 }}>Cargando el reto…</div>;
+  if (lv.gate) return lv.gate;
   const s = g.state;
   const A = personOf(pair.a)!, B = personOf(pair.b)!;
   const chain = [A, ...s.chain.map((id) => personOf(id)!)];
@@ -64,19 +73,19 @@ export function ConexionGame({ day }: { day?: number }) {
     const links = chainIds.length;
     g.save({ ...s, chain: chainIds, errors, done: true, won, gaveUp, guesses: [...s.guesses, won ? "ok" : "x"], summary: won ? `${links} en el medio` : "X" });
     if (won) { play("win"); if (links <= optimal) setConfetti((n) => n + 1); } else play("lose");
-    const pts = won ? Math.max(3, 10 - (links - optimal) * 2 - errors) : 0;
+    const pts = won ? Math.round(Math.max(3, 10 - (links - optimal) * 2 - errors) * lv.diff.mult) : 0;
     g.finish(won, Math.min(meta.max, links + errors + 1), pts);
   };
 
   const finalChain = s.done && s.won ? [...chain, B] : chain;
   const links = s.chain.length;
-  const pts = s.won ? Math.max(3, 10 - (links - optimal) * 2 - s.errors) : 0;
+  const pts = s.won ? Math.round(Math.max(3, 10 - (links - optimal) * 2 - s.errors) * lv.diff.mult) : 0;
   const shareBody = `🔗 ${A.name} → ${B.name}\n${s.won ? `${"⚽".repeat(links)} ${links} en el medio (mínimo ${optimal})` : "❌"}${s.errors ? ` · ${s.errors} error${s.errors > 1 ? "es" : ""}` : ""}`;
 
   return (
     <>
       <Confetti fire={confetti} />
-      <GameTop title="¿Quién jugó con quién?" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={<span className="tag">{LIVES - s.errors} ❤️</span>} />
+      <GameTop title="¿Quién jugó con quién?" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={<><span className="tag">{LIVES - s.errors} ❤️</span>{lv.badge}</>} />
       <p className="cx-goal">Uní a <b>{A.name}</b> con <b>{B.name}</b> usando compañeros de equipo. Se puede en <b>{optimal}</b> {optimal === 1 ? "paso" : "pasos"}.</p>
 
       <div className="cx-chain">

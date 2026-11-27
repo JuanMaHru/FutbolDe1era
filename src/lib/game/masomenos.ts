@@ -7,6 +7,7 @@ import holData from "@/data/hol.json";
 import valuesData from "@/data/values.json";
 import { ageOn } from "./compare";
 import { rng, shuffled } from "./daily";
+import { poolFor, type Level } from "../difficulty";
 
 export interface HolItem { id: string; name: string; kind: "jugador" | "club"; value: number; sub: string }
 export interface Theme {
@@ -57,14 +58,15 @@ export const MAX_ROUNDS = 20;
  * Secuencia del día: tramos de 4 rondas por temática; dentro del tramo se encadena (el B pasa a ser el A).
  * Nunca hay empates.
  */
-export function buildRounds(seed: number, today: Date, only?: string): Round[] {
+export function buildRounds(seed: number, today: Date, only?: string, level?: Level): Round[] {
   const r = rng(seed);
   const themes = usableThemes(today).filter((t) => !only || t.id === only);
   const order = shuffled(themes, Math.floor(r() * 1e9));
   const rounds: Round[] = [];
   for (let k = 0; rounds.length < MAX_ROUNDS && themes.length; k++) {
     const th = order[k % order.length];
-    const pool = shuffled(th.items(today), Math.floor(r() * 1e9));
+    const items = th.kind === "jugador" && level ? poolFor(th.items(today), level) : th.items(today);
+    const pool = shuffled(items, Math.floor(r() * 1e9));
     let a = pool[0];
     const seg = only ? MAX_ROUNDS : 4;
     for (let i = 1, n = 0; i < pool.length && n < seg && rounds.length < MAX_ROUNDS; i++) {

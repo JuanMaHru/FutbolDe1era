@@ -25,7 +25,7 @@ export function LegalNotice() {
       <h2>Escudos</h2>
       <p>
         {REAL_CRESTS
-          ? <>Los escudos son marcas de sus respectivos clubes y les pertenecen. Los mostramos únicamente para identificar a cada equipo, sin modificarlos ni usarlos como decoración ni publicidad. Las imágenes se cargan desde TheSportsDB, una base de datos deportiva pública. Cuando un escudo no está disponible, usamos uno ilustrado por nosotros.</>
+          ? <>Los escudos son marcas de sus respectivos clubes y les pertenecen. Los usamos para identificar a cada equipo, sin modificarlos ni usarlos en publicidad. Las imágenes se cargan desde TheSportsDB, una base de datos deportiva pública. Cuando un escudo no está disponible, usamos uno ilustrado por nosotros.</>
           : <>Los escudos que se ven son ilustraciones propias hechas con los colores de cada club; no son los escudos oficiales.</>}
       </p>
       <h2>Trofeos y premios</h2>
