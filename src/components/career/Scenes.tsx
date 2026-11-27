@@ -127,8 +127,10 @@ function keeperPlace(side: KeeperSide, high: boolean): KeeperPlace {
 }
 
 export function GoalScene({
-  keeper = "idle", place, ball, ballFrom = [100, 122], result, wall, wallJump, keeperColor = "#c8f03c", wallKit, targets, onTarget, small,
+  keeper = "idle", place, ball, ballFrom = [100, 122], result, wall, wallJump, keeperColor = "#c8f03c", wallKit, targets, onTarget, small, aim,
 }: {
+  /** Mira sobre la zona elegida (antes de patear). */
+  aim?: GoalZone;
   keeper?: KeeperSide;
   /** Posición libre del arquero (mano a mano). */
   place?: KeeperPlace;
@@ -220,6 +222,13 @@ export function GoalScene({
       <g className="sc-ball" style={{ transform: `translate(${bx}px, ${by}px) scale(${bscale})` }}>
         <g className={fly ? "sc-spin" : ""}><BallShape id={id} /></g>
       </g>
+      {aim && (
+        <g className="sc-aim" style={{ transform: `translate(${GOAL_XY[aim][0]}px, ${GOAL_XY[aim][1]}px)` }}>
+          <circle r="7" fill="none" stroke="#fff" strokeWidth="1.2" />
+          <circle r="2" fill="#ff4d4d" />
+          <path d="M-11 0 H-4 M4 0 H11 M0 -11 V-4 M0 4 V11" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" />
+        </g>
+      )}
       {/* Zonas tocables */}
       {targets && onTarget && targets.map((z) => {
         const [x, y] = GOAL_XY[z];

@@ -588,10 +588,15 @@ export function planMoments(s: CareerState, started: boolean, rand: () => number
   const n = (started ? 2 : rand() < 0.6 ? 1 : 0) + (s.boost > 0 && started ? 1 : 0);
   const sig = archetypeOf(s).signature;
   // Si no sos el pateador designado este partido, no te tocan penales, tiros libres ni córners.
-  const pool = POOLS[role(s)]
-    .filter(([k]) => !SET_PIECES.includes(k) || rand() < takerChance(s, k))
-    // Ser especialista en pelota parada no hace que haya más penales: solo que los patees vos.
-    .map(([k, w]) => [k, k === sig ? w + (SET_PIECES.includes(k) ? 1 : 3) : w] as [MomentKind, number]);
+  const base = POOLS[role(s)];
+  const kept = base.filter(([k]) => !SET_PIECES.includes(k) || rand() < takerChance(s, k));
+  // Si los centros (córner o tiro libre) los tira otro, te pueden quedar para cabecear.
+  const crossesByOthers = base.some(([k]) => (k === "corner" || k === "freekick") && !kept.some(([j]) => j === k));
+  const withHeader: [MomentKind, number][] = crossesByOthers && role(s) !== "ARQ"
+    ? (kept.some(([k]) => k === "header") ? kept.map(([k, w]) => [k, k === "header" ? w + 1 : w] as [MomentKind, number]) : [...kept, ["header", 1]])
+    : kept;
+  // Ser especialista en pelota parada no hace que haya más penales: solo que los patees vos.
+  const pool = withHeader.map(([k, w]) => [k, k === sig ? w + (SET_PIECES.includes(k) ? 1 : 3) : w] as [MomentKind, number]);
   const out: MomentKind[] = [];
   for (let i = 0; i < n; i++) {
     const avail = pool.filter(([k]) => !out.includes(k) && !(s.lastKinds.includes(k) && rand() < 0.7));
@@ -622,6 +627,63 @@ export function prepareMatch(s: CareerState, rival: string, kinds: MomentKind[],
   const minutes = kinds.map(() => (started ? 8 + Math.floor(rand() * 74) : 60 + Math.floor(rand() * 26))).sort((a, b) => a - b);
   if (minutes.length && rand() < 0.45) minutes[minutes.length - 1] = 85 + Math.floor(rand() * 8);
   return { kinds, minutes, baseFor: Array.from({ length: gf }, mins).sort((a, b) => a - b), baseAgainst: Array.from({ length: ga }, mins).sort((a, b) => a - b) };
+}
+
+/* ---------- Pelota parada que patean otros (relato) ---------- */
+export type SetPieceKind = "penalty" | "freekick" | "corner";
+export interface FeedItem { min: number; us: boolean; kind: SetPieceKind; goal: boolean; text: string }
+const TAKER: Record<SetPieceKind, string[]> = {
+  penalty: ["el capitán", "el 9", "el 10"],
+  freekick: ["el 10", "el zurdo del equipo", "el 8"],
+  corner: ["el 11", "el 7", "el 10"],
+};
+const SP_ICON: Record<SetPieceKind, string> = { penalty: "🎯", freekick: "🧱", corner: "🚩" };
+function feedText(kind: SetPieceKind, us: boolean, out: string, who: string, them: string, iAmKeeper: boolean): string {
+  const T: Record<string, Record<string, string>> = us ? {
+    penalty: { gol: `Penal para nosotros: lo patea ${who}… ¡Gol!`, atajado: `Penal para nosotros: lo patea ${who} y el arquero se lo ataja.`, afuera: `Penal para nosotros: ${who} la tira afuera.`, palo: `Penal para nosotros: ${who} la estrella en el palo.` },
+    freekick: { gol: `Tiro libre de ${who}… ¡al ángulo, golazo!`, atajado: `Tiro libre de ${who}: vuela el arquero y la saca.`, afuera: `Tiro libre de ${who}: pasa cerca del palo.`, barrera: `Tiro libre de ${who}: da en la barrera.` },
+    corner: { gol: `Córner de ${who}, cabezazo y… ¡gol!`, atajado: `Córner de ${who}: cabezazo que ataja el arquero.`, afuera: `Córner de ${who}: el cabezazo se va desviado.`, despejado: `Córner de ${who}: despeja la defensa.` },
+  } : {
+    penalty: { gol: `Penal para ${them}… gol de ellos.`, atajado: iAmKeeper ? `Penal para ${them}… ¡y lo atajás vos!` : `Penal para ${them}… ¡nuestro arquero lo ataja!`, afuera: `Penal para ${them}… ¡lo tiraron afuera!`, palo: `Penal para ${them}… ¡pegó en el palo!` },
+    freekick: { gol: `Tiro libre de ${them}… se metió. Gol de ellos.`, atajado: `Tiro libre de ${them}: ${iAmKeeper ? "volás y la sacás" : "nuestro arquero la saca"} al córner.`, afuera: `Tiro libre de ${them}: se va alto.`, barrera: `Tiro libre de ${them}: rebota en la barrera.` },
+    corner: { gol: `Córner para ${them}… cabezazo y gol de ellos.`, atajado: `Córner para ${them}: cabezazo que ${iAmKeeper ? "contenés vos" : "contiene nuestro arquero"}.`, afuera: `Córner para ${them}: el cabezazo se va afuera.`, despejado: `Córner para ${them}: lo despejamos.` },
+  };
+  return T[kind][out];
+}
+/**
+ * Pelotas paradas del partido que no pateás vos: algunos goles "de fondo" se cuentan como penal, tiro libre o córner,
+ * y se suman algunas que no terminaron en gol. Así el partido cuenta lo que pasó.
+ */
+export function setPieceFeed(s: CareerState, plan: LivePlan, rival: string, rand: () => number): FeedItem[] {
+  const mine = new Set(plan.kinds);
+  const gk = role(s) === "ARQ";
+  const pickKind = (us: boolean): SetPieceKind | null => {
+    const r = rand();
+    const k: SetPieceKind = r < 0.3 ? "penalty" : r < 0.55 ? "freekick" : "corner";
+    if (us && mine.has(k)) return null; // esa la pateás vos
+    if (!us && gk && k === "penalty" && mine.has("penalty-save")) return null;
+    return k;
+  };
+  const out: FeedItem[] = [];
+  const add = (min: number, us: boolean, k: SetPieceKind, res: string) => {
+    const who = TAKER[k][Math.floor(rand() * TAKER[k].length)];
+    out.push({ min, us, kind: k, goal: res === "gol", text: `${SP_ICON[k]} ${feedText(k, us, res, who, rival, gk)}` });
+  };
+  plan.baseFor.forEach((m) => { if (rand() < 0.3) { const k = pickKind(true); if (k) add(m, true, k, "gol"); } });
+  plan.baseAgainst.forEach((m) => { if (rand() < 0.25) { const k = pickKind(false); if (k) add(m, false, k, "gol"); } });
+  const taken = new Set([...plan.minutes, ...plan.baseFor, ...plan.baseAgainst]);
+  const misses = Math.floor(rand() * 3);
+  for (let i = 0; i < misses; i++) {
+    const us = rand() < 0.55;
+    const k = pickKind(us);
+    if (!k) continue;
+    let m = 5 + Math.floor(rand() * 85);
+    while (taken.has(m)) m++;
+    taken.add(m);
+    const opts = k === "penalty" ? ["atajado", "atajado", "afuera", "palo"] : k === "freekick" ? ["atajado", "afuera", "barrera", "barrera"] : ["despejado", "despejado", "atajado", "afuera"];
+    add(m, us, k, opts[Math.floor(rand() * opts.length)]);
+  }
+  return out.sort((a, b) => a.min - b.min);
 }
 
 /** Efecto de cada jugada: +1 nuestro, +1 del rival o nada. Se sortea una vez para que el marcador en vivo sea coherente. */

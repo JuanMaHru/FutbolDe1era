@@ -449,6 +449,9 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
   const rival = fx?.rival ?? "";
   const [started] = useState(() => R() < E.startChance(s));
   const [plan] = useState(() => E.prepareMatch(s, rival, E.planMoments(s, started, R), R, started));
+  // Pelotas paradas que patean otros: se cuentan en el relato. Si simulás, el partido es otro y no se muestran.
+  const [feed] = useState(() => E.setPieceFeed(s, plan, rival, R));
+  const [showFeed, setShowFeed] = useState(true);
   const [phase, setPhase] = useState<"pre" | "play" | "burst" | "pens" | "post">("pre");
   const [moments, setMoments] = useState<Moment[]>([]);
   const [effects, setEffects] = useState<E.Effect3[]>([]);
@@ -520,6 +523,7 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
         {injuryNote && <p className="match-note injury-note">{injuryNote}{s.age >= 30 ? " Con los años, el cuerpo pide más cuidado." : ""}</p>}
         <p className="match-note">{won ? "¡Victoria!" : res.gf === res.ga && !res.pens ? "Empate" : "Derrota"} · {res.note}</p>
         <ul className="comments">{comments.map((c, k) => <li key={k} style={{ animationDelay: `${k * 120}ms` }}>{c}</li>)}</ul>
+        {showFeed && <Feed items={feed} title="Pelota parada" />}
         {res.timeline.length > 0 && (
           <div className="goals-line">{res.timeline.map((g, k) => <span key={k} className={g.us ? "us" : "them"}>{g.mine ? "⚽" : g.us ? "•" : "○"} {g.min}&apos;</span>)}</div>
         )}
@@ -558,7 +562,7 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
         {header}
         <h2>{s.injury > 0 ? "🩹 Estás lesionado" : "🟥 Estás suspendido"}</h2>
         <p>{s.injury > 0 ? `Te quedan ${plural(s.injury, "fecha", "fechas")} de recuperación.` : `Te quedan ${plural(s.suspension, "fecha", "fechas")} de suspensión.`}</p>
-        <button className="btn btn-primary big-cta" onClick={() => finishMatch(E.simQuick(s, rival, R, "absent"))}>Ver el partido desde la tribuna →</button>
+        <button className="btn btn-primary big-cta" onClick={() => { setShowFeed(false); finishMatch(E.simQuick(s, rival, R, "absent")); }}>Ver el partido desde la tribuna →</button>
       </section>
     );
   }
@@ -572,7 +576,7 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
         {plan.kinds.length > 0 ? (
           <>
             <button className="btn btn-primary big-cta" onClick={() => { play("whistle"); setTimeout(() => setPhase("play"), 50); }}>¡Que ruede la pelota! 🟢</button>
-            <button className="btn btn-ghost" style={{ width: "100%", marginTop: 6 }} onClick={() => finishMatch(E.simQuick(s, rival, R, "simulate"))}>⏩ Simular partido</button>
+            <button className="btn btn-ghost" style={{ width: "100%", marginTop: 6 }} onClick={() => { setShowFeed(false); finishMatch(E.simQuick(s, rival, R, "simulate")); }}>⏩ Simular partido</button>
           </>
         ) : (
           <button className="btn btn-primary big-cta" onClick={() => finishMatch(E.resolveMatch(s, plan, [], [], false))}>Ver el partido desde el banco →</button>
@@ -592,6 +596,7 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
         <Burst kind={moments[moments.length - 1].kind} ok={moments[moments.length - 1].ok} effect={effects[effects.length - 1]} colors={colors} />
       ) : (
         <>
+          <Feed items={feed.filter((f) => f.min < minuteNow)} />
           <div className={`situation ${plan.minutes[i] >= 85 ? "late" : ""}`}>
             <div className="sit-top"><span className="sit-min">{sit.minute}</span>{sit.tags.map((t) => <span key={t} className="sit-tag">{t}</span>)}</div>
             <p className="sit-head">{sit.headline}</p>
@@ -605,6 +610,21 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
       )}
       <Confetti fire={confetti} colors={colors} />
     </section>
+  );
+}
+
+/** Relato de las pelotas paradas que patearon otros. */
+function Feed({ items, title = "Lo que pasó" }: { items: E.FeedItem[]; title?: string }) {
+  if (!items.length) return null;
+  return (
+    <div className="feed">
+      <p className="feed-title">{title}</p>
+      <ul>
+        {items.map((f, k) => (
+          <li key={k} className={`${f.us ? "us" : "them"} ${f.goal ? "goal" : ""}`}><b>{f.min}&apos;</b> {f.text}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

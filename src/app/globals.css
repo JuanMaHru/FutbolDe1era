@@ -1040,3 +1040,15 @@ body[data-swipe="right"] main { animation: swipeR .32s ease-out; }
 .moment .timing-cursor { top: 50%; bottom: auto; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff 0 35%, #d9dde3 70%, #9aa1ab); box-shadow: 0 0 0 2px #111 inset, 0 0 14px rgba(255,255,255,.8); }
 .moment .timing-cursor::after { content: ""; position: absolute; inset: 8px; background: #16181d; clip-path: polygon(50% 0, 100% 38%, 82% 100%, 18% 100%, 0 38%); }
 .zone-btn { font-weight: 800; }
+.feed { text-align: left; background: rgba(0,0,0,.18); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; margin: 8px 0; }
+.feed-title { margin: 0 0 4px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--muted, #9aa3b2); }
+.feed ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.feed li { font-size: 13px; line-height: 1.35; padding-left: 8px; border-left: 3px solid transparent; animation: fadeUp .35s ease both; }
+.feed li b { color: var(--chalk); margin-right: 2px; }
+.feed li.us.goal { border-left-color: var(--accent); }
+.feed li.them.goal { border-left-color: #e25555; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.sc-aim > * { animation: sc-pulse-soft 1.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.aim-note { margin: 0; text-align: center; font-weight: 800; font-size: 14px; animation: fadeUp .3s ease both; }
+.aim-note.ok { color: #8ff0b6; }
+.aim-note.bad { color: #ffb4a8; }
