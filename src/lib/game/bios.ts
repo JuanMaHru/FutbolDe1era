@@ -4,6 +4,7 @@
  */
 import biosData from "@/data/bios.json";
 import photosData from "@/data/photos.json";
+import localImages from "@/data/images-local.json";
 import { CAREERS, type Stint } from "./careers";
 
 export interface Photo { url: string; author: string; license: string; page: string }
@@ -16,7 +17,9 @@ export function careerOf(id: string): Stint[] {
   const list = curated?.career ?? BIOS[id]?.career ?? [];
   return [...list].sort((a, b) => a.from - b.from);
 }
-export const photoOf = (id: string): Photo | undefined => PHOTOS[id];
+/** Si la foto ya está descargada en el sitio, se usa esa copia (más confiable que cargarla de Wikimedia). */
+const LOCAL = (localImages as { photos: Record<string, string> }).photos;
+export const photoOf = (id: string): Photo | undefined => (PHOTOS[id] ? { ...PHOTOS[id], url: LOCAL[id] ?? PHOTOS[id].url } : undefined);
 
 export interface Hint { label: string; value: string; at: number }
 

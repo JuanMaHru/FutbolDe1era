@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useId, useRef, useState } from "react";
 import CRESTS from "@/data/crests.json";
+import LOCAL_IMAGES from "@/data/images-local.json";
 import { REAL_CRESTS } from "@/lib/site";
 import { clubStyle } from "@/lib/clubs";
 import { PatternFill } from "./PatternFill";
@@ -26,7 +27,10 @@ const hash = (s: string) => [...s].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >
  * monograma con serifa y, en los redondos, el nombre alrededor. Determinístico por nombre.
  */
 export function Crest({ club, size = 28, title, real = true }: { club: string; size?: number; title?: string; real?: boolean }) {
-  const url = real && REAL_CRESTS ? (CRESTS as Record<string, string>)[club] : undefined;
+  const remote = real && REAL_CRESTS ? (CRESTS as Record<string, string>)[club] : undefined;
+  // Copia descargada al sitio si existe; si no, la imagen de TheSportsDB.
+  const localUrl = real && REAL_CRESTS ? (LOCAL_IMAGES as { crests: Record<string, string> }).crests[club] : undefined;
+  const url = localUrl ?? remote;
   const [broken, setBroken] = useState(false);
   const img = useRef<HTMLImageElement>(null);
   // Si la imagen falló antes de hidratar, onError no llega: lo revisamos al montar.
@@ -35,7 +39,7 @@ export function Crest({ club, size = 28, title, real = true }: { club: string; s
     return (
       // Escudo real, solo para identificar al club (ver /aviso-legal). Si no carga, vuelve al escudo propio.
       // eslint-disable-next-line @next/next/no-img-element
-      <img ref={img} src={`${url}/${size > 60 ? "small" : "tiny"}`} width={size} height={size} alt={title ?? club} title={title ?? club} className="crest crest-real" loading="lazy" decoding="async" referrerPolicy="no-referrer" onError={() => setBroken(true)} />
+      <img ref={img} src={localUrl ?? `${remote}/${size > 60 ? "small" : "tiny"}`} width={size} height={size} alt={title ?? club} title={title ?? club} className="crest crest-real" loading="lazy" decoding="async" referrerPolicy="no-referrer" onError={() => setBroken(true)} />
     );
   return <OwnCrest club={club} size={size} title={title} />;
 }
