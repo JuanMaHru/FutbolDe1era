@@ -84,7 +84,7 @@ export function Perfil() {
         <button className="pf-avatar" onClick={() => file.current?.click()} aria-label="Cambiar foto">
           {extra.photo ? <img src={extra.photo} alt="" /> : <span>{initials}</span>}
           <span className="pf-cam">📷</span>
-          {extra.club && <span className="pf-crest"><Crest club={extra.club} size={30} /></span>}
+          {extra.club && <span className="pf-crest"><Crest club={extra.club} size={26} /></span>}
         </button>
         <input ref={file} type="file" accept="image/*" hidden onChange={(e) => pickPhoto(e.target.files?.[0])} />
         <div className="pf-id">

@@ -986,9 +986,10 @@ body[data-swipe="right"] main { animation: swipeR .32s ease-out; }
 /* Perfil */
 .pf-head { display: flex; gap: 16px; align-items: center; margin-top: 12px; }
 .pf-avatar { position: relative; width: 92px; height: 92px; border-radius: 50%; border: 3px solid var(--accent); background: var(--surface-2); padding: 0; cursor: pointer; flex-shrink: 0; display: grid; place-items: center; color: var(--chalk); font-family: var(--display); font-weight: 900; font-size: 34px; }
-.pf-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.pf-avatar > img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 .pf-cam { position: absolute; bottom: -2px; left: -2px; font-size: 16px; background: var(--bg-2); border-radius: 50%; width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--line); }
-.pf-crest { position: absolute; bottom: -4px; right: -6px; }
+.pf-crest { position: absolute; bottom: -4px; right: -8px; width: 38px; height: 38px; border-radius: 50%; background: var(--bg-2); border: 2px solid var(--accent); display: grid; place-items: center; box-shadow: 0 2px 6px rgba(0,0,0,.45); }
+.pf-crest .crest { width: 26px !important; height: 26px !important; border-radius: 0; object-fit: contain; }
 .pf-id { display: grid; gap: 6px; min-width: 0; flex: 1; }
 .pf-name { background: none; border: 0; padding: 0; text-align: left; color: var(--chalk); font-family: var(--display); font-style: italic; font-weight: 900; font-size: 26px; text-transform: uppercase; cursor: pointer; overflow-wrap: anywhere; }
 .pf-club { display: flex; gap: 6px; align-items: center; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
