@@ -1,7 +1,7 @@
 import { Kit } from "./Kit";
 import { Crest } from "./Crest";
 
-export type ModeId = "jugador" | "dt" | "tray" | "traydt" | "ligas" | "archivo" | "carrera" | "wordle" | "bingo" | "once" | "masomenos";
+export type ModeId = "jugador" | "dt" | "tray" | "traydt" | "ligas" | "archivo" | "carrera" | "wordle" | "bingo" | "once" | "masomenos" | "intruso" | "conexion";
 
 const G = "#22a95b", Y = "#e4a91c", M = "var(--miss)", CH = "#eef4ef", AC = "var(--accent)";
 
@@ -98,6 +98,18 @@ export function ModeArt({ mode }: { mode: ModeId }) {
           {["G", "O", "L", "E", "S"].map((l, i) => (
             <span key={i} style={{ background: [G, Y, M, G, G][i], animationDelay: `${i * 110}ms` }}>{l}</span>
           ))}
+        </div>
+      );
+    case "intruso":
+      return (
+        <div className="art art-in">
+          {["🇦🇷", "🇦🇷", "🇧🇷", "🇦🇷"].map((f, i) => <span key={i} className={i === 2 ? "odd" : ""}>{f}</span>)}
+        </div>
+      );
+    case "conexion":
+      return (
+        <div className="art art-cx">
+          <span>A</span><i /><span>?</span><i /><span>B</span>
         </div>
       );
     case "masomenos":

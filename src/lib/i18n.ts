@@ -42,6 +42,8 @@ const es = {
   "mode.bingo": "Bingo Futbolero",
   "mode.once": "Armá el 11",
   "mode.masomenos": "Más o Menos",
+  "mode.intruso": "El intruso",
+  "mode.conexion": "¿Quién jugó con quién?",
   "game.guessThe": "Adiviná el",
   "game.placeholder": "Escribí un",
   "game.notFound": "No está en la base (todavía).",

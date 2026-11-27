@@ -8,7 +8,7 @@ import { careerOf } from "./bios";
 export const BRAND = "Fútbol de Primera";
 
 /** Jugadores con los clubes de toda su carrera (para consignas como "Jugó en River"). */
-const PLAYERS: Player[] = (playersData as Player[]).map((p) => ({ ...p, clubs: careerOf(p.id).map((s) => s.club) }));
+export const PLAYERS: Player[] = (playersData as Player[]).map((p) => ({ ...p, clubs: careerOf(p.id).map((s) => s.club) }));
 
 export const playerGame: GameDefinition<Player> = {
   id: "jugador",
