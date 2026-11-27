@@ -1005,3 +1005,7 @@ body[data-swipe="right"] main { animation: swipeR .32s ease-out; }
 .pf-game { display: flex; justify-content: space-between; gap: 8px; padding: 10px 12px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); color: var(--chalk); text-decoration: none; font-weight: 700; }
 .pf-account { display: grid; gap: 8px; margin-top: 16px; }
 .pf-club select { width: 100%; min-width: 0; }
+.kit-draw { position: relative; display: inline-block; flex-shrink: 0; }
+.kit-draw svg { display: block; overflow: visible; }
+.kit-crest { position: absolute; left: 58%; top: 21%; display: grid; place-items: center; filter: drop-shadow(0 1px 1px rgba(0,0,0,.35)); }
+.kit-crest .crest, .kit-crest img { width: 100% !important; height: 100% !important; }

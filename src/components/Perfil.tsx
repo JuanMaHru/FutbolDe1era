@@ -139,6 +139,55 @@ export function Perfil() {
         <span className="muted small">Muy pronto vas a poder crear tu cuenta para no perder nada al cambiar de celu, jugar ligas online y cambiar figuritas con amigos. Por ahora tu perfil se guarda en este dispositivo.</span>
         <InstallApp variant="button" />
       </section>
+      <Backup />
     </>
+  );
+}
+
+const BK_PREFIX = "primera:v1:";
+
+/** Copia de seguridad de todo lo guardado (carrera, perfil, álbum, rachas) en un archivo. */
+function Backup() {
+  const [msg, setMsg] = useState("");
+  const file = useRef<HTMLInputElement>(null);
+  const download = () => {
+    const data: Record<string, string> = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith(BK_PREFIX)) data[k] = localStorage.getItem(k) ?? "";
+    }
+    const blob = new Blob([JSON.stringify({ app: "futbol-de-primera", date: new Date().toISOString(), data })], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `futbol-de-primera-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    setMsg(`Listo: se descargó tu copia (${Object.keys(data).length} datos).`);
+  };
+  const restore = async (f: File) => {
+    try {
+      const j = JSON.parse(await f.text());
+      if (j?.app !== "futbol-de-primera" || typeof j.data !== "object") throw new Error();
+      const entries = Object.entries(j.data as Record<string, string>).filter(([k, v]) => k.startsWith(BK_PREFIX) && typeof v === "string");
+      if (!entries.length) throw new Error();
+      if (!confirm("Esto reemplaza lo guardado en este dispositivo por lo de la copia. ¿Seguimos?")) return;
+      entries.forEach(([k, v]) => localStorage.setItem(k, v));
+      setMsg("¡Restaurado! Recargando…");
+      setTimeout(() => location.reload(), 700);
+    } catch {
+      setMsg("Ese archivo no es una copia válida de Fútbol de Primera.");
+    }
+  };
+  return (
+    <section className="card pf-account">
+      <b>💾 Copia de seguridad</b>
+      <span className="muted small">Descargá un archivo con tu carrera, perfil, álbum y rachas. Si cambiás de celu o borrás el navegador, lo restaurás desde acá.</span>
+      <div className="row">
+        <button className="btn btn-primary" onClick={download}>Descargar copia</button>
+        <button className="btn" onClick={() => file.current?.click()}>Restaurar</button>
+        <input ref={file} type="file" accept="application/json,.json" hidden onChange={(e) => { const f = e.target.files?.[0]; if (f) restore(f); e.target.value = ""; }} />
+      </div>
+      {msg && <span className="small" role="status">{msg}</span>}
+    </section>
   );
 }
