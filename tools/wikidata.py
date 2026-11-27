@@ -17,8 +17,9 @@ def _get(params):
             req = urllib.request.Request(full, headers={"User-Agent": UA})
             with urllib.request.urlopen(req, timeout=60) as r:
                 data = json.load(r)
-            if "error" in data and data["error"].get("code") == "maxlag":
-                time.sleep(5); continue
+            if "error" in data:
+                if data["error"].get("code") == "maxlag": time.sleep(5); continue
+                raise RuntimeError(data["error"].get("info"))
             json.dump(data, open(path, "w"))
             time.sleep(1.0)
             return data
@@ -85,7 +86,7 @@ def by_titles(titles, site="eswiki"):
     out = {}
     for i in range(0, len(titles), 50):
         chunk = titles[i:i + 50]
-        d = _get({"action": "wbgetentities", "sites": site, "titles": "|".join(chunk), "props": "claims|labels|sitelinks", "languages": "es|en", "sitefilter": site, "normalize": 1})
+        d = _get({"action": "wbgetentities", "sites": site, "titles": "|".join(chunk), "props": "claims|labels|sitelinks", "languages": "es|en", "sitefilter": site})
         for q, e in d.get("entities", {}).items():
             if q.startswith("-") or "missing" in e: continue
             _ent[q] = e

@@ -24,20 +24,24 @@ def score_of(p, e):
         elif abs(int(b[:4]) - int(p["birth"][:4])) <= 1: s += 1
         else: s -= 3
     return s
-# 1) Por título de Wikipedia (es y en), de a 50.
+# 1) Por título de Wikipedia, de a 50 (probando variantes con desambiguación).
 names = sorted({p["name"] for p in people.values()})
+births = {p["name"]: p["birth"] for p in people.values()}
 hit = {}
-for site in ("eswiki", "enwiki"):
-    got = by_titles([n for n in names if n not in hit], site)
+VARIANTS = [("eswiki", "{}"), ("enwiki", "{}"), ("eswiki", "{} (futbolista)"), ("enwiki", "{} (footballer)"),
+            ("eswiki", "{} (entrenador)"), ("enwiki", "{} (football manager)")]
+for site, fmt in VARIANTS:
+    todo = {fmt.format(n): n for n in names if n not in hit or score_of({"birth": births[n]}, hit[n]) < 5}
+    got = by_titles(list(todo), site)
     for t_, e in got.items():
-        for n in names:
-            if n not in hit and (n == t_ or n.replace(" ", "_") == t_): hit[n] = e
-print("por título:", len(hit), "de", len(names), flush=True)
+        n = todo.get(t_) or todo.get(t_.replace("_", " "))
+        if n and (n not in hit or score_of({"birth": births[n]}, e) > score_of({"birth": births[n]}, hit[n])): hit[n] = e
+    print(site, fmt, "→", len(hit), "de", len(names), flush=True)
 # 2) El resto (o los que no son futbolistas): búsqueda.
 for pid, p in people.items():
     e = hit.get(p["name"])
     best, score = (e["id"], score_of(p, e)) if e else (None, -99)
-    if score < 5:
+    if score < 3 and "--search" in sys.argv:
         qs = search(p["name"], "es") or search(strip(p["name"]), "en")
         ents = entities(qs)
         for k, q in enumerate(qs):
