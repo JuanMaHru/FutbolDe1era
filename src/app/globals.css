@@ -82,7 +82,7 @@ button { font: inherit; color: inherit; }
 .nav a { text-decoration: none; font-size: 14px; font-weight: 700; padding: 6px 10px; border-radius: 999px; color: var(--muted); }
 .nav a:hover, .nav a.active { color: var(--chalk); background: var(--surface); }
 .rep-pill { font-size: 13px; font-weight: 800; padding: 5px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); white-space: nowrap; }
-@media (max-width: 560px) { .brand-full { display: none; } .brand-small { display: flex; } .nav a { padding: 6px 8px; font-size: 13px; } }
+@media (max-width: 560px) { .brand-full svg { height: 38px; width: auto; } .nav a { padding: 6px 8px; font-size: 13px; } }
 
 /* ---------- Genérico ---------- */
 h1 { font-size: clamp(26px, 6vw, 38px); line-height: 1.08; letter-spacing: -0.02em; margin: 24px 0 8px; text-wrap: balance; }
@@ -935,3 +935,12 @@ body[data-swipe="right"] main { animation: swipeR .32s ease-out; }
 .round-timer { height: 6px; border-radius: 999px; background: var(--surface-2); overflow: hidden; margin: 6px 0; }
 .round-timer span { display: block; height: 100%; background: var(--accent); transition: width .25s linear; }
 .round-timer.urgent span { background: var(--danger); }
+
+/* Botón volver y ventanas con controles siempre visibles */
+.back-link { display: inline-flex; align-items: center; gap: 4px; margin: 10px 0 0; padding: 6px 12px 6px 8px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--chalk); text-decoration: none; font-weight: 700; font-size: 14px; }
+.back-link:hover { border-color: var(--accent); }
+.howto, .theme-dialog { overflow-y: auto; overscroll-behavior: contain; }
+.howto-close { position: sticky !important; top: 8px; right: auto; justify-self: end; z-index: 6; margin-bottom: -44px; background: var(--surface-2); box-shadow: 0 4px 12px rgba(0,0,0,.35); }
+.theme-body > .btn-primary:last-child, .howto-body > .btn-primary:last-child { position: sticky; bottom: 10px; z-index: 6; box-shadow: 0 -6px 18px rgba(0,0,0,.45), 0 4px 12px rgba(0,0,0,.4); }
+.theme-body > #theme-search { position: sticky; top: 8px; z-index: 5; margin-right: 52px; }
+.theme-body > #theme-search { background: var(--bg-2); box-shadow: 0 -12px 0 var(--bg-2), 0 6px 14px rgba(0,0,0,.35); }

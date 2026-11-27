@@ -10,8 +10,15 @@ import { IconClose, IconHelp } from "./Icons";
 import { DonateButton } from "./Donate";
 import type { DailyMode } from "./useDailyGame";
 
+/** Botón para volver a la lista de juegos (o al archivo). */
+export function BackLink({ archive = false }: { archive?: boolean }) {
+  return <Link href={archive ? "/archivo" : "/"} className="back-link" onClick={() => play("click")}>‹ {archive ? "Archivo" : "Juegos"}</Link>;
+}
+
 export function GameTop({ title, mode, day, dateLabel, onHelp, extra }: { title: string; mode: DailyMode | "practice"; day: number; dateLabel?: string; onHelp: () => void; extra?: React.ReactNode }) {
   return (
+    <>
+    <BackLink archive={mode === "archive"} />
     <div className="game-head">
       <div style={{ minWidth: 0 }}>
         <div className="row" style={{ gap: 8, marginBottom: 6 }}>
@@ -28,6 +35,7 @@ export function GameTop({ title, mode, day, dateLabel, onHelp, extra }: { title:
         </button>
       </div>
     </div>
+    </>
   );
 }
 

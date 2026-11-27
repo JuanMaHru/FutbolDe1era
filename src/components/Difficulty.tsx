@@ -4,6 +4,7 @@ import { chooseLevel, cfgOf, describe, lastLevel, LEVEL_ICON, LEVEL_LABEL, LEVEL
 import type { GameId } from "@/lib/game/types";
 import { play } from "@/lib/sound";
 import { dailyMeta } from "@/lib/game/daily-games";
+import { BackLink } from "./GameParts";
 
 /**
  * Nivel del reto del día. Si el juego ya arrancó (sin nivel guardado), queda en "medio" sin reloj.
@@ -83,6 +84,7 @@ export function useLevel(game: GameId, key: string, state: { done: boolean; gues
   const left = useClock(diff.start, diff.cfg.time, !!state && !state.done && diff.chosen, onTimeout);
   const gate = !diff.ready ? <div className="card muted" style={{ marginTop: 24 }}>Cargando el reto…</div> : !diff.chosen ? (
     <>
+      <BackLink />
       <div className="game-head"><h1>{dailyMeta(game).title}</h1></div>
       <DifficultyPicker game={game} onChoose={diff.choose} />
     </>

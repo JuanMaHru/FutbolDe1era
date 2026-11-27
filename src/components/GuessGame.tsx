@@ -21,6 +21,7 @@ import { DonateButton } from "./Donate";
 import { ClockBadge, DifficultyPicker, useClock, useDifficulty } from "./Difficulty";
 import { levelSeed, poolFor } from "@/lib/difficulty";
 import { Hints } from "./Hints";
+import { BackLink } from "./GameParts";
 import { BioCard } from "./BioCard";
 import { hintsFor } from "@/lib/game/bios";
 
@@ -196,6 +197,7 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
   if (mode !== "practice" && !diff.chosen)
     return (
       <>
+        <BackLink />
         <div className="game-head"><h1>{t("game.guessThe")} {game.title}</h1></div>
         <DifficultyPicker game={gameId} onChoose={diff.choose} />
       </>
@@ -208,6 +210,7 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
   return (
     <>
       <Confetti fire={confetti} />
+      <BackLink archive={mode === "archive"} />
       <div className="game-head">
         <div style={{ minWidth: 0 }}>
           <div className="row" style={{ gap: 8, marginBottom: 6 }}>

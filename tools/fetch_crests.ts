@@ -37,6 +37,17 @@ const ALIAS: Record<string, [string, string?]> = {
   "Ulsan HD": ["Ulsan Hyundai"], "Yokohama F. Marinos": ["Yokohama F Marinos"], "Shanghai Port": ["Shanghai Port"],
 };
 
+/** Selecciones: nombre en inglés tal como lo tiene TheSportsDB. */
+const NATIONAL: Record<string, string> = {
+  "Selección Argentina": "Argentina", "Selección de Chile": "Chile", "Selección de Perú": "Peru", "Selección de Bolivia": "Bolivia",
+  "Selección de Venezuela": "Venezuela", "Selección de España": "Spain", "Selección de Italia": "Italy", "Selección de Portugal": "Portugal",
+  "Selección de Países Bajos": "Netherlands", "Selección de México": "Mexico", "Selección de Canadá": "Canada", "Selección de Corea del Sur": "South Korea",
+  "Selección de Japón": "Japan", "Selección de Marruecos": "Morocco", "Selección de Bélgica": "Belgium", "Selección de Croacia": "Croatia",
+  "Selección de Senegal": "Senegal", "Selección de Noruega": "Norway", "Selección de Uruguay": "Uruguay", "Selección de Brasil": "Brazil",
+  "Selección de Colombia": "Colombia", "Selección de Ecuador": "Ecuador", "Selección de Paraguay": "Paraguay", "Selección de EE.UU.": "USA",
+  "Selección de Inglaterra": "England", "Selección de Alemania": "Germany", "Selección de Francia": "France",
+};
+
 const strip = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -57,9 +68,19 @@ async function search(q: string): Promise<any[]> {
 async function main() {
   const out: Record<string, string> = JSON.parse(readFileSync(OUT, "utf8") || "{}");
   const names = [...new Set([...Object.keys(CLUBS), ...CLUBS_W.map((c) => c.name), ...INTL_CLUBS.map((c) => c.name)])]
-    .filter((n) => !/^Selección/.test(n) && (ALL || !out[n]));
+    .filter((n) => ALL || !out[n]);
   const miss: string[] = [];
   for (const name of names) {
+    if (NATIONAL[name]) {
+      // Selección mayor masculina: nombre exacto del país.
+      const teams = (await search(NATIONAL[name])).filter((x: any) => x.strTeam === NATIONAL[name] && (x.strGender ?? "Male") === "Male");
+      await sleep(2200);
+      const badge = teams[0]?.strBadge || teams[0]?.strTeamBadge;
+      if (badge) { out[name] = badge; console.log("✓", name); writeFileSync(OUT, JSON.stringify(Object.fromEntries(Object.entries(out).sort()), null, 1) + "\n"); }
+      else { miss.push(name); console.log("✗", name); }
+      continue;
+    }
+    if (/^Selección/.test(name)) continue;
     const [alias, hint] = ALIAS[name] ?? [];
     const lg = LEAGUES[clubInfo(name).league];
     const country = hint ?? (lg && COUNTRY[lg.country]);
