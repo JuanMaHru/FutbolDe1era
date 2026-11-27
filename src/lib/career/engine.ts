@@ -648,7 +648,7 @@ function feedText(kind: SetPieceKind, us: boolean, out: string, who: string, the
     freekick: { gol: `Tiro libre de ${them}… se metió. Gol de ellos.`, atajado: `Tiro libre de ${them}: ${iAmKeeper ? "volás y la sacás" : "nuestro arquero la saca"} al córner.`, afuera: `Tiro libre de ${them}: se va alto.`, barrera: `Tiro libre de ${them}: rebota en la barrera.` },
     corner: { gol: `Córner para ${them}… cabezazo y gol de ellos.`, atajado: `Córner para ${them}: cabezazo que ${iAmKeeper ? "contenés vos" : "contiene nuestro arquero"}.`, afuera: `Córner para ${them}: el cabezazo se va afuera.`, despejado: `Córner para ${them}: lo despejamos.` },
   };
-  return T[kind][out];
+  return T[kind][out].replace(/\bde el /g, "del ");
 }
 /**
  * Pelotas paradas del partido que no pateás vos: algunos goles "de fondo" se cuentan como penal, tiro libre o córner,

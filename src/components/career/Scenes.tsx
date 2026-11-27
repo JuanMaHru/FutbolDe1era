@@ -127,8 +127,10 @@ function keeperPlace(side: KeeperSide, high: boolean): KeeperPlace {
 }
 
 export function GoalScene({
-  keeper = "idle", place, ball, ballFrom = [100, 122], result, wall, wallJump, keeperColor = "#c8f03c", wallKit, targets, onTarget, small, aim,
+  keeper = "idle", place, ball, ballFrom = [100, 122], result, wall, wallJump, keeperColor = "#c8f03c", wallKit, targets, onTarget, small, aim, run,
 }: {
+  /** Mano a mano: sin punto penal y con líneas de velocidad. */
+  run?: boolean;
   /** Mira sobre la zona elegida (antes de patear). */
   aim?: GoalZone;
   keeper?: KeeperSide;
@@ -187,7 +189,14 @@ export function GoalScene({
       <rect y="45" width="200" height="95" fill={`url(#gr${id})`} />
       <line x1="0" y1="82.5" x2="200" y2="82.5" stroke="#fff" strokeOpacity="0.9" strokeWidth="1" />
       <path d="M14 82.5 L4 98 H196 L186 82.5" fill="none" stroke="#fff" strokeOpacity="0.75" strokeWidth="0.9" />
-      <ellipse cx="100" cy="124" rx="3" ry="1.1" fill="#fff" opacity="0.85" />
+      {!run && <ellipse cx="100" cy="124" rx="3" ry="1.1" fill="#fff" opacity="0.85" />}
+      {!run && <path d="M70 140 Q100 128 130 140" fill="none" stroke="#fff" strokeOpacity="0.6" strokeWidth="0.9" />}
+      {run && !fly && (
+        <g className="sc-speed" stroke="#fff" strokeLinecap="round" strokeOpacity="0.7">
+          <line x1="86" y1="136" x2="92" y2="130" strokeWidth="1.2" /><line x1="114" y1="136" x2="108" y2="130" strokeWidth="1.2" />
+          <line x1="80" y1="128" x2="88" y2="124" strokeWidth="1" /><line x1="120" y1="128" x2="112" y2="124" strokeWidth="1" />
+        </g>
+      )}
       {/* Sombra del arco */}
       <ellipse cx="100" cy="84" rx="72" ry="3" fill="#000" opacity="0.22" />
       {/* Red */}

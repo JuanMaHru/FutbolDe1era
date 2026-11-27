@@ -24,12 +24,42 @@ const SHOT_LABEL: Record<string, string> = {
   TL: "al ángulo izquierdo", TR: "al ángulo derecho", BL: "abajo a la izquierda", BR: "abajo a la derecha", C: "al medio", CH: "picados",
   UNDER: "por abajo de la barrera", cruzado: "cruzados", palo: "al primer palo", vaselina: "de vaselina", gambeta: "gambeteando al arquero",
 };
+/** Identidad de cada jugada: color, ícono y nombre corto para reconocerla al instante. */
+export const MOMENT_LOOK: Record<string, { icon: string; label: string; color: string; verb: string }> = {
+  penalty: { icon: "🎯", label: "Penal", color: "#ef4444", verb: "Elegí y pateá" },
+  "penalty-save": { icon: "🧤", label: "Atajá el penal", color: "#f97316", verb: "Elegí el lado y volá" },
+  freekick: { icon: "🧱", label: "Tiro libre", color: "#a855f7", verb: "Elegí y pateá" },
+  "freekick-save": { icon: "🧤", label: "Tiro libre en contra", color: "#8b5cf6", verb: "Cubrí un palo" },
+  placement: { icon: "🏃", label: "Mano a mano", color: "#06b6d4", verb: "Elegí cómo definir" },
+  corner: { icon: "🚩", label: "Córner", color: "#eab308", verb: "Elegí a dónde tirarlo" },
+  header: { icon: "🗣️", label: "Cabezazo", color: "#84cc16", verb: "Elegí a dónde cabecear" },
+  pass: { icon: "👟", label: "Pase gol", color: "#3b82f6", verb: "Tocá al libre" },
+  intercept: { icon: "🛡️", label: "Anticipo", color: "#14b8a6", verb: "Tocá al que va a recibir" },
+  tackle: { icon: "🦵", label: "Cruce", color: "#10b981", verb: "Barré a tiempo" },
+  save: { icon: "🧤", label: "Atajada", color: "#f59e0b", verb: "Volá a tiempo" },
+  finish: { icon: "⚽", label: "Definición", color: "#22c55e", verb: "Pateá a tiempo" },
+  trivia: { icon: "🧠", label: "Lectura de juego", color: "#ec4899", verb: "Respondé rápido" },
+  ttt: { icon: "❌", label: "Tateti táctico", color: "#f43f5e", verb: "Hacé tres en línea" },
+};
+function MomentHead({ kind, chips = [] }: { kind: string; chips?: (string | false | null | undefined)[] }) {
+  const L = MOMENT_LOOK[kind] ?? MOMENT_LOOK.finish;
+  const list = chips.filter(Boolean) as string[];
+  return (
+    <div className="mhead" style={{ "--mk": L.color } as React.CSSProperties}>
+      <div className="mhead-bar"><span className="mhead-icon">{L.icon}</span><span className="mhead-label">{L.label}</span><span className="mhead-verb">{L.verb}</span></div>
+      {list.length > 0 && <div className="mhead-chips">{list.map((c) => <span key={c}>{c}</span>)}</div>}
+    </div>
+  );
+}
+const side2 = (sd: "L" | "R") => (sd === "L" ? "tu derecha" : "tu izquierda");
+
 const KIND_LABEL: Record<ShotKind, string> = { penalty: "penales", freekick: "tiros libres", placement: "mano a mano" };
 /** Aviso de que el arquero ya te tiene estudiado. */
 function Scouted({ kind, shots }: { kind: ShotKind; shots?: Record<string, string[]> }) {
   const f = favoriteShot(shots?.[kind]);
   if (!f) return null;
-  return <p className="scouted">📋 Te estudiaron: de tus últimos {f.of} {KIND_LABEL[kind]}, {f.count} fueron {SHOT_LABEL[f.choice] ?? f.choice}. Si repetís, te la van a leer.</p>;
+  void KIND_LABEL;
+  return <p className="scouted">📋 Te leen: {f.count} de {f.of} {SHOT_LABEL[f.choice] ?? f.choice}</p>;
 }
 const ReadNote = ({ on }: { on: boolean }) => (on ? <p className="scouted read">🧤 ¡Te la leyó! Ya sabía a dónde ibas a patear.</p> : null);
 const clamp01 = (x: number) => Math.max(0.03, Math.min(0.97, x));
@@ -41,7 +71,7 @@ const finish = (ok: boolean, onDone: (ok: boolean) => void, delay = 1300) => {
 type Zone = GoalZone;
 
 /** Barra de precisión: primero elegís, después le pegás en el momento justo. */
-function AimBar({ d, bonus, cta, label = "Ahora la precisión: soltá en la zona verde.", onHit }: { d: number; bonus: number; cta: string; label?: string; onHit: (good: boolean) => void }) {
+function AimBar({ d, bonus, cta, label = "Soltá en la zona verde", onHit }: { d: number; bonus: number; cta: string; label?: string; onHit: (good: boolean) => void }) {
   const center = useMemo(() => 0.3 + Math.random() * 0.4, []);
   const zone = Math.max(0.1, Math.min(0.42, 0.24 + bonus * 0.6 - (d - 0.5) * 0.15));
   const lo = center - zone / 2, hi = center + zone / 2;
@@ -115,13 +145,10 @@ export function PenaltyShoot({ d, bonus, onDone, shots, fame = 50, rival, title 
     setTimeout(() => { setRes(ok); setRead(guessed && !ok); finish(ok, (o) => onDone(o, { kind: "penalty", choice: z }), guessed && !ok ? 1700 : 650); }, 600);
   };
   const choose = (z: Zone) => { if (!aim) { play("click"); setAim(z); } };
-  const OPTS: [Zone, string][] = [["TL", "↖ Ángulo izq."], ["CH", "🥄 Picarla"], ["TR", "Ángulo der. ↗"], ["BL", "↙ Abajo izq."], ["C", "Al medio"], ["BR", "Abajo der. ↘"]];
+  const OPTS: [Zone, string][] = [["TL", "↖ Ángulo"], ["CH", "🥄 Picar"], ["TR", "Ángulo ↗"], ["BL", "↙ Abajo"], ["C", "● Medio"], ["BR", "Abajo ↘"]];
   return (
     <div className="moment">
-      <p className="moment-title">⚽ {title}</p>
-      <p className="muted small" style={{ margin: 0 }}>
-        {showHint ? `👀 Dato: el arquero suele tirarse a su ${tendency === "L" ? "izquierda (tu derecha)" : "derecha (tu izquierda)"}.` : "Elegí dónde patear. Los ángulos son difíciles de atajar pero podés errarlo."}
-      </p>
+      <MomentHead kind="penalty" chips={[title !== "¡Penal!" && title.replace(/:.*/, ""), showHint && `👀 Se tira a ${side2(tendency)}`]} />
       <Scouted kind="penalty" shots={shots} />
       <GoalScene keeper={keeper} ball={shot ?? undefined} result={res} keeperColor={keeperKitOf(rival)} aim={aim && !shot ? aim : undefined}
         targets={aim ? undefined : ["TL", "CH", "TR", "BL", "C", "BR"]} onTarget={choose} />
@@ -129,7 +156,6 @@ export function PenaltyShoot({ d, bonus, onDone, shots, fame = 50, rival, title 
       <Quality q={q} />
       {!aim ? (
         <>
-          <p className="muted small scene-hint">Tocá el arco o elegí abajo.</p>
           <div className="zone-grid">
             {OPTS.map(([z, label]) => <button key={z} className="btn zone-btn" onClick={() => choose(z)}>{label}</button>)}
           </div>
@@ -169,10 +195,7 @@ export function PenaltySave({ d, bonus, onDone, team, title = "Penal en contra" 
   const pick = (k: "L" | "C" | "R") => { if (!side) { play("click"); setSide(k); } };
   return (
     <div className="moment">
-      <p className="moment-title">🧤 {title}</p>
-      <p className="muted small" style={{ margin: 0 }}>
-        Patea un <b>{shooter.foot}</b>{bonus > 0 ? ` — lo estudiaste: suele patear a tu ${shooter.fav === "L" ? "izquierda" : "derecha"}` : ""}. ¿Para dónde te tirás?
-      </p>
+      <MomentHead kind="penalty-save" chips={[title !== "Penal en contra" && title.replace(/:.*/, ""), `🦶 ${shooter.foot === "zurdo" ? "Zurdo" : "Derecho"}`, bonus > 0 && `👀 Suele ir a tu ${shooter.fav === "L" ? "izquierda" : "derecha"}`]} />
       <GoalScene keeper={dive ?? "idle"} ball={ball} result={res} keeperColor={keeperKitOf(team)} />
       <Quality q={q} good="⚡ Reaccionaste a tiempo." bad="🐢 Saliste tarde." />
       {!side ? (
@@ -181,7 +204,7 @@ export function PenaltySave({ d, bonus, onDone, team, title = "Penal en contra" 
           <button className="btn zone-btn" onClick={() => pick("C")}>Me quedo</button>
           <button className="btn zone-btn" onClick={() => pick("R")}>Derecha ➡</button>
         </div>
-      ) : <AimBar d={d} bonus={bonus} cta="¡Volar!" label="Ahora el reflejo: soltá en la zona verde." onHit={(g) => go(side, g)} />}
+      ) : <AimBar d={d} bonus={bonus} cta="¡Volar!" label="Reflejo: soltá en verde" onHit={(g) => go(side, g)} />}
     </div>
   );
 }
@@ -234,19 +257,16 @@ export function FreeKick({ d, bonus, foot, onDone, shots, fame = 50, rival }: Mo
   };
   return (
     <div className="moment">
-      <p className="moment-title">🎯 Tiro libre al borde del área</p>
-      <p className="muted small" style={{ margin: 0 }}>
-        El arquero se para cargado a su {keeperSide === "L" ? "izquierda (tu derecha)" : "derecha (tu izquierda)"}. {choice ? "Ahora la potencia: soltá en la zona verde." : "¿A dónde le pegás?"}
-      </p>
+      <MomentHead kind="freekick" chips={[`🧤 Cargado a ${side2(keeperSide)}`]} />
       <Scouted kind="freekick" shots={shots} />
       <GoalScene keeper={shownKeeper ?? "idle"} place={shownKeeper ? undefined : { x: keeperSide === "L" ? 88 : 112, y: 82 }} ball={shownKeeper && choice ? choice : undefined}
         wall wallJump={jumped} wallKit={kitOf(rival)} result={res} keeperColor={keeperKitOf(rival)} />
       <ReadNote on={read} />
       {!choice ? (
         <div className="zone-grid three">
-          <button className="btn zone-btn" onClick={() => { play("click"); setChoice("TL"); }}>↖ Ángulo izq.</button>
-          <button className="btn zone-btn" onClick={() => { play("click"); setChoice("UNDER"); }}>⤵ Por abajo de la barrera</button>
-          <button className="btn zone-btn" onClick={() => { play("click"); setChoice("TR"); }}>Ángulo der. ↗</button>
+          <button className="btn zone-btn" onClick={() => { play("click"); setChoice("TL"); }}>↖ Ángulo</button>
+          <button className="btn zone-btn" onClick={() => { play("click"); setChoice("UNDER"); }}>⤵ Por abajo</button>
+          <button className="btn zone-btn" onClick={() => { play("click"); setChoice("TR"); }}>Ángulo ↗</button>
         </div>
       ) : (
         <>
@@ -282,27 +302,26 @@ export function FreeKickSave({ d, bonus, onDone, team, rival }: MomentProps) {
   const ball: Zone = target === "far" ? "TR" : target === "wall" ? "TL" : "BL";
   return (
     <div className="moment">
-      <p className="moment-title">🧤 Tiro libre en contra</p>
-      <p className="muted small" style={{ margin: 0 }}>Va a patear un <b>{shooterFoot}</b> de {rival ?? "el rival"}. ¿Qué palo cubrís?</p>
+      <MomentHead kind="freekick-save" chips={[`🦶 ${shooterFoot === "zurdo" ? "Zurdo" : "Derecho"}`]} />
       <GoalScene keeper={pick === "far" ? "R" : pick === "wall" || pick === "under" ? "L" : "idle"} ball={pick ? ball : undefined} wall wallKit={kitOf(team)} result={res} keeperColor={keeperKitOf(team)} />
       <Quality q={q} good="⚡ Reaccionaste a tiempo." bad="🐢 Saliste tarde." />
       {!cover ? (
         <div className="zone-grid three">
-          <button className="btn zone-btn" onClick={() => { play("click"); setCover("wall"); }}>Palo de la barrera</button>
-          <button className="btn zone-btn" onClick={() => { play("click"); setCover("under"); }}>Abajo (por si pasa por abajo)</button>
-          <button className="btn zone-btn" onClick={() => { play("click"); setCover("far"); }}>Mi palo</button>
+          <button className="btn zone-btn" onClick={() => { play("click"); setCover("wall"); }}>🧱 Palo barrera</button>
+          <button className="btn zone-btn" onClick={() => { play("click"); setCover("under"); }}>⬇ Abajo</button>
+          <button className="btn zone-btn" onClick={() => { play("click"); setCover("far"); }}>Mi palo ➡</button>
         </div>
-      ) : <AimBar d={d} bonus={bonus} cta="¡Volar!" label="Ahora el reflejo: soltá en la zona verde." onHit={(g) => go(cover, g)} />}
+      ) : <AimBar d={d} bonus={bonus} cta="¡Volar!" label="Reflejo: soltá en verde" onHit={(g) => go(cover, g)} />}
     </div>
   );
 }
 
 /* ---------- Mano a mano: elegir cómo definir ---------- */
 const KEEPER_STATES = [
-  { id: "adelantado", text: "El arquero salió a achicar, está adelantado.", odds: { cruzado: 0.45, palo: 0.35, vaselina: 0.85, gambeta: 0.7 } },
-  { id: "linea", text: "El arquero se quedó parado en la línea.", odds: { cruzado: 0.78, palo: 0.6, vaselina: 0.15, gambeta: 0.35 } },
-  { id: "cargado", text: "El arquero está cargado hacia el primer palo.", odds: { cruzado: 0.85, palo: 0.2, vaselina: 0.4, gambeta: 0.55 } },
-  { id: "tirado", text: "El arquero se tiró antes de tiempo.", odds: { cruzado: 0.35, palo: 0.5, vaselina: 0.6, gambeta: 0.85 } },
+  { id: "adelantado", text: "El arquero salió a achicar, está adelantado.", chip: "Salió a achicar", odds: { cruzado: 0.45, palo: 0.35, vaselina: 0.85, gambeta: 0.7 } },
+  { id: "linea", text: "El arquero se quedó parado en la línea.", chip: "Quieto en la línea", odds: { cruzado: 0.78, palo: 0.6, vaselina: 0.15, gambeta: 0.35 } },
+  { id: "cargado", text: "El arquero está cargado hacia el primer palo.", chip: "Cargado al primer palo", odds: { cruzado: 0.85, palo: 0.2, vaselina: 0.4, gambeta: 0.55 } },
+  { id: "tirado", text: "El arquero se tiró antes de tiempo.", chip: "Se tiró antes", odds: { cruzado: 0.35, palo: 0.5, vaselina: 0.6, gambeta: 0.85 } },
 ] as const;
 const PLACE_OF: Record<string, KeeperPlace> = {
   adelantado: { x: 100, y: 106, scale: 1.35, pose: "ready" },
@@ -333,18 +352,17 @@ export function Placement({ d, bonus, onDone, shots, fame = 50, rival }: MomentP
     : res ? FINISH_TO[choice] : undefined;
   return (
     <div className="moment">
-      <p className="moment-title">🏃 Mano a mano</p>
-      <p className="muted small" style={{ margin: 0 }}>{st.text} ¿Cómo la definís?</p>
-      <GoalScene place={place} ball={target} ballFrom={[100, 128]} result={res} keeperColor={keeperKitOf(rival)} />
+      <MomentHead kind="placement" chips={[`🧤 ${st.chip}`]} />
+      <GoalScene run place={place} ball={target} ballFrom={[100, 128]} result={res} keeperColor={keeperKitOf(rival)} />
       <Scouted kind="placement" shots={shots} />
       <ReadNote on={read} />
       <Quality q={q} good="🎯 La definiste justo." bad="😬 Le pegaste mal." />
       {!aim ? (
         <div className="zone-grid two">
-          <button className="btn zone-btn" onClick={() => { play("click"); setAim("cruzado"); }}>↘ Cruzado abajo</button>
-          <button className="btn zone-btn" onClick={() => { play("click"); setAim("palo"); }}>↗ Al primer palo</button>
+          <button className="btn zone-btn" onClick={() => { play("click"); setAim("cruzado"); }}>↘ Cruzado</button>
+          <button className="btn zone-btn" onClick={() => { play("click"); setAim("palo"); }}>↗ Primer palo</button>
           <button className="btn zone-btn" onClick={() => { play("click"); setAim("vaselina"); }}>🌈 Vaselina</button>
-          <button className="btn zone-btn" onClick={() => { play("click"); setAim("gambeta"); }}>🌀 Gambeta al arquero</button>
+          <button className="btn zone-btn" onClick={() => { play("click"); setAim("gambeta"); }}>🌀 Gambeta</button>
         </div>
       ) : <AimBar d={d} bonus={bonus} cta={aim === "gambeta" ? "¡Encarar!" : "¡Definir!"} onHit={(g) => go(aim, g)} />}
     </div>
@@ -379,10 +397,7 @@ export function PassMoment({ d, bonus, onDone, mode, team, rival }: MomentProps 
   };
   return (
     <div className="moment">
-      <p className="moment-title">{mode === "pass" ? "👟 Pase filtrado" : "🛡️ Anticipo"}</p>
-      <p className="muted small" style={{ margin: 0 }}>
-        {mode === "pass" ? "Tocá al compañero que quedó libre de marca." : "El rival va a dar el pase al que está libre. Tocá a quién vas a cortar."} ({left}s)
-      </p>
+      <MomentHead kind={mode} chips={[`⏱ ${left}s`]} />
       <PitchScene>
         {layout.defs.map(([x, y], i) => <PlayerToken key={`d${i}`} x={x} y={y} color={them[0]} trim={them[1]} />)}
         {layout.spots.map(([x, y], i) => (
@@ -402,9 +417,9 @@ export function PassMoment({ d, bonus, onDone, mode, team, rival }: MomentProps 
 
 /* ---------- Precisión (definir, cruzar, atajar, cabecear) ---------- */
 const TIMING_LABEL: Record<string, { title: string; cta: string; desc: string; ok: string; bad: string }> = {
-  finish: { title: "Llegás al área con la pelota", cta: "¡Definir!", desc: "Pateá cuando la marca esté en la zona verde.", ok: "¡GOOOL! ⚽", bad: "Afuera por poco…" },
+  finish: { title: "Llegás al área", cta: "¡Definir!", desc: "Pateá cuando la marca esté en la zona verde.", ok: "¡GOOOL! ⚽", bad: "Afuera por poco…" },
   tackle: { title: "Contragolpe del rival", cta: "¡Cruzar!", desc: "Tirate al piso cuando esté en la zona verde.", ok: "¡Cruce perfecto! 🛡️", bad: "Te pasó de largo…" },
-  save: { title: "Remate a quemarropa", cta: "¡Volar!", desc: "Estirate en el momento justo.", ok: "¡Atajadón! 🧤", bad: "Gol del rival…" },
+  save: { title: "Remate de cerca", cta: "¡Volar!", desc: "Estirate en el momento justo.", ok: "¡Atajadón! 🧤", bad: "Gol del rival…" },
   header: { title: "Córner a favor", cta: "¡Cabezazo!", desc: "Saltá cuando la marca esté en la zona verde.", ok: "¡GOL DE CABEZA! ⚽", bad: "Se fue alto…" },
 };
 export function TimingMoment({ kind, d, bonus, onDone, team, rival }: MomentProps & { kind: string }) {
@@ -437,8 +452,7 @@ export function TimingMoment({ kind, d, bonus, onDone, team, rival }: MomentProp
   const L = TIMING_LABEL[kind] ?? TIMING_LABEL.finish;
   return (
     <div className="moment">
-      <p className="moment-title">⚡ {L.title}</p>
-      <p className="muted small" style={{ margin: 0 }}>{L.desc}</p>
+      <MomentHead kind={kind} chips={[L.title]} />
       <TimingScene kind={kind} result={result} team={team} rival={rival} />
       <div className="timing" onClick={hit} role="button" aria-label={L.cta}>
         <div className="timing-zone" style={{ left: `${lo * 100}%`, width: `${(hi - lo) * 100}%` }} />
@@ -486,16 +500,16 @@ function TimingScene({ kind, result, team, rival }: { kind: string; result: bool
 
 /* ---------- Cabezazo: te tiran el centro (córner o tiro libre de un compañero) ---------- */
 const HEAD_SETUPS = [
-  { text: "El arquero salió a cortar y quedó a mitad de camino.", place: { x: 100, y: 98, scale: 1.2, pose: "jump" }, odds: { piso: 0.66, palo: 0.34, cruzado: 0.45 } },
-  { text: "El arquero se quedó en la línea, pegado al primer palo.", place: { x: 70, y: 82, pose: "ready" }, odds: { piso: 0.36, palo: 0.14, cruzado: 0.66 } },
-  { text: "El arquero cubre el segundo palo.", place: { x: 130, y: 82, pose: "ready" }, odds: { piso: 0.36, palo: 0.62, cruzado: 0.18 } },
+  { text: "El arquero salió a cortar y quedó a mitad de camino.", chip: "Salió a cortar", place: { x: 100, y: 98, scale: 1.2, pose: "jump" }, odds: { piso: 0.66, palo: 0.34, cruzado: 0.45 } },
+  { text: "El arquero se quedó en la línea, pegado al primer palo.", chip: "En el primer palo", place: { x: 70, y: 82, pose: "ready" }, odds: { piso: 0.36, palo: 0.14, cruzado: 0.66 } },
+  { text: "El arquero cubre el segundo palo.", chip: "Cubre el segundo palo", place: { x: 130, y: 82, pose: "ready" }, odds: { piso: 0.36, palo: 0.62, cruzado: 0.18 } },
 ] as const;
 const HEAD_TO: Record<string, GoalZone> = { piso: "C", palo: "BL", cruzado: "BR" };
 export function HeaderMoment({ d, bonus, onDone, rival }: MomentProps) {
   const st = useMemo(() => HEAD_SETUPS[Math.floor(Math.random() * HEAD_SETUPS.length)], []);
   const from = useMemo(() => {
     const r = Math.random();
-    return r < 0.55 ? `El ${["10", "7", "11"][Math.floor(Math.random() * 3)]} tira el córner` : r < 0.85 ? "Tiro libre lateral de un compañero" : "Centro desde la derecha";
+    return r < 0.55 ? "🚩 Córner de un compañero" : r < 0.85 ? "🧱 Tiro libre lateral" : "↗ Centro desde la derecha";
   }, []);
   const [aim, setAim] = useState<keyof typeof st.odds | null>(null);
   const [q, setQ] = useState<boolean | null>(null);
@@ -511,27 +525,26 @@ export function HeaderMoment({ d, bonus, onDone, rival }: MomentProps) {
   };
   return (
     <div className="moment">
-      <p className="moment-title">🤕 ¡Te queda para cabecear!</p>
-      <p className="muted small" style={{ margin: 0 }}>{from} y la pelota te cae a vos. {st.text} ¿A dónde la mandás?</p>
+      <MomentHead kind="header" chips={[from, `🧤 ${st.chip}`]} />
       <GoalScene small place={st.place as KeeperPlace} ball={ball} ballFrom={[60, 100]} result={res} keeperColor={keeperKitOf(rival)} />
       <Quality q={q} good="💪 Saltaste justo." bad="😬 La agarraste mal." />
       {!aim ? (
         <div className="zone-grid three">
-          <button className="btn zone-btn" onClick={() => { play("click"); setAim("piso"); }}>⬇ Abajo, contra el piso</button>
-          <button className="btn zone-btn" onClick={() => { play("click"); setAim("palo"); }}>↖ Al primer palo</button>
+          <button className="btn zone-btn" onClick={() => { play("click"); setAim("piso"); }}>⬇ Al piso</button>
+          <button className="btn zone-btn" onClick={() => { play("click"); setAim("palo"); }}>↖ 1er palo</button>
           <button className="btn zone-btn" onClick={() => { play("click"); setAim("cruzado"); }}>↘ Cruzado</button>
         </div>
-      ) : <AimBar d={d} bonus={bonus} cta="¡Cabezazo!" label="Saltá en el momento justo: soltá en la zona verde." onHit={(g) => go(aim, g)} />}
+      ) : <AimBar d={d} bonus={bonus} cta="¡Cabezazo!" label="Saltá: soltá en verde" onHit={(g) => go(aim, g)} />}
     </div>
   );
 }
 
 /* ---------- Córner: elegir a dónde tirarlo y darle bien ---------- */
 const CORNER_SETUPS = [
-  { text: "Defienden en zona en el área chica.", defs: [[40, 8], [50, 7], [60, 8], [47, 16]], odds: { primer: 0.22, penal: 0.55, segundo: 0.38, corto: 0.4 } },
-  { text: "Marcan al hombre y su central más alto cuida el segundo palo.", defs: [[42, 11], [52, 20], [63, 9], [17, 12]], odds: { primer: 0.5, penal: 0.32, segundo: 0.14, corto: 0.3 } },
-  { text: "Amontonaron gente en el primer palo.", defs: [[38, 7], [42, 10], [45, 6], [50, 15]], odds: { primer: 0.12, penal: 0.42, segundo: 0.58, corto: 0.32 } },
-  { text: "Se metieron todos en el área y dejaron libre al que viene en corto.", defs: [[40, 9], [50, 9], [60, 9], [50, 19], [44, 15]], odds: { primer: 0.24, penal: 0.22, segundo: 0.26, corto: 0.6 } },
+  { text: "Defienden en zona en el área chica.", chip: "Defienden en zona", defs: [[40, 8], [50, 7], [60, 8], [47, 16]], odds: { primer: 0.22, penal: 0.55, segundo: 0.38, corto: 0.4 } },
+  { text: "Marcan al hombre y su central más alto cuida el segundo palo.", chip: "Su alto cuida el 2º palo", defs: [[42, 11], [52, 20], [63, 9], [17, 12]], odds: { primer: 0.5, penal: 0.32, segundo: 0.14, corto: 0.3 } },
+  { text: "Amontonaron gente en el primer palo.", chip: "Llenaron el 1er palo", defs: [[38, 7], [42, 10], [45, 6], [50, 15]], odds: { primer: 0.12, penal: 0.42, segundo: 0.58, corto: 0.32 } },
+  { text: "Se metieron todos en el área y dejaron libre al que viene en corto.", chip: "Libre el corto", defs: [[40, 9], [50, 9], [60, 9], [50, 19], [44, 15]], odds: { primer: 0.24, penal: 0.22, segundo: 0.26, corto: 0.6 } },
 ] as const;
 type CornerTarget = keyof (typeof CORNER_SETUPS)[number]["odds"];
 const CORNER_TO: Record<CornerTarget, [number, number]> = { primer: [41, 10], penal: [50, 21], segundo: [61, 10], corto: [14, 11] };
@@ -570,8 +583,7 @@ export function Corner({ d, bonus, onDone, team, rival }: MomentProps) {
   };
   return (
     <div className="moment">
-      <p className="moment-title">🚩 Córner a favor</p>
-      <p className="muted small" style={{ margin: 0 }}>{st.text} {choice ? "Ahora el centro: soltá en la zona verde." : "¿A dónde lo tirás?"}</p>
+      <MomentHead kind="corner" chips={[`🛡️ ${st.chip}`]} />
       <PitchScene corner>
         {st.defs.map(([x, y], i) => <PlayerToken key={i} x={x} y={y} color={them[0]} trim={them[1]} />)}
         <PlayerToken x={50} y={5} color={keeperKitOf(rival)} />
@@ -584,9 +596,9 @@ export function Corner({ d, bonus, onDone, team, rival }: MomentProps) {
       </PitchScene>
       {!choice ? (
         <div className="zone-grid two">
-          <button className="btn zone-btn" onClick={() => { play("click"); setChoice("primer"); }}>Al primer palo</button>
-          <button className="btn zone-btn" onClick={() => { play("click"); setChoice("penal"); }}>Al punto penal</button>
-          <button className="btn zone-btn" onClick={() => { play("click"); setChoice("segundo"); }}>Al segundo palo</button>
+          <button className="btn zone-btn" onClick={() => { play("click"); setChoice("primer"); }}>1er palo</button>
+          <button className="btn zone-btn" onClick={() => { play("click"); setChoice("penal"); }}>Punto penal</button>
+          <button className="btn zone-btn" onClick={() => { play("click"); setChoice("segundo"); }}>2º palo</button>
           <button className="btn zone-btn" onClick={() => { play("click"); setChoice("corto"); }}>En corto</button>
         </div>
       ) : (
@@ -620,8 +632,7 @@ export function TriviaMoment({ onDone, seconds = 9, compact = false }: { onDone:
   };
   return (
     <div className={compact ? "trivia-compact" : "moment"}>
-      {!compact && <p className="moment-title">🧠 Lectura de juego</p>}
-      {!compact && <p className="muted small" style={{ margin: 0 }}>Acertá para ganar la jugada. Tu conocimiento es tu stat.</p>}
+      {!compact && <MomentHead kind="trivia" />}
       <div className="trivia-timer"><span style={{ width: `${(left / seconds) * 100}%` }} /></div>
       <p className="trivia-q">{q.text}</p>
       <div className="trivia-opts">
@@ -674,8 +685,7 @@ export function TicTacToe({ onDone }: MomentProps) {
   const line = winner(board) ?? [];
   return (
     <div className="moment">
-      <p className="moment-title">❌⭕ Tres en raya táctico</p>
-      <p className="muted small" style={{ margin: 0 }}>Arrancás vos. Para ocupar una casilla, respondé bien; si fallás, es del rival. Tres en línea o empate: jugada ganada.</p>
+      <MomentHead kind="ttt" chips={["Respondé bien para ganar la casilla"]} />
       <div className="ttt">
         {board.map((c, i) => (
           <button key={i} className={`ttt-cell ${c ? `m-${c}` : ""} ${line.includes(i) ? "win" : ""}`} disabled={!!c || asking !== null || !!done} onClick={() => { play("click"); setAsking(i); }}>
@@ -691,6 +701,13 @@ export function TicTacToe({ onDone }: MomentProps) {
 
 /** Elige el minijuego según el tipo de jugada. */
 export function MomentRunner({ kind, ...p }: MomentProps & { kind: MomentKind }) {
+  return (
+    <div className="moment-wrap" style={{ "--mk": (MOMENT_LOOK[kind] ?? MOMENT_LOOK.finish).color } as React.CSSProperties}>
+      <MomentBody kind={kind} {...p} />
+    </div>
+  );
+}
+function MomentBody({ kind, ...p }: MomentProps & { kind: MomentKind }) {
   switch (kind) {
     case "penalty": return <PenaltyShoot {...p} />;
     case "penalty-save": return <PenaltySave {...p} />;

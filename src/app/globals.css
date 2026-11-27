@@ -1052,3 +1052,31 @@ body[data-swipe="right"] main { animation: swipeR .32s ease-out; }
 .aim-note { margin: 0; text-align: center; font-weight: 800; font-size: 14px; animation: fadeUp .3s ease both; }
 .aim-note.ok { color: #8ff0b6; }
 .aim-note.bad { color: #ffb4a8; }
+
+/* ---------- Jugadas: identidad visual por tipo ---------- */
+.moment-wrap { --mk: var(--accent); }
+.moment-wrap .scene { box-shadow: 0 0 0 2px var(--mk), 0 8px 22px rgba(0,0,0,.4); }
+.moment-wrap .btn-primary { background: var(--mk); border-color: var(--mk); color: #0b0d12; }
+.moment-wrap .zone-btn { border-color: color-mix(in srgb, var(--mk) 45%, var(--line)); }
+.mhead { display: grid; gap: 6px; }
+.mhead-bar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 14px; color: #fff;
+  background: linear-gradient(100deg, var(--mk), color-mix(in srgb, var(--mk) 50%, #000)); box-shadow: 0 4px 14px color-mix(in srgb, var(--mk) 35%, transparent); animation: rise .25s both; }
+.mhead-icon { font-size: 26px; line-height: 1; filter: drop-shadow(0 1px 1px rgba(0,0,0,.4)); }
+.mhead-label { font-family: var(--display); text-transform: uppercase; font-size: 26px; line-height: 1; letter-spacing: .02em; text-shadow: 0 2px 0 rgba(0,0,0,.25); }
+.mhead-verb { margin-left: auto; font-size: 12px; font-weight: 800; text-align: right; opacity: .92; line-height: 1.15; }
+.mhead-chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.mhead-chips span { font-size: 13px; font-weight: 800; padding: 3px 10px; border-radius: 999px; background: color-mix(in srgb, var(--mk) 16%, transparent); border: 1px solid color-mix(in srgb, var(--mk) 50%, transparent); }
+.scouted { margin: 0; text-align: center; font-size: 12.5px; font-weight: 700; }
+/* Contexto del partido en una línea */
+.live-card .situation { display: flex; align-items: center; gap: 8px; padding: 6px 10px; margin-bottom: 6px; }
+.live-card .sit-top { flex-wrap: nowrap; }
+.live-card .sit-head { margin: 0; font-size: 13.5px; line-height: 1.25; }
+.live-card .sit-tag { display: none; }
+.live-card .moment-progress { margin-bottom: 6px; }
+.feed.mini { padding: 4px 10px; margin: 0 0 6px; }
+.feed.mini li { font-size: 12.5px; }
+.starter { font-size: 17px; }
+.mhead-label { white-space: nowrap; font-size: clamp(19px, 6.4vw, 26px); }
+.mhead-verb { max-width: 42%; }
+.sc-speed { animation: sc-speed .5s linear infinite; }
+@keyframes sc-speed { 50% { opacity: .35; } }

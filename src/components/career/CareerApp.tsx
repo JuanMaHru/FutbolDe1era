@@ -572,7 +572,7 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
       <section className="match card">
         {header}
         <p className="muted small" style={{ margin: 0 }}>Fuerza {Math.round(strengthOf(team))} vs {Math.round(strengthOf(rival))}{fx.knockout ? (fx.leg === 1 ? " · Partido de ida" : " · Eliminación: si empatan, penales") : ""}</p>
-        <p className={`starter ${started ? "yes" : "no"}`}>{started ? `✅ Sos titular: vas a tener ${plan.kinds.length} jugadas.` : plan.kinds.length ? "🪑 Arrancás en el banco: entrás en el segundo tiempo y vas a tener 1 jugada." : "🪑 Arrancás en el banco y no se sabe si vas a entrar."}</p>
+        <p className={`starter ${started ? "yes" : "no"}`}>{started ? `✅ Titular · ${plan.kinds.length} jugadas` : plan.kinds.length ? "🪑 Suplente · entrás en el 2º tiempo · 1 jugada" : "🪑 Suplente · capaz no entrás"}</p>
         {plan.kinds.length > 0 ? (
           <>
             <button className="btn btn-primary big-cta" onClick={() => { play("whistle"); setTimeout(() => setPhase("play"), 50); }}>¡Que ruede la pelota! 🟢</button>
@@ -596,7 +596,7 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
         <Burst kind={moments[moments.length - 1].kind} ok={moments[moments.length - 1].ok} effect={effects[effects.length - 1]} colors={colors} />
       ) : (
         <>
-          <Feed items={feed.filter((f) => f.min < minuteNow)} />
+          <Feed items={feed.filter((f) => f.min < minuteNow).slice(-1)} mini />
           <div className={`situation ${plan.minutes[i] >= 85 ? "late" : ""}`}>
             <div className="sit-top"><span className="sit-min">{sit.minute}</span>{sit.tags.map((t) => <span key={t} className="sit-tag">{t}</span>)}</div>
             <p className="sit-head">{sit.headline}</p>
@@ -614,11 +614,11 @@ function MatchStep({ s, save }: { s: CareerState; save: (s: CareerState) => void
 }
 
 /** Relato de las pelotas paradas que patearon otros. */
-function Feed({ items, title = "Lo que pasó" }: { items: E.FeedItem[]; title?: string }) {
+function Feed({ items, title = "Lo que pasó", mini }: { items: E.FeedItem[]; title?: string; mini?: boolean }) {
   if (!items.length) return null;
   return (
-    <div className="feed">
-      <p className="feed-title">{title}</p>
+    <div className={`feed ${mini ? "mini" : ""}`}>
+      {!mini && <p className="feed-title">{title}</p>}
       <ul>
         {items.map((f, k) => (
           <li key={k} className={`${f.us ? "us" : "them"} ${f.goal ? "goal" : ""}`}><b>{f.min}&apos;</b> {f.text}</li>
