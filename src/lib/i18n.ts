@@ -41,6 +41,7 @@ const es = {
   "mode.wordle": "Palabra Crack",
   "mode.bingo": "Bingo Futbolero",
   "mode.once": "Armá el 11",
+  "mode.masomenos": "Más o Menos",
   "game.guessThe": "Adiviná el",
   "game.placeholder": "Escribí un",
   "game.notFound": "No está en la base (todavía).",

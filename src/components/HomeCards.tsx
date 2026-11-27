@@ -26,6 +26,7 @@ const MODES: Mode[] = [
   { id: "once", href: "/once", badge: "new", desc: "Completá el 11 con consignas" },
   { id: "wordle", href: "/palabra", badge: "new", desc: "Adiviná el apellido letra por letra" },
   { id: "bingo", href: "/bingo", badge: "new", desc: "Ubicá a cada jugador en su casilla" },
+  { id: "masomenos", href: "/mas-o-menos", badge: "new", desc: "¿Vale más o menos? Valores, goles, estadios…" },
   { id: "carrera", href: "/carrera", badge: "new", desc: "Creá tu jugador y llegá a la Selección" },
   { id: "ligas", href: "/ligas", desc: "Tabla semanal con tu grupo" },
   { id: "archivo", href: "/archivo", desc: "Jugá los días que te perdiste" },

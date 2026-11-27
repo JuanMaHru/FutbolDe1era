@@ -10,6 +10,7 @@ import { LeagueTable } from "@/components/LeagueTable";
 import { Archive } from "@/components/Archive";
 import { TrayectoriaGame } from "@/components/TrayectoriaGame";
 import { OrderGame } from "@/components/OrderGame";
+import { MasOMenosGame } from "@/components/MasOMenosGame";
 import { OnceGame } from "@/components/OnceGame";
 import { PalabraGame } from "@/components/PalabraGame";
 import { BingoGame } from "@/components/BingoGame";
@@ -27,6 +28,8 @@ function Page({ path }: { path: string }) {
   }
   const tray = path.match(/^\/trayectoria(\/dt)?(?:\/(\d+))?$/);
   if (tray) return tray[1] ? <OrderGame key={path} day={tray[2] ? Number(tray[2]) : undefined} /> : <TrayectoriaGame key={path} kind="jugador" day={tray[2] ? Number(tray[2]) : undefined} />;
+  const mm = path.match(/^\/mas-o-menos(?:\/(\d+))?$/);
+  if (mm) return <MasOMenosGame key={path} day={mm[1] ? Number(mm[1]) : undefined} />;
   const other = path.match(/^\/(once|palabra|bingo)(?:\/(\d+))?$/);
   if (other) {
     const day = other[2] ? Number(other[2]) : undefined;
