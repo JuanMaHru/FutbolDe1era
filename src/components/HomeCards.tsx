@@ -20,6 +20,7 @@ interface Mode {
 }
 
 const MODES: Mode[] = [
+  { id: "carrera", href: "/carrera", badge: "new", desc: "Creá tu jugador, ganá títulos, elegí tus pases y llegá a la Selección" },
   { id: "jugador", href: "/jugador", badge: "daily", desc: "Club, liga, país, posición, edad y dorsal" },
   { id: "dt", href: "/dt", badge: "daily", desc: "Equipo, liga, país, edad y cómo jugaba" },
   { id: "tray", href: "/trayectoria", badge: "new", desc: "Cada error revela un club de su carrera" },
@@ -32,7 +33,6 @@ const MODES: Mode[] = [
   { id: "anios", href: "/en-que-anio", badge: "new", desc: "Momentos históricos: ¿en qué año fue?" },
   { id: "conexion", href: "/conexion", badge: "new", desc: "Uní dos jugadores con compañeros de equipo" },
   { id: "masomenos", href: "/mas-o-menos", badge: "new", desc: "¿Vale más o menos? Valores, goles, estadios…" },
-  { id: "carrera", href: "/carrera", badge: "new", desc: "Creá tu jugador y llegá a la Selección" },
   { id: "ligas", href: "/ligas", desc: "Tabla semanal con tu grupo" },
   { id: "archivo", href: "/archivo", desc: "Jugá los días que te perdiste" },
 ];
@@ -79,7 +79,6 @@ export function HomeCards() {
         </div>
       </section>
 
-      <Efemerides />
 
       <h2 className="section-title">{t("home.pick")}</h2>
       <div className="modes">
@@ -96,7 +95,7 @@ export function HomeCards() {
             </>
           );
           return m.href ? (
-            <Link key={m.id} href={m.href} className="mode" style={{ animationDelay: `${i * 50}ms` }} onClick={() => play("click")}>
+            <Link key={m.id} href={m.href} className={`mode ${m.id === "carrera" ? "mode-featured" : ""}`} style={{ animationDelay: `${i * 50}ms` }} onClick={() => play("click")}>
               {inner}
             </Link>
           ) : (
@@ -106,6 +105,7 @@ export function HomeCards() {
           );
         })}
       </div>
+      <Efemerides />
       <div style={{ marginTop: 22 }}><DonateButton variant="card" /></div>
     </>
   );

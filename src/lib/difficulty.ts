@@ -9,8 +9,8 @@ import { read, write } from "./storage";
 
 export type Level = "facil" | "medio" | "dificil";
 export const LEVELS: Level[] = ["facil", "medio", "dificil"];
-export const LEVEL_LABEL: Record<Level, string> = { facil: "Fácil", medio: "Medio", dificil: "Difícil" };
-export const LEVEL_ICON: Record<Level, string> = { facil: "🟢", medio: "🟡", dificil: "🔴" };
+export const LEVEL_LABEL: Record<Level, string> = { facil: "Hincha", medio: "Crack", dificil: "Leyenda" };
+export const LEVEL_ICON: Record<Level, string> = { facil: "📣", medio: "⭐", dificil: "👑" };
 export const MULT: Record<Level, number> = { facil: 0.6, medio: 1, dificil: 1.4 };
 
 /** tries: intentos/vidas/tarjetas según el juego. time: segundos totales (0 = sin reloj). perRound: segundos por jugada. */

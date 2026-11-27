@@ -18,7 +18,7 @@ export function DonateButton({ variant = "pill" }: { variant?: "pill" | "card" |
       ) : variant === "link" ? (
         <button className="link-btn" onClick={() => setOpen(true)}>💙 Apoyá el proyecto</button>
       ) : (
-        <button className="donate-pill" onClick={() => { play("click"); setOpen(true); }} aria-label="Apoyá el proyecto"><span aria-hidden>💙</span><span className="donate-txt">Apoyar</span></button>
+        <button className="donate-pill" onClick={() => { play("click"); setOpen(true); }} aria-label="Apoyá el proyecto"><span aria-hidden>⚽</span><span className="donate-txt">Apoyar</span></button>
       )}
       <DonateDialog open={open} onClose={() => setOpen(false)} />
     </>
