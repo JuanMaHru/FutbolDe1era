@@ -36,8 +36,10 @@ export function Header() {
 
   const links = [
     { href: "/", label: t("nav.games"), active: path === "/" },
-    { href: "/archivo", label: t("nav.archive"), active: path.startsWith("/archivo") },
+    { href: "/carrera", label: "Carrera", active: path.startsWith("/carrera") },
+    { href: "/album", label: "Álbum", active: path.startsWith("/album") },
     { href: "/ligas", label: t("nav.leagues"), active: path.startsWith("/ligas") },
+    { href: "/archivo", label: t("nav.archive"), active: path.startsWith("/archivo") },
   ];
 
   return (
@@ -105,11 +107,10 @@ export function Header() {
         </Link>
         <nav className="nav">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className={l.active ? "active" : ""}>
-              {l.label}
+            <Link key={l.href} href={l.href} className={`nav-link ${l.active ? "active" : ""}`}>
+              {l.label}{l.href === "/album" && <PackBadge />}
             </Link>
           ))}
-          <Link href="/album" className="album-link" title="Álbum de figuritas">📒<PackBadge /></Link>
           <span className="rep-pill" title="Reputación: la vas a usar en el Modo Carrera">
             ⭐ {profile?.reputation ?? 0}
           </span>

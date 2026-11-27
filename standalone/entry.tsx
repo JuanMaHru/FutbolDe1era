@@ -23,6 +23,7 @@ import { Catalog } from "@/components/career/Catalog";
 import { Footer, LegalNotice } from "@/components/LegalNotice";
 import { FONTS_URL } from "@/lib/site";
 import { Album } from "@/components/Album";
+import { TabBar } from "@/components/TabBar";
 
 function Page({ path }: { path: string }) {
   const game = path.match(/^\/(jugador|dt)(?:\/(\d+))?$/);
@@ -107,6 +108,7 @@ function App() {
         <Page path={path} />
       </main>
       <Footer />
+      <TabBar />
     </>
   );
 }

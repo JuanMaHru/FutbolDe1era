@@ -3,6 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { THEME_BOOT } from "@/lib/theme";
 import { Footer } from "@/components/LegalNotice";
+import { TabBar } from "@/components/TabBar";
 import { FONTS_URL, SITE_URL } from "@/lib/site";
 
 const DESCRIPTION = "Adiviná el jugador y el DT del día, competí con tus amigos y compartí tu resultado. Tu conocimiento de fútbol es tu stat.";
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main className="container">{children}</main>
         <Footer />
+        <TabBar />
       </body>
     </html>
   );
