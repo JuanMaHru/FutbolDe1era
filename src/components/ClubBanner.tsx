@@ -9,7 +9,7 @@ const CANTOS = ["Te sigo a todas partes", "Esta hinchada te alienta", "Hasta la 
 /** Frases propias de cada club (apodos, lemas o títulos de cantos, no letras completas). */
 const FRASES: Record<string, string[]> = {
   "Boca Juniors": ["Jugador N° 12", "La Mitad + 1", "Xeneize de corazón"],
-  "River Plate": ["Rojo y blanco como mi corazón", "El Más Grande", "Millonario de ley"],
+  "River Plate": ["Rojo y blanco como mi corazón", "El Más Grande", "Millonario de ley", "Todos menos algunos", "Vivir y jugar con Grandeza"],
   "Racing Club": ["La Academia", "Racing es un sentimiento", "Primer grande"],
   "Independiente": ["Rey de Copas", "Diablo de corazón"],
   "San Lorenzo": ["El Ciclón", "Cuervo de alma"],
