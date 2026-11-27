@@ -146,6 +146,11 @@
    {
     "club": "Chelsea",
     "from": 2023,
+    "to": 2026
+   },
+   {
+    "club": "Manchester City",
+    "from": 2026,
     "to": null
    }
   ]
@@ -205,6 +210,11 @@
    {
     "club": "Tottenham",
     "from": 2021,
+    "to": 2026
+   },
+   {
+    "club": "Atlético de Madrid",
+    "from": 2026,
     "to": null
    }
   ]
@@ -371,6 +381,11 @@
    {
     "club": "Benfica",
     "from": 2020,
+    "to": 2026
+   },
+   {
+    "club": "River Plate",
+    "from": 2026,
     "to": null
    }
   ]
@@ -395,6 +410,11 @@
    {
     "club": "Tigres",
     "from": 2025,
+    "to": 2026
+   },
+   {
+    "club": "River Plate",
+    "from": 2026,
     "to": null
    }
   ]
@@ -853,7 +873,13 @@
    {
     "club": "Al Hilal",
     "from": 2025,
-    "to": null
+    "to": 2026
+   },
+   {
+    "club": "Diriyah Club",
+    "from": 2026,
+    "to": null,
+    "loan": true
    }
   ]
  },
@@ -1024,6 +1050,11 @@
    {
     "club": "Liverpool",
     "from": 2017,
+    "to": 2026
+   },
+   {
+    "club": "Trabzonspor",
+    "from": 2026,
     "to": null
    }
   ]
@@ -1878,6 +1909,11 @@
    {
     "club": "Barcelona",
     "from": 2022,
+    "to": 2026
+   },
+   {
+    "club": "Chicago Fire",
+    "from": 2026,
     "to": null
    }
   ]
@@ -1907,6 +1943,11 @@
    {
     "club": "Atlético de Madrid",
     "from": 2021,
+    "to": 2026
+   },
+   {
+    "club": "Orlando City",
+    "from": 2026,
     "to": null
    }
   ]
@@ -2098,7 +2139,13 @@
    {
     "club": "Chelsea",
     "from": 2025,
-    "to": null
+    "to": 2026
+   },
+   {
+    "club": "Aston Villa",
+    "from": 2026,
+    "to": null,
+    "loan": true
    }
   ]
  },
@@ -2117,7 +2164,13 @@
    {
     "club": "Real Madrid",
     "from": 2025,
-    "to": null
+    "to": 2026
+   },
+   {
+    "club": "Fiorentina",
+    "from": 2026,
+    "to": null,
+    "loan": true
    }
   ]
  },
@@ -2171,6 +2224,11 @@
    {
     "club": "Atlético de Madrid",
     "from": 2025,
+    "to": 2026
+   },
+   {
+    "club": "River Plate",
+    "from": 2026,
     "to": null
    }
   ]
@@ -2190,6 +2248,11 @@
    {
     "club": "Bayer Leverkusen",
     "from": 2020,
+    "to": 2026
+   },
+   {
+    "club": "Ipswich Town",
+    "from": 2026,
     "to": null
    }
   ]

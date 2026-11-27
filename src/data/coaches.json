@@ -57,8 +57,7 @@
   "nationality": "ARG",
   "birthDate": "1978-09-01",
   "debutYear": 2012,
-  "playedAs": "DFC",
-  "check": true
+  "playedAs": "DFC"
  },
  {
   "id": "diego-simeone",
@@ -118,8 +117,7 @@
   "nationality": "ARG",
   "birthDate": "1962-08-14",
   "debutYear": 1992,
-  "playedAs": "MC",
-  "check": true
+  "playedAs": "MC"
  },
  {
   "id": "jorge-sampaoli",
@@ -279,8 +277,7 @@
   "nationality": "ARG",
   "birthDate": "1971-10-05",
   "playedAs": "DFC",
-  "debutYear": 2010,
-  "check": true
+  "debutYear": 2010
  },
  {
   "id": "juan-pablo-vojvoda",
@@ -290,8 +287,7 @@
   "nationality": "ARG",
   "birthDate": "1975-01-13",
   "playedAs": "DFC",
-  "debutYear": 2014,
-  "check": true
+  "debutYear": 2014
  },
  {
   "id": "hernan-crespo",
@@ -301,8 +297,7 @@
   "nationality": "ARG",
   "birthDate": "1975-07-05",
   "playedAs": "DC",
-  "debutYear": 2015,
-  "check": true
+  "debutYear": 2015
  },
  {
   "id": "fernando-diniz",
@@ -312,8 +307,7 @@
   "nationality": "BRA",
   "birthDate": "1974-03-27",
   "playedAs": "MC",
-  "debutYear": 2009,
-  "check": true
+  "debutYear": 2009
  },
  {
   "id": "leonardo-jardim",
@@ -323,8 +317,7 @@
   "nationality": "POR",
   "birthDate": "1974-08-01",
   "playedAs": "NJ",
-  "debutYear": 2003,
-  "check": true
+  "debutYear": 2003
  },
  {
   "id": "guido-pizarro",
@@ -334,8 +327,7 @@
   "nationality": "ARG",
   "birthDate": "1990-02-26",
   "playedAs": "MC",
-  "debutYear": 2024,
-  "check": true
+  "debutYear": 2024
  },
  {
   "id": "domenec-torrent",
@@ -345,8 +337,7 @@
   "nationality": "ESP",
   "birthDate": "1962-07-14",
   "playedAs": "NJ",
-  "debutYear": 2010,
-  "check": true
+  "debutYear": 2010
  },
  {
   "id": "javier-mascherano",
@@ -366,8 +357,7 @@
   "nationality": "POR",
   "birthDate": "1954-07-24",
   "playedAs": "MC",
-  "debutYear": 1990,
-  "check": true
+  "debutYear": 1990
  },
  {
   "id": "matthias-jaissle",
@@ -377,8 +367,7 @@
   "nationality": "GER",
   "birthDate": "1988-04-05",
   "playedAs": "DFC",
-  "debutYear": 2019,
-  "check": true
+  "debutYear": 2019
  },
  {
   "id": "enzo-maresca",
@@ -388,8 +377,7 @@
   "nationality": "ITA",
   "birthDate": "1980-02-10",
   "playedAs": "MC",
-  "debutYear": 2017,
-  "check": true
+  "debutYear": 2017
  },
  {
   "id": "ruben-amorim",
@@ -409,8 +397,7 @@
   "nationality": "DEN",
   "birthDate": "1973-10-09",
   "playedAs": "NJ",
-  "debutYear": 2008,
-  "check": true
+  "debutYear": 2008
  },
  {
   "id": "unai-emery",
@@ -470,8 +457,7 @@
   "nationality": "GER",
   "birthDate": "1993-02-26",
   "playedAs": "MC",
-  "debutYear": 2020,
-  "check": true
+  "debutYear": 2020
  },
  {
   "id": "david-moyes",
@@ -511,8 +497,7 @@
   "nationality": "ARG",
   "birthDate": "1973-12-21",
   "playedAs": "MC",
-  "debutYear": 2011,
-  "check": true
+  "debutYear": 2011
  },
  {
   "id": "jose-bordalas",
@@ -522,8 +507,7 @@
   "nationality": "ESP",
   "birthDate": "1964-03-05",
   "playedAs": "DC",
-  "debutYear": 1993,
-  "check": true
+  "debutYear": 1993
  },
  {
   "id": "cristian-chivu",
@@ -533,8 +517,7 @@
   "nationality": "ROU",
   "birthDate": "1980-10-26",
   "playedAs": "DFC",
-  "debutYear": 2021,
-  "check": true
+  "debutYear": 2021
  },
  {
   "id": "massimiliano-allegri",
@@ -564,8 +547,7 @@
   "nationality": "ITA",
   "birthDate": "1958-01-26",
   "playedAs": "MC",
-  "debutYear": 1994,
-  "check": true
+  "debutYear": 1994
  },
  {
   "id": "maurizio-sarri",
@@ -595,8 +577,7 @@
   "nationality": "ITA",
   "birthDate": "1977-12-10",
   "playedAs": "MC",
-  "debutYear": 2014,
-  "check": true
+  "debutYear": 2014
  },
  {
   "id": "niko-kovac",
@@ -626,8 +607,7 @@
   "nationality": "POR",
   "birthDate": "1973-03-05",
   "playedAs": "DFC",
-  "debutYear": 2005,
-  "check": true
+  "debutYear": 2005
  },
  {
   "id": "francesco-farioli",
@@ -637,8 +617,7 @@
   "nationality": "ITA",
   "birthDate": "1989-04-10",
   "playedAs": "NJ",
-  "debutYear": 2020,
-  "check": true
+  "debutYear": 2020
  },
  {
   "id": "jose-mourinho",
@@ -648,8 +627,7 @@
   "nationality": "POR",
   "birthDate": "1963-01-26",
   "playedAs": "MC",
-  "debutYear": 2000,
-  "check": true
+  "debutYear": 2000
  },
  {
   "id": "luis-de-la-fuente",
@@ -747,9 +725,8 @@
   "team": "Selección de Venezuela",
   "league": "Selecciones",
   "nationality": "ARG",
-  "birthDate": "1970-05-30",
+  "birthDate": "1970-08-20",
   "playedAs": "DFC",
-  "debutYear": 2010,
-  "check": true
+  "debutYear": 2010
  }
 ]

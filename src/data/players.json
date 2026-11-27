@@ -32,7 +32,7 @@
  {
   "id": "enzo-fernandez",
   "name": "Enzo Fernández",
-  "club": "Chelsea",
+  "club": "Manchester City",
   "league": "Premier League",
   "nationality": "ARG",
   "position": "MC",
@@ -52,7 +52,7 @@
  {
   "id": "emiliano-martinez",
   "name": "Emiliano Martínez",
-  "club": "Aston Villa",
+  "club": "Chelsea",
   "league": "Premier League",
   "nationality": "ARG",
   "position": "ARQ",
@@ -62,8 +62,8 @@
  {
   "id": "cristian-romero",
   "name": "Cristian Romero",
-  "club": "Tottenham",
-  "league": "Premier League",
+  "club": "Atlético de Madrid",
+  "league": "LaLiga",
   "nationality": "ARG",
   "position": "DFC",
   "number": 17,
@@ -92,8 +92,8 @@
  {
   "id": "nicolas-otamendi",
   "name": "Nicolás Otamendi",
-  "club": "Benfica",
-  "league": "Primeira Liga",
+  "club": "River Plate",
+  "league": "Liga Profesional",
   "nationality": "ARG",
   "position": "DFC",
   "number": 30,
@@ -102,8 +102,8 @@
  {
   "id": "franco-mastantuono",
   "name": "Franco Mastantuono",
-  "club": "Real Madrid",
-  "league": "LaLiga",
+  "club": "Fiorentina",
+  "league": "Serie A",
   "nationality": "ARG",
   "position": "EXT",
   "number": 30,
@@ -122,8 +122,8 @@
  {
   "id": "thiago-almada",
   "name": "Thiago Almada",
-  "club": "Atlético de Madrid",
-  "league": "LaLiga",
+  "club": "River Plate",
+  "league": "Liga Profesional",
   "nationality": "ARG",
   "position": "MCO",
   "number": 11,
@@ -132,7 +132,7 @@
  {
   "id": "alejandro-garnacho",
   "name": "Alejandro Garnacho",
-  "club": "Chelsea",
+  "club": "Aston Villa",
   "league": "Premier League",
   "nationality": "ARG",
   "position": "EXT",
@@ -152,8 +152,8 @@
  {
   "id": "nahuel-molina",
   "name": "Nahuel Molina",
-  "club": "Atlético de Madrid",
-  "league": "LaLiga",
+  "club": "Roma",
+  "league": "Serie A",
   "nationality": "ARG",
   "position": "LAT",
   "number": 16,
@@ -192,8 +192,8 @@
  {
   "id": "exequiel-palacios",
   "name": "Exequiel Palacios",
-  "club": "Bayer Leverkusen",
-  "league": "Bundesliga",
+  "club": "Ipswich Town",
+  "league": "Premier League",
   "nationality": "ARG",
   "position": "MC",
   "number": 25,
@@ -212,8 +212,8 @@
  {
   "id": "angel-correa",
   "name": "Ángel Correa",
-  "club": "Tigres",
-  "league": "Liga MX",
+  "club": "River Plate",
+  "league": "Liga Profesional",
   "nationality": "ARG",
   "position": "DC",
   "number": 11,
@@ -282,8 +282,8 @@
  {
   "id": "franco-armani",
   "name": "Franco Armani",
-  "club": "River Plate",
-  "league": "Liga Profesional",
+  "club": "Atlético Nacional",
+  "league": "Liga Colombiana",
   "nationality": "ARG",
   "position": "ARQ",
   "number": 1,
@@ -322,8 +322,8 @@
  {
   "id": "juan-fernando-quintero",
   "name": "Juan Fernando Quintero",
-  "club": "River Plate",
-  "league": "Liga Profesional",
+  "club": "Independiente Medellín",
+  "league": "Liga Colombiana",
   "nationality": "COL",
   "position": "MCO",
   "number": 10,
@@ -332,8 +332,8 @@
  {
   "id": "german-pezzella",
   "name": "Germán Pezzella",
-  "club": "River Plate",
-  "league": "Liga Profesional",
+  "club": "Peñarol",
+  "league": "Liga Uruguaya",
   "nationality": "ARG",
   "position": "DFC",
   "number": 6,
@@ -522,7 +522,7 @@
  {
   "id": "darwin-nunez",
   "name": "Darwin Núñez",
-  "club": "Al Hilal",
+  "club": "Diriyah Club",
   "league": "Saudi Pro League",
   "nationality": "URU",
   "position": "DC",
@@ -652,8 +652,8 @@
  {
   "id": "mohamed-salah",
   "name": "Mohamed Salah",
-  "club": "Liverpool",
-  "league": "Premier League",
+  "club": "Trabzonspor",
+  "league": "Süper Lig",
   "nationality": "EGY",
   "position": "EXT",
   "number": 11,
@@ -677,8 +677,7 @@
   "nationality": "ARG",
   "position": "DFC",
   "number": 32,
-  "birthDate": "1999-07-12",
-  "check": true
+  "birthDate": "1999-07-12"
  },
  {
   "id": "lautaro-di-lollo",
@@ -688,8 +687,7 @@
   "nationality": "ARG",
   "position": "DFC",
   "number": 40,
-  "birthDate": "2004-03-10",
-  "check": true
+  "birthDate": "2004-03-10"
  },
  {
   "id": "carlos-palacios",
@@ -715,8 +713,8 @@
  {
   "id": "ander-herrera",
   "name": "Ander Herrera",
-  "club": "Boca Juniors",
-  "league": "Liga Profesional",
+  "club": "Real Zaragoza",
+  "league": "LaLiga",
   "nationality": "ESP",
   "position": "MC",
   "number": 21,
@@ -725,13 +723,12 @@
  {
   "id": "kevin-zenon",
   "name": "Kevin Zenón",
-  "club": "Boca Juniors",
-  "league": "Liga Profesional",
+  "club": "Atlas",
+  "league": "Liga MX",
   "nationality": "ARG",
   "position": "MC",
   "number": 22,
-  "birthDate": "2001-07-30",
-  "check": true
+  "birthDate": "2001-07-30"
  },
  {
   "id": "rodrigo-battaglia",
@@ -741,8 +738,7 @@
   "nationality": "ARG",
   "position": "MC",
   "number": 23,
-  "birthDate": "1991-07-12",
-  "check": true
+  "birthDate": "1991-07-12"
  },
  {
   "id": "paulo-diaz",
@@ -752,7 +748,7 @@
   "nationality": "CHI",
   "position": "DFC",
   "number": 17,
-  "birthDate": "1994-08-25"
+  "birthDate": "1994-03-24"
  },
  {
   "id": "lucas-martinez-quarta",
@@ -772,8 +768,7 @@
   "nationality": "COL",
   "position": "MC",
   "number": 22,
-  "birthDate": "2000-09-29",
-  "check": true
+  "birthDate": "2000-09-29"
  },
  {
   "id": "giuliano-galoppo",
@@ -783,8 +778,7 @@
   "nationality": "ARG",
   "position": "MC",
   "number": 34,
-  "birthDate": "1999-06-18",
-  "check": true
+  "birthDate": "1999-06-18"
  },
  {
   "id": "sebastian-driussi",
@@ -804,8 +798,7 @@
   "nationality": "ARG",
   "position": "LAT",
   "number": 16,
-  "birthDate": "1996-04-28",
-  "check": true
+  "birthDate": "1996-04-28"
  },
  {
   "id": "matias-galarza-fonda",
@@ -826,8 +819,7 @@
   "nationality": "ARG",
   "position": "DFC",
   "number": 6,
-  "birthDate": "1990-03-20",
-  "check": true
+  "birthDate": "1990-03-20"
  },
  {
   "id": "santiago-sosa",
@@ -837,8 +829,7 @@
   "nationality": "ARG",
   "position": "MC",
   "number": 23,
-  "birthDate": "1999-05-03",
-  "check": true
+  "birthDate": "1999-05-03"
  },
  {
   "id": "juan-nardoni",
@@ -848,8 +839,7 @@
   "nationality": "ARG",
   "position": "MC",
   "number": 5,
-  "birthDate": "2002-07-14",
-  "check": true
+  "birthDate": "2002-07-14"
  },
  {
   "id": "gabriel-rojas",
@@ -865,13 +855,12 @@
  {
   "id": "bruno-zuculini",
   "name": "Bruno Zuculini",
-  "club": "Racing Club",
-  "league": "Liga Profesional",
+  "club": "Nacional",
+  "league": "Liga Uruguaya",
   "nationality": "ARG",
   "position": "MC",
   "number": 15,
-  "birthDate": "1993-04-02",
-  "check": true
+  "birthDate": "1993-04-02"
  },
  {
   "id": "duvan-vergara",
@@ -881,8 +870,7 @@
   "nationality": "COL",
   "position": "EXT",
   "number": 19,
-  "birthDate": "1996-09-09",
-  "check": true
+  "birthDate": "1996-09-09"
  },
  {
   "id": "ivan-marcone",
@@ -892,8 +880,7 @@
   "nationality": "ARG",
   "position": "MC",
   "number": 23,
-  "birthDate": "1990-06-03",
-  "check": true
+  "birthDate": "1990-06-03"
  },
  {
   "id": "felipe-loyola",
@@ -903,8 +890,7 @@
   "nationality": "CHI",
   "position": "MC",
   "number": 20,
-  "birthDate": "2000-12-17",
-  "check": true
+  "birthDate": "2000-11-09"
  },
  {
   "id": "santiago-montiel",
@@ -914,8 +900,7 @@
   "nationality": "ARG",
   "position": "EXT",
   "number": 11,
-  "birthDate": "2000-02-20",
-  "check": true
+  "birthDate": "2000-11-22"
  },
  {
   "id": "orlando-gill",
@@ -925,8 +910,7 @@
   "nationality": "PAR",
   "position": "ARQ",
   "number": 1,
-  "birthDate": "2000-03-31",
-  "check": true
+  "birthDate": "2000-06-11"
  },
  {
   "id": "andres-vombergar",
@@ -947,19 +931,17 @@
   "nationality": "ARG",
   "position": "EXT",
   "number": 7,
-  "birthDate": "1992-01-17",
-  "check": true
+  "birthDate": "1992-01-17"
  },
  {
   "id": "cristian-medina",
   "name": "Cristian Medina",
-  "club": "Estudiantes",
-  "league": "Liga Profesional",
+  "club": "Botafogo",
+  "league": "Brasileirão",
   "nationality": "ARG",
   "position": "MC",
   "number": 36,
-  "birthDate": "2002-06-01",
-  "check": true
+  "birthDate": "2002-06-01"
  },
  {
   "id": "leandro-gonzalez-pirez",
@@ -969,8 +951,7 @@
   "nationality": "ARG",
   "position": "DFC",
   "number": 14,
-  "birthDate": "1992-02-26",
-  "check": true
+  "birthDate": "1992-02-26"
  },
  {
   "id": "tiago-palacios",
@@ -980,7 +961,7 @@
   "nationality": "ARG",
   "position": "MCO",
   "number": 11,
-  "birthDate": "2001-03-09",
+  "birthDate": "2001-03-28",
   "check": true
  },
  {
@@ -991,8 +972,7 @@
   "nationality": "ARG",
   "position": "ARQ",
   "number": 1,
-  "birthDate": "1995-06-20",
-  "check": true
+  "birthDate": "1995-06-20"
  },
  {
   "id": "braian-romero",
@@ -1002,8 +982,7 @@
   "nationality": "ARG",
   "position": "DC",
   "number": 9,
-  "birthDate": "1991-06-15",
-  "check": true
+  "birthDate": "1991-06-15"
  },
  {
   "id": "elias-gomez",
@@ -1013,8 +992,7 @@
   "nationality": "ARG",
   "position": "LAT",
   "number": 3,
-  "birthDate": "1994-06-09",
-  "check": true
+  "birthDate": "1994-06-09"
  },
  {
   "id": "agustin-bouzat",
@@ -1024,8 +1002,7 @@
   "nationality": "ARG",
   "position": "MC",
   "number": 10,
-  "birthDate": "1994-06-28",
-  "check": true
+  "birthDate": "1994-03-28"
  },
  {
   "id": "jorge-broun",
@@ -1035,8 +1012,7 @@
   "nationality": "ARG",
   "position": "ARQ",
   "number": 1,
-  "birthDate": "1986-05-26",
-  "check": true
+  "birthDate": "1986-05-26"
  },
  {
   "id": "carlos-quintana",
@@ -1046,8 +1022,7 @@
   "nationality": "ARG",
   "position": "DFC",
   "number": 2,
-  "birthDate": "1988-02-11",
-  "check": true
+  "birthDate": "1988-02-11"
  },
  {
   "id": "jaminton-campaz",
@@ -1057,8 +1032,7 @@
   "nationality": "COL",
   "position": "EXT",
   "number": 10,
-  "birthDate": "2000-05-24",
-  "check": true
+  "birthDate": "2000-05-24"
  },
  {
   "id": "franco-ibarra",
@@ -1068,8 +1042,7 @@
   "nationality": "ARG",
   "position": "MC",
   "number": 5,
-  "birthDate": "2001-04-28",
-  "check": true
+  "birthDate": "2001-04-28"
  },
  {
   "id": "ever-banega",
@@ -1090,8 +1063,7 @@
   "nationality": "ARG",
   "position": "ARQ",
   "number": 22,
-  "birthDate": "1992-02-29",
-  "check": true
+  "birthDate": "1992-02-29"
  },
  {
   "id": "ruben-botta",
@@ -1101,8 +1073,7 @@
   "nationality": "ARG",
   "position": "MCO",
   "number": 10,
-  "birthDate": "1990-01-31",
-  "check": true
+  "birthDate": "1990-01-31"
  },
  {
   "id": "federico-girotti",
@@ -1112,8 +1083,7 @@
   "nationality": "ARG",
   "position": "DC",
   "number": 9,
-  "birthDate": "1999-06-02",
-  "check": true
+  "birthDate": "1999-06-02"
  },
  {
   "id": "lucas-zelarayan",
@@ -1134,8 +1104,7 @@
   "nationality": "ARG",
   "position": "DC",
   "number": 9,
-  "birthDate": "1988-07-15",
-  "check": true
+  "birthDate": "1988-07-15"
  },
  {
   "id": "eduardo-salvio",
@@ -1145,8 +1114,7 @@
   "nationality": "ARG",
   "position": "EXT",
   "number": 11,
-  "birthDate": "1990-07-13",
-  "check": true
+  "birthDate": "1990-07-13"
  },
  {
   "id": "carlos-izquierdoz",
@@ -1156,8 +1124,7 @@
   "nationality": "ARG",
   "position": "DFC",
   "number": 24,
-  "birthDate": "1988-11-03",
-  "check": true
+  "birthDate": "1988-11-03"
  },
  {
   "id": "nahuel-losada",
@@ -1167,8 +1134,7 @@
   "nationality": "ARG",
   "position": "ARQ",
   "number": 1,
-  "birthDate": "1993-04-09",
-  "check": true
+  "birthDate": "1993-04-17"
  },
  {
   "id": "marcelino-moreno",
@@ -1178,8 +1144,7 @@
   "nationality": "ARG",
   "position": "MCO",
   "number": 10,
-  "birthDate": "1994-08-14",
-  "check": true
+  "birthDate": "1994-06-25"
  },
  {
   "id": "hernan-galindez",
@@ -1189,8 +1154,7 @@
   "nationality": "ECU",
   "position": "ARQ",
   "number": 1,
-  "birthDate": "1987-03-30",
-  "check": true
+  "birthDate": "1987-03-30"
  },
  {
   "id": "ignacio-fernandez",
@@ -1200,8 +1164,7 @@
   "nationality": "ARG",
   "position": "MCO",
   "number": 26,
-  "birthDate": "1990-01-12",
-  "check": true
+  "birthDate": "1990-01-12"
  },
  {
   "id": "giorgian-de-arrascaeta",
@@ -1226,13 +1189,12 @@
  {
   "id": "gonzalo-plata",
   "name": "Gonzalo Plata",
-  "club": "Flamengo",
-  "league": "Brasileirão",
+  "club": "Dinamo Moscú",
+  "league": "Liga Rusa",
   "nationality": "ECU",
   "position": "EXT",
   "number": 50,
-  "birthDate": "2000-11-01",
-  "check": true
+  "birthDate": "2000-11-01"
  },
  {
   "id": "jorginho",
@@ -1273,13 +1235,12 @@
   "nationality": "ESP",
   "position": "MC",
   "number": 8,
-  "birthDate": "1994-11-21",
-  "check": true
+  "birthDate": "1994-11-21"
  },
  {
   "id": "weverton",
   "name": "Weverton",
-  "club": "Palmeiras",
+  "club": "Grêmio",
   "league": "Brasileirão",
   "nationality": "BRA",
   "position": "ARQ",
@@ -1299,8 +1260,8 @@
  {
   "id": "raphael-veiga",
   "name": "Raphael Veiga",
-  "club": "Palmeiras",
-  "league": "Brasileirão",
+  "club": "Club América",
+  "league": "Liga MX",
   "nationality": "BRA",
   "position": "MCO",
   "number": 23,
@@ -1314,8 +1275,7 @@
   "nationality": "BRA",
   "position": "DC",
   "number": 9,
-  "birthDate": "2005-02-28",
-  "check": true
+  "birthDate": "2005-02-28"
  },
  {
   "id": "jose-manuel-lopez",
@@ -1325,8 +1285,7 @@
   "nationality": "ARG",
   "position": "DC",
   "number": 42,
-  "birthDate": "2000-12-06",
-  "check": true
+  "birthDate": "2000-12-06"
  },
  {
   "id": "facundo-torres",
@@ -1336,8 +1295,7 @@
   "nationality": "URU",
   "position": "EXT",
   "number": 17,
-  "birthDate": "2000-04-13",
-  "check": true
+  "birthDate": "2000-04-13"
  },
  {
   "id": "anibal-moreno",
@@ -1347,8 +1305,7 @@
   "nationality": "ARG",
   "position": "MC",
   "number": 5,
-  "birthDate": "1999-05-13",
-  "check": true
+  "birthDate": "1999-05-13"
  },
  {
   "id": "agustin-giay",
@@ -1358,13 +1315,12 @@
   "nationality": "ARG",
   "position": "LAT",
   "number": 4,
-  "birthDate": "2004-01-16",
-  "check": true
+  "birthDate": "2004-01-16"
  },
  {
   "id": "hulk",
   "name": "Hulk",
-  "club": "Atlético Mineiro",
+  "club": "Fluminense",
   "league": "Brasileirão",
   "nationality": "BRA",
   "position": "DC",
@@ -1389,8 +1345,7 @@
   "nationality": "ARG",
   "position": "MCO",
   "number": 8,
-  "birthDate": "1998-01-04",
-  "check": true
+  "birthDate": "1998-01-04"
  },
  {
   "id": "thiago-silva",
@@ -1400,8 +1355,7 @@
   "nationality": "BRA",
   "position": "DFC",
   "number": 3,
-  "birthDate": "1984-09-22",
-  "check": true
+  "birthDate": "1984-09-22"
  },
  {
   "id": "german-cano",
@@ -1436,8 +1390,8 @@
  {
   "id": "enner-valencia",
   "name": "Enner Valencia",
-  "club": "Internacional",
-  "league": "Brasileirão",
+  "club": "Boca Juniors",
+  "league": "Liga Profesional",
   "nationality": "ECU",
   "position": "DC",
   "number": 13,
@@ -1487,7 +1441,7 @@
  {
   "id": "philippe-coutinho",
   "name": "Philippe Coutinho",
-  "club": "Vasco da Gama",
+  "club": "Santos",
   "league": "Brasileirão",
   "nationality": "BRA",
   "position": "MCO",
@@ -1502,19 +1456,17 @@
   "nationality": "ARG",
   "position": "DC",
   "number": 99,
-  "birthDate": "1988-10-15",
-  "check": true
+  "birthDate": "1988-10-15"
  },
  {
   "id": "gabriel-barbosa",
   "name": "Gabriel Barbosa",
-  "club": "Cruzeiro",
+  "club": "Santos",
   "league": "Brasileirão",
   "nationality": "BRA",
   "position": "DC",
   "number": 9,
-  "birthDate": "1996-08-30",
-  "check": true
+  "birthDate": "1996-08-30"
  },
  {
   "id": "cassio",
@@ -1535,19 +1487,17 @@
   "nationality": "CHI",
   "position": "MC",
   "number": 20,
-  "birthDate": "1989-04-17",
-  "check": true
+  "birthDate": "1989-04-17"
  },
  {
   "id": "david-ospina",
   "name": "David Ospina",
-  "club": "Atlético Nacional",
-  "league": "Liga Colombiana",
+  "club": "Atlante",
+  "league": "Liga MX",
   "nationality": "COL",
   "position": "ARQ",
   "number": 1,
-  "birthDate": "1988-08-31",
-  "check": true
+  "birthDate": "1988-08-31"
  },
  {
   "id": "andre-pierre-gignac",
@@ -1567,8 +1517,7 @@
   "nationality": "ARG",
   "position": "ARQ",
   "number": 1,
-  "birthDate": "1986-02-10",
-  "check": true
+  "birthDate": "1986-02-10"
  },
  {
   "id": "sergio-ramos",
@@ -1583,8 +1532,8 @@
  {
   "id": "sergio-canales",
   "name": "Sergio Canales",
-  "club": "Monterrey",
-  "league": "Liga MX",
+  "club": "Racing de Santander",
+  "league": "LaLiga",
   "nationality": "ESP",
   "position": "MC",
   "number": 10,
@@ -1598,8 +1547,7 @@
   "nationality": "ARG",
   "position": "EXT",
   "number": 7,
-  "birthDate": "1994-07-11",
-  "check": true
+  "birthDate": "1994-07-11"
  },
  {
   "id": "henry-martin",
@@ -1609,8 +1557,7 @@
   "nationality": "MEX",
   "position": "DC",
   "number": 21,
-  "birthDate": "1992-11-18",
-  "check": true
+  "birthDate": "1992-11-18"
  },
  {
   "id": "alvaro-fidalgo",
@@ -1620,8 +1567,7 @@
   "nationality": "ESP",
   "position": "MC",
   "number": 8,
-  "birthDate": "1997-04-09",
-  "check": true
+  "birthDate": "1997-04-09"
  },
  {
   "id": "riqui-puig",
@@ -1681,8 +1627,7 @@
   "nationality": "POR",
   "position": "DC",
   "number": 79,
-  "birthDate": "1999-11-10",
-  "check": true
+  "birthDate": "1999-11-10"
  },
  {
   "id": "ruben-neves",
@@ -1733,8 +1678,7 @@
   "nationality": "POR",
   "position": "LAT",
   "number": 20,
-  "birthDate": "1994-05-27",
-  "check": true
+  "birthDate": "1994-05-27"
  },
  {
   "id": "karim-benzema",
@@ -1749,8 +1693,8 @@
  {
   "id": "n-golo-kante",
   "name": "N'Golo Kanté",
-  "club": "Al-Ittihad",
-  "league": "Saudi Pro League",
+  "club": "Fenerbahçe",
+  "league": "Süper Lig",
   "nationality": "FRA",
   "position": "MC",
   "number": 7,
@@ -1770,8 +1714,8 @@
  {
   "id": "riyad-mahrez",
   "name": "Riyad Mahrez",
-  "club": "Al-Ahli",
-  "league": "Saudi Pro League",
+  "club": "Al-Shamal",
+  "league": "Liga de Catar",
   "nationality": "ALG",
   "position": "EXT",
   "number": 7,
@@ -1785,8 +1729,7 @@
   "nationality": "ENG",
   "position": "DC",
   "number": 99,
-  "birthDate": "1996-03-16",
-  "check": true
+  "birthDate": "1996-03-16"
  },
  {
   "id": "edouard-mendy",
@@ -1801,8 +1744,8 @@
  {
   "id": "rodri",
   "name": "Rodri",
-  "club": "Manchester City",
-  "league": "Premier League",
+  "club": "Barcelona",
+  "league": "LaLiga",
   "nationality": "ESP",
   "position": "MC",
   "number": 16,
@@ -1831,8 +1774,8 @@
  {
   "id": "bernardo-silva",
   "name": "Bernardo Silva",
-  "club": "Manchester City",
-  "league": "Premier League",
+  "club": "Real Madrid",
+  "league": "LaLiga",
   "nationality": "POR",
   "position": "MC",
   "number": 20,
@@ -1846,8 +1789,7 @@
   "nationality": "ITA",
   "position": "ARQ",
   "number": 25,
-  "birthDate": "1999-02-25",
-  "check": true
+  "birthDate": "1999-02-25"
  },
  {
   "id": "jeremy-doku",
@@ -1862,7 +1804,7 @@
  {
   "id": "omar-marmoush",
   "name": "Omar Marmoush",
-  "club": "Manchester City",
+  "club": "Tottenham",
   "league": "Premier League",
   "nationality": "EGY",
   "position": "DC",
@@ -1872,13 +1814,12 @@
  {
   "id": "tijjani-reijnders",
   "name": "Tijjani Reijnders",
-  "club": "Manchester City",
-  "league": "Premier League",
+  "club": "Al-Qadsiah",
+  "league": "Saudi Pro League",
   "nationality": "NED",
   "position": "MC",
   "number": 4,
-  "birthDate": "1998-07-29",
-  "check": true
+  "birthDate": "1998-07-29"
  },
  {
   "id": "rayan-cherki",
@@ -1888,8 +1829,7 @@
   "nationality": "FRA",
   "position": "MCO",
   "number": 10,
-  "birthDate": "2003-08-17",
-  "check": true
+  "birthDate": "2003-08-17"
  },
  {
   "id": "josko-gvardiol",
@@ -1985,7 +1925,7 @@
  {
   "id": "andrew-robertson",
   "name": "Andrew Robertson",
-  "club": "Liverpool",
+  "club": "Tottenham",
   "league": "Premier League",
   "nationality": "SCO",
   "position": "LAT",
@@ -2075,8 +2015,8 @@
  {
   "id": "gabriel-martinelli",
   "name": "Gabriel Martinelli",
-  "club": "Arsenal",
-  "league": "Premier League",
+  "club": "Al Hilal",
+  "league": "Saudi Pro League",
   "nationality": "BRA",
   "position": "EXT",
   "number": 11,
@@ -2090,8 +2030,7 @@
   "nationality": "ENG",
   "position": "MCO",
   "number": 10,
-  "birthDate": "1998-06-29",
-  "check": true
+  "birthDate": "1998-06-29"
  },
  {
   "id": "piero-hincapie",
@@ -2101,8 +2040,7 @@
   "nationality": "ECU",
   "position": "DFC",
   "number": 5,
-  "birthDate": "2002-01-09",
-  "check": true
+  "birthDate": "2002-01-09"
  },
  {
   "id": "cole-palmer",
@@ -2137,8 +2075,8 @@
  {
   "id": "robert-sanchez",
   "name": "Robert Sánchez",
-  "club": "Chelsea",
-  "league": "Premier League",
+  "club": "Como",
+  "league": "Serie A",
   "nationality": "ESP",
   "position": "ARQ",
   "number": 1,
@@ -2168,8 +2106,8 @@
  {
   "id": "marc-cucurella",
   "name": "Marc Cucurella",
-  "club": "Chelsea",
-  "league": "Premier League",
+  "club": "Real Madrid",
+  "league": "LaLiga",
   "nationality": "ESP",
   "position": "LAT",
   "number": 3,
@@ -2213,14 +2151,13 @@
   "nationality": "SVN",
   "position": "DC",
   "number": 30,
-  "birthDate": "2003-05-31",
-  "check": true
+  "birthDate": "2003-05-31"
  },
  {
   "id": "casemiro",
   "name": "Casemiro",
-  "club": "Manchester United",
-  "league": "Premier League",
+  "club": "Inter Miami",
+  "league": "MLS",
   "nationality": "BRA",
   "position": "MC",
   "number": 18,
@@ -2269,8 +2206,8 @@
  {
   "id": "guglielmo-vicario",
   "name": "Guglielmo Vicario",
-  "club": "Tottenham",
-  "league": "Premier League",
+  "club": "Juventus",
+  "league": "Serie A",
   "nationality": "ITA",
   "position": "ARQ",
   "number": 1,
@@ -2284,8 +2221,7 @@
   "nationality": "NED",
   "position": "MCO",
   "number": 7,
-  "birthDate": "2003-04-21",
-  "check": true
+  "birthDate": "2003-04-21"
  },
  {
   "id": "mohammed-kudus",
@@ -2295,8 +2231,7 @@
   "nationality": "GHA",
   "position": "EXT",
   "number": 20,
-  "birthDate": "2000-08-02",
-  "check": true
+  "birthDate": "2000-08-02"
  },
  {
   "id": "rodrigo-bentancur",
@@ -2321,8 +2256,8 @@
  {
   "id": "ollie-watkins",
   "name": "Ollie Watkins",
-  "club": "Aston Villa",
-  "league": "Premier League",
+  "club": "Al Hilal",
+  "league": "Saudi Pro League",
   "nationality": "ENG",
   "position": "DC",
   "number": 11,
@@ -2331,7 +2266,7 @@
  {
   "id": "youri-tielemans",
   "name": "Youri Tielemans",
-  "club": "Aston Villa",
+  "club": "Manchester United",
   "league": "Premier League",
   "nationality": "BEL",
   "position": "MC",
@@ -2341,7 +2276,7 @@
  {
   "id": "morgan-rogers",
   "name": "Morgan Rogers",
-  "club": "Aston Villa",
+  "club": "Chelsea",
   "league": "Premier League",
   "nationality": "ENG",
   "position": "MCO",
@@ -2371,7 +2306,7 @@
  {
   "id": "bruno-guimaraes",
   "name": "Bruno Guimarães",
-  "club": "Newcastle",
+  "club": "Arsenal",
   "league": "Premier League",
   "nationality": "BRA",
   "position": "MC",
@@ -2381,8 +2316,8 @@
  {
   "id": "anthony-gordon",
   "name": "Anthony Gordon",
-  "club": "Newcastle",
-  "league": "Premier League",
+  "club": "Barcelona",
+  "league": "LaLiga",
   "nationality": "ENG",
   "position": "EXT",
   "number": 10,
@@ -2391,7 +2326,7 @@
  {
   "id": "sandro-tonali",
   "name": "Sandro Tonali",
-  "club": "Newcastle",
+  "club": "Tottenham",
   "league": "Premier League",
   "nationality": "ITA",
   "position": "MC",
@@ -2411,13 +2346,12 @@
  {
   "id": "nick-woltemade",
   "name": "Nick Woltemade",
-  "club": "Newcastle",
-  "league": "Premier League",
+  "club": "Juventus",
+  "league": "Serie A",
   "nationality": "GER",
   "position": "DC",
   "number": 27,
-  "birthDate": "2002-02-14",
-  "check": true
+  "birthDate": "2002-02-14"
  },
  {
   "id": "kaoru-mitoma",
@@ -2432,7 +2366,7 @@
  {
   "id": "danny-welbeck",
   "name": "Danny Welbeck",
-  "club": "Brighton",
+  "club": "Chelsea",
   "league": "Premier League",
   "nationality": "ENG",
   "position": "DC",
@@ -2487,14 +2421,13 @@
   "nationality": "ARG",
   "position": "MC",
   "number": 16,
-  "birthDate": "1998-06-28",
-  "check": true
+  "birthDate": "1998-06-28"
  },
  {
   "id": "lucas-paqueta",
   "name": "Lucas Paquetá",
-  "club": "West Ham",
-  "league": "Premier League",
+  "club": "Flamengo",
+  "league": "Brasileirão",
   "nationality": "BRA",
   "position": "MCO",
   "number": 10,
@@ -2528,8 +2461,7 @@
   "nationality": "ENG",
   "position": "EXT",
   "number": 18,
-  "birthDate": "1995-09-10",
-  "check": true
+  "birthDate": "1995-09-10"
  },
  {
   "id": "jude-bellingham",
@@ -2624,7 +2556,7 @@
  {
   "id": "dani-carvajal",
   "name": "Dani Carvajal",
-  "club": "Real Madrid",
+  "club": "Getafe",
   "league": "LaLiga",
   "nationality": "ESP",
   "position": "LAT",
@@ -2644,8 +2576,8 @@
  {
   "id": "robert-lewandowski",
   "name": "Robert Lewandowski",
-  "club": "Barcelona",
-  "league": "LaLiga",
+  "club": "Chicago Fire",
+  "league": "MLS",
   "nationality": "POL",
   "position": "DC",
   "number": 9,
@@ -2699,8 +2631,7 @@
   "nationality": "GER",
   "position": "ARQ",
   "number": 1,
-  "birthDate": "1992-04-30",
-  "check": true
+  "birthDate": "1992-04-30"
  },
  {
   "id": "pau-cubarsi",
@@ -2735,8 +2666,8 @@
  {
   "id": "ferran-torres",
   "name": "Ferran Torres",
-  "club": "Barcelona",
-  "league": "LaLiga",
+  "club": "Paris Saint-Germain",
+  "league": "Ligue 1",
   "nationality": "ESP",
   "position": "DC",
   "number": 7,
@@ -2750,8 +2681,7 @@
   "nationality": "ENG",
   "position": "EXT",
   "number": 14,
-  "birthDate": "1997-10-31",
-  "check": true
+  "birthDate": "1997-10-31"
  },
  {
   "id": "dani-olmo",
@@ -2796,8 +2726,8 @@
  {
   "id": "antoine-griezmann",
   "name": "Antoine Griezmann",
-  "club": "Atlético de Madrid",
-  "league": "LaLiga",
+  "club": "Orlando City",
+  "league": "MLS",
   "nationality": "FRA",
   "position": "DC",
   "number": 7,
@@ -2836,8 +2766,8 @@
  {
   "id": "conor-gallagher",
   "name": "Conor Gallagher",
-  "club": "Atlético de Madrid",
-  "league": "LaLiga",
+  "club": "Tottenham",
+  "league": "Premier League",
   "nationality": "ENG",
   "position": "MC",
   "number": 4,
@@ -2887,7 +2817,7 @@
  {
   "id": "jose-maria-gimenez",
   "name": "José María Giménez",
-  "club": "Atlético de Madrid",
+  "club": "Deportivo La Coruña",
   "league": "LaLiga",
   "nationality": "URU",
   "position": "DFC",
@@ -2957,13 +2887,12 @@
  {
   "id": "thomas-partey",
   "name": "Thomas Partey",
-  "club": "Villarreal",
-  "league": "LaLiga",
+  "club": "Al-Shabab",
+  "league": "Saudi Pro League",
   "nationality": "GHA",
   "position": "MC",
   "number": 16,
-  "birthDate": "1993-06-13",
-  "check": true
+  "birthDate": "1993-06-13"
  },
  {
   "id": "mikel-oyarzabal",
@@ -3049,8 +2978,8 @@
  {
   "id": "yann-sommer",
   "name": "Yann Sommer",
-  "club": "Inter",
-  "league": "Serie A",
+  "club": "Club Brugge",
+  "league": "Liga Belga",
   "nationality": "SUI",
   "position": "ARQ",
   "number": 1,
@@ -3079,8 +3008,8 @@
  {
   "id": "denzel-dumfries",
   "name": "Denzel Dumfries",
-  "club": "Inter",
-  "league": "Serie A",
+  "club": "Real Madrid",
+  "league": "LaLiga",
   "nationality": "NED",
   "position": "LAT",
   "number": 2,
@@ -3089,8 +3018,8 @@
  {
   "id": "rafael-leao",
   "name": "Rafael Leão",
-  "club": "Milan",
-  "league": "Serie A",
+  "club": "Galatasaray",
+  "league": "Süper Lig",
   "nationality": "POR",
   "position": "EXT",
   "number": 10,
@@ -3129,8 +3058,8 @@
  {
   "id": "santiago-gimenez",
   "name": "Santiago Giménez",
-  "club": "Milan",
-  "league": "Serie A",
+  "club": "Porto",
+  "league": "Primeira Liga",
   "nationality": "MEX",
   "position": "DC",
   "number": 7,
@@ -3144,14 +3073,13 @@
   "nationality": "FRA",
   "position": "MC",
   "number": 12,
-  "birthDate": "1995-04-03",
-  "check": true
+  "birthDate": "1995-04-03"
  },
  {
   "id": "dusan-vlahovic",
   "name": "Dušan Vlahović",
-  "club": "Juventus",
-  "league": "Serie A",
+  "club": "Beşiktaş",
+  "league": "Süper Lig",
   "nationality": "SRB",
   "position": "DC",
   "number": 9,
@@ -3180,13 +3108,12 @@
  {
   "id": "jonathan-david",
   "name": "Jonathan David",
-  "club": "Juventus",
-  "league": "Serie A",
+  "club": "Atlético de Madrid",
+  "league": "LaLiga",
   "nationality": "CAN",
   "position": "DC",
   "number": 30,
-  "birthDate": "2000-01-14",
-  "check": true
+  "birthDate": "2000-01-14"
  },
  {
   "id": "manuel-locatelli",
@@ -3201,8 +3128,8 @@
  {
   "id": "michele-di-gregorio",
   "name": "Michele Di Gregorio",
-  "club": "Juventus",
-  "league": "Serie A",
+  "club": "Bournemouth",
+  "league": "Premier League",
   "nationality": "ITA",
   "position": "ARQ",
   "number": 29,
@@ -3221,8 +3148,8 @@
  {
   "id": "romelu-lukaku",
   "name": "Romelu Lukaku",
-  "club": "Napoli",
-  "league": "Serie A",
+  "club": "Fenerbahçe",
+  "league": "Süper Lig",
   "nationality": "BEL",
   "position": "DC",
   "number": 9,
@@ -3246,8 +3173,7 @@
   "nationality": "DEN",
   "position": "DC",
   "number": 19,
-  "birthDate": "2003-02-04",
-  "check": true
+  "birthDate": "2003-02-04"
  },
  {
   "id": "giovanni-di-lorenzo",
@@ -3272,7 +3198,7 @@
  {
   "id": "artem-dovbyk",
   "name": "Artem Dovbyk",
-  "club": "Roma",
+  "club": "Bologna",
   "league": "Serie A",
   "nationality": "UKR",
   "position": "DC",
@@ -3292,8 +3218,8 @@
  {
   "id": "ademola-lookman",
   "name": "Ademola Lookman",
-  "club": "Atalanta",
-  "league": "Serie A",
+  "club": "Atlético de Madrid",
+  "league": "LaLiga",
   "nationality": "NGA",
   "position": "EXT",
   "number": 11,
@@ -3332,7 +3258,7 @@
  {
   "id": "moise-kean",
   "name": "Moise Kean",
-  "club": "Fiorentina",
+  "club": "Como",
   "league": "Serie A",
   "nationality": "ITA",
   "position": "DC",
@@ -3342,13 +3268,12 @@
  {
   "id": "edin-dzeko",
   "name": "Edin Džeko",
-  "club": "Fiorentina",
-  "league": "Serie A",
+  "club": "Schalke 04",
+  "league": "Bundesliga",
   "nationality": "BIH",
   "position": "DC",
   "number": 9,
-  "birthDate": "1986-03-17",
-  "check": true
+  "birthDate": "1986-03-17"
  },
  {
   "id": "riccardo-orsolini",
@@ -3378,8 +3303,7 @@
   "nationality": "ESP",
   "position": "DC",
   "number": 7,
-  "birthDate": "1992-10-23",
-  "check": true
+  "birthDate": "1992-10-23"
  },
  {
   "id": "maximo-perrone",
@@ -3389,8 +3313,7 @@
   "nationality": "ARG",
   "position": "MC",
   "number": 23,
-  "birthDate": "2003-01-07",
-  "check": true
+  "birthDate": "2003-01-07"
  },
  {
   "id": "harry-kane",
@@ -3495,8 +3418,8 @@
  {
   "id": "alejandro-grimaldo",
   "name": "Alejandro Grimaldo",
-  "club": "Bayer Leverkusen",
-  "league": "Bundesliga",
+  "club": "Atlético de Madrid",
+  "league": "LaLiga",
   "nationality": "ESP",
   "position": "LAT",
   "number": 20,
@@ -3525,8 +3448,8 @@
  {
   "id": "julian-brandt",
   "name": "Julian Brandt",
-  "club": "Borussia Dortmund",
-  "league": "Bundesliga",
+  "club": "Ajax",
+  "league": "Eredivisie",
   "nationality": "GER",
   "position": "MCO",
   "number": 10,
@@ -3535,8 +3458,8 @@
  {
   "id": "karim-adeyemi",
   "name": "Karim Adeyemi",
-  "club": "Borussia Dortmund",
-  "league": "Bundesliga",
+  "club": "Barcelona",
+  "league": "LaLiga",
   "nationality": "GER",
   "position": "EXT",
   "number": 27,
@@ -3630,14 +3553,13 @@
   "nationality": "FRA",
   "position": "ARQ",
   "number": 30,
-  "birthDate": "2001-11-06",
-  "check": true
+  "birthDate": "2001-11-06"
  },
  {
   "id": "bradley-barcola",
   "name": "Bradley Barcola",
-  "club": "Paris Saint-Germain",
-  "league": "Ligue 1",
+  "club": "Liverpool",
+  "league": "Premier League",
   "nationality": "FRA",
   "position": "EXT",
   "number": 29,
@@ -3666,19 +3588,18 @@
  {
   "id": "pierre-emerick-aubameyang",
   "name": "Pierre-Emerick Aubameyang",
-  "club": "Olympique de Marsella",
-  "league": "Ligue 1",
+  "club": "Deportivo La Coruña",
+  "league": "LaLiga",
   "nationality": "GAB",
   "position": "DC",
   "number": 97,
-  "birthDate": "1989-06-18",
-  "check": true
+  "birthDate": "1989-06-18"
  },
  {
   "id": "mason-greenwood",
   "name": "Mason Greenwood",
-  "club": "Olympique de Marsella",
-  "league": "Ligue 1",
+  "club": "Fenerbahçe",
+  "league": "Süper Lig",
   "nationality": "ENG",
   "position": "EXT",
   "number": 10,
@@ -3687,8 +3608,8 @@
  {
   "id": "leonardo-balerdi",
   "name": "Leonardo Balerdi",
-  "club": "Olympique de Marsella",
-  "league": "Ligue 1",
+  "club": "Roma",
+  "league": "Serie A",
   "nationality": "ARG",
   "position": "DFC",
   "number": 5,
@@ -3697,8 +3618,8 @@
  {
   "id": "geronimo-rulli",
   "name": "Gerónimo Rulli",
-  "club": "Olympique de Marsella",
-  "league": "Ligue 1",
+  "club": "Manchester City",
+  "league": "Premier League",
   "nationality": "ARG",
   "position": "ARQ",
   "number": 1,
@@ -3722,8 +3643,7 @@
   "nationality": "FRA",
   "position": "MC",
   "number": 8,
-  "birthDate": "1993-03-15",
-  "check": true
+  "birthDate": "1993-03-15"
  },
  {
   "id": "vangelis-pavlidis",
@@ -3738,13 +3658,12 @@
  {
   "id": "richard-rios",
   "name": "Richard Ríos",
-  "club": "Benfica",
-  "league": "Primeira Liga",
+  "club": "Al-Ittihad",
+  "league": "Saudi Pro League",
   "nationality": "COL",
   "position": "MC",
   "number": 20,
-  "birthDate": "2000-06-02",
-  "check": true
+  "birthDate": "2000-06-02"
  },
  {
   "id": "diogo-costa",
@@ -3779,8 +3698,8 @@
  {
   "id": "morten-hjulmand",
   "name": "Morten Hjulmand",
-  "club": "Sporting CP",
-  "league": "Primeira Liga",
+  "club": "Atlético de Madrid",
+  "league": "LaLiga",
   "nationality": "DEN",
   "position": "MC",
   "number": 42,
@@ -3794,8 +3713,7 @@
   "nationality": "COL",
   "position": "DC",
   "number": 97,
-  "birthDate": "1997-12-02",
-  "check": true
+  "birthDate": "1997-12-02"
  },
  {
   "id": "luuk-de-jong",
@@ -3815,8 +3733,7 @@
   "nationality": "CRO",
   "position": "EXT",
   "number": 5,
-  "birthDate": "1989-02-02",
-  "check": true
+  "birthDate": "1989-02-02"
  },
  {
   "id": "victor-osimhen",
@@ -3846,8 +3763,7 @@
   "nationality": "GER",
   "position": "EXT",
   "number": 10,
-  "birthDate": "1996-01-11",
-  "check": true
+  "birthDate": "1996-01-11"
  },
  {
   "id": "lucas-torreira",

@@ -18,6 +18,9 @@ import { HowTo } from "./HowTo";
 import { IconHelp } from "./Icons";
 import { MysteryCard } from "./MysteryCard";
 import { DonateButton } from "./Donate";
+import { Hints } from "./Hints";
+import { BioCard } from "./BioCard";
+import { hintsFor } from "@/lib/game/bios";
 
 type Mode = "daily" | "archive" | "practice";
 type Item = Entity & Record<string, unknown>;
@@ -205,10 +208,12 @@ export function GuessGame({ gameId, day }: { gameId: GuessGameId; day?: number }
 
       <MysteryCard gameId={gameId} rows={rows} attributes={attrs} revealed={done ? target : undefined} />
 
+      <Hints hints={hintsFor(gameId, target as never)} misses={guessIds.filter((x) => x !== target.id).length} done={done} />
+
       {done && (
         <section className={`card result ${won ? "" : "lost"}`} aria-live="polite">
           <p className="result-title">{won ? (guessIds.length === 1 ? `${t("result.first")} 🎯` : `${t("result.win")} ⚽`) : `${t("result.lose")} 😮‍💨`}</p>
-          <p className="muted small" style={{ margin: "2px 0 0" }}>{game.subtitle(target)}</p>
+          <BioCard id={target.id} name={target.name} subtitle={game.subtitle(target)} />
 
           {mode !== "practice" ? (
             <>

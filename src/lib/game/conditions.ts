@@ -13,6 +13,8 @@ export interface Condition {
 const nat = (code: string, label: string): Condition => ({ id: `nat-${code}`, label, icon: COUNTRIES[code]?.flag ?? "🏳️", test: (p) => p.nationality === code });
 const league = (l: string, label = l): Condition => ({ id: `lg-${l}`, label, icon: "🏆", test: (p) => p.league === l });
 const club = (c: string, label = c): Condition => ({ id: `club-${c}`, label, icon: "🛡️", test: (p) => p.club === c });
+const everIn = (p: Player) => new Set([...(p.clubs ?? []), p.club]);
+const ever = (c: string, label: string): Condition => ({ id: `ever-${c}`, label, icon: "🧭", test: (p) => everIn(p).has(c) });
 const line = (l: Line, label: string, icon: string): Condition => ({ id: `line-${l}`, label, icon, test: (p) => POSITIONS[p.position]?.line === l });
 
 export const CONDITIONS: Condition[] = [
@@ -35,6 +37,18 @@ export const CONDITIONS: Condition[] = [
   club("Atlético de Madrid", "Juega en el Atlético"),
   club("Estudiantes", "Juega en Estudiantes"),
   club("Inter Miami", "Juega en Inter Miami"),
+  ever("Boca Juniors", "Jugó en Boca"),
+  ever("River Plate", "Jugó en River"),
+  ever("Barcelona", "Jugó en el Barcelona"),
+  ever("Real Madrid", "Jugó en el Real Madrid"),
+  ever("Atlético de Madrid", "Jugó en el Atlético de Madrid"),
+  ever("Juventus", "Jugó en la Juventus"),
+  ever("Inter", "Jugó en el Inter"),
+  ever("Manchester United", "Jugó en el Manchester United"),
+  ever("Chelsea", "Jugó en el Chelsea"),
+  ever("Benfica", "Jugó en el Benfica"),
+  ever("Paris Saint-Germain", "Jugó en el PSG"),
+  { id: "clubs-5", label: "Pasó por 5 o más clubes", icon: "🧳", test: (p) => (p.clubs?.length ?? 0) > 0 && everIn(p).size >= 5 },
   { id: "age-35", label: "35 años o más", icon: "👴", test: (p, d) => ageOn(p.birthDate, d) >= 35 },
   { id: "age-25", label: "Menor de 25", icon: "🐣", test: (p, d) => ageOn(p.birthDate, d) < 25 },
   { id: "age-26-30", label: "Entre 26 y 30 años", icon: "🎂", test: (p, d) => { const a = ageOn(p.birthDate, d); return a >= 26 && a <= 30; } },

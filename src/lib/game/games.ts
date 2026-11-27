@@ -3,8 +3,12 @@ import coachesData from "@/data/coaches.json";
 import type { Coach, GameDefinition, GameId, Player } from "./types";
 import { coachAttributes, playerAttributes } from "./compare";
 import { COUNTRIES, POSITIONS } from "./meta";
+import { careerOf } from "./bios";
 
 export const BRAND = "Fútbol de Primera";
+
+/** Jugadores con los clubes de toda su carrera (para consignas como "Jugó en River"). */
+const PLAYERS: Player[] = (playersData as Player[]).map((p) => ({ ...p, clubs: careerOf(p.id).map((s) => s.club) }));
 
 export const playerGame: GameDefinition<Player> = {
   id: "jugador",
@@ -12,8 +16,8 @@ export const playerGame: GameDefinition<Player> = {
   noun: "jugador",
   maxGuesses: 8,
   seed: 20261101,
-  items: playersData as Player[],
-  targets: (playersData as Player[]).filter((p) => !p.check),
+  items: PLAYERS,
+  targets: PLAYERS.filter((p) => !p.check),
   attributes: playerAttributes,
   subtitle: (p) => `${POSITIONS[p.position]?.label ?? p.position} · ${p.club} · ${COUNTRIES[p.nationality]?.flag ?? ""}`,
 };

@@ -1,0 +1,6550 @@
+{
+ "players": [
+  {
+   "id": "lionel-messi",
+   "name": "Lionel Messi",
+   "qid": "Q615",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "lautaro-martinez",
+   "name": "Lautaro Martínez",
+   "qid": "Q21484126",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "enzo-fernandez",
+   "name": "Enzo Fernández",
+   "qid": "Q96105248",
+   "check": false,
+   "issues": [
+    "club Chelsea → Manchester City Football Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q50602",
+     "es": "Manchester City Football Club",
+     "en": "Manchester City F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "alexis-mac-allister",
+   "name": "Alexis Mac Allister",
+   "qid": "Q33297140",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "emiliano-martinez",
+   "name": "Emiliano Martínez",
+   "qid": "Q3275904",
+   "check": false,
+   "issues": [
+    "nacimiento 1992-09-02 → 1992-09-01",
+    "club Aston Villa → Chelsea Football Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q9616",
+     "es": "Chelsea Football Club",
+     "en": "Chelsea F.C.",
+     "start": "2026",
+     "loan": false
+    },
+    "birthDate": "1992-09-01"
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "cristian-romero",
+   "name": "Cristian Romero",
+   "qid": "Q28058687",
+   "check": false,
+   "issues": [
+    "club Tottenham → Atlético de Madrid (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q8701",
+     "es": "Atlético de Madrid",
+     "en": "Atlético Madrid",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "lisandro-martinez",
+   "name": "Lisandro Martínez",
+   "qid": "Q30881092",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "rodrigo-de-paul",
+   "name": "Rodrigo De Paul",
+   "qid": "Q6110670",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "nicolas-otamendi",
+   "name": "Nicolás Otamendi",
+   "qid": "Q182063",
+   "check": false,
+   "issues": [
+    "club Benfica → Club Atlético River Plate (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q15799",
+     "es": "Club Atlético River Plate",
+     "en": "Club Atlético River Plate",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "franco-mastantuono",
+   "name": "Franco Mastantuono",
+   "qid": "Q123289726",
+   "check": false,
+   "issues": [
+    "club Real Madrid → ACF Fiorentina (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q2052",
+     "es": "ACF Fiorentina",
+     "en": "ACF Fiorentina",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "nico-paz",
+   "name": "Nico Paz",
+   "qid": "Q111336539",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "thiago-almada",
+   "name": "Thiago Almada",
+   "qid": "Q57293140",
+   "check": false,
+   "issues": [
+    "club Atlético de Madrid → Club Atlético River Plate (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q15799",
+     "es": "Club Atlético River Plate",
+     "en": "Club Atlético River Plate",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "alejandro-garnacho",
+   "name": "Alejandro Garnacho",
+   "qid": "Q111366053",
+   "check": false,
+   "issues": [
+    "club Chelsea → Aston Villa Football Club (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q18711",
+     "es": "Aston Villa Football Club",
+     "en": "Aston Villa F.C.",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "giuliano-simeone",
+   "name": "Giuliano Simeone",
+   "qid": "Q111672750",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "nahuel-molina",
+   "name": "Nahuel Molina",
+   "qid": "Q22082590",
+   "check": false,
+   "issues": [
+    "club Atlético de Madrid → A.S. Roma (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q2739",
+     "es": "A.S. Roma",
+     "en": "AS Roma",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "paulo-dybala",
+   "name": "Paulo Dybala",
+   "qid": "Q166317",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "giovani-lo-celso",
+   "name": "Giovani Lo Celso",
+   "qid": "Q20743436",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG",
+    "ITA"
+   ]
+  },
+  {
+   "id": "matias-soule",
+   "name": "Matías Soulé",
+   "qid": "Q107075915",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "exequiel-palacios",
+   "name": "Exequiel Palacios",
+   "qid": "Q19345715",
+   "check": false,
+   "issues": [
+    "club Bayer Leverkusen → Ipswich Town Football Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q9653",
+     "es": "Ipswich Town Football Club",
+     "en": "Ipswich Town F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "facundo-medina",
+   "name": "Facundo Medina",
+   "qid": "Q28056787",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "angel-correa",
+   "name": "Ángel Correa",
+   "qid": "Q10855654",
+   "check": false,
+   "issues": [
+    "club Tigres → Club Atlético River Plate (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q15799",
+     "es": "Club Atlético River Plate",
+     "en": "Club Atlético River Plate",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "edinson-cavani",
+   "name": "Edinson Cavani",
+   "qid": "Q167790",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "URU"
+   ]
+  },
+  {
+   "id": "miguel-merentiel",
+   "name": "Miguel Merentiel",
+   "qid": "Q35066509",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "URU"
+   ]
+  },
+  {
+   "id": "leandro-paredes",
+   "name": "Leandro Paredes",
+   "qid": "Q630170",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "exequiel-zeballos",
+   "name": "Exequiel Zeballos",
+   "qid": "Q71735627",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "milton-gimenez",
+   "name": "Milton Giménez",
+   "qid": "Q63384958",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "franco-armani",
+   "name": "Franco Armani",
+   "qid": "Q5484508",
+   "check": false,
+   "issues": [
+    "club River Plate → Atlético Nacional (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q332605",
+     "es": "Atlético Nacional",
+     "en": "Atlético Nacional",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "miguel-borja",
+   "name": "Miguel Borja",
+   "qid": "Q4094820",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "COL"
+   ]
+  },
+  {
+   "id": "facundo-colidio",
+   "name": "Facundo Colidio",
+   "qid": "Q42126337",
+   "check": false,
+   "issues": [
+    "club River Plate → Albacete Balompié (desde 2018)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q576285",
+     "es": "Albacete Balompié",
+     "en": "Albacete Balompié",
+     "start": "2018",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "maximiliano-salas",
+   "name": "Maximiliano Salas",
+   "qid": "Q23011966",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "juan-fernando-quintero",
+   "name": "Juan Fernando Quintero",
+   "qid": "Q2092409",
+   "check": false,
+   "issues": [
+    "club River Plate → Deportivo Independiente Medellín (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q332527",
+     "es": "Deportivo Independiente Medellín",
+     "en": "Deportivo Independiente Medellín",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "COL"
+   ]
+  },
+  {
+   "id": "german-pezzella",
+   "name": "Germán Pezzella",
+   "qid": "Q3761173",
+   "check": false,
+   "issues": [
+    "club River Plate → Club Atlético Peñarol (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q16320",
+     "es": "Club Atlético Peñarol",
+     "en": "Club Atlético Peñarol",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "marcos-acuna",
+   "name": "Marcos Acuña",
+   "qid": "Q17462635",
+   "check": false,
+   "issues": [
+    "club River Plate → Boca Juniors (desde 2019)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q170703",
+     "es": "Boca Juniors",
+     "en": "Boca Juniors",
+     "start": "2019",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "gonzalo-montiel",
+   "name": "Gonzalo Montiel",
+   "qid": "Q26255087",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "gabriel-arias",
+   "name": "Gabriel Arias",
+   "qid": "Q28005145",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "CHI"
+   ]
+  },
+  {
+   "id": "gaston-martirena",
+   "name": "Gastón Martirena",
+   "qid": "Q109225751",
+   "check": false,
+   "issues": [
+    "nacimiento 2000-01-04 → 2000-01-05"
+   ],
+   "fix": {
+    "birthDate": "2000-01-05"
+   },
+   "nat_wd": [
+    "URU"
+   ]
+  },
+  {
+   "id": "angel-di-maria",
+   "name": "Ángel Di María",
+   "qid": "Q251683",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "ignacio-malcorra",
+   "name": "Ignacio Malcorra",
+   "qid": "Q17478131",
+   "check": false,
+   "issues": [
+    "nacimiento 1987-07-24 → 1987-06-24"
+   ],
+   "fix": {
+    "birthDate": "1987-06-24"
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "gabriel-avalos",
+   "name": "Gabriel Ávalos",
+   "qid": "Q14592575",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "PAR"
+   ]
+  },
+  {
+   "id": "rodrigo-rey",
+   "name": "Rodrigo Rey",
+   "qid": "Q6110784",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "guido-carrillo",
+   "name": "Guido Carrillo",
+   "qid": "Q3779221",
+   "check": false,
+   "issues": [
+    "club Estudiantes → Southampton Football Club (desde 2018)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q18732",
+     "es": "Southampton Football Club",
+     "en": "Southampton F.C.",
+     "start": "2018",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "fernando-muslera",
+   "name": "Fernando Muslera",
+   "qid": "Q203749",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "URU"
+   ]
+  },
+  {
+   "id": "santiago-ascacibar",
+   "name": "Santiago Ascacíbar",
+   "qid": "Q23927885",
+   "check": false,
+   "issues": [
+    "club Estudiantes → Hertha BSC (desde 2020)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q102720",
+     "es": "Hertha BSC",
+     "en": "Hertha BSC",
+     "start": "2020",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "jose-sosa",
+   "name": "José Sosa",
+   "qid": "Q314241",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "edwuin-cetre",
+   "name": "Edwuin Cetré",
+   "qid": "Q30186091",
+   "check": false,
+   "issues": [
+    "nacimiento 1998-01-02 → 1998-01-01"
+   ],
+   "fix": {
+    "birthDate": "1998-01-01"
+   },
+   "nat_wd": [
+    "COL"
+   ]
+  },
+  {
+   "id": "walter-bou",
+   "name": "Walter Bou",
+   "qid": "Q19362957",
+   "check": false,
+   "issues": [
+    "club Lanús → Club de Gimnasia y Esgrima La Plata (desde 2014)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q18640",
+     "es": "Club de Gimnasia y Esgrima La Plata",
+     "en": "Club de Gimnasia y Esgrima La Plata",
+     "start": "2014",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "claudio-aquino",
+   "name": "Claudio Aquino",
+   "qid": "Q5129320",
+   "check": false,
+   "issues": [
+    "club Vélez Sarsfield → Fluminense Football Club (desde 2016)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q80987",
+     "es": "Fluminense Football Club",
+     "en": "Fluminense F.C.",
+     "start": "2016",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "sebastian-villa",
+   "name": "Sebastián Villa",
+   "qid": "Q47494583",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "COL"
+   ]
+  },
+  {
+   "id": "federico-valverde",
+   "name": "Federico Valverde",
+   "qid": "Q19509544",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "URU"
+   ]
+  },
+  {
+   "id": "darwin-nunez",
+   "name": "Darwin Núñez",
+   "qid": "Q46372260",
+   "check": false,
+   "issues": [
+    "club Al Hilal → Diriyah Club (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q7069287",
+     "es": "Diriyah Club",
+     "en": "Al-Diriyah Club",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "URU"
+   ]
+  },
+  {
+   "id": "luis-diaz",
+   "name": "Luis Díaz",
+   "qid": "Q28531111",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "COL"
+   ]
+  },
+  {
+   "id": "james-rodriguez",
+   "name": "James Rodríguez",
+   "qid": "Q368441",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "COL"
+   ]
+  },
+  {
+   "id": "vinicius-junior",
+   "name": "Vinícius Júnior",
+   "qid": "Q28973866",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "raphinha",
+   "name": "Raphinha",
+   "qid": "Q28861547",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "neymar",
+   "name": "Neymar",
+   "qid": "Q142794",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "moises-caicedo",
+   "name": "Moisés Caicedo",
+   "qid": "Q87715532",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ECU"
+   ]
+  },
+  {
+   "id": "arturo-vidal",
+   "name": "Arturo Vidal",
+   "qid": "Q192671",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "CHI"
+   ]
+  },
+  {
+   "id": "miguel-almiron",
+   "name": "Miguel Almirón",
+   "qid": "Q16145667",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "PAR"
+   ]
+  },
+  {
+   "id": "kylian-mbappe",
+   "name": "Kylian Mbappé",
+   "qid": "Q21621995",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "erling-haaland",
+   "name": "Erling Haaland",
+   "qid": "Q28967995",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "NOR"
+   ]
+  },
+  {
+   "id": "lamine-yamal",
+   "name": "Lamine Yamal",
+   "qid": "Q113704154",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "mohamed-salah",
+   "name": "Mohamed Salah",
+   "qid": "Q1354960",
+   "check": false,
+   "issues": [
+    "club Liverpool → Trabzonspor (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q192641",
+     "es": "Trabzonspor",
+     "en": "Trabzonspor",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "EGY"
+   ]
+  },
+  {
+   "id": "cristiano-ronaldo",
+   "name": "Cristiano Ronaldo",
+   "qid": "Q11571",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "ayrton-costa",
+   "name": "Ayrton Costa",
+   "qid": "Q103967727",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "lautaro-di-lollo",
+   "name": "Lautaro Di Lollo",
+   "qid": "Q116196701",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "carlos-palacios",
+   "name": "Carlos Palacios",
+   "qid": "Q121639118",
+   "check": true,
+   "issues": [
+    "nacionalidad CHI → PER"
+   ],
+   "fix": {},
+   "nat_wd": [
+    "PER"
+   ]
+  },
+  {
+   "id": "luis-advincula",
+   "name": "Luis Advíncula",
+   "qid": "Q2655086",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "PER"
+   ]
+  },
+  {
+   "id": "ander-herrera",
+   "name": "Ander Herrera",
+   "qid": "Q1639968",
+   "check": false,
+   "issues": [
+    "club Boca Juniors → Real Zaragoza (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q10308",
+     "es": "Real Zaragoza",
+     "en": "Real Zaragoza",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "kevin-zenon",
+   "name": "Kevin Zenón",
+   "qid": "Q101001007",
+   "check": true,
+   "issues": [
+    "club Boca Juniors → Club Atlas de Guadalajara (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q1023532",
+     "es": "Club Atlas de Guadalajara",
+     "en": "Atlas F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "rodrigo-battaglia",
+   "name": "Rodrigo Battaglia",
+   "qid": "Q3940027",
+   "check": true,
+   "issues": [
+    "club Boca Juniors → Clube Atlético Mineiro (desde 2023)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q270995",
+     "es": "Clube Atlético Mineiro",
+     "en": "Clube Atlético Mineiro",
+     "start": "2023",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ITA",
+    "ARG"
+   ]
+  },
+  {
+   "id": "paulo-diaz",
+   "name": "Paulo Díaz",
+   "qid": "Q17624699",
+   "check": false,
+   "issues": [
+    "nacimiento 1994-08-25 → 1994-03-24",
+    "club River Plate → Club Atlético San Lorenzo de Almagro (desde 2016)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q218282",
+     "es": "Club Atlético San Lorenzo de Almagro",
+     "en": "San Lorenzo de Almagro",
+     "start": "2016",
+     "loan": false
+    },
+    "birthDate": "1994-03-24"
+   },
+   "nat_wd": [
+    "CHI"
+   ]
+  },
+  {
+   "id": "lucas-martinez-quarta",
+   "name": "Lucas Martínez Quarta",
+   "qid": "Q20669464",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "kevin-castano",
+   "name": "Kevin Castaño",
+   "qid": "Q117289166",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "COL"
+   ]
+  },
+  {
+   "id": "giuliano-galoppo",
+   "name": "Giuliano Galoppo",
+   "qid": "Q59209535",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "sebastian-driussi",
+   "name": "Sebastián Driussi",
+   "qid": "Q11640549",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "fabricio-bustos",
+   "name": "Fabricio Bustos",
+   "qid": "Q29005699",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "marcos-rojo",
+   "name": "Marcos Rojo",
+   "qid": "Q507890",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "santiago-sosa",
+   "name": "Santiago Sosa",
+   "qid": "Q56378908",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "juan-nardoni",
+   "name": "Juan Nardoni",
+   "qid": "Q66929490",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "bruno-zuculini",
+   "name": "Bruno Zuculini",
+   "qid": "Q3645977",
+   "check": true,
+   "issues": [
+    "club Racing Club → Club Nacional de Football (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q499616",
+     "es": "Club Nacional de Football",
+     "en": "Club Nacional de Football",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "duvan-vergara",
+   "name": "Duván Vergara",
+   "qid": "Q25842194",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "COL"
+   ]
+  },
+  {
+   "id": "ivan-marcone",
+   "name": "Iván Marcone",
+   "qid": "Q5408414",
+   "check": true,
+   "issues": [
+    "club Independiente → Club Atlético Lanús (desde 2016, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q324589",
+     "es": "Club Atlético Lanús",
+     "en": "Club Atlético Lanús",
+     "start": "2016",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "felipe-loyola",
+   "name": "Felipe Loyola",
+   "qid": "Q121016559",
+   "check": true,
+   "issues": [
+    "nacimiento 2000-12-17 → 2000-11-09"
+   ],
+   "fix": {
+    "birthDate": "2000-11-09"
+   },
+   "nat_wd": [
+    "CHI"
+   ]
+  },
+  {
+   "id": "santiago-montiel",
+   "name": "Santiago Montiel",
+   "qid": "Q121355674",
+   "check": true,
+   "issues": [
+    "nacimiento 2000-02-20 → 2000-11-22"
+   ],
+   "fix": {
+    "birthDate": "2000-11-22"
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "orlando-gill",
+   "name": "Orlando Gill",
+   "qid": "Q60842077",
+   "check": true,
+   "issues": [
+    "nacimiento 2000-03-31 → 2000-06-11"
+   ],
+   "fix": {
+    "birthDate": "2000-06-11"
+   },
+   "nat_wd": [
+    "PAR"
+   ]
+  },
+  {
+   "id": "andres-vombergar",
+   "name": "Andrés Vombergar",
+   "qid": "Q30331236",
+   "check": true,
+   "issues": [
+    "nacionalidad ARG → SVN"
+   ],
+   "fix": {},
+   "nat_wd": [
+    "SVN"
+   ]
+  },
+  {
+   "id": "ezequiel-cerutti",
+   "name": "Ezequiel Cerutti",
+   "qid": "Q5853761",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "cristian-medina",
+   "name": "Cristian Medina",
+   "qid": "Q85713528",
+   "check": true,
+   "issues": [
+    "club Estudiantes → Botafogo de Futebol e Regatas (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q80958",
+     "es": "Botafogo de Futebol e Regatas",
+     "en": "Botafogo F.R.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "leandro-gonzalez-pirez",
+   "name": "Leandro González Pírez",
+   "qid": "Q3829241",
+   "check": true,
+   "issues": [
+    "club Estudiantes → Club Tijuana (desde 2020)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q1103168",
+     "es": "Club Tijuana",
+     "en": "Club Tijuana",
+     "start": "2020",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "tiago-palacios",
+   "name": "Tiago Palacios",
+   "qid": "Q105641783",
+   "check": true,
+   "issues": [
+    "nacimiento 2001-03-09 → 2001-03-28",
+    "nacionalidad ARG → URU"
+   ],
+   "fix": {
+    "birthDate": "2001-03-28"
+   },
+   "nat_wd": [
+    "URU"
+   ]
+  },
+  {
+   "id": "tomas-marchiori",
+   "name": "Tomás Marchiori",
+   "qid": "Q26213349",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "braian-romero",
+   "name": "Braian Romero",
+   "qid": "Q19060912",
+   "check": true,
+   "issues": [
+    "club Vélez Sarsfield → Asociación Atlética Argentinos Juniors (desde 2016)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q220621",
+     "es": "Asociación Atlética Argentinos Juniors",
+     "en": "Argentinos Juniors",
+     "start": "2016",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "elias-gomez",
+   "name": "Elías Gómez",
+   "qid": "Q20745447",
+   "check": true,
+   "issues": [
+    "club Vélez Sarsfield → Club Social y Deportivo Defensa y Justicia (desde 2016, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q1024338",
+     "es": "Club Social y Deportivo Defensa y Justicia",
+     "en": "Defensa y Justicia",
+     "start": "2016",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "agustin-bouzat",
+   "name": "Agustín Bouzat",
+   "qid": "Q23668580",
+   "check": true,
+   "issues": [
+    "nacimiento 1994-06-28 → 1994-03-28"
+   ],
+   "fix": {
+    "birthDate": "1994-03-28"
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "jorge-broun",
+   "name": "Jorge Broun",
+   "qid": "Q6277769",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "carlos-quintana",
+   "name": "Carlos Quintana",
+   "qid": "Q3660120",
+   "check": true,
+   "issues": [
+    "club Rosario Central → Talleres de Córdoba (desde 2016)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q1022939",
+     "es": "Talleres de Córdoba",
+     "en": "Talleres de Córdoba",
+     "start": "2016",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "jaminton-campaz",
+   "name": "Jaminton Campaz",
+   "qid": "Q30050934",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "COL"
+   ]
+  },
+  {
+   "id": "franco-ibarra",
+   "name": "Franco Ibarra",
+   "qid": "Q85869869",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "guido-herrera",
+   "name": "Guido Herrera",
+   "qid": "Q5888110",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "ruben-botta",
+   "name": "Rubén Botta",
+   "qid": "Q6396836",
+   "check": true,
+   "issues": [
+    "club Talleres → Club Atlético San Lorenzo de Almagro (desde 2016)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q218282",
+     "es": "Club Atlético San Lorenzo de Almagro",
+     "en": "San Lorenzo de Almagro",
+     "start": "2016",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "federico-girotti",
+   "name": "Federico Girotti",
+   "qid": "Q61050256",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "lucas-zelarayan",
+   "name": "Lucas Zelarayán",
+   "qid": "Q5981956",
+   "check": true,
+   "issues": [
+    "nacionalidad ARG → ARM",
+    "club Belgrano → Al-Fateh SC (desde 2023)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q2701659",
+     "es": "Al-Fateh SC",
+     "en": "Al Fateh SC",
+     "start": "2023",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARM"
+   ]
+  },
+  {
+   "id": "franco-jara",
+   "name": "Franco Jara",
+   "qid": "Q654690",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "eduardo-salvio",
+   "name": "Eduardo Salvio",
+   "qid": "Q367644",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "carlos-izquierdoz",
+   "name": "Carlos Izquierdoz",
+   "qid": "Q3660080",
+   "check": true,
+   "issues": [
+    "club Lanús → Club Santos Laguna (desde 2014)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q745246",
+     "es": "Club Santos Laguna",
+     "en": "Santos Laguna",
+     "start": "2014",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "nahuel-losada",
+   "name": "Nahuel Losada",
+   "qid": "Q26996198",
+   "check": true,
+   "issues": [
+    "nacimiento 1993-04-09 → 1993-04-17"
+   ],
+   "fix": {
+    "birthDate": "1993-04-17"
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "marcelino-moreno",
+   "name": "Marcelino Moreno",
+   "qid": "Q26724160",
+   "check": true,
+   "issues": [
+    "nacimiento 1994-08-14 → 1994-06-25"
+   ],
+   "fix": {
+    "birthDate": "1994-06-25"
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "hernan-galindez",
+   "name": "Hernán Galíndez",
+   "qid": "Q5742434",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ECU"
+   ]
+  },
+  {
+   "id": "ignacio-fernandez",
+   "name": "Ignacio Fernández",
+   "qid": "Q6447402",
+   "check": true,
+   "issues": [
+    "club Gimnasia y Esgrima LP → Club Atlético River Plate (desde 2016)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q15799",
+     "es": "Club Atlético River Plate",
+     "en": "Club Atlético River Plate",
+     "start": "2016",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "giorgian-de-arrascaeta",
+   "name": "Giorgian de Arrascaeta",
+   "qid": "Q13578003",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "URU"
+   ]
+  },
+  {
+   "id": "gonzalo-plata",
+   "name": "Gonzalo Plata",
+   "qid": "Q60842120",
+   "check": true,
+   "issues": [
+    "club Flamengo → FC Dinamo Moscú (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q17497",
+     "es": "FC Dinamo Moscú",
+     "en": "FC Dinamo Moscow",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ECU"
+   ]
+  },
+  {
+   "id": "agustin-rossi",
+   "name": "Agustín Rossi",
+   "qid": "Q20736318",
+   "check": false,
+   "issues": [
+    "club Flamengo → Al-Nassr (desde 2023)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q482764",
+     "es": "Al-Nassr",
+     "en": "Al-Nassr",
+     "start": "2023",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "saul-niguez",
+   "name": "Saúl Ñíguez",
+   "qid": "Q912172",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "weverton",
+   "name": "Weverton",
+   "qid": "Q8040741",
+   "check": false,
+   "issues": [
+    "club Palmeiras → Grêmio Foot-Ball Porto Alegrense (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q221695",
+     "es": "Grêmio Foot-Ball Porto Alegrense",
+     "en": "Grêmio FBPA",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "gustavo-gomez",
+   "name": "Gustavo Gómez",
+   "qid": "Q1033783",
+   "check": false,
+   "issues": [
+    "club Palmeiras → Boca Juniors (desde 2016)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q170703",
+     "es": "Boca Juniors",
+     "en": "Boca Juniors",
+     "start": "2016",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "PAR"
+   ]
+  },
+  {
+   "id": "raphael-veiga",
+   "name": "Raphael Veiga",
+   "qid": "Q27443365",
+   "check": false,
+   "issues": [
+    "club Palmeiras → Club de Fútbol América (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q459090",
+     "es": "Club de Fútbol América",
+     "en": "Club América",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "vitor-roque",
+   "name": "Vitor Roque",
+   "qid": "Q111016177",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "jose-manuel-lopez",
+   "name": "José Manuel López",
+   "qid": "Q104903216",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "facundo-torres",
+   "name": "Facundo Torres",
+   "qid": "Q27982962",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "URU"
+   ]
+  },
+  {
+   "id": "anibal-moreno",
+   "name": "Aníbal Moreno",
+   "qid": "Q60842143",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "agustin-giay",
+   "name": "Agustín Giay",
+   "qid": "Q112854266",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "hulk",
+   "name": "Hulk",
+   "qid": "Q62786",
+   "check": false,
+   "issues": [
+    "club Atlético Mineiro → Fluminense Football Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q80987",
+     "es": "Fluminense Football Club",
+     "en": "Fluminense F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "memphis-depay",
+   "name": "Memphis Depay",
+   "qid": "Q1894",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "NED"
+   ]
+  },
+  {
+   "id": "rodrigo-garro",
+   "name": "Rodrigo Garro",
+   "qid": "Q61609728",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "thiago-silva",
+   "name": "Thiago Silva",
+   "qid": "Q210453",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "german-cano",
+   "name": "Germán Cano",
+   "qid": "Q3761170",
+   "check": false,
+   "issues": [
+    "club Fluminense → Club de Regatas Vasco da Gama (desde 2019)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q5014111",
+     "es": "Club de Regatas Vasco da Gama",
+     "en": "CR Vasco da Gama",
+     "start": "2019",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "enner-valencia",
+   "name": "Enner Valencia",
+   "qid": "Q2843080",
+   "check": false,
+   "issues": [
+    "club Internacional → Boca Juniors (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q170703",
+     "es": "Boca Juniors",
+     "en": "Boca Juniors",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ECU"
+   ]
+  },
+  {
+   "id": "sergio-rochet",
+   "name": "Sergio Rochet",
+   "qid": "Q17086753",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "URU"
+   ]
+  },
+  {
+   "id": "jonathan-calleri",
+   "name": "Jonathan Calleri",
+   "qid": "Q16298050",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "lucas-moura",
+   "name": "Lucas Moura",
+   "qid": "Q312886",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "philippe-coutinho",
+   "name": "Philippe Coutinho",
+   "qid": "Q311872",
+   "check": false,
+   "issues": [
+    "club Vasco da Gama → Santos Futebol Clube (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q80955",
+     "es": "Santos Futebol Clube",
+     "en": "Santos F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "pablo-vegetti",
+   "name": "Pablo Vegetti",
+   "qid": "Q15146754",
+   "check": true,
+   "issues": [
+    "club Vasco da Gama → Club Atlético Colón (desde 2015, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q80897",
+     "es": "Club Atlético Colón",
+     "en": "Club Atlético Colón",
+     "start": "2015",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "gabriel-barbosa",
+   "name": "Gabriel Barbosa",
+   "qid": "Q13646572",
+   "check": true,
+   "issues": [
+    "club Cruzeiro → Santos Futebol Clube (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q80955",
+     "es": "Santos Futebol Clube",
+     "en": "Santos F.C.",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "charles-aranguiz",
+   "name": "Charles Aránguiz",
+   "qid": "Q797945",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "CHI"
+   ]
+  },
+  {
+   "id": "david-ospina",
+   "name": "David Ospina",
+   "qid": "Q436987",
+   "check": true,
+   "issues": [
+    "club Atlético Nacional → Atlante Fútbol Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q849949",
+     "es": "Atlante Fútbol Club",
+     "en": "Atlante F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "COL"
+   ]
+  },
+  {
+   "id": "andre-pierre-gignac",
+   "name": "André-Pierre Gignac",
+   "qid": "Q1940",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "nahuel-guzman",
+   "name": "Nahuel Guzmán",
+   "qid": "Q3869949",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "sergio-ramos",
+   "name": "Sergio Ramos",
+   "qid": "Q483309",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "sergio-canales",
+   "name": "Sergio Canales",
+   "qid": "Q19422",
+   "check": false,
+   "issues": [
+    "nacionalidad ESP → NGA",
+    "club Monterrey → Racing de Santander (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q12236",
+     "es": "Racing de Santander",
+     "en": "Racing de Santander",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "NGA"
+   ]
+  },
+  {
+   "id": "lucas-ocampos",
+   "name": "Lucas Ocampos",
+   "qid": "Q194579",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "henry-martin",
+   "name": "Henry Martín",
+   "qid": "Q18719813",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "MEX"
+   ]
+  },
+  {
+   "id": "alvaro-fidalgo",
+   "name": "Álvaro Fidalgo",
+   "qid": "Q98092491",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP",
+    "MEX"
+   ]
+  },
+  {
+   "id": "riqui-puig",
+   "name": "Riqui Puig",
+   "qid": "Q50315237",
+   "check": false,
+   "issues": [
+    "club LA Galaxy → Fútbol Club Barcelona (desde 2018)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q7156",
+     "es": "Fútbol Club Barcelona",
+     "en": "FC Barcelona",
+     "start": "2018",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "marco-reus",
+   "name": "Marco Reus",
+   "qid": "Q152377",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "hugo-lloris",
+   "name": "Hugo Lloris",
+   "qid": "Q1907",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "son-heung-min",
+   "name": "Son Heung-min",
+   "qid": "Q439722",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "KOR"
+   ]
+  },
+  {
+   "id": "sadio-mane",
+   "name": "Sadio Mané",
+   "qid": "Q209942",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "SEN"
+   ]
+  },
+  {
+   "id": "joao-felix",
+   "name": "João Félix",
+   "qid": "Q27049064",
+   "check": true,
+   "issues": [
+    "club Al Nassr → Al-Hilal Omdurmán (desde 2025)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q284461",
+     "es": "Al-Hilal Omdurmán",
+     "en": "Al-Hilal Club",
+     "start": "2025",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "ruben-neves",
+   "name": "Rúben Neves",
+   "qid": "Q17486599",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "kalidou-koulibaly",
+   "name": "Kalidou Koulibaly",
+   "qid": "Q3192187",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "SEN",
+    "FRA"
+   ]
+  },
+  {
+   "id": "yassine-bounou",
+   "name": "Yassine Bounou",
+   "qid": "Q3571952",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "MAR"
+   ]
+  },
+  {
+   "id": "joao-cancelo",
+   "name": "João Cancelo",
+   "qid": "Q6298063",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "karim-benzema",
+   "name": "Karim Benzema",
+   "qid": "Q1912",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "n-golo-kante",
+   "name": "N'Golo Kanté",
+   "qid": "Q16665941",
+   "check": false,
+   "issues": [
+    "club Al-Ittihad → Fenerbahçe Spor Kulübü (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q6601875",
+     "es": "Fenerbahçe Spor Kulübü",
+     "en": "Fenerbahçe Istanbul",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "riyad-mahrez",
+   "name": "Riyad Mahrez",
+   "qid": "Q8338725",
+   "check": false,
+   "issues": [
+    "club Al-Ahli → Al-Shamal Sports Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q812760",
+     "es": "Al-Shamal Sports Club",
+     "en": "Al-Shamal Sports Club",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ALG"
+   ]
+  },
+  {
+   "id": "ivan-toney",
+   "name": "Ivan Toney",
+   "qid": "Q16239819",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "edouard-mendy",
+   "name": "Édouard Mendy",
+   "qid": "Q27736107",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "SEN"
+   ]
+  },
+  {
+   "id": "rodri",
+   "name": "Rodri",
+   "qid": "Q20994118",
+   "check": false,
+   "issues": [
+    "club Manchester City → Fútbol Club Barcelona (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q7156",
+     "es": "Fútbol Club Barcelona",
+     "en": "FC Barcelona",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "phil-foden",
+   "name": "Phil Foden",
+   "qid": "Q30729096",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "ruben-dias",
+   "name": "Rúben Dias",
+   "qid": "Q21621168",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "bernardo-silva",
+   "name": "Bernardo Silva",
+   "qid": "Q15521306",
+   "check": false,
+   "issues": [
+    "club Manchester City → Real Madrid Club de Fútbol (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q8682",
+     "es": "Real Madrid Club de Fútbol",
+     "en": "Real Madrid Club de Fútbol",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "gianluigi-donnarumma",
+   "name": "Gianluigi Donnarumma",
+   "qid": "Q20830808",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "jeremy-doku",
+   "name": "Jérémy Doku",
+   "qid": "Q59209505",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BEL"
+   ]
+  },
+  {
+   "id": "omar-marmoush",
+   "name": "Omar Marmoush",
+   "qid": "Q28065104",
+   "check": false,
+   "issues": [
+    "club Manchester City → Tottenham Hotspur Football Club (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q18741",
+     "es": "Tottenham Hotspur Football Club",
+     "en": "Tottenham Hotspur F.C.",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "EGY"
+   ]
+  },
+  {
+   "id": "tijjani-reijnders",
+   "name": "Tijjani Reijnders",
+   "qid": "Q39500352",
+   "check": true,
+   "issues": [
+    "club Manchester City → Al-Qadsiah Football Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q286191",
+     "es": "Al-Qadsiah Football Club",
+     "en": "Al Qadsiah FC",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "NED"
+   ]
+  },
+  {
+   "id": "rayan-cherki",
+   "name": "Rayan Cherki",
+   "qid": "Q64736321",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "josko-gvardiol",
+   "name": "Joško Gvardiol",
+   "qid": "Q73400656",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "CRO"
+   ]
+  },
+  {
+   "id": "virgil-van-dijk",
+   "name": "Virgil van Dijk",
+   "qid": "Q133903",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "NED"
+   ]
+  },
+  {
+   "id": "florian-wirtz",
+   "name": "Florian Wirtz",
+   "qid": "Q94699949",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "alexander-isak",
+   "name": "Alexander Isak",
+   "qid": "Q23759917",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "SWE"
+   ]
+  },
+  {
+   "id": "dominik-szoboszlai",
+   "name": "Dominik Szoboszlai",
+   "qid": "Q30134278",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "HUN"
+   ]
+  },
+  {
+   "id": "ryan-gravenberch",
+   "name": "Ryan Gravenberch",
+   "qid": "Q56257870",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "NED"
+   ]
+  },
+  {
+   "id": "cody-gakpo",
+   "name": "Cody Gakpo",
+   "qid": "Q28801927",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "NED"
+   ]
+  },
+  {
+   "id": "andrew-robertson",
+   "name": "Andrew Robertson",
+   "qid": "Q15915040",
+   "check": false,
+   "issues": [
+    "club Liverpool → Tottenham Hotspur Football Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q18741",
+     "es": "Tottenham Hotspur Football Club",
+     "en": "Tottenham Hotspur F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "SCO"
+   ]
+  },
+  {
+   "id": "bukayo-saka",
+   "name": "Bukayo Saka",
+   "qid": "Q59306386",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "martin-degaard",
+   "name": "Martin Ødegaard",
+   "qid": "Q16902219",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "NOR"
+   ]
+  },
+  {
+   "id": "declan-rice",
+   "name": "Declan Rice",
+   "qid": "Q30007142",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "IRL",
+    "ENG"
+   ]
+  },
+  {
+   "id": "william-saliba",
+   "name": "William Saliba",
+   "qid": "Q56868118",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "gabriel-magalhaes",
+   "name": "Gabriel Magalhães",
+   "qid": "Q25175970",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "david-raya",
+   "name": "David Raya",
+   "qid": "Q19665907",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "viktor-gyokeres",
+   "name": "Viktor Gyökeres",
+   "qid": "Q47075606",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "SWE"
+   ]
+  },
+  {
+   "id": "martin-zubimendi",
+   "name": "Martín Zubimendi",
+   "qid": "Q63384759",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "gabriel-martinelli",
+   "name": "Gabriel Martinelli",
+   "qid": "Q61460651",
+   "check": false,
+   "issues": [
+    "club Arsenal → Al-Hilal (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q73965",
+     "es": "Al-Hilal",
+     "en": "Al Hilal SFC",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "eberechi-eze",
+   "name": "Eberechi Eze",
+   "qid": "Q28445512",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "piero-hincapie",
+   "name": "Piero Hincapié",
+   "qid": "Q101053044",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ECU"
+   ]
+  },
+  {
+   "id": "cole-palmer",
+   "name": "Cole Palmer",
+   "qid": "Q99760796",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "reece-james",
+   "name": "Reece James",
+   "qid": "Q39076401",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "robert-sanchez",
+   "name": "Robert Sánchez",
+   "qid": "Q56043276",
+   "check": false,
+   "issues": [
+    "club Chelsea → Calcio Como 1907 (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q1120838",
+     "es": "Calcio Como 1907",
+     "en": "Como 1907",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "pedro-neto",
+   "name": "Pedro Neto",
+   "qid": "Q30036972",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "marc-cucurella",
+   "name": "Marc Cucurella",
+   "qid": "Q22082505",
+   "check": false,
+   "issues": [
+    "club Chelsea → Real Madrid Club de Fútbol (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q8682",
+     "es": "Real Madrid Club de Fútbol",
+     "en": "Real Madrid Club de Fútbol",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "bruno-fernandes",
+   "name": "Bruno Fernandes",
+   "qid": "Q4979316",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "matheus-cunha",
+   "name": "Matheus Cunha",
+   "qid": "Q35831063",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "bryan-mbeumo",
+   "name": "Bryan Mbeumo",
+   "qid": "Q49561427",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA",
+    "CMR"
+   ]
+  },
+  {
+   "id": "benjamin-sesko",
+   "name": "Benjamin Šeško",
+   "qid": "Q65950315",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "SVN"
+   ]
+  },
+  {
+   "id": "casemiro",
+   "name": "Casemiro",
+   "qid": "Q616664",
+   "check": false,
+   "issues": [
+    "club Manchester United → Inter de Miami (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q16844931",
+     "es": "Inter de Miami",
+     "en": "Inter Miami CF",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "amad-diallo",
+   "name": "Amad Diallo",
+   "qid": "Q72603655",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "CIV"
+   ]
+  },
+  {
+   "id": "micky-van-de-ven",
+   "name": "Micky van de Ven",
+   "qid": "Q69812902",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "NED"
+   ]
+  },
+  {
+   "id": "james-maddison",
+   "name": "James Maddison",
+   "qid": "Q17517177",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "dejan-kulusevski",
+   "name": "Dejan Kulusevski",
+   "qid": "Q59914139",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "MKD",
+    "SWE"
+   ]
+  },
+  {
+   "id": "guglielmo-vicario",
+   "name": "Guglielmo Vicario",
+   "qid": "Q44083681",
+   "check": false,
+   "issues": [
+    "club Tottenham → Juventus (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q1422",
+     "es": "Juventus",
+     "en": "Juventus FC",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "xavi-simons",
+   "name": "Xavi Simons",
+   "qid": "Q65925174",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "NED"
+   ]
+  },
+  {
+   "id": "mohammed-kudus",
+   "name": "Mohammed Kudus",
+   "qid": "Q56877051",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "GHA"
+   ]
+  },
+  {
+   "id": "rodrigo-bentancur",
+   "name": "Rodrigo Bentancur",
+   "qid": "Q18817134",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "URU"
+   ]
+  },
+  {
+   "id": "richarlison",
+   "name": "Richarlison",
+   "qid": "Q20806743",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "ollie-watkins",
+   "name": "Ollie Watkins",
+   "qid": "Q16911979",
+   "check": false,
+   "issues": [
+    "club Aston Villa → Al-Hilal (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q73965",
+     "es": "Al-Hilal",
+     "en": "Al Hilal SFC",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "youri-tielemans",
+   "name": "Youri Tielemans",
+   "qid": "Q14327453",
+   "check": false,
+   "issues": [
+    "club Aston Villa → Manchester United Football Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q18656",
+     "es": "Manchester United Football Club",
+     "en": "Manchester United F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "BEL"
+   ]
+  },
+  {
+   "id": "morgan-rogers",
+   "name": "Morgan Rogers",
+   "qid": "Q61598452",
+   "check": false,
+   "issues": [
+    "club Aston Villa → Chelsea Football Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q9616",
+     "es": "Chelsea Football Club",
+     "en": "Chelsea F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "emiliano-buendia",
+   "name": "Emiliano Buendía",
+   "qid": "Q18637343",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP",
+    "ARG"
+   ]
+  },
+  {
+   "id": "pau-torres",
+   "name": "Pau Torres",
+   "qid": "Q43384100",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "bruno-guimaraes",
+   "name": "Bruno Guimarães",
+   "qid": "Q58323172",
+   "check": false,
+   "issues": [
+    "club Newcastle → Arsenal Fútbol Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q9617",
+     "es": "Arsenal Fútbol Club",
+     "en": "Arsenal F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "anthony-gordon",
+   "name": "Anthony Gordon",
+   "qid": "Q45179405",
+   "check": false,
+   "issues": [
+    "club Newcastle → Fútbol Club Barcelona (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q7156",
+     "es": "Fútbol Club Barcelona",
+     "en": "FC Barcelona",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "sandro-tonali",
+   "name": "Sandro Tonali",
+   "qid": "Q43402334",
+   "check": false,
+   "issues": [
+    "club Newcastle → Tottenham Hotspur Football Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q18741",
+     "es": "Tottenham Hotspur Football Club",
+     "en": "Tottenham Hotspur F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "nick-pope",
+   "name": "Nick Pope",
+   "qid": "Q15999945",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "nick-woltemade",
+   "name": "Nick Woltemade",
+   "qid": "Q84158344",
+   "check": true,
+   "issues": [
+    "club Newcastle → Juventus (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q1422",
+     "es": "Juventus",
+     "en": "Juventus FC",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "kaoru-mitoma",
+   "name": "Kaoru Mitoma",
+   "qid": "Q44395063",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "JPN"
+   ]
+  },
+  {
+   "id": "danny-welbeck",
+   "name": "Danny Welbeck",
+   "qid": "Q188457",
+   "check": false,
+   "issues": [
+    "club Brighton → Chelsea Football Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q9616",
+     "es": "Chelsea Football Club",
+     "en": "Chelsea F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "jean-philippe-mateta",
+   "name": "Jean-Philippe Mateta",
+   "qid": "Q26964668",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "raul-jimenez",
+   "name": "Raúl Jiménez",
+   "qid": "Q1925465",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "MEX"
+   ]
+  },
+  {
+   "id": "morgan-gibbs-white",
+   "name": "Morgan Gibbs-White",
+   "qid": "Q28147578",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "chris-wood",
+   "name": "Chris Wood",
+   "qid": "Q74548",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "NZL"
+   ]
+  },
+  {
+   "id": "nicolas-dominguez",
+   "name": "Nicolás Domínguez",
+   "qid": "Q29419531",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "lucas-paqueta",
+   "name": "Lucas Paquetá",
+   "qid": "Q30089624",
+   "check": false,
+   "issues": [
+    "club West Ham → Clube de Regatas do Flamengo (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q17479",
+     "es": "Clube de Regatas do Flamengo",
+     "en": "Clube de Regatas do Flamengo",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "jarrod-bowen",
+   "name": "Jarrod Bowen",
+   "qid": "Q26704890",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "jordan-pickford",
+   "name": "Jordan Pickford",
+   "qid": "Q13014035",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "jack-grealish",
+   "name": "Jack Grealish",
+   "qid": "Q16056053",
+   "check": true,
+   "issues": [
+    "club Everton → Manchester City Football Club (desde 2021)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q50602",
+     "es": "Manchester City Football Club",
+     "en": "Manchester City F.C.",
+     "start": "2021",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "IRL",
+    "ENG"
+   ]
+  },
+  {
+   "id": "jude-bellingham",
+   "name": "Jude Bellingham",
+   "qid": "Q66241169",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "thibaut-courtois",
+   "name": "Thibaut Courtois",
+   "qid": "Q73360",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BEL"
+   ]
+  },
+  {
+   "id": "antonio-rudiger",
+   "name": "Antonio Rüdiger",
+   "qid": "Q96755",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "rodrygo",
+   "name": "Rodrygo",
+   "qid": "Q42728914",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "arda-guler",
+   "name": "Arda Güler",
+   "qid": "Q108159340",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "TUR"
+   ]
+  },
+  {
+   "id": "aurelien-tchouameni",
+   "name": "Aurélien Tchouaméni",
+   "qid": "Q46951844",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "trent-alexander-arnold",
+   "name": "Trent Alexander-Arnold",
+   "qid": "Q27569376",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "dean-huijsen",
+   "name": "Dean Huijsen",
+   "qid": "Q112184628",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "NED",
+    "ESP"
+   ]
+  },
+  {
+   "id": "eduardo-camavinga",
+   "name": "Eduardo Camavinga",
+   "qid": "Q62960177",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "dani-carvajal",
+   "name": "Dani Carvajal",
+   "qid": "Q127452",
+   "check": false,
+   "issues": [
+    "club Real Madrid → Getafe Club de Fútbol (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q8806",
+     "es": "Getafe Club de Fútbol",
+     "en": "Getafe CF",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "eder-militao",
+   "name": "Éder Militão",
+   "qid": "Q29950055",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "robert-lewandowski",
+   "name": "Robert Lewandowski",
+   "qid": "Q151269",
+   "check": false,
+   "issues": [
+    "club Barcelona → Chicago Fire (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q308683",
+     "es": "Chicago Fire",
+     "en": "Chicago Fire FC",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "POL"
+   ]
+  },
+  {
+   "id": "pedri",
+   "name": "Pedri",
+   "qid": "Q66606355",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "gavi",
+   "name": "Gavi",
+   "qid": "Q108111889",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "frenkie-de-jong",
+   "name": "Frenkie de Jong",
+   "qid": "Q19898898",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "NED"
+   ]
+  },
+  {
+   "id": "marc-andre-ter-stegen",
+   "name": "Marc-André ter Stegen",
+   "qid": "Q160472",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "pau-cubarsi",
+   "name": "Pau Cubarsí",
+   "qid": "Q118473161",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "jules-kounde",
+   "name": "Jules Koundé",
+   "qid": "Q47170176",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "ferran-torres",
+   "name": "Ferran Torres",
+   "qid": "Q44297797",
+   "check": false,
+   "issues": [
+    "club Barcelona → Paris Saint-Germain FC (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q483020",
+     "es": "Paris Saint-Germain FC",
+     "en": "Paris Saint-Germain FC",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "marcus-rashford",
+   "name": "Marcus Rashford",
+   "qid": "Q22951255",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "dani-olmo",
+   "name": "Dani Olmo",
+   "qid": "Q19560313",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "fermin-lopez",
+   "name": "Fermín López",
+   "qid": "Q117312887",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "alejandro-balde",
+   "name": "Alejandro Balde",
+   "qid": "Q105681392",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "jan-oblak",
+   "name": "Jan Oblak",
+   "qid": "Q2058682",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "SVN"
+   ]
+  },
+  {
+   "id": "antoine-griezmann",
+   "name": "Antoine Griezmann",
+   "qid": "Q455462",
+   "check": false,
+   "issues": [
+    "club Atlético de Madrid → Orlando City Soccer Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q15214308",
+     "es": "Orlando City Soccer Club",
+     "en": "Orlando City SC",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "alexander-srloth",
+   "name": "Alexander Sørloth",
+   "qid": "Q13784739",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "NOR"
+   ]
+  },
+  {
+   "id": "pablo-barrios",
+   "name": "Pablo Barrios",
+   "qid": "Q114924158",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "conor-gallagher",
+   "name": "Conor Gallagher",
+   "qid": "Q44737408",
+   "check": false,
+   "issues": [
+    "club Atlético de Madrid → Tottenham Hotspur Football Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q18741",
+     "es": "Tottenham Hotspur Football Club",
+     "en": "Tottenham Hotspur F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "alex-baena",
+   "name": "Álex Baena",
+   "qid": "Q97404267",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "johnny-cardoso",
+   "name": "Johnny Cardoso",
+   "qid": "Q72219351",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "USA"
+   ]
+  },
+  {
+   "id": "marcos-llorente",
+   "name": "Marcos Llorente",
+   "qid": "Q21130285",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "jose-maria-gimenez",
+   "name": "José María Giménez",
+   "qid": "Q13634114",
+   "check": false,
+   "issues": [
+    "club Atlético de Madrid → Real Club Deportivo de A Coruña (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q8760",
+     "es": "Real Club Deportivo de A Coruña",
+     "en": "Deportivo de A Coruña",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "URU"
+   ]
+  },
+  {
+   "id": "nico-williams",
+   "name": "Nico Williams",
+   "qid": "Q104414736",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "inaki-williams",
+   "name": "Iñaki Williams",
+   "qid": "Q18608497",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP",
+    "GHA"
+   ]
+  },
+  {
+   "id": "unai-simon",
+   "name": "Unai Simón",
+   "qid": "Q23908113",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "oihan-sancet",
+   "name": "Oihan Sancet",
+   "qid": "Q66466886",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "gerard-moreno",
+   "name": "Gerard Moreno",
+   "qid": "Q5550103",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "juan-foyth",
+   "name": "Juan Foyth",
+   "qid": "Q29841260",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "thomas-partey",
+   "name": "Thomas Partey",
+   "qid": "Q15963873",
+   "check": true,
+   "issues": [
+    "club Villarreal → Al-Shabab (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q2636005",
+     "es": "Al-Shabab",
+     "en": "Al-Shabab Football Club",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "GHA"
+   ]
+  },
+  {
+   "id": "mikel-oyarzabal",
+   "name": "Mikel Oyarzabal",
+   "qid": "Q21195147",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "takefusa-kubo",
+   "name": "Takefusa Kubo",
+   "qid": "Q27067753",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "JPN"
+   ]
+  },
+  {
+   "id": "isco",
+   "name": "Isco",
+   "qid": "Q80892",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "iago-aspas",
+   "name": "Iago Aspas",
+   "qid": "Q26380",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "marcus-thuram",
+   "name": "Marcus Thuram",
+   "qid": "Q19903718",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "nicolo-barella",
+   "name": "Nicolò Barella",
+   "qid": "Q20090225",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "hakan-calhanoglu",
+   "name": "Hakan Çalhanoğlu",
+   "qid": "Q763465",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "TUR"
+   ]
+  },
+  {
+   "id": "yann-sommer",
+   "name": "Yann Sommer",
+   "qid": "Q667596",
+   "check": false,
+   "issues": [
+    "club Inter → Club Brujas (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q190916",
+     "es": "Club Brujas",
+     "en": "Club Brugge K.V.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "SUI"
+   ]
+  },
+  {
+   "id": "alessandro-bastoni",
+   "name": "Alessandro Bastoni",
+   "qid": "Q28561068",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "federico-dimarco",
+   "name": "Federico Dimarco",
+   "qid": "Q20204829",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "denzel-dumfries",
+   "name": "Denzel Dumfries",
+   "qid": "Q19882816",
+   "check": false,
+   "issues": [
+    "club Inter → Real Madrid Club de Fútbol (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q8682",
+     "es": "Real Madrid Club de Fútbol",
+     "en": "Real Madrid Club de Fútbol",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ABW",
+    "NED"
+   ]
+  },
+  {
+   "id": "rafael-leao",
+   "name": "Rafael Leão",
+   "qid": "Q30055335",
+   "check": false,
+   "issues": [
+    "club Milan → Galatasaray Spor Kulübü (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q495299",
+     "es": "Galatasaray Spor Kulübü",
+     "en": "Galatasaray S.K.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "christian-pulisic",
+   "name": "Christian Pulisic",
+   "qid": "Q22279773",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "USA"
+   ]
+  },
+  {
+   "id": "mike-maignan",
+   "name": "Mike Maignan",
+   "qid": "Q17274709",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "luka-modric",
+   "name": "Luka Modrić",
+   "qid": "Q483837",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "CRO"
+   ]
+  },
+  {
+   "id": "santiago-gimenez",
+   "name": "Santiago Giménez",
+   "qid": "Q33296979",
+   "check": false,
+   "issues": [
+    "club Milan → Fútbol Club Oporto (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q128446",
+     "es": "Fútbol Club Oporto",
+     "en": "FC Porto",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "MEX"
+   ]
+  },
+  {
+   "id": "adrien-rabiot",
+   "name": "Adrien Rabiot",
+   "qid": "Q18962",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "dusan-vlahovic",
+   "name": "Dušan Vlahović",
+   "qid": "Q23762815",
+   "check": false,
+   "issues": [
+    "club Juventus → Beşiktaş Jimnastik Kulübü (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q172567",
+     "es": "Beşiktaş Jimnastik Kulübü",
+     "en": "Beşiktaş J.K.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "SRB"
+   ]
+  },
+  {
+   "id": "kenan-yldz",
+   "name": "Kenan Yıldız",
+   "qid": "Q113184832",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "TUR"
+   ]
+  },
+  {
+   "id": "gleison-bremer",
+   "name": "Gleison Bremer",
+   "qid": "Q38693097",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "jonathan-david",
+   "name": "Jonathan David",
+   "qid": "Q56085180",
+   "check": true,
+   "issues": [
+    "club Juventus → Atlético de Madrid (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q8701",
+     "es": "Atlético de Madrid",
+     "en": "Atlético Madrid",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "CAN"
+   ]
+  },
+  {
+   "id": "manuel-locatelli",
+   "name": "Manuel Locatelli",
+   "qid": "Q23899393",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "michele-di-gregorio",
+   "name": "Michele Di Gregorio",
+   "qid": "Q42317168",
+   "check": false,
+   "issues": [
+    "club Juventus → AFC Bournemouth (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q19568",
+     "es": "AFC Bournemouth",
+     "en": "AFC Bournemouth",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "kevin-de-bruyne",
+   "name": "Kevin De Bruyne",
+   "qid": "Q357984",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BEL"
+   ]
+  },
+  {
+   "id": "romelu-lukaku",
+   "name": "Romelu Lukaku",
+   "qid": "Q313316",
+   "check": false,
+   "issues": [
+    "club Napoli → Fenerbahçe Spor Kulübü (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q6601875",
+     "es": "Fenerbahçe Spor Kulübü",
+     "en": "Fenerbahçe Istanbul",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "BEL"
+   ]
+  },
+  {
+   "id": "scott-mctominay",
+   "name": "Scott McTominay",
+   "qid": "Q29624459",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "SCO"
+   ]
+  },
+  {
+   "id": "rasmus-hjlund",
+   "name": "Rasmus Højlund",
+   "qid": "Q66467324",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "DEN"
+   ]
+  },
+  {
+   "id": "giovanni-di-lorenzo",
+   "name": "Giovanni Di Lorenzo",
+   "qid": "Q14831282",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "lorenzo-pellegrini",
+   "name": "Lorenzo Pellegrini",
+   "qid": "Q19773058",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "artem-dovbyk",
+   "name": "Artem Dovbyk",
+   "qid": "Q20066885",
+   "check": false,
+   "issues": [
+    "club Roma → Bologna Football Club 1909 (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q1893",
+     "es": "Bologna Football Club 1909",
+     "en": "Bologna F.C. 1909",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "UKR"
+   ]
+  },
+  {
+   "id": "mile-svilar",
+   "name": "Mile Svilar",
+   "qid": "Q38245742",
+   "check": false,
+   "issues": [
+    "nacionalidad SRB → BEL"
+   ],
+   "fix": {},
+   "nat_wd": [
+    "BEL"
+   ]
+  },
+  {
+   "id": "ademola-lookman",
+   "name": "Ademola Lookman",
+   "qid": "Q21484766",
+   "check": false,
+   "issues": [
+    "club Atalanta → Atlético de Madrid (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q8701",
+     "es": "Atlético de Madrid",
+     "en": "Atlético Madrid",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ENG",
+    "NGA"
+   ]
+  },
+  {
+   "id": "charles-de-ketelaere",
+   "name": "Charles De Ketelaere",
+   "qid": "Q68607008",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BEL"
+   ]
+  },
+  {
+   "id": "mattia-zaccagni",
+   "name": "Mattia Zaccagni",
+   "qid": "Q28968068",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "moise-kean",
+   "name": "Moise Kean",
+   "qid": "Q27889974",
+   "check": false,
+   "issues": [
+    "club Fiorentina → Calcio Como 1907 (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q1120838",
+     "es": "Calcio Como 1907",
+     "en": "Como 1907",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "edin-dzeko",
+   "name": "Edin Džeko",
+   "qid": "Q153786",
+   "check": true,
+   "issues": [
+    "club Fiorentina → FC Schalke 04 (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q32494",
+     "es": "FC Schalke 04",
+     "en": "Schalke 04",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "BIH"
+   ]
+  },
+  {
+   "id": "riccardo-orsolini",
+   "name": "Riccardo Orsolini",
+   "qid": "Q27881421",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "alvaro-morata",
+   "name": "Álvaro Morata",
+   "qid": "Q48770",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "maximo-perrone",
+   "name": "Máximo Perrone",
+   "qid": "Q112338635",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "harry-kane",
+   "name": "Harry Kane",
+   "qid": "Q969725",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "jamal-musiala",
+   "name": "Jamal Musiala",
+   "qid": "Q96072055",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ENG",
+    "GER"
+   ]
+  },
+  {
+   "id": "joshua-kimmich",
+   "name": "Joshua Kimmich",
+   "qid": "Q13865408",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "manuel-neuer",
+   "name": "Manuel Neuer",
+   "qid": "Q107365",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "michael-olise",
+   "name": "Michael Olise",
+   "qid": "Q62050484",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "dayot-upamecano",
+   "name": "Dayot Upamecano",
+   "qid": "Q20723878",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "alphonso-davies",
+   "name": "Alphonso Davies",
+   "qid": "Q23540953",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "CAN"
+   ]
+  },
+  {
+   "id": "serge-gnabry",
+   "name": "Serge Gnabry",
+   "qid": "Q59490",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "kim-min-jae",
+   "name": "Kim Min-jae",
+   "qid": "Q28699707",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "KOR"
+   ]
+  },
+  {
+   "id": "patrik-schick",
+   "name": "Patrik Schick",
+   "qid": "Q16910257",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "CZE"
+   ]
+  },
+  {
+   "id": "alejandro-grimaldo",
+   "name": "Alejandro Grimaldo",
+   "qid": "Q921324",
+   "check": false,
+   "issues": [
+    "club Bayer Leverkusen → Atlético de Madrid (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q8701",
+     "es": "Atlético de Madrid",
+     "en": "Atlético Madrid",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "serhou-guirassy",
+   "name": "Serhou Guirassy",
+   "qid": "Q18637429",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "GUI"
+   ]
+  },
+  {
+   "id": "gregor-kobel",
+   "name": "Gregor Kobel",
+   "qid": "Q36184031",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "SUI"
+   ]
+  },
+  {
+   "id": "julian-brandt",
+   "name": "Julian Brandt",
+   "qid": "Q3189078",
+   "check": false,
+   "issues": [
+    "club Borussia Dortmund → Ajax de Ámsterdam (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q81888",
+     "es": "Ajax de Ámsterdam",
+     "en": "AFC Ajax",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "karim-adeyemi",
+   "name": "Karim Adeyemi",
+   "qid": "Q56424307",
+   "check": false,
+   "issues": [
+    "club Borussia Dortmund → Fútbol Club Barcelona (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q7156",
+     "es": "Fútbol Club Barcelona",
+     "en": "FC Barcelona",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "ousmane-dembele",
+   "name": "Ousmane Dembélé",
+   "qid": "Q20851003",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "achraf-hakimi",
+   "name": "Achraf Hakimi",
+   "qid": "Q26932598",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "MAR",
+    "ESP"
+   ]
+  },
+  {
+   "id": "marquinhos",
+   "name": "Marquinhos",
+   "qid": "Q39230",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "BRA",
+    "POR"
+   ]
+  },
+  {
+   "id": "vitinha",
+   "name": "Vitinha",
+   "qid": "Q66818509",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "joao-neves",
+   "name": "João Neves",
+   "qid": "Q113551733",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "khvicha-kvaratskhelia",
+   "name": "Khvicha Kvaratskhelia",
+   "qid": "Q61780902",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "GEO"
+   ]
+  },
+  {
+   "id": "desire-doue",
+   "name": "Désiré Doué",
+   "qid": "Q112170256",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "nuno-mendes",
+   "name": "Nuno Mendes",
+   "qid": "Q96396963",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "lucas-chevalier",
+   "name": "Lucas Chevalier",
+   "qid": "Q98102459",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "bradley-barcola",
+   "name": "Bradley Barcola",
+   "qid": "Q99670930",
+   "check": false,
+   "issues": [
+    "club Paris Saint-Germain → Liverpool Fútbol Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q1130849",
+     "es": "Liverpool Fútbol Club",
+     "en": "Liverpool F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "willian-pacho",
+   "name": "Willian Pacho",
+   "qid": "Q87767569",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ECU"
+   ]
+  },
+  {
+   "id": "fabian-ruiz",
+   "name": "Fabián Ruiz",
+   "qid": "Q18637930",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "pierre-emerick-aubameyang",
+   "name": "Pierre-Emerick Aubameyang",
+   "qid": "Q44977",
+   "check": true,
+   "issues": [
+    "club Olympique de Marsella → Real Club Deportivo de A Coruña (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q8760",
+     "es": "Real Club Deportivo de A Coruña",
+     "en": "Deportivo de A Coruña",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "FRA",
+    "GAB"
+   ]
+  },
+  {
+   "id": "mason-greenwood",
+   "name": "Mason Greenwood",
+   "qid": "Q61986758",
+   "check": false,
+   "issues": [
+    "club Olympique de Marsella → Fenerbahçe Spor Kulübü (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q6601875",
+     "es": "Fenerbahçe Spor Kulübü",
+     "en": "Fenerbahçe Istanbul",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "leonardo-balerdi",
+   "name": "Leonardo Balerdi",
+   "qid": "Q50233588",
+   "check": false,
+   "issues": [
+    "club Olympique de Marsella → A.S. Roma (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q2739",
+     "es": "A.S. Roma",
+     "en": "AS Roma",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "geronimo-rulli",
+   "name": "Gerónimo Rulli",
+   "qid": "Q5879014",
+   "check": false,
+   "issues": [
+    "club Olympique de Marsella → Manchester City Football Club (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q50602",
+     "es": "Manchester City Football Club",
+     "en": "Manchester City F.C.",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "nicolas-tagliafico",
+   "name": "Nicolás Tagliafico",
+   "qid": "Q3876530",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "paul-pogba",
+   "name": "Paul Pogba",
+   "qid": "Q129027",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "vangelis-pavlidis",
+   "name": "Vangelis Pavlidis",
+   "qid": "Q24231840",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "GRE"
+   ]
+  },
+  {
+   "id": "richard-rios",
+   "name": "Richard Ríos",
+   "qid": "Q117322318",
+   "check": true,
+   "issues": [
+    "club Benfica → Al-Ittihad (desde 2026, préstamo)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q309480",
+     "es": "Al-Ittihad",
+     "en": "Al Ittihad FC",
+     "start": "2026",
+     "loan": true
+    }
+   },
+   "nat_wd": [
+    "COL"
+   ]
+  },
+  {
+   "id": "diogo-costa",
+   "name": "Diogo Costa",
+   "qid": "Q26255578",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "samu-aghehowa",
+   "name": "Samu Aghehowa",
+   "qid": "Q116923606",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "alan-varela",
+   "name": "Alan Varela",
+   "qid": "Q104375627",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "morten-hjulmand",
+   "name": "Morten Hjulmand",
+   "qid": "Q55761514",
+   "check": false,
+   "issues": [
+    "club Sporting CP → Atlético de Madrid (desde 2026)"
+   ],
+   "fix": {
+    "club": {
+     "qid": "Q8701",
+     "es": "Atlético de Madrid",
+     "en": "Atlético Madrid",
+     "start": "2026",
+     "loan": false
+    }
+   },
+   "nat_wd": [
+    "DEN"
+   ]
+  },
+  {
+   "id": "luis-javier-suarez",
+   "name": "Luis Javier Suárez",
+   "qid": "Q28736721",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "COL"
+   ]
+  },
+  {
+   "id": "luuk-de-jong",
+   "name": "Luuk de Jong",
+   "qid": "Q313911",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "NED"
+   ]
+  },
+  {
+   "id": "ivan-perisic",
+   "name": "Ivan Perišić",
+   "qid": "Q161054",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "CRO"
+   ]
+  },
+  {
+   "id": "victor-osimhen",
+   "name": "Victor Osimhen",
+   "qid": "Q25253293",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "NGA"
+   ]
+  },
+  {
+   "id": "mauro-icardi",
+   "name": "Mauro Icardi",
+   "qid": "Q136986",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "ARG",
+    "ITA"
+   ]
+  },
+  {
+   "id": "leroy-sane",
+   "name": "Leroy Sané",
+   "qid": "Q16499882",
+   "check": true,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "lucas-torreira",
+   "name": "Lucas Torreira",
+   "qid": "Q16302330",
+   "check": false,
+   "issues": [],
+   "fix": {},
+   "nat_wd": [
+    "URU"
+   ]
+  }
+ ],
+ "coaches": [
+  {
+   "id": "lionel-scaloni",
+   "name": "Lionel Scaloni",
+   "qid": "Q311586",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1978-05-16",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "marcelo-gallardo",
+   "name": "Marcelo Gallardo",
+   "qid": "Q266507",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1976-01-18",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "gustavo-costas",
+   "name": "Gustavo Costas",
+   "qid": "Q3294412",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1963-02-28",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "ariel-holan",
+   "name": "Ariel Holan",
+   "qid": "Q5704053",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1960-09-14",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "guillermo-barros-schelotto",
+   "name": "Guillermo Barros Schelotto",
+   "qid": "Q509165",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1973-05-04",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "eduardo-dominguez",
+   "name": "Eduardo Domínguez",
+   "qid": "Q3288172",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1978-09-01",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "diego-simeone",
+   "name": "Diego Simeone",
+   "qid": "Q258115",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1970-04-28",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "mauricio-pochettino",
+   "name": "Mauricio Pochettino",
+   "qid": "Q313000",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1972-03-02",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "marcelo-bielsa",
+   "name": "Marcelo Bielsa",
+   "qid": "Q31575",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1955-07-21",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "nestor-lorenzo",
+   "name": "Néstor Lorenzo",
+   "qid": "Q655975",
+   "check": false,
+   "issues": [
+    "nacimiento 1966-02-28 → 1966-02-26"
+   ],
+   "birth_wd": "1966-02-26",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "sebastian-beccacece",
+   "name": "Sebastián Beccacece",
+   "qid": "Q7442628",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1980-12-17",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "gustavo-alfaro",
+   "name": "Gustavo Alfaro",
+   "qid": "Q5621337",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1962-08-14",
+   "nat_wd": [
+    "URU",
+    "ARG"
+   ]
+  },
+  {
+   "id": "jorge-sampaoli",
+   "name": "Jorge Sampaoli",
+   "qid": "Q1089864",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1960-03-13",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "carlo-ancelotti",
+   "name": "Carlo Ancelotti",
+   "qid": "Q174614",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1959-06-10",
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "pep-guardiola",
+   "name": "Pep Guardiola",
+   "qid": "Q164038",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1971-01-18",
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "mikel-arteta",
+   "name": "Mikel Arteta",
+   "qid": "Q185572",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1982-03-26",
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "arne-slot",
+   "name": "Arne Slot",
+   "qid": "Q1029223",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1978-09-17",
+   "nat_wd": [
+    "NED"
+   ]
+  },
+  {
+   "id": "xabi-alonso",
+   "name": "Xabi Alonso",
+   "qid": "Q208104",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1981-11-25",
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "hansi-flick",
+   "name": "Hansi Flick",
+   "qid": "Q577384",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1965-02-24",
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "luis-enrique",
+   "name": "Luis Enrique",
+   "qid": "Q222789",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1970-05-08",
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "vincent-kompany",
+   "name": "Vincent Kompany",
+   "qid": "Q201381",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1986-04-10",
+   "nat_wd": [
+    "BEL"
+   ]
+  },
+  {
+   "id": "simone-inzaghi",
+   "name": "Simone Inzaghi",
+   "qid": "Q314670",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1976-04-05",
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "thomas-tuchel",
+   "name": "Thomas Tuchel",
+   "qid": "Q702233",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1973-08-29",
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "julian-nagelsmann",
+   "name": "Julian Nagelsmann",
+   "qid": "Q21226404",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1987-07-23",
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "didier-deschamps",
+   "name": "Didier Deschamps",
+   "qid": "Q508711",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1968-10-15",
+   "nat_wd": [
+    "FRA"
+   ]
+  },
+  {
+   "id": "abel-ferreira",
+   "name": "Abel Ferreira",
+   "qid": "Q318415",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1978-12-22",
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "filipe-luis",
+   "name": "Filipe Luís",
+   "qid": "Q350547",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1985-08-09",
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "mauricio-pellegrino",
+   "name": "Mauricio Pellegrino",
+   "qid": "Q313131",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1971-10-05",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "juan-pablo-vojvoda",
+   "name": "Juan Pablo Vojvoda",
+   "qid": "Q41777366",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1975-01-13",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "hernan-crespo",
+   "name": "Hernán Crespo",
+   "qid": "Q160206",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1975-07-05",
+   "nat_wd": [
+    "ARG",
+    "ITA"
+   ]
+  },
+  {
+   "id": "fernando-diniz",
+   "name": "Fernando Diniz",
+   "qid": "Q10281320",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1974-03-27",
+   "nat_wd": [
+    "BRA"
+   ]
+  },
+  {
+   "id": "leonardo-jardim",
+   "name": "Leonardo Jardim",
+   "qid": "Q2162382",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1974-08-01",
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "guido-pizarro",
+   "name": "Guido Pizarro",
+   "qid": "Q334566",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1990-02-26",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "domenec-torrent",
+   "name": "Domènec Torrent",
+   "qid": "Q24082703",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1962-07-14",
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "javier-mascherano",
+   "name": "Javier Mascherano",
+   "qid": "Q161571",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1984-06-08",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "jorge-jesus",
+   "name": "Jorge Jesus",
+   "qid": "Q527550",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1954-07-24",
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "matthias-jaissle",
+   "name": "Matthias Jaissle",
+   "qid": "Q690028",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1988-04-05",
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "enzo-maresca",
+   "name": "Enzo Maresca",
+   "qid": "Q317282",
+   "check": true,
+   "issues": [
+    "nacimiento 1980-02-10 → 1981-02-10"
+   ],
+   "birth_wd": "1981-02-10",
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "ruben-amorim",
+   "name": "Rúben Amorim",
+   "qid": "Q368682",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1985-01-27",
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "thomas-frank",
+   "name": "Thomas Frank",
+   "qid": "Q13469562",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1973-10-09",
+   "nat_wd": [
+    "DEN"
+   ]
+  },
+  {
+   "id": "unai-emery",
+   "name": "Unai Emery",
+   "qid": "Q295610",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1971-11-03",
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "eddie-howe",
+   "name": "Eddie Howe",
+   "qid": "Q5336135",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1977-11-29",
+   "nat_wd": [
+    "ENG"
+   ]
+  },
+  {
+   "id": "oliver-glasner",
+   "name": "Oliver Glasner",
+   "qid": "Q874777",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1974-08-28",
+   "nat_wd": [
+    "AUT"
+   ]
+  },
+  {
+   "id": "marco-silva",
+   "name": "Marco Silva",
+   "qid": "Q6757714",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1977-07-12",
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "andoni-iraola",
+   "name": "Andoni Iraola",
+   "qid": "Q317216",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1982-06-22",
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "fabian-hurzeler",
+   "name": "Fabian Hürzeler",
+   "qid": "Q115819313",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1993-02-26",
+   "nat_wd": [
+    "GER"
+   ]
+  },
+  {
+   "id": "david-moyes",
+   "name": "David Moyes",
+   "qid": "Q297252",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1963-04-25",
+   "nat_wd": [
+    "SCO"
+   ]
+  },
+  {
+   "id": "ernesto-valverde",
+   "name": "Ernesto Valverde",
+   "qid": "Q359118",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1964-02-09",
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "manuel-pellegrini",
+   "name": "Manuel Pellegrini",
+   "qid": "Q296036",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1953-09-16",
+   "nat_wd": [
+    "CHI"
+   ]
+  },
+  {
+   "id": "matias-almeyda",
+   "name": "Matías Almeyda",
+   "qid": "Q359494",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1973-12-21",
+   "nat_wd": [
+    "ARG"
+   ]
+  },
+  {
+   "id": "jose-bordalas",
+   "name": "José Bordalás",
+   "qid": "Q3323802",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1964-03-05",
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "cristian-chivu",
+   "name": "Cristian Chivu",
+   "qid": "Q210491",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1980-10-26",
+   "nat_wd": [
+    "ROU"
+   ]
+  },
+  {
+   "id": "massimiliano-allegri",
+   "name": "Massimiliano Allegri",
+   "qid": "Q354529",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1967-08-11",
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "antonio-conte",
+   "name": "Antonio Conte",
+   "qid": "Q26580",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1969-07-31",
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "gian-piero-gasperini",
+   "name": "Gian Piero Gasperini",
+   "qid": "Q367846",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1958-01-26",
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "maurizio-sarri",
+   "name": "Maurizio Sarri",
+   "qid": "Q3852721",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1959-01-10",
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "cesc-fabregas",
+   "name": "Cesc Fàbregas",
+   "qid": "Q17499",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1987-05-04",
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "vincenzo-italiano",
+   "name": "Vincenzo Italiano",
+   "qid": "Q1091404",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1977-12-10",
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "niko-kovac",
+   "name": "Niko Kovač",
+   "qid": "Q154305",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1971-10-15",
+   "nat_wd": [
+    "CRO"
+   ]
+  },
+  {
+   "id": "roberto-de-zerbi",
+   "name": "Roberto De Zerbi",
+   "qid": "Q2032119",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1979-06-06",
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "paulo-fonseca",
+   "name": "Paulo Fonseca",
+   "qid": "Q10346582",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1973-03-05",
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "francesco-farioli",
+   "name": "Francesco Farioli",
+   "qid": "Q106247695",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1989-04-10",
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "jose-mourinho",
+   "name": "José Mourinho",
+   "qid": "Q79983",
+   "check": true,
+   "issues": [],
+   "birth_wd": "1963-01-26",
+   "nat_wd": [
+    "POR"
+   ]
+  },
+  {
+   "id": "roberto-martinez",
+   "name": "Roberto Martínez",
+   "qid": "Q357994",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1973-07-13",
+   "nat_wd": [
+    "ESP"
+   ]
+  },
+  {
+   "id": "ronald-koeman",
+   "name": "Ronald Koeman",
+   "qid": "Q192635",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1963-03-21",
+   "nat_wd": [
+    "NED"
+   ]
+  },
+  {
+   "id": "gennaro-gattuso",
+   "name": "Gennaro Gattuso",
+   "qid": "Q116980",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1978-01-09",
+   "nat_wd": [
+    "ITA"
+   ]
+  },
+  {
+   "id": "javier-aguirre",
+   "name": "Javier Aguirre",
+   "qid": "Q194311",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1958-12-01",
+   "nat_wd": [
+    "MEX"
+   ]
+  },
+  {
+   "id": "hajime-moriyasu",
+   "name": "Hajime Moriyasu",
+   "qid": "Q2428403",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1968-08-23",
+   "nat_wd": [
+    "JPN"
+   ]
+  },
+  {
+   "id": "walid-regragui",
+   "name": "Walid Regragui",
+   "qid": "Q3052128",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1975-09-23",
+   "nat_wd": [
+    "MAR"
+   ]
+  },
+  {
+   "id": "jesse-marsch",
+   "name": "Jesse Marsch",
+   "qid": "Q1336179",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1973-11-08",
+   "nat_wd": [
+    "USA"
+   ]
+  },
+  {
+   "id": "hong-myung-bo",
+   "name": "Hong Myung-bo",
+   "qid": "Q313940",
+   "check": false,
+   "issues": [],
+   "birth_wd": "1969-02-12",
+   "nat_wd": [
+    "KOR"
+   ]
+  },
+  {
+   "id": "fernando-batista",
+   "name": "Fernando Batista",
+   "qid": "Q60841644",
+   "check": true,
+   "issues": [
+    "nacimiento 1970-05-30 → 1970-08-20"
+   ],
+   "birth_wd": "1970-08-20",
+   "nat_wd": [
+    "ARG"
+   ]
+  }
+ ],
+ "careers": [
+  {
+   "id": "lionel-messi",
+   "name": "Lionel Messi",
+   "qid": "Q615",
+   "issues": [],
+   "wikidata": [
+    "Fútbol Club Barcelona \"C\" 2003-2004",
+    "Fútbol Club Barcelona Atlètic 2004-2005",
+    "Fútbol Club Barcelona 2004-2021",
+    "Paris Saint-Germain FC 2021-2023",
+    "Inter de Miami 2023-"
+   ]
+  },
+  {
+   "id": "angel-di-maria",
+   "name": "Ángel Di María",
+   "qid": "Q251683",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético Rosario Central 2005-2007",
+    "Sport Lisboa e Benfica 2007-2010",
+    "Real Madrid Club de Fútbol 2010-2014",
+    "Manchester United Football Club 2014-2015",
+    "Paris Saint-Germain FC 2015-2022",
+    "Juventus 2022-2023",
+    "Sport Lisboa e Benfica 2023-2025",
+    "Club Atlético Rosario Central 2025-"
+   ]
+  },
+  {
+   "id": "lautaro-martinez",
+   "name": "Lautaro Martínez",
+   "qid": "Q21484126",
+   "issues": [],
+   "wikidata": [
+    "Racing Club 2015-2018",
+    "Inter de Milán 2018-"
+   ]
+  },
+  {
+   "id": "enzo-fernandez",
+   "name": "Enzo Fernández",
+   "qid": "Q96105248",
+   "issues": [
+    "River Plate: desde 2021 → Wikidata 2019"
+   ],
+   "wikidata": [
+    "Club Atlético River Plate 2019-2022",
+    "Club Social y Deportivo Defensa y Justicia 2020-2021 (p)",
+    "Sport Lisboa e Benfica 2022-2023",
+    "Chelsea Football Club 2023-2026",
+    "Manchester City Football Club 2026-"
+   ]
+  },
+  {
+   "id": "alexis-mac-allister",
+   "name": "Alexis Mac Allister",
+   "qid": "Q33297140",
+   "issues": [],
+   "wikidata": [
+    "Asociación Atlética Argentinos Juniors 2016-2019",
+    "Brighton & Hove Albion Football Club 2019-2023",
+    "Asociación Atlética Argentinos Juniors 2019-2019 (p)",
+    "Boca Juniors 2019-2020 (p)",
+    "Liverpool Fútbol Club 2023-"
+   ]
+  },
+  {
+   "id": "cristian-romero",
+   "name": "Cristian Romero",
+   "qid": "Q28058687",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético Belgrano 2016-2018",
+    "Genoa Cricket & Football Club 2018-2019",
+    "Juventus 2019-2021",
+    "Genoa Cricket & Football Club 2019-2020 (p)",
+    "Atalanta Bergamasca Calcio 2020-2021 (p)",
+    "Atalanta Bergamasca Calcio 2021-2022",
+    "Tottenham Hotspur Football Club 2021-2022 (p)",
+    "Tottenham Hotspur Football Club 2022-2026",
+    "Atlético de Madrid 2026-"
+   ]
+  },
+  {
+   "id": "rodrigo-de-paul",
+   "name": "Rodrigo De Paul",
+   "qid": "Q6110670",
+   "issues": [],
+   "wikidata": [
+    "Racing Club 2012-2014",
+    "Valencia Club de Fútbol 2014-2016",
+    "Racing Club 2016-2016 (p)",
+    "Udinese Calcio 2016-2021",
+    "Atlético de Madrid 2021-2026",
+    "Inter de Miami 2025-2025 (p)",
+    "Inter de Miami 2026-"
+   ]
+  },
+  {
+   "id": "paulo-dybala",
+   "name": "Paulo Dybala",
+   "qid": "Q166317",
+   "issues": [],
+   "wikidata": [
+    "Instituto Atlético Central Córdoba 2011-2012",
+    "Palermo FC 2012-2015",
+    "Juventus 2015-2022",
+    "A.S. Roma 2022-"
+   ]
+  },
+  {
+   "id": "leandro-paredes",
+   "name": "Leandro Paredes",
+   "qid": "Q630170",
+   "issues": [
+    "Chievo 2014-2014: no figura en Wikidata"
+   ],
+   "wikidata": [
+    "Boca Juniors 2010-2015",
+    "A.S. Roma 2014-2015 (p)",
+    "Associazione Calcio ChievoVerona 2014-2014 (p)",
+    "Empoli Football Club 2015-2016 (p)",
+    "A.S. Roma 2015-2017",
+    "FC Zenit de San Petersburgo 2017-2019",
+    "Paris Saint-Germain FC 2019-2023",
+    "Juventus 2022-2023 (p)",
+    "A.S. Roma 2023-2025",
+    "Boca Juniors 2025-"
+   ]
+  },
+  {
+   "id": "nicolas-otamendi",
+   "name": "Nicolás Otamendi",
+   "qid": "Q182063",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético Vélez Sarsfield 2007-2010",
+    "Fútbol Club Oporto 2010-2014",
+    "Valencia Club de Fútbol 2014-2015",
+    "Clube Atlético Mineiro 2014-2014 (p)",
+    "Manchester City Football Club 2015-2020",
+    "Sport Lisboa e Benfica 2020-2026",
+    "Club Atlético River Plate 2026-"
+   ]
+  },
+  {
+   "id": "angel-correa",
+   "name": "Ángel Correa",
+   "qid": "Q10855654",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético San Lorenzo de Almagro 2012-2014",
+    "Atlético de Madrid 2014-2025",
+    "Tigres de la UANL 2025-2026",
+    "Club Atlético River Plate 2026-"
+   ]
+  },
+  {
+   "id": "sergio-aguero",
+   "name": "Sergio Agüero",
+   "qid": "Q119562",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético Independiente 2003-2006",
+    "Atlético de Madrid 2006-2011",
+    "Manchester City Football Club 2011-2021",
+    "Fútbol Club Barcelona 2021-2021"
+   ]
+  },
+  {
+   "id": "juan-roman-riquelme",
+   "name": "Juan Román Riquelme",
+   "qid": "Q192965",
+   "issues": [],
+   "wikidata": [
+    "Boca Juniors 1996-2002",
+    "Fútbol Club Barcelona 2002-2005",
+    "Villarreal Club de Fútbol 2003-2005 (p)",
+    "Villarreal Club de Fútbol 2005-2007",
+    "Boca Juniors 2007-2014 (p)",
+    "Asociación Atlética Argentinos Juniors 2014-2015"
+   ]
+  },
+  {
+   "id": "carlos-tevez",
+   "name": "Carlos Tevez",
+   "qid": "Q50600",
+   "issues": [],
+   "wikidata": [
+    "Boca Juniors 2001-2004",
+    "Sport Club Corinthians Paulista 2005-2006",
+    "West Ham United Football Club 2006-2007",
+    "Manchester United Football Club 2007-2009 (p)",
+    "Manchester City Football Club 2009-2013",
+    "Juventus 2013-2015",
+    "Boca Juniors 2015-2016",
+    "Shanghái Greenland 2017-2017",
+    "Boca Juniors 2018-2021"
+   ]
+  },
+  {
+   "id": "gabriel-batistuta",
+   "name": "Gabriel Batistuta",
+   "qid": "Q170376",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético Newell’s Old Boys 1988-1989",
+    "Club Atlético River Plate 1989-1990",
+    "Boca Juniors 1990-1991",
+    "ACF Fiorentina 1991-2000",
+    "A.S. Roma 2000-2003",
+    "Inter de Milán 2003-2003 (p)",
+    "Al-Arabi SC 2003-2005"
+   ]
+  },
+  {
+   "id": "javier-mascherano",
+   "name": "Javier Mascherano",
+   "qid": "Q161571",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético River Plate 2003-2005",
+    "Sport Club Corinthians Paulista 2005-2006",
+    "West Ham United Football Club 2006-2007",
+    "Liverpool Fútbol Club 2007-2010",
+    "Fútbol Club Barcelona 2010-2018",
+    "Hebei F.C. 2018-2019",
+    "Club Estudiantes de La Plata 2019-2020"
+   ]
+  },
+  {
+   "id": "gonzalo-higuain",
+   "name": "Gonzalo Higuaín",
+   "qid": "Q483846",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético River Plate 2005-2007",
+    "Real Madrid Club de Fútbol 2007-2013",
+    "Società Sportiva Calcio Napoli 2013-2016",
+    "Juventus 2016-2020",
+    "A.C. Milan 2018-2019 (p)",
+    "Chelsea Football Club 2019-2019 (p)",
+    "Inter de Miami 2020-2022"
+   ]
+  },
+  {
+   "id": "edinson-cavani",
+   "name": "Edinson Cavani",
+   "qid": "Q167790",
+   "issues": [],
+   "wikidata": [
+    "Danubio Fútbol Club 2005-2007",
+    "Palermo FC 2007-2010",
+    "Società Sportiva Calcio Napoli 2010-2013",
+    "Paris Saint-Germain FC 2013-2020",
+    "Manchester United Football Club 2020-2022",
+    "Valencia Club de Fútbol 2022-2023",
+    "Boca Juniors 2023-2026"
+   ]
+  },
+  {
+   "id": "diego-forlan",
+   "name": "Diego Forlán",
+   "qid": "Q261534",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético Independiente 1997-2002",
+    "Manchester United Football Club 2002-2004",
+    "Villarreal Club de Fútbol 2004-2007",
+    "Atlético de Madrid 2007-2011",
+    "Inter de Milán 2011-2012",
+    "Sport Club Internacional 2012-2014",
+    "Cerezo Osaka 2014-2015",
+    "Club Atlético Peñarol 2015-2016",
+    "Mumbai City Football Club 2016-2016",
+    "Kitchee SC 2018-2018"
+   ]
+  },
+  {
+   "id": "federico-valverde",
+   "name": "Federico Valverde",
+   "qid": "Q19509544",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético Peñarol 2015-2016",
+    "Real Madrid Castilla Club de Fútbol 2016-2017",
+    "Real Club Deportivo de A Coruña 2017-2018 (p)",
+    "Real Madrid Club de Fútbol 2018-"
+   ]
+  },
+  {
+   "id": "darwin-nunez",
+   "name": "Darwin Núñez",
+   "qid": "Q46372260",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético Peñarol 2017-2019",
+    "Unión Deportiva Almería 2019-2020",
+    "Sport Lisboa e Benfica 2020-2022",
+    "Liverpool Fútbol Club 2022-2025",
+    "Al-Hilal 2025-",
+    "Diriyah Club 2026- (p)"
+   ]
+  },
+  {
+   "id": "cristiano-ronaldo",
+   "name": "Cristiano Ronaldo",
+   "qid": "Q11571",
+   "issues": [],
+   "wikidata": [
+    "CF Andorinha 1992-1995",
+    "Clube Desportivo Nacional 1995-1997",
+    "Sporting C.P. Youth and Academy 1997-2002",
+    "Sporting Clube de Portugal 2002-2003",
+    "Manchester United Football Club 2003-2009",
+    "Real Madrid Club de Fútbol 2009-2018",
+    "Juventus 2018-2021",
+    "Manchester United Football Club 2021-2022",
+    "Al-Nassr 2023-"
+   ]
+  },
+  {
+   "id": "neymar",
+   "name": "Neymar",
+   "qid": "Q142794",
+   "issues": [],
+   "wikidata": [
+    "Santos Futebol Clube 2009-2013",
+    "Fútbol Club Barcelona 2013-2017",
+    "Paris Saint-Germain FC 2017-2023",
+    "Al-Hilal 2023-2025",
+    "Santos Futebol Clube 2025-"
+   ]
+  },
+  {
+   "id": "kylian-mbappe",
+   "name": "Kylian Mbappé",
+   "qid": "Q21621995",
+   "issues": [],
+   "wikidata": [
+    "AS Monaco FC II 2015-2016",
+    "A.S. Monaco F.C. 2015-2018",
+    "Paris Saint-Germain FC 2017-2018 (p)",
+    "Paris Saint-Germain FC 2018-2024",
+    "Real Madrid Club de Fútbol 2024-"
+   ]
+  },
+  {
+   "id": "erling-haaland",
+   "name": "Erling Haaland",
+   "qid": "Q28967995",
+   "issues": [],
+   "wikidata": [
+    "Bryne FK 2016-2017",
+    "Molde FK 2017-2019",
+    "FC Red Bull Salzburgo 2019-2020",
+    "Borussia Dortmund 2020-2022",
+    "Manchester City Football Club 2022-"
+   ]
+  },
+  {
+   "id": "mohamed-salah",
+   "name": "Mohamed Salah",
+   "qid": "Q1354960",
+   "issues": [],
+   "wikidata": [
+    "Mokawloon al-Arab 2010-2012",
+    "FC Basilea 2012-2014",
+    "Chelsea Football Club 2014-2015",
+    "ACF Fiorentina 2015-2015 (p)",
+    "A.S. Roma 2015-2016 (p)",
+    "A.S. Roma 2016-2017",
+    "Liverpool Fútbol Club 2017-2026",
+    "Trabzonspor 2026-"
+   ]
+  },
+  {
+   "id": "luis-diaz",
+   "name": "Luis Díaz",
+   "qid": "Q28531111",
+   "issues": [],
+   "wikidata": [
+    "Barranquilla Fútbol Club 2016-2017",
+    "Junior de Barranquilla 2017-2019",
+    "Fútbol Club Oporto 2019-2022",
+    "Liverpool Fútbol Club 2022-2025",
+    "F. C. Bayern Múnich 2025-"
+   ]
+  },
+  {
+   "id": "james-rodriguez",
+   "name": "James Rodríguez",
+   "qid": "Q368441",
+   "issues": [],
+   "wikidata": [
+    "Envigado Fútbol Club 2006-2008",
+    "Club Atlético Banfield 2008-2010",
+    "Fútbol Club Oporto 2010-2013",
+    "A.S. Monaco F.C. 2013-2014",
+    "Real Madrid Club de Fútbol 2014-2020",
+    "F. C. Bayern Múnich 2017-2019 (p)",
+    "Everton F.C. 2020-2021",
+    "Al-Rayyan 2021-2022",
+    "Olympiacos Fútbol Club 2022-2023",
+    "São Paulo Futebol Clube 2023-2024",
+    "Rayo Vallecano 2024-2025",
+    "Club León 2025-2025",
+    "Minnesota United Football Club 2026-2026",
+    "Atlético Nacional 2026-"
+   ]
+  },
+  {
+   "id": "radamel-falcao",
+   "name": "Radamel Falcao",
+   "qid": "Q138172",
+   "issues": [],
+   "wikidata": [
+    "Lanceros Boyacá 1999-2001",
+    "Club Atlético River Plate 2005-2009",
+    "Fútbol Club Oporto 2009-2011",
+    "Atlético de Madrid 2011-2013",
+    "A.S. Monaco F.C. 2013-2019",
+    "Manchester United Football Club 2014-2015 (p)",
+    "Chelsea Football Club 2015-2016 (p)",
+    "Galatasaray Spor Kulübü 2019-2021",
+    "Rayo Vallecano 2021-2024",
+    "Millonarios Fútbol Club 2024-"
+   ]
+  },
+  {
+   "id": "luka-modric",
+   "name": "Luka Modrić",
+   "qid": "Q483837",
+   "issues": [],
+   "wikidata": [
+    "HŠK Zrinjski Mostar 2003-2004 (p)",
+    "GNK Dinamo Zagreb 2003-2008",
+    "NK Inter Zaprešić 2004-2005 (p)",
+    "Tottenham Hotspur Football Club 2008-2012",
+    "Real Madrid Club de Fútbol 2012-2025",
+    "A.C. Milan 2025-"
+   ]
+  },
+  {
+   "id": "jude-bellingham",
+   "name": "Jude Bellingham",
+   "qid": "Q66241169",
+   "issues": [],
+   "wikidata": [
+    "Birmingham City FC 2019-2020",
+    "Borussia Dortmund 2020-2023",
+    "Real Madrid Club de Fútbol 2023-"
+   ]
+  },
+  {
+   "id": "harry-kane",
+   "name": "Harry Kane",
+   "qid": "Q969725",
+   "issues": [
+    "Tottenham: desde 2011 → Wikidata 2004, 2009"
+   ],
+   "wikidata": [
+    "Tottenham Hotspur F.C. Reserves and Academy 2004-2009",
+    "Tottenham Hotspur Football Club 2009-2023",
+    "Leyton Orient Football Club 2011-2011 (p)",
+    "Millwall Football Club 2012-2012 (p)",
+    "Norwich City Football Club 2012-2013 (p)",
+    "Leicester City Football Club 2013-2013 (p)",
+    "F. C. Bayern Múnich 2023-"
+   ]
+  },
+  {
+   "id": "robert-lewandowski",
+   "name": "Robert Lewandowski",
+   "qid": "Q151269",
+   "issues": [],
+   "wikidata": [
+    "Znicz Pruszków 2006-2008",
+    "Lech Poznań 2008-2010",
+    "Borussia Dortmund 2010-2014",
+    "F. C. Bayern Múnich 2014-2022",
+    "Fútbol Club Barcelona 2022-2026",
+    "Chicago Fire 2026-"
+   ]
+  },
+  {
+   "id": "antoine-griezmann",
+   "name": "Antoine Griezmann",
+   "qid": "Q455462",
+   "issues": [],
+   "wikidata": [
+    "Real Sociedad de Fútbol 2009-2014",
+    "Atlético de Madrid 2014-2019",
+    "Fútbol Club Barcelona 2019-2022",
+    "Atlético de Madrid 2021-2022 (p)",
+    "Atlético de Madrid 2022-2026",
+    "Orlando City Soccer Club 2026-"
+   ]
+  },
+  {
+   "id": "karim-benzema",
+   "name": "Karim Benzema",
+   "qid": "Q1912",
+   "issues": [],
+   "wikidata": [
+    "Olympique de Lyon 2004-2009",
+    "Olympique Lyonnais Reserves and Academy 2004-2006",
+    "Real Madrid Club de Fútbol 2009-2023",
+    "Al-Ittihad 2023-2026",
+    "Al-Hilal 2026-2026"
+   ]
+  },
+  {
+   "id": "kevin-de-bruyne",
+   "name": "Kevin De Bruyne",
+   "qid": "Q357984",
+   "issues": [
+    "Genk 2008-2012: no figura en Wikidata"
+   ],
+   "wikidata": [
+    "Werder Bremen 2012-2013 (p)",
+    "Chelsea Football Club 2012-2014",
+    "VfL Wolfsburgo 2014-2015",
+    "Manchester City Football Club 2015-2025",
+    "Società Sportiva Calcio Napoli 2025-",
+    "FC Argeș Pitești 8520-2012"
+   ]
+  },
+  {
+   "id": "vinicius-junior",
+   "name": "Vinícius Júnior",
+   "qid": "Q28973866",
+   "issues": [],
+   "wikidata": [
+    "Clube de Regatas do Flamengo 2017-2018",
+    "Real Madrid Club de Fútbol 2018-",
+    "Real Madrid Castilla Club de Fútbol 2018-2018"
+   ]
+  },
+  {
+   "id": "mauro-icardi",
+   "name": "Mauro Icardi",
+   "qid": "Q136986",
+   "issues": [],
+   "wikidata": [
+    "Unione Calcio Sampdoria 2012-2013",
+    "Inter de Milán 2013-2020",
+    "Paris Saint-Germain FC 2019-2020 (p)",
+    "Paris Saint-Germain FC 2020-2023",
+    "Galatasaray Spor Kulübü 2022-2023 (p)",
+    "Galatasaray Spor Kulübü 2023-2026"
+   ]
+  },
+  {
+   "id": "lisandro-martinez",
+   "name": "Lisandro Martínez",
+   "qid": "Q30881092",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético Newell’s Old Boys 2017-2018",
+    "Club Social y Deportivo Defensa y Justicia 2017-2018 (p)",
+    "Club Social y Deportivo Defensa y Justicia 2018-2019",
+    "Ajax de Ámsterdam 2019-2022",
+    "Manchester United Football Club 2022-"
+   ]
+  },
+  {
+   "id": "emiliano-buendia",
+   "name": "Emiliano Buendía",
+   "qid": "Q18637343",
+   "issues": [
+    "Cultural Leonesa 2016-2017: no figura en Wikidata"
+   ],
+   "wikidata": [
+    "Getafe Club de Fútbol 2014-2018",
+    "Getafe Club de Fútbol \"B\" 2014-2015",
+    "Norwich City Football Club 2018-2021",
+    "Aston Villa Football Club 2021-2025",
+    "Aston Villa Football Club 2025-",
+    "Bayer 04 Leverkusen 2025-2025 (p)"
+   ]
+  },
+  {
+   "id": "alejandro-garnacho",
+   "name": "Alejandro Garnacho",
+   "qid": "Q111366053",
+   "issues": [],
+   "wikidata": [
+    "Manchester United Football Club 2022-2025",
+    "Chelsea Football Club 2025-2026",
+    "Aston Villa Football Club 2026- (p)"
+   ]
+  },
+  {
+   "id": "franco-mastantuono",
+   "name": "Franco Mastantuono",
+   "qid": "Q123289726",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético River Plate 2024-2025",
+    "Real Madrid Club de Fútbol 2025-",
+    "ACF Fiorentina 2026- (p)"
+   ]
+  },
+  {
+   "id": "nico-paz",
+   "name": "Nico Paz",
+   "qid": "Q111336539",
+   "issues": [],
+   "wikidata": [
+    "Real Madrid Castilla Club de Fútbol 2022-2024",
+    "Real Madrid Club de Fútbol 2023-2024",
+    "Calcio Como 1907 2024-"
+   ]
+  },
+  {
+   "id": "thiago-almada",
+   "name": "Thiago Almada",
+   "qid": "Q57293140",
+   "issues": [
+    "Lyon 2025-2025: no figura en Wikidata"
+   ],
+   "wikidata": [
+    "Club Atlético Vélez Sarsfield 2018-2022",
+    "Atlanta United FC 2022-2024",
+    "Botafogo de Futebol e Regatas 2024-2025",
+    "Atlético de Madrid 2025-2026",
+    "Club Atlético River Plate 2026-"
+   ]
+  },
+  {
+   "id": "exequiel-palacios",
+   "name": "Exequiel Palacios",
+   "qid": "Q19345715",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético River Plate 2015-2019",
+    "Bayer 04 Leverkusen 2020-2026",
+    "Ipswich Town Football Club 2026-"
+   ]
+  },
+  {
+   "id": "zlatan-ibrahimovic",
+   "name": "Zlatan Ibrahimović",
+   "qid": "Q46896",
+   "issues": [],
+   "wikidata": [
+    "Malmö FF 1999-2001",
+    "Ajax de Ámsterdam 2000-2004",
+    "Juventus 2004-2006",
+    "Inter de Milán 2006-2009",
+    "Fútbol Club Barcelona 2009-2010",
+    "A.C. Milan 2010-2012",
+    "Paris Saint-Germain FC 2012-2016",
+    "Manchester United Football Club 2016-2018",
+    "Los Angeles Galaxy 2018-2019",
+    "A.C. Milan 2020-2023"
+   ]
+  },
+  {
+   "id": "ronaldinho",
+   "name": "Ronaldinho",
+   "qid": "Q39444",
+   "issues": [],
+   "wikidata": [
+    "Grêmio Foot-Ball Porto Alegrense 1998-2001",
+    "Paris Saint-Germain FC 2001-2003",
+    "Fútbol Club Barcelona 2003-2008",
+    "A.C. Milan 2008-2010",
+    "Clube de Regatas do Flamengo 2011-2012",
+    "Clube Atlético Mineiro 2012-2014",
+    "Querétaro Fútbol Club 2014-2015",
+    "Fluminense Football Club 2015-2015",
+    "Ravenna Calcio 2026-"
+   ]
+  },
+  {
+   "id": "javier-zanetti",
+   "name": "Javier Zanetti",
+   "qid": "Q52876",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético Talleres de Remedios de Escalada 1992-1993",
+    "Club Atlético Banfield 1993-1995",
+    "Inter de Milán 1995-2014"
+   ]
+  },
+  {
+   "id": "pablo-aimar",
+   "name": "Pablo Aimar",
+   "qid": "Q130215",
+   "issues": [],
+   "wikidata": [
+    "Asociación Atlética Estudiantes 1985-1993",
+    "Club Atlético River Plate 1993-1997",
+    "Club Atlético River Plate 1996-2000",
+    "Valencia Club de Fútbol 2001-2006",
+    "Real Zaragoza 2006-2008",
+    "Sport Lisboa e Benfica 2008-2013",
+    "Johor Darul Ta'zim F.C. 2013-2014",
+    "Club Atlético River Plate 2015-2015"
+   ]
+  },
+  {
+   "id": "martin-palermo",
+   "name": "Martín Palermo",
+   "qid": "Q208436",
+   "issues": [],
+   "wikidata": [
+    "Club Estudiantes de La Plata 1992-1997",
+    "Boca Juniors 1997-2000",
+    "Villarreal Club de Fútbol 2001-2003",
+    "Real Betis Balompié 2003-2004",
+    "Real Betis Balompié 2003-2003",
+    "Deportivo Alavés 2004-2004",
+    "Boca Juniors 2004-2011"
+   ]
+  },
+  {
+   "id": "javier-saviola",
+   "name": "Javier Saviola",
+   "qid": "Q186071",
+   "issues": [],
+   "wikidata": [
+    "Club Atlético River Plate 1998-2001",
+    "Fútbol Club Barcelona 2001-2007",
+    "A.S. Monaco F.C. 2004-2005 (p)",
+    "Sevilla Fútbol Club 2005-2006 (p)",
+    "Real Madrid Club de Fútbol 2007-2009",
+    "Sport Lisboa e Benfica 2009-2012",
+    "Málaga Club de Fútbol 2012-2013",
+    "Olympiacos Fútbol Club 2013-2014",
+    "Hellas Verona Football Club 2014-2015",
+    "Club Atlético River Plate 2015-2016"
+   ]
+  },
+  {
+   "id": "arturo-vidal",
+   "name": "Arturo Vidal",
+   "qid": "Q192671",
+   "issues": [
+    "Bayer Leverkusen 2007-2011: no figura en Wikidata"
+   ],
+   "wikidata": [
+    "Club Social y Deportivo Colo-Colo 2005-2007",
+    "Club Universidad de Chile 2007-2011",
+    "Juventus 2011-2015",
+    "F. C. Bayern Múnich 2015-2018",
+    "Fútbol Club Barcelona 2018-2020",
+    "Inter de Milán 2020-2022",
+    "Clube de Regatas do Flamengo 2022-2023",
+    "Clube Atlético Paranaense 2023-2024",
+    "Club Social y Deportivo Colo-Colo 2024-"
+   ]
+  },
+  {
+   "id": "alexis-sanchez",
+   "name": "Alexis Sánchez",
+   "qid": "Q180553",
+   "issues": [
+    "Udinese: desde 2008 → Wikidata 2006, 2024"
+   ],
+   "wikidata": [
+    "Cobreloa 2005-2006",
+    "Udinese Calcio 2006-2011",
+    "Club Social y Deportivo Colo-Colo 2006-2008 (p)",
+    "Club Atlético River Plate 2007-2008 (p)",
+    "Fútbol Club Barcelona 2011-2014",
+    "Arsenal Fútbol Club 2014-2018",
+    "Manchester United Football Club 2018-2020",
+    "Inter de Milán 2019-2020 (p)",
+    "Inter de Milán 2020-2022",
+    "Olympique de Marsella 2022-2023",
+    "Inter de Milán 2023-2024",
+    "Udinese Calcio 2024-2025",
+    "Sevilla Fútbol Club 2025-2026",
+    "Club de Foot Montréal 2026-"
+   ]
+  }
+ ],
+ "missing": [
+  "Julián Álvarez",
+  "Agustín Marchesín",
+  "Adrián Martínez",
+  "Luis Suárez",
+  "Matías Galarza Fonda",
+  "Gabriel Rojas",
+  "Ever Banega",
+  "Pedro",
+  "Jorginho",
+  "Bruno Henrique",
+  "Ganso",
+  "Fábio",
+  "Oscar",
+  "Cássio",
+  "Theo Hernández",
+  "Fabinho",
+  "Alisson",
+  "Hugo Ekitiké",
+  "João Pedro",
+  "Estêvão",
+  "Joan García",
+  "Ronald Araujo",
+  "Koke",
+  "Nico González",
+  "Antony",
+  "Valentín Castellanos",
+  "Santiago Castro",
+  "Ederson",
+  "Luis de la Fuente",
+  "Ronaldo Nazário"
+ ]
+}

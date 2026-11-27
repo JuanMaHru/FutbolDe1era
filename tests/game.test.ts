@@ -46,7 +46,7 @@ test("jugador: Messi vs Suárez (mismo club)", () => {
 });
 
 test("jugador: club amarillo si es misma liga", () => {
-  const c = playerAttributes[0].compare(byName("Franco Armani"), byName("Edinson Cavani"), today);
+  const c = playerAttributes[0].compare(byName("Miguel Borja"), byName("Edinson Cavani"), today);
   assert.equal(c.status, "near");
 });
 

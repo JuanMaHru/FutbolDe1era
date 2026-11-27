@@ -18,21 +18,30 @@ tents = entities(list(team_q))
 cents = entities(list(country_q))
 
 SPECIAL = {"Q21": "ENG", "Q22": "SCO", "Q25": "WAL", "Q26": "NIR"}
+# Nuestros códigos son estilo FIFA; Wikidata usa ISO 3166.
+FIFA = {"URY": "URU", "CHL": "CHI", "PRY": "PAR", "PRT": "POR", "NLD": "NED", "DEU": "GER", "HRV": "CRO", "CHE": "SUI", "DZA": "ALG",
+        "DNK": "DEN", "GRC": "GRE", "GIN": "GUI", "SVN": "SVN", "BGR": "BUL", "IRN": "IRN", "SAU": "KSA", "CRI": "CRC", "GTM": "GUA", "HND": "HON",
+        "SLV": "SLV", "NGA": "NGA", "ZAF": "RSA", "ARE": "UAE", "IDN": "IDN", "MYS": "MAS", "PHL": "PHI", "VNM": "VIE", "TWN": "TPE", "LVA": "LVA",
+        "PSE": "PLE", "TZA": "TAN", "ZMB": "ZAM", "ZWE": "ZIM", "MDG": "MAD", "TGO": "TOG", "AGO": "ANG", "BFA": "BFA", "SDN": "SDN"}
 def ccode(q):
     if q in SPECIAL: return SPECIAL[q]
     e = cents.get(q)
     v = _vals(e, "P298") if e else []
-    return v[0][0] if v else None
+    return FIFA.get(v[0][0], v[0][0]) if v else None
 
 NAT_TYPES = {"Q6979593", "Q1194951", "Q23905105", "Q23847779", "Q23759293", "Q26887310", "Q23901137"}
 def is_nat(tq):
     e = tents.get(tq)
-    return bool(e) and bool({v for v, _ in _vals(e, "P31")} & NAT_TYPES)
+    if not e: return False
+    if {v for v, _ in _vals(e, "P31")} & NAT_TYPES: return True
+    l = (label(e, "es") or "") + " " + (label(e, "en") or "")
+    return bool(re.search(r"selecci[oó]n|national|olímpic|olympic|sub-?\d\d|under-\d\d|u-?\d\d\b", l, re.I))
+YOUTH = re.compile(r"\b(B|II|C|reserva|reserves|juvenil|youth|sub-?\d\d|u-?\d\d|primavera|academy|castilla|atl[eé]tic\b)\b", re.I)
 
 norm = lambda s: re.sub(r"[^a-z0-9 ]", " ", "".join(ch for ch in unicodedata.normalize("NFD", (s or "").lower()) if unicodedata.category(ch) != "Mn"))
 STOP = {"club", "fc", "cf", "ca", "cd", "sc", "ac", "afc", "de", "del", "la", "el", "futbol", "football", "atletico", "sociedad", "deportivo", "sport", "ss", "us", "as", "1", "s", "a", "c", "sad"}
 def toks(s): return {t for t in norm(s).split() if t not in STOP and len(t) > 1}
-ALIAS = {"Bayern Múnich": "bayern munich", "Olympique de Marsella": "marseille", "Inter": "internazionale", "Milan": "milan", "Spartak Moscú": "spartak moscow",
+ALIAS = {"Bayern Múnich": "bayern munich", "Olympique de Marsella": "marseille", "Inter": "inter milan", "LAFC": "los angeles", "Porto": "porto", "Ajax": "ajax", "Milan": "milan", "Spartak Moscú": "spartak moscow",
          "Hamburgo": "hamburger", "Colonia": "koln", "Copenhague": "copenhagen", "Slavia Praga": "slavia prague", "Sparta Praga": "sparta prague",
          "Crvena Zvezda": "red star belgrade", "Gimnasia y Esgrima LP": "gimnasia esgrima plata", "Estudiantes": "estudiantes plata", "Club América": "america",
          "Chivas": "guadalajara", "Pumas": "unam", "Tigres": "tigres uanl", "PSV": "psv eindhoven", "Paris Saint-Germain": "paris saint germain",
@@ -62,13 +71,17 @@ for x in players:
     codes = [c for c in (ccode(c) for c in p["sport"] or p["cit"]) if c]
     if codes and x["nationality"] not in codes: issues.append(f"nacionalidad {x['nationality']} → {'/'.join(codes)}")
     stints = club_stints(p)
-    current = [t for t in stints if t["start"] and not t["end"]]
-    cur = current[-1] if current else None
+    dated = [t for t in stints if t["start"] and not YOUTH.search(tname(t["qid"]))]
+    last = max(dated, key=lambda t: t["start"]) if dated else None
+    cur = last if last and not last["end"] else None
     if cur and not same_club(x["club"], cur["qid"]): issues.append(f"club {x['club']} → {tname(cur['qid'])} (desde {cur['start']}{', préstamo' if cur['loan'] else ''})")
+    fix = {}
+    if cur and not same_club(x["club"], cur["qid"]): fix["club"] = {"qid": cur["qid"], "es": tname(cur["qid"]), "en": label(tents[cur["qid"]], "en") if cur["qid"] in tents else None, "start": cur["start"], "loan": cur["loan"]}
+    if p["birth"] and x.get("birthDate") != p["birth"]: fix["birthDate"] = p["birth"]
     mine = [t for t in stints if same_club(x["club"], t["qid"])]
     nums = [t["num"] for t in mine if t["num"]]
     if nums and str(x.get("number")) not in nums: issues.append(f"dorsal {x.get('number')} → {nums[-1]}")
-    report["players"].append({"id": x["id"], "name": x["name"], "qid": q, "check": bool(x.get("check")), "issues": issues})
+    report["players"].append({"id": x["id"], "name": x["name"], "qid": q, "check": bool(x.get("check")), "issues": issues, "fix": fix, "nat_wd": codes})
 
 for x in coaches:
     q = ids.get(x["id"], {}).get("qid"); p = prof.get(q)
@@ -77,7 +90,7 @@ for x in coaches:
     if p["birth"] and x.get("birthDate") != p["birth"]: issues.append(f"nacimiento {x.get('birthDate')} → {p['birth']}")
     codes = [c for c in (ccode(c) for c in p["sport"] or p["cit"]) if c]
     if codes and x["nationality"] not in codes: issues.append(f"nacionalidad {x['nationality']} → {'/'.join(codes)}")
-    report["coaches"].append({"id": x["id"], "name": x["name"], "qid": q, "check": bool(x.get("check")), "issues": issues})
+    report["coaches"].append({"id": x["id"], "name": x["name"], "qid": q, "check": bool(x.get("check")), "issues": issues, "birth_wd": p["birth"], "nat_wd": codes})
 
 for x in careers:
     q = ids.get(x["id"], {}).get("qid"); p = prof.get(q)
@@ -92,6 +105,17 @@ for x in careers:
     report["careers"].append({"id": x["id"], "name": x["name"], "qid": q, "issues": issues,
                               "wikidata": [f"{tname(t['qid'])} {t['start']}-{t['end'] or ''}{' (p)' if t['loan'] else ''}" for t in wd]})
 
+bios = {}
+for pid, v in ids.items():
+    p = prof.get(v["qid"]) if v["qid"] else None
+    if not p: continue
+    car = []
+    for t_ in club_stints(p):
+        if not t_["start"] or YOUTH.search(tname(t_["qid"])): continue
+        car.append({"qid": t_["qid"], "es": tname(t_["qid"]), "en": label(tents[t_["qid"]], "en") if t_["qid"] in tents else None,
+                    "from": int(t_["start"]), "to": int(t_["end"]) if t_["end"] else None, "loan": t_["loan"]})
+    bios[pid] = car
+json.dump(bios, open(os.path.join(os.path.dirname(__file__), "wikidata_careers.json"), "w"), ensure_ascii=False, indent=1)
 json.dump(report, open(os.path.join(os.path.dirname(__file__), "verify_report.json"), "w"), ensure_ascii=False, indent=1)
 for k in ("players", "coaches", "careers"):
     bad = [r for r in report[k] if r["issues"]]

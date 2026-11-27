@@ -728,3 +728,36 @@ a.mode .mode-cta { color: var(--accent); }
 .scouted { margin: 6px 0 0; padding: 6px 10px; border-radius: 10px; font-size: 13px; background: rgba(255, 194, 61, 0.12); border: 1px solid rgba(255, 194, 61, 0.35); color: var(--text); }
 .scouted.read { background: rgba(220, 60, 60, 0.16); border-color: rgba(220, 60, 60, 0.45); font-weight: 700; }
 .injury-note { background: rgba(220, 60, 60, 0.14); border: 1px solid rgba(220, 60, 60, 0.4); border-radius: 10px; padding: 8px 10px; }
+
+/* Pistas progresivas y ficha final */
+.hints { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin: 10px 0; }
+.hint { display: flex; flex-direction: column; gap: 2px; padding: 8px 10px; border-radius: 12px; background: var(--surface); border: 1px dashed var(--line); min-width: 0; }
+.hint.open { border-style: solid; border-color: var(--accent); background: linear-gradient(135deg, var(--surface-2), var(--surface)); animation: tile .5s ease both; }
+.hint-label { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); font-weight: 700; }
+.hint-value { font-weight: 800; overflow-wrap: anywhere; }
+.hint:not(.open) .hint-value { color: var(--muted); font-weight: 600; font-size: 13px; }
+.bio { margin: 12px 0; padding: 12px; border-radius: 14px; background: var(--bg-2); border: 1px solid var(--line); text-align: left; }
+.bio-head { display: flex; gap: 12px; align-items: center; }
+.bio-photo { margin: 0; flex-shrink: 0; width: 86px; }
+.bio-photo img { width: 86px; height: 104px; object-fit: cover; object-position: top; border-radius: 10px; display: block; background: var(--surface); }
+.bio-photo figcaption { font-size: 9px; line-height: 1.2; margin-top: 3px; color: var(--muted); overflow-wrap: anywhere; }
+.bio-photo figcaption a { color: inherit; }
+.bio-name { font-family: var(--display); font-style: italic; font-weight: 900; font-size: 22px; margin: 0; text-transform: uppercase; }
+.bio-career { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 6px; }
+.bio-career li { display: grid; grid-template-columns: 22px 1fr auto; gap: 8px; align-items: center; }
+.bio-club { font-weight: 700; min-width: 0; overflow-wrap: anywhere; }
+
+/* Trayectoria DT: ordenar */
+.order-head { display: flex; gap: 12px; align-items: center; margin: 10px 0; }
+.order-photo { width: 64px; height: 78px; object-fit: cover; object-position: top; border-radius: 10px; flex-shrink: 0; }
+.order-name { font-family: var(--display); font-style: italic; font-weight: 900; font-size: 24px; text-transform: uppercase; margin: 2px 0; }
+.order-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; margin: 12px 0; }
+.order-tile { display: flex; align-items: center; gap: 8px; padding: 10px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--chalk); font: inherit; font-weight: 700; text-align: left; cursor: pointer; min-width: 0; }
+.order-tile span { min-width: 0; overflow-wrap: anywhere; }
+.order-tile:hover:not(:disabled) { border-color: var(--accent); }
+.order-tile.used { opacity: .3; }
+.order-tile.shake { animation: shake .4s; border-color: var(--danger); }
+.order-line .tl-item.missed { opacity: .65; }
+.once-card { display: grid; gap: 8px; justify-items: center; margin: 10px 0; }
+.once-card img { width: min(260px, 70vw); border-radius: 12px; border: 1px solid var(--line); }
+.reverse-note { margin: 8px 0; }

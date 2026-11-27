@@ -1,9 +1,9 @@
 "use client";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { pickDaily } from "@/lib/game/daily";
+import { dayNumber, pickDaily } from "@/lib/game/daily";
 import { dailyMeta } from "@/lib/game/daily-games";
 import { points } from "@/lib/game/scoring";
-import { scoreWord, WORDS } from "@/lib/game/words";
+import { CAT_CYCLE, CAT_LABEL, scoreWord, WORDS, type WordCat } from "@/lib/game/words";
 import { play } from "@/lib/sound";
 import { Confetti } from "./Confetti";
 import { GameTop, HelpDialog, ResultCard, fmtKey, useToast } from "./GameParts";
@@ -11,7 +11,7 @@ import { useDailyGame } from "./useDailyGame";
 
 const MAX = 6;
 const ROWS = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
-const POOL = WORDS.map((w) => ({ ...w, id: w.word }));
+const POOL = WORDS.map((w) => ({ ...w, cat: w.cat ?? ("jugador" as WordCat), id: w.word }));
 interface PState { done: boolean; won: boolean; guesses: string[]; summary?: string; hint?: boolean }
 const RANK = { miss: 0, near: 1, hit: 2 } as const;
 
@@ -22,7 +22,8 @@ export function PalabraGame({ day }: { day?: number }) {
   const [shake, setShake] = useState(false);
   const [confetti, setConfetti] = useState(0);
   const toast = useToast();
-  const target = g.key ? pickDaily(POOL, 424242, g.key) : null;
+  const cat: WordCat = g.key ? CAT_CYCLE[dayNumber(g.key) % CAT_CYCLE.length] : "jugador";
+  const target = g.key ? pickDaily(POOL.filter((w) => w.cat === cat), 424242, g.key) : null;
   const N = target?.word.length ?? 5;
 
   const keyState = useMemo(() => {
@@ -93,7 +94,7 @@ export function PalabraGame({ day }: { day?: number }) {
   return (
     <>
       <Confetti fire={confetti} />
-      <GameTop title="Palabra Crack" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={<span className="tag">{N} letras</span>} />
+      <GameTop title="Palabra Crack" mode={g.mode} day={g.day} dateLabel={fmtKey(g.key)} onHelp={() => g.setShowHelp(true)} extra={<><span className="tag tag-accent">{CAT_LABEL[cat]}</span><span className="tag">{N} letras</span></>} />
 
       <div className="wordle" style={{ "--n": N } as React.CSSProperties}>
         {rows.map((w, r) => {

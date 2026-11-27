@@ -1,7 +1,8 @@
 "use client";
 import { useMemo, useState } from "react";
 import { CAREERS, careersOf, revealedCount, sortedCareer, yearsLabel, type CareerEntry } from "@/lib/game/careers";
-import { pickDaily } from "@/lib/game/daily";
+import { dayNumber, pickDaily } from "@/lib/game/daily";
+import { BioCard } from "./BioCard";
 import { dailyMeta } from "@/lib/game/daily-games";
 import { COUNTRIES, LINE_LABEL, POSITIONS } from "@/lib/game/meta";
 import { points } from "@/lib/game/scoring";
@@ -27,7 +28,9 @@ export function TrayectoriaGame({ kind, day }: { kind: "jugador" | "dt"; day?: n
   if (!g.state || !g.key) return <div className="card muted" style={{ marginTop: 24 }}>Cargando el reto…</div>;
 
   const target = pickDaily(pool, kind === "jugador" ? 7331 : 9173, g.key);
-  const steps = sortedCareer(target);
+  // Un día de cada tres, "al revés": arranca por el último club y hay que llegar antes de ver los inicios.
+  const reverse = kind === "jugador" && dayNumber(g.key) % 3 === 0;
+  const steps = reverse ? sortedCareer(target).reverse() : sortedCareer(target);
   const s = g.state;
   const wrong = s.guesses.filter((x) => x !== target.id).length;
   const shown = s.done ? steps.length : revealedCount(steps.length, wrong, MAX);
@@ -56,7 +59,7 @@ export function TrayectoriaGame({ kind, day }: { kind: "jugador" | "dt"; day?: n
 
   const used = new Set(s.guesses.map((gid) => CAREERS.find((c) => c.id === gid)?.name ?? ""));
   const pts = points(s.won, s.guesses.length);
-  const shareBody = s.guesses.map((x) => (x === target.id ? "✅" : "🟥")).join("") + (s.won ? "" : "") + `\n🏟️ ${shown}/${steps.length} clubes vistos`;
+  const shareBody = (reverse ? "🔄 " : "") + s.guesses.map((x) => (x === target.id ? "✅" : "🟥")).join("") + (s.won ? "" : "") + `\n🏟️ ${shown}/${steps.length} clubes vistos`;
 
   return (
     <>
@@ -70,6 +73,8 @@ export function TrayectoriaGame({ kind, day }: { kind: "jugador" | "dt"; day?: n
         })}
         <span className="tries-text"><b>{s.guesses.length}</b>/{MAX}</span>
       </div>
+
+      {reverse && <p className="notice reverse-note">🔄 <b>Hoy va al revés:</b> arranca por el último club. ¿Lo sacás antes de llegar a sus inicios?</p>}
 
       <ol className={`timeline ${shake ? "shake" : ""}`} aria-label="Trayectoria">
         {steps.map((st, i) => {
@@ -120,7 +125,9 @@ export function TrayectoriaGame({ kind, day }: { kind: "jugador" | "dt"; day?: n
           shareBody={shareBody}
           path={meta.path}
           day={g.day}
-        />
+        >
+          <BioCard id={target.id} name={target.name} career={false} subtitle={`${COUNTRIES[target.nationality]?.flag ?? ""} ${target.position ? POSITIONS[target.position]?.label ?? "" : "DT"}`} />
+        </ResultCard>
       )}
 
       {!s.done && (

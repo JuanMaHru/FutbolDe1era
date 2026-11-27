@@ -2,7 +2,10 @@
  * Apellidos para Palabra Crack (sin tildes ni Ñ). La pista se muestra a partir del 4.º intento.
  * hint: país · puesto · época.
  */
-export const WORDS: { word: string; name: string; hint: string }[] = [
+export type WordCat = "jugador" | "club" | "apodo" | "estadio" | "jerga";
+export const CAT_LABEL: Record<WordCat, string> = { jugador: "Apellido", club: "Club", apodo: "Apodo", estadio: "Estadio", jerga: "Jerga futbolera" };
+
+export const WORDS: { word: string; name: string; hint: string; cat?: WordCat }[] = [
   { word: "MESSI", name: "Lionel Messi", hint: "🇦🇷 · Delantero · actual" },
   { word: "TEVEZ", name: "Carlos Tevez", hint: "🇦🇷 · Delantero · 2000s" },
   { word: "AIMAR", name: "Pablo Aimar", hint: "🇦🇷 · Enganche · 2000s" },
@@ -69,7 +72,69 @@ export const WORDS: { word: string; name: string; hint: string }[] = [
   { word: "GALLARDO", name: "Marcelo Gallardo", hint: "🇦🇷 · DT · actual" },
   { word: "CASILLAS", name: "Iker Casillas", hint: "🇪🇸 · Arquero · 2000s" },
   { word: "BURDISSO", name: "Nicolás Burdisso", hint: "🇦🇷 · Central · 2000s" },
+  { word: "RIVER", name: "River Plate", hint: "🇦🇷 · Buenos Aires", cat: "club" },
+  { word: "RACING", name: "Racing Club", hint: "🇦🇷 · Avellaneda", cat: "club" },
+  { word: "LANUS", name: "Lanús", hint: "🇦🇷 · Sur del conurbano", cat: "club" },
+  { word: "HURACAN", name: "Huracán", hint: "🇦🇷 · Parque Patricios", cat: "club" },
+  { word: "TALLERES", name: "Talleres", hint: "🇦🇷 · Córdoba", cat: "club" },
+  { word: "BELGRANO", name: "Belgrano", hint: "🇦🇷 · Córdoba", cat: "club" },
+  { word: "VELEZ", name: "Vélez Sarsfield", hint: "🇦🇷 · Liniers", cat: "club" },
+  { word: "PENAROL", name: "Peñarol", hint: "🇺🇾 · Montevideo", cat: "club" },
+  { word: "NACIONAL", name: "Nacional", hint: "🇺🇾 · Montevideo", cat: "club" },
+  { word: "FLAMENGO", name: "Flamengo", hint: "🇧🇷 · Río de Janeiro", cat: "club" },
+  { word: "SANTOS", name: "Santos", hint: "🇧🇷 · San Pablo", cat: "club" },
+  { word: "GREMIO", name: "Grêmio", hint: "🇧🇷 · Porto Alegre", cat: "club" },
+  { word: "CHELSEA", name: "Chelsea", hint: "🏴 · Londres", cat: "club" },
+  { word: "ARSENAL", name: "Arsenal", hint: "🏴 · Londres", cat: "club" },
+  { word: "NAPOLI", name: "Napoli", hint: "🇮🇹 · Nápoles", cat: "club" },
+  { word: "BENFICA", name: "Benfica", hint: "🇵🇹 · Lisboa", cat: "club" },
+  { word: "SEVILLA", name: "Sevilla", hint: "🇪🇸 · Andalucía", cat: "club" },
+  { word: "VALENCIA", name: "Valencia", hint: "🇪🇸 · Comunidad Valenciana", cat: "club" },
+  { word: "JUVENTUS", name: "Juventus", hint: "🇮🇹 · Turín", cat: "club" },
+  { word: "BAYERN", name: "Bayern Múnich", hint: "🇩🇪 · Baviera", cat: "club" },
+  { word: "BOTAFOGO", name: "Botafogo", hint: "🇧🇷 · Río de Janeiro", cat: "club" },
+  { word: "PULGA", name: "Lionel Messi", hint: "🇦🇷 · Delantero · actual", cat: "apodo" },
+  { word: "APACHE", name: "Carlos Tevez", hint: "🇦🇷 · Delantero · 2000s", cat: "apodo" },
+  { word: "BURRITO", name: "Ariel Ortega", hint: "🇦🇷 · Enganche · 90s", cat: "apodo" },
+  { word: "CHOLO", name: "Diego Simeone", hint: "🇦🇷 · Volante y DT", cat: "apodo" },
+  { word: "MATADOR", name: "Mario Kempes", hint: "🇦🇷 · Delantero · 70s", cat: "apodo" },
+  { word: "PELUSA", name: "Diego Maradona", hint: "🇦🇷 · Enganche · 80s", cat: "apodo" },
+  { word: "FIDEO", name: "Ángel Di María", hint: "🇦🇷 · Extremo · 2010s", cat: "apodo" },
+  { word: "TITAN", name: "Martín Palermo", hint: "🇦🇷 · Delantero · 2000s", cat: "apodo" },
+  { word: "CONEJO", name: "Javier Saviola", hint: "🇦🇷 · Delantero · 2000s", cat: "apodo" },
+  { word: "PRINCIPE", name: "Enzo Francescoli", hint: "🇺🇾 · Enganche · 90s", cat: "apodo" },
+  { word: "KAISER", name: "Franz Beckenbauer", hint: "🇩🇪 · Líbero · 70s", cat: "apodo" },
+  { word: "FENOMENO", name: "Ronaldo Nazário", hint: "🇧🇷 · Delantero · 90s", cat: "apodo" },
+  { word: "TRINCHE", name: "Tomás Carlovich", hint: "🇦🇷 · Volante · 70s", cat: "apodo" },
+  { word: "PIOJO", name: "Claudio López", hint: "🇦🇷 · Delantero · 90s", cat: "apodo" },
+  { word: "CILINDRO", name: "Estadio Presidente Perón (Racing)", hint: "🇦🇷 · Avellaneda", cat: "estadio" },
+  { word: "MARACANA", name: "Maracaná", hint: "🇧🇷 · Río de Janeiro", cat: "estadio" },
+  { word: "WEMBLEY", name: "Wembley", hint: "🏴 · Londres", cat: "estadio" },
+  { word: "ANFIELD", name: "Anfield", hint: "🏴 · Liverpool", cat: "estadio" },
+  { word: "AZTECA", name: "Estadio Azteca", hint: "🇲🇽 · Ciudad de México", cat: "estadio" },
+  { word: "BERNABEU", name: "Santiago Bernabéu", hint: "🇪🇸 · Madrid", cat: "estadio" },
+  { word: "MESTALLA", name: "Mestalla", hint: "🇪🇸 · Valencia", cat: "estadio" },
+  { word: "ALLIANZ", name: "Allianz Arena", hint: "🇩🇪 · Múnich", cat: "estadio" },
+  { word: "LIBERTI", name: "Estadio Libertadores de América (Independiente)", hint: "🇦🇷 · Avellaneda", cat: "estadio" },
+  { word: "GAMBETA", name: "Gambeta", hint: "Regate · amague", cat: "jerga" },
+  { word: "CHILENA", name: "Chilena", hint: "Remate acrobático", cat: "jerga" },
+  { word: "RABONA", name: "Rabona", hint: "Pegarle cruzando las piernas", cat: "jerga" },
+  { word: "VASELINA", name: "Vaselina", hint: "Por arriba del arquero", cat: "jerga" },
+  { word: "GOLAZO", name: "Golazo", hint: "Lo que todos gritan", cat: "jerga" },
+  { word: "TIKITAKA", name: "Tiki-taka", hint: "Toque y toque", cat: "jerga" },
+  { word: "HATTRICK", name: "Hat-trick", hint: "Tres en un partido", cat: "jerga" },
+  { word: "OFFSIDE", name: "Offside", hint: "Fuera de juego", cat: "jerga" },
+  { word: "MUNDIAL", name: "Mundial", hint: "Cada cuatro años", cat: "jerga" },
+  { word: "RECOPA", name: "Recopa", hint: "Campeón contra campeón", cat: "jerga" },
+  { word: "EUROCOPA", name: "Eurocopa", hint: "Selecciones de Europa", cat: "jerga" },
+  { word: "PICADO", name: "Picado", hint: "Partido entre amigos", cat: "jerga" },
+  { word: "POTRERO", name: "Potrero", hint: "Donde se aprende", cat: "jerga" },
+  { word: "TRIBUNA", name: "Tribuna", hint: "Donde se alienta", cat: "jerga" },
+  { word: "GOLEADA", name: "Goleada", hint: "Muchos goles", cat: "jerga" },
 ];
+
+/** Categoría del día: apellidos casi siempre, y un día por semana cada otra temática. */
+export const CAT_CYCLE: WordCat[] = ["jugador", "club", "jugador", "apodo", "jugador", "estadio", "jerga"];
 
 /** Colorea un intento estilo Wordle, respetando letras repetidas. */
 export function scoreWord(guess: string, target: string): ("hit" | "near" | "miss")[] {

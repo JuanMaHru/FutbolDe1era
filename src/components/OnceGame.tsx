@@ -13,6 +13,7 @@ import { Confetti } from "./Confetti";
 import { GameTop, HelpDialog, ResultCard, fmtKey, useToast } from "./GameParts";
 import { GuessInput } from "./GuessInput";
 import { useDailyGame } from "./useDailyGame";
+import { OnceCard } from "./OnceCard";
 
 const MAX_STRIKES = 3;
 interface OState { done: boolean; won: boolean; slots: (string | null)[]; strikes: number; summary?: string }
@@ -157,7 +158,9 @@ export function OnceGame({ day }: { day?: number }) {
           shareBody={shareBody}
           path={meta.path}
           day={g.day}
-        />
+        >
+          {filled >= 6 && <OnceCard names={s.slots.map((id) => (id ? surname(byId.get(id)!.name) : null))} day={g.day} />}
+        </ResultCard>
       )}
 
       <HelpDialog

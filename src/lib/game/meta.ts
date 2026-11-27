@@ -73,6 +73,10 @@ export const LEAGUES: Record<string, { region: Region; short: string }> = {
   "MLS": { region: "Norteamérica", short: "MLS" },
   "Liga MX": { region: "Norteamérica", short: "Liga MX" },
   "Saudi Pro League": { region: "Asia", short: "Arabia" },
+  "Liga de Catar": { region: "Asia", short: "Catar" },
+  "Liga Uruguaya": { region: "Sudamérica", short: "Uruguay" },
+  "Liga Belga": { region: "Europa", short: "Bélgica" },
+  "Liga Rusa": { region: "Europa", short: "Rusia" },
   "Selecciones": { region: "Selecciones", short: "Nacional" },
 };
 

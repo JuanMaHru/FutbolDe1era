@@ -35,6 +35,8 @@ export interface Player extends Entity {
   position: string;
   number: number;
   birthDate: string;
+  /** Clubes de toda su carrera (de la trayectoria), para consignas tipo "Jugó en…". */
+  clubs?: string[];
 }
 
 export interface Coach extends Entity {

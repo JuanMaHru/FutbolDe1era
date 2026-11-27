@@ -39,10 +39,16 @@ def search(name, lang="es"):
 
 _ent = {}
 def entities(qids, props="claims|labels"):
-    need = [q for q in dict.fromkeys(qids) if q and q not in _ent]
+    # Caché por entidad (independiente del orden de los pedidos).
+    for q in dict.fromkeys(qids):
+        if q and q not in _ent and os.path.exists(os.path.join(CACHE, f"e_{q}.json")):
+            _ent[q] = json.load(open(os.path.join(CACHE, f"e_{q}.json")))
+    need = sorted(q for q in dict.fromkeys(qids) if q and q not in _ent)
     for i in range(0, len(need), 50):
         d = _get({"action": "wbgetentities", "ids": "|".join(need[i:i + 50]), "props": props, "languages": "es|en"})
-        _ent.update(d.get("entities", {}))
+        for q, e in d.get("entities", {}).items():
+            _ent[q] = e
+            if "missing" not in e: json.dump(e, open(os.path.join(CACHE, f"e_{q}.json"), "w"))
     return {q: _ent.get(q) for q in qids if _ent.get(q)}
 
 FOOT, COACH = "Q937857", "Q628099"
