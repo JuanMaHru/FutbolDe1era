@@ -12,6 +12,7 @@ import { TrayectoriaGame } from "@/components/TrayectoriaGame";
 import { OrderGame } from "@/components/OrderGame";
 import { MasOMenosGame } from "@/components/MasOMenosGame";
 import { IntrusoGame } from "@/components/IntrusoGame";
+import { AniosGame } from "@/components/AniosGame";
 import { ConexionGame } from "@/components/ConexionGame";
 import { OnceGame } from "@/components/OnceGame";
 import { PalabraGame } from "@/components/PalabraGame";
@@ -20,6 +21,7 @@ import { CareerApp } from "@/components/career/CareerApp";
 import { Catalog } from "@/components/career/Catalog";
 import { Footer, LegalNotice } from "@/components/LegalNotice";
 import { FONTS_URL } from "@/lib/site";
+import { Album } from "@/components/Album";
 
 function Page({ path }: { path: string }) {
   const game = path.match(/^\/(jugador|dt)(?:\/(\d+))?$/);
@@ -30,6 +32,8 @@ function Page({ path }: { path: string }) {
   }
   const tray = path.match(/^\/trayectoria(\/dt)?(?:\/(\d+))?$/);
   if (tray) return tray[1] ? <OrderGame key={path} day={tray[2] ? Number(tray[2]) : undefined} /> : <TrayectoriaGame key={path} kind="jugador" day={tray[2] ? Number(tray[2]) : undefined} />;
+  const yr = path.match(/^\/en-que-anio(?:\/(\d+))?$/);
+  if (yr) return <AniosGame key={path} day={yr[1] ? Number(yr[1]) : undefined} />;
   const ic = path.match(/^\/(intruso|conexion)(?:\/(\d+))?$/);
   if (ic) return ic[1] === "intruso" ? <IntrusoGame key={path} day={ic[2] ? Number(ic[2]) : undefined} /> : <ConexionGame key={path} day={ic[2] ? Number(ic[2]) : undefined} />;
   const mm = path.match(/^\/mas-o-menos(?:\/(\d+))?$/);
@@ -43,6 +47,7 @@ function Page({ path }: { path: string }) {
   }
   if (path === "/carrera") return <CareerApp />;
   if (path === "/aviso-legal") return <LegalNotice />;
+  if (path === "/album") return <><h1 className="hero-title" style={{ fontSize: "clamp(28px,7vw,44px)" }}>El <span className="hl">álbum</span></h1><Album /></>;
   if (path === "/vitrina")
     return (
       <>

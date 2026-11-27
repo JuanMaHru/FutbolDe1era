@@ -10,6 +10,7 @@ import { ThemePicker } from "./ThemePicker";
 import { DonateButton } from "./Donate";
 import { Crest } from "./art/Crest";
 import { BrandLogo, BrandSymbol } from "./Brand";
+import { PackBadge } from "./Album";
 import { DEFAULT_THEME, currentTheme, setTheme } from "@/lib/theme";
 import { useProfile } from "./useProfile";
 
@@ -108,6 +109,7 @@ export function Header() {
               {l.label}
             </Link>
           ))}
+          <Link href="/album" className="album-link" title="Álbum de figuritas">📒<PackBadge /></Link>
           <span className="rep-pill" title="Reputación: la vas a usar en el Modo Carrera">
             ⭐ {profile?.reputation ?? 0}
           </span>

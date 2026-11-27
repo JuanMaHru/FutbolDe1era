@@ -12,6 +12,13 @@ Minijuegos diarios de fútbol conectados a un modo carrera. *Tu conocimiento rea
 - **Armá el 11**: cada posición tiene una consigna (país, liga, club, edad, dorsal); 3 errores y roja.
 - **Palabra Crack**: el apellido letra por letra.
 - **Bingo Futbolero**: ubicá a cada jugador que sale en la casilla que cumple.
+- **Más o Menos**: higher or lower con temáticas (valor de mercado aprox., edad, altura, partidos y goles con la selección, clubes, fundación y estadio), más modo libre.
+- **El intruso**: 4 jugadores, tres comparten algo; ¿quién no encaja?
+- **¿Quién jugó con quién?**: uní dos jugadores con una cadena de compañeros de equipo.
+- **¿En qué año?**: cinco momentos históricos para ubicar en el tiempo.
+
+**Álbum de figuritas** (`/album`): cada reto terminado da un sobre gratis; fotos libres de Wikimedia Commons con crédito.
+**Datos**: verificados contra Wikidata (`tools/resolve_ids.py`, `verify_data.py`, `apply_fixes.py`, `build_bios.py`, `build_hol.py`, `fetch_photos.py`).
 
 **Modo Carrera**: creás un jugador (puesto, estilo, pie, apodo, dorsal) y la suerte decide su potencial
 (de "jugador de oficio" a "fenómeno generacional"). Temporadas con formato real: ligas completas con tabla

@@ -50,7 +50,7 @@ export interface Coach extends Entity {
 }
 
 /** Juegos diarios. Los ids se usan en rutas, almacenamiento y ligas. */
-export type GameId = "jugador" | "dt" | "tray" | "traydt" | "once" | "palabra" | "bingo" | "masomenos" | "intruso" | "conexion";
+export type GameId = "jugador" | "dt" | "tray" | "traydt" | "once" | "palabra" | "bingo" | "masomenos" | "intruso" | "conexion" | "anios";
 
 export interface GameDefinition<T extends Entity> {
   id: GameId;

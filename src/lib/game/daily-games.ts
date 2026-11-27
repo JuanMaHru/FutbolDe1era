@@ -20,6 +20,7 @@ export const DAILY: DailyMeta[] = [
   { id: "bingo", title: "Bingo Futbolero", short: "Bingo", path: "/bingo", max: 16, icon: "🎱" },
   { id: "intruso", title: "El intruso", short: "Intruso", path: "/intruso", max: 6, icon: "🕵️" },
   { id: "conexion", title: "¿Quién jugó con quién?", short: "Conexión", path: "/conexion", max: 8, icon: "🔗" },
+  { id: "anios", title: "¿En qué año?", short: "Año", path: "/en-que-anio", max: 8, icon: "📅" },
   { id: "masomenos", title: "Más o Menos", short: "Más o Menos", path: "/mas-o-menos", max: 20, icon: "⚖️" },
 ];
 export const DAILY_IDS = DAILY.map((d) => d.id);

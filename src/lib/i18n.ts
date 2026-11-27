@@ -43,6 +43,7 @@ const es = {
   "mode.once": "Armá el 11",
   "mode.masomenos": "Más o Menos",
   "mode.intruso": "El intruso",
+  "mode.anios": "¿En qué año?",
   "mode.conexion": "¿Quién jugó con quién?",
   "game.guessThe": "Adiviná el",
   "game.placeholder": "Escribí un",

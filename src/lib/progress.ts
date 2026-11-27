@@ -1,3 +1,4 @@
+import { grantPack } from "./album";
 import type { GameId } from "./game/types";
 import { read, write } from "./storage";
 
@@ -73,6 +74,7 @@ export function recordFinish(game: GameId, key: string, won: boolean, guesses: n
   }
   stats.lastPlayed = key;
   write(`stats:${game}`, stats);
+  grantPack(game, key, won);
 
   // Reputación: puntos del reto + bonus por racha. Perder no resta en la Fase 1;
   // en la Fase 2 una derrota bajará la "confianza" del club dentro de la carrera.
